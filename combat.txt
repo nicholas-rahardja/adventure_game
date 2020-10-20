@@ -1,0 +1,14 @@
+Start combat:
+  player turn-
+    user can use item 
+    for each player character:
+      user picks a move
+      pick a target (if needed, aoe spells/ random target spells dont)
+      calculate damage (include stats, with buffs, enemy debuff, type effectiveness)
+      apply damage (and check for deaths) OR apply debuff/buffs
+      check for team death
+  enemy turn (if no team death)
+    same shit
+    CPU pick moves if single player.
+    
+
