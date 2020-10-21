@@ -79,7 +79,7 @@
           },
           "scale": {
             "description": "The attack value multiplier for the move",
-            "type": "integer"
+            "type": "number"
           },
           "element": {
             "description": "The element of the move",
