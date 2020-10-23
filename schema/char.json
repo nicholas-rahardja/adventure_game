@@ -31,20 +31,12 @@
             "minItems": 1,
             "uniqueItems": true
           },
-          "atk-base": {
-            "description": "The base attack value for the character.",
-            "type": "integer"
-          },
-          "atk-scale": {
+          "atk": {
             "description": "The attack value multiplier for the character.",
             "type": "integer"
           },
-          "hp-base": {
-            "description": "The base health value for the character.",
-            "type": "integer"
-          },
-          "hp-scale": {
-            "description": "The health value multiplier for the character.",
+          "hp": {
+            "description": "The health value for the character.",
             "type": "integer"
           },
           "element": {
