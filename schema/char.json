@@ -63,13 +63,6 @@
           "name",
           "description",
           "moves",
-<<<<<<< HEAD
-          "atk-base",
-          "atk-scale",
-          "hp-base",
-          "hp-scale",
-          "type"
-=======
           "atk",
           "hp",
           "element"
@@ -119,7 +112,6 @@
           "atk",
           "scale",
           "element"
->>>>>>> 060755ecb03150ba997ff44d1a04ac095ad9040e
         ]
       }
     }
