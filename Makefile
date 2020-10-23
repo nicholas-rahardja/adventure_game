@@ -1,4 +1,4 @@
-MODULES=character
+MODULES=author character
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
