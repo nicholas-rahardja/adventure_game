@@ -18,6 +18,10 @@
             "description": "The name of the character",
             "type": "string"
           },
+          "description": {
+            "description": "The description of the character",
+            "type": "string"
+          },
           "moves": {
             "description": "The IDs of moves available for the character",
             "type": "array",
@@ -27,12 +31,20 @@
             "minItems": 1,
             "uniqueItems": true
           },
-          "atk": {
+          "atk-base": {
+            "description": "The base attack value for the character.",
+            "type": "integer"
+          },
+          "atk-scale": {
             "description": "The attack value multiplier for the character.",
             "type": "integer"
           },
-          "hp": {
-            "description": "The health value for the character.",
+          "hp-base": {
+            "description": "The base health value for the character.",
+            "type": "integer"
+          },
+          "hp-scale": {
+            "description": "The health value multiplier for the character.",
             "type": "integer"
           },
           "type": {
@@ -49,9 +61,12 @@
         "required": [
           "id",
           "name",
+          "description",
           "moves",
-          "atk",
-          "hp",
+          "atk-base",
+          "atk-scale",
+          "hp-base",
+          "hp-scale",
           "type"
         ]
       }
