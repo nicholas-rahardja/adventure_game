@@ -1,0 +1,394 @@
+{
+  "chars": [
+    {
+      "id": 1,
+      "name": "Brave Warrior Clarkson",
+      "description": "PH",
+      "moves": [
+        1,
+        2
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 2,
+      "name": "Wise Sage Gries",
+      "description": "PH",
+      "moves": [
+        16,
+        17
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 3,
+      "name": "Nether Imp",
+      "description": "PH",
+      "moves": [
+        3,
+        5
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "fire"
+    },
+    {
+      "id": 4,
+      "name": "Harpy",
+      "description": "PH",
+      "moves": [
+        1,
+        2
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 5,
+      "name": "Forest Fairy",
+      "description": "PH",
+      "moves": [
+        6,
+        10
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "grass"
+    },
+    {
+      "id": 6,
+      "name": "Mountain Thug",
+      "description": "PH",
+      "moves": [
+        1,
+        2
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 7,
+      "name": "Holy Knight Xenon",
+      "description": "PH",
+      "moves": [
+        18,
+        20
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 8,
+      "name": "Paladin",
+      "description": "PH",
+      "moves": [
+        18,
+        19
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 9,
+      "name": "Dark priestess",
+      "description": "PH",
+      "moves": [
+        25,
+        26
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 10,
+      "name": "Alpha Wolf",
+      "description": "PH",
+      "moves": [
+        1,
+        2
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 11,
+      "name": "Wolf",
+      "description": "PH",
+      "moves": [
+        1,
+        2
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 12,
+      "name": "Mermaid",
+      "description": "PH",
+      "moves": [
+        6,
+        15
+      ],
+      "atk": 10,
+      "hp": 250,
+      "element": "normal"
+    },
+    {
+      "id": 1001,
+      "name": "test char",
+      "description": "test character. DO NOT USE IN REAL GAME",
+      "moves": [
+        1001,
+        1002
+      ],
+      "atk": 1000,
+      "hp": 1000,
+      "element": "normal"
+    }
+  ],
+  "moves": [
+    {
+      "id": 1,
+      "name": "Rising Slash",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 2,
+      "name": "Kick",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 16,
+      "name": "magic missiles",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 17,
+      "name": "arcanic blast",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 3,
+      "name": "Fireball",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 4,
+      "name": "Phoenix Flame",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 5,
+      "name": "Eruption",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 12,
+      "name": "Thunderbolt",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 13,
+      "name": "Meteor",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 14,
+      "name": "Sunfire",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 6,
+      "name": "Aqua Torrent",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "water"
+    },
+    {
+      "id": 7,
+      "name": "Cyclone",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "water"
+    },
+    {
+      "id": 8,
+      "name": "Icebolt",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "water"
+    },
+    {
+      "id": 15,
+      "name": "Watersproud",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "water"
+    },
+    {
+      "id": 9,
+      "name": "Entangling Thorns",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "grass"
+    },
+    {
+      "id": 10,
+      "name": "Leaf Hurricane",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "grass"
+    },
+    {
+      "id": 11,
+      "name": "Bloom",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "grass"
+    },
+    {
+      "id": 18,
+      "name": "Blinding Flare",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 19,
+      "name": "Holy Strike",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 20,
+      "name": "Divine Judgment",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 21,
+      "name": "Shadowbolt",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 22,
+      "name": "Coalescing Nightmares",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 23,
+      "name": "Inferno",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "fire"
+    },
+    {
+      "id": 24,
+      "name": "Dark slash",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 25,
+      "name": "Mind Torment",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 26,
+      "name": "Mists of Agony",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 27,
+      "name": "Curse",
+      "description": "PH",
+      "atk": 10,
+      "scale": 2,
+      "element": "normal"
+    },
+    {
+      "id": 1001,
+      "name": "test 1 damage",
+      "description": "TEST MOVE",
+      "atk": 1,
+      "scale": 0,
+      "element": "normal"
+    },
+    {
+      "id": 1002,
+      "name": "test 9999999 damage",
+      "description": "TEST MOVE, INSTAKILL",
+      "atk": 9999999,
+      "scale": 1,
+      "element": "normal"
+    }
+  ]
+}
