@@ -4,7 +4,7 @@ open Character
 
 (* Load JSON files here for testing.
    Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
-let j1 = from_file "charmove.json"
+let j1 = from_file "json/charmove.json"
 let t1 = from_json j1
 
 (* Copied from A2 test suite *)
