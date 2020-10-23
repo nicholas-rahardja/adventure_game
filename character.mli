@@ -44,6 +44,9 @@ val get_char_desc : c -> string
 (** [get_moves c] is the list of moves that [c] has. *)
 val get_moves : c -> move list
 
+(** [get_char_atk c] is [c]'s base attack value. *)
+val get_char_atk : c -> int 
+
 (** [get_hp c] is [c]'s initial HP. *)
 val get_hp : c -> int 
 

@@ -44,6 +44,9 @@ let get_char_desc c =
 let get_moves c =
   c.moves
 
+let get_char_atk c =
+  c.atk
+
 let get_hp c =
   c.hp 
 

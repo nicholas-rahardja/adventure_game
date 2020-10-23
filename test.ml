@@ -1,8 +1,32 @@
 open OUnit2
+open Yojson.Basic
 open Character
 
-(* Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
-(* let example1 = from_file "directory/file.json" *)
+(* Load JSON files here for testing.
+   Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
+let j1 = from_file "charmove.json"
+let t1 = from_json j1
+
+(* Copied from A2 test suite *)
+(** [pp_string s] pretty-prints string [s]. *)
+let pp_string s = "\"" ^ s ^ "\""
+
+(** [pp_list pp_elt lst] pretty-prints list [lst], using [pp_elt]
+    to pretty-print each element of [lst]. *)
+let pp_list pp_elt lst =
+  let pp_elts lst =
+    let rec loop n acc = function
+      | [] -> acc
+      | [h] -> acc ^ pp_elt h
+      | h1 :: (h2 :: t as t') ->
+        if n = 100 then acc ^ "..."  (* stop printing long list *)
+        else loop (n + 1) (acc ^ (pp_elt h1) ^ "; ") t'
+    in loop 0 "" lst
+  in "[" ^ pp_elts lst ^ "]"
+
+(* Other comparison and printer functions *)
+let cmp_unordered_lists lst1 lst2 =
+  List.sort compare lst1 = List.sort compare lst2
 
 let str x = 
   x
@@ -13,38 +37,47 @@ let string_of_element = function
   | Fire -> "Fire"
   | Grass -> "Grass"
 
-(* Copied from A2 test suite *)
-let cmp_set_like_lists lst1 lst2 =
-  let uniq1 = List.sort_uniq compare lst1 in
-  let uniq2 = List.sort_uniq compare lst2 in
-  List.length lst1 = List.length uniq1
-  &&
-  List.length lst2 = List.length uniq2
-  &&
-  uniq1 = uniq2
-
-let char_str_test name f input expected =
-  name >:: (fun _ -> assert_equal expected (f input) ~printer:str)
-
-let char_int_test name f input expected =
-  name >:: (fun _ -> assert_equal expected (f input) ~printer:string_of_int)
-
-let char_element_test name f input expected =
-  name >:: (fun _ -> assert_equal expected (f input) ~printer:string_of_element)
-
-(* WARNING: the two functions below do not work with element tests. *)
-let from_json_chars_test name json f expected =
+let chars_test name json f p expected =
   name >:: (fun _ -> assert_equal expected 
-               ((from_json json).all_chars |> List.map f)
-               ~cmp:cmp_set_like_lists)
+               ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
+               ~cmp:cmp_unordered_lists ~printer:p)
 
-let from_json_moves_test name json f expected =
+let chars_str_test name json f expected =
   name >:: (fun _ -> assert_equal expected 
-               ((from_json json).all_moves |> List.map f)
-               ~cmp:cmp_set_like_lists)
+               ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
+               ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
 
 let char_tests = [
-
+  chars_str_test "char name test" j1 get_char_name
+    ["Brave Warrior Clarkson"; "Wise Sage Gries"; "Nether Imp"; "Harpy"; 
+     "Forest Fairy"; "Mountain Thug"; "Holy Knight Xenon"; "Paladin"; 
+     "Dark priestess"; "Alpha Wolf"; "Wolf"; "Mermaid"; "test char"];
+  chars_str_test "char desc test" j1 get_char_desc
+    ["PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; 
+     "test character. DO NOT USE IN REAL GAME"];
+  chars_test "char moves test" j1 get_moves (pp_list (pp_list get_move_name))
+    [
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option.get (get_move t1 16); Option.get (get_move t1 17)];
+      [Option.get (get_move t1 3); Option.get (get_move t1 5)];
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option.get (get_move t1 6); Option.get (get_move t1 10)];
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option.get (get_move t1 18); Option.get (get_move t1 20)];
+      [Option.get (get_move t1 18); Option.get (get_move t1 19)];
+      [Option.get (get_move t1 25); Option.get (get_move t1 26)];
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option.get (get_move t1 6); Option.get (get_move t1 15)];
+      [Option.get (get_move t1 1001); Option.get (get_move t1 1002)];
+    ];
+  chars_test "char atk test" j1 get_char_atk (pp_list string_of_int) 
+    [10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 1000];
+  chars_test "char hp test" j1 get_hp (pp_list string_of_int) 
+    [250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 1000];
+  chars_test "char element test" j1 get_char_element (pp_list string_of_element) 
+    [Normal; Normal; Fire; Normal; Grass; Normal; Normal; Normal; Normal; 
+     Normal; Normal; Normal; Normal];
 ]
 
 (** Testing the move functions *)

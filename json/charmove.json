@@ -163,7 +163,7 @@
       "name": "Rising Slash",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -171,7 +171,7 @@
       "name": "Kick",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -179,7 +179,7 @@
       "name": "magic missiles",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -187,7 +187,7 @@
       "name": "arcanic blast",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -195,7 +195,7 @@
       "name": "Fireball",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -203,7 +203,7 @@
       "name": "Phoenix Flame",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -211,7 +211,7 @@
       "name": "Eruption",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -219,7 +219,7 @@
       "name": "Thunderbolt",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -227,7 +227,7 @@
       "name": "Meteor",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -235,7 +235,7 @@
       "name": "Sunfire",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -243,7 +243,7 @@
       "name": "Aqua Torrent",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "water"
     },
     {
@@ -251,7 +251,7 @@
       "name": "Cyclone",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "water"
     },
     {
@@ -259,7 +259,7 @@
       "name": "Icebolt",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "water"
     },
     {
@@ -267,7 +267,7 @@
       "name": "Watersproud",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "water"
     },
     {
@@ -275,7 +275,7 @@
       "name": "Entangling Thorns",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "grass"
     },
     {
@@ -283,7 +283,7 @@
       "name": "Leaf Hurricane",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "grass"
     },
     {
@@ -291,7 +291,7 @@
       "name": "Bloom",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "grass"
     },
     {
@@ -299,7 +299,7 @@
       "name": "Blinding Flare",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -307,7 +307,7 @@
       "name": "Holy Strike",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -315,7 +315,7 @@
       "name": "Divine Judgment",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -323,7 +323,7 @@
       "name": "Shadowbolt",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -331,7 +331,7 @@
       "name": "Coalescing Nightmares",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -339,7 +339,7 @@
       "name": "Inferno",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "fire"
     },
     {
@@ -347,7 +347,7 @@
       "name": "Dark slash",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -355,7 +355,7 @@
       "name": "Mind Torment",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -363,7 +363,7 @@
       "name": "Mists of Agony",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -371,7 +371,7 @@
       "name": "Curse",
       "description": "PH",
       "atk": 10,
-      "scale": 2,
+      "scale": 2.0,
       "element": "normal"
     },
     {
@@ -379,7 +379,7 @@
       "name": "test 1 damage",
       "description": "TEST MOVE",
       "atk": 1,
-      "scale": 0,
+      "scale": 0.0,
       "element": "normal"
     },
     {
@@ -387,7 +387,7 @@
       "name": "test 9999999 damage",
       "description": "TEST MOVE, INSTAKILL",
       "atk": 9999999,
-      "scale": 1,
+      "scale": 1.0,
       "element": "normal"
     }
   ]
