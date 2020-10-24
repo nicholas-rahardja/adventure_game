@@ -15,8 +15,8 @@ let gries = getextract_char 2
 let test_unit_god = getextract_char 1001
 
 
-let test_team1 = [michael; gries]
-let test_team2 = [test_unit_god; michael]
-
+let test_team1 = [michael]
+let test_team2 = [test_unit_god]
+ 
 
 let go unit = Combat.start test_team1 test_team2

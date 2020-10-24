@@ -24,9 +24,11 @@ type t = {
 let do_dmg c dmg = 
   Printf.printf "%s has taken %d damage\n" c.char_name dmg;
   let remaining_health = c.cur_hp - dmg in
+  Printf.printf "%s has %d health left\n" c.char_name remaining_health;
   if remaining_health > 0 then c.cur_hp <- remaining_health else
     (Printf.printf "\n%s has fallen!\n" c.char_name;
-     c.cur_hp <- 0;  c.active <- false)
+     c.cur_hp <- 0;  c.active <- false);
+  print_newline ()
 
 (** [is_dead c] returns true if a character's hp is below 0. *)
 let is_active c = c.active = true
@@ -41,19 +43,26 @@ let get_active team =
 let target index (team:team) = 
   index - 1 |> List.nth team
 
+let counter = ref 1
+
 (** [print_char_name inte c] prints:
     "inte target is c_name" where c_name is the char_name of c*)
-let print_char_name inte c= 
-  Printf.printf "%d target is %s\n" inte c.char_name
+let print_char_name c= 
+  Printf.printf "Target %d : %s ~ %i remaining health left \n" !counter c.char_name c.cur_hp;
+  incr counter
 
 (** [print_targets team] prints out the possible targets to choose *)
 let print_targets team = 
-  let counter = ref 0 in 
+  (* let counter = ref 0 in  *)
+  Printf.printf "Please enter a target number of the opposition team to attack next: \n";
   fun () ->
-    List.iter (incr counter; print_char_name !counter) team; print_newline ()
+    List.iter (print_char_name) team; print_newline ();
+  counter := 1
 
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
-let ask_user = print_endline "pick your move:  "; read_int
+let ask_user = 
+  (* print_endline "Pick your move: ";  *)
+  read_int
 
 (** [select_enemy] ask the user to pick an enemy to target. They will have to 
     enter an int. 0 for the 1st target, 1 for the 2nd target, 2 for the 3rd 
@@ -67,7 +76,7 @@ let rec select_enemy team =
     target (ask_user ()) act_team
   end
   with 
-    _ -> print_endline "\nthat is not a valid target, please choose agin: \n"; 
+    _ -> print_endline "\n That is not a valid target, please choose again: \n"; 
     select_enemy team
 
 (** [is_team_dead act_team] checks if [act_team] is all dead.
@@ -97,9 +106,9 @@ let is_move move_name move =
 let rec select_move (move_list: Character.move list) =
   try begin
     let print_move (m : Character.move) = 
-      Printf.printf "Move is '%s'\n" (Character.get_move_name m) in
+      Printf.printf "Move option : '%s'\n" (Character.get_move_name m) in
     List.iter print_move move_list; 
-    print_endline "\nPlease enter move name"; 
+    print_endline "\nPlease enter a move name to attack your enemy:"; 
     let move_chosen = read_line () in
     List.find (is_move move_chosen) move_list
   end
@@ -112,7 +121,7 @@ let rec select_move (move_list: Character.move list) =
 let use_move n opp_team c= 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
-  Printf.printf "%s is attacking: \n" c.char_name;
+  Printf.printf "Character %s is attacking: \n" c.char_name;
   let move = select_move c.char_moves in 
   let target = select_enemy act_enemy in 
   Character.get_damage c.char_c target.char_c move |> int_of_float |>
@@ -141,7 +150,7 @@ let team_n_turn n t : unit =
   let (fri_team, enemy_team) = get_team n t in
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
-  Printf.printf "\n team %d turn start!\n\n" n;
+  Printf.printf "\n It is team %d's turn to start!\n\n" n;
   use_item fri_team; 
   List.iter (use_move n enemy_team) act_friendly
 
@@ -154,7 +163,7 @@ let start_t t =
       team_n_turn 2 t;
     done
   end
-  with Winner inte -> Printf.printf "team %d is the Winner!\n" inte;
+  with Winner inte -> Printf.printf "Congratulation, team %d is the Winner!\n" inte;
     t.winner <- inte
 
 let winner t = t.winner
@@ -170,11 +179,14 @@ let process_char cchar = {
 let init_team clst = 
   List.map process_char clst
 
+
+
 let init clst1 clst2 = {
   team1 = init_team clst1;
   team2 = init_team clst2;
   winner = 0
 }
+
 let start clst1 clst2 = 
   let init = init clst1 clst2 in 
   start_t init
