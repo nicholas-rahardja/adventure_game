@@ -67,7 +67,7 @@ let rec select_enemy team =
     target (ask_user ()) act_team
   end
   with 
-    _ -> print_endline "that is not a valid target, please choose agin: \n"; 
+    _ -> print_endline "\nthat is not a valid target, please choose agin: \n"; 
     select_enemy team
 
 (** [is_team_dead act_team] checks if [act_team] is all dead.
@@ -85,7 +85,9 @@ let check_winner act_team inte=
 let use_item team = ()
 
 (** *)
-let is_move move_name move = Character.get_move_name move = move_name
+let is_move move_name move = 
+  (Character.get_move_name move |>  String.lowercase_ascii) = 
+  (move_name |>  String.lowercase_ascii)
 
 
 (** [select_move move_list] prints out the possible moves to use,
@@ -101,7 +103,9 @@ let rec select_move (move_list: Character.move list) =
     let move_chosen = read_line () in
     List.find (is_move move_chosen) move_list
   end
-  with _ -> select_move move_list
+  with _ -> 
+    print_endline "\nthat is not a valid move, please choose agin: \n";
+    select_move move_list
 
 
 (** [use_move opp_team c] asks the user to attack with character c.*)
