@@ -16,7 +16,7 @@ test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
 zip:
-	zip project.zip *.ml* *.json _tags Makefile install.txt
+	zip -r project.zip *.ml *.mli json/* _tags Makefile install.txt
 
 play:
 	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
@@ -36,4 +36,4 @@ docs-private: build
 
 clean:
 	ocamlbuild -clean
-	rm -rf doc.public doc.private adventure.zip
+	rm -rf doc.public doc.private project.zip
