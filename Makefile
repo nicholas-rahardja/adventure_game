@@ -1,4 +1,4 @@
-MODULES=author character combat
+MODULES=author character combat main
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
