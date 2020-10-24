@@ -16,7 +16,7 @@ test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
 zip:
-	zip project.zip *.ml* *.json _tags Makefile install.txt
+	zip -r project.zip *.ml *.mli json/* _tags Makefile install.txt
 
 play:
 	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
