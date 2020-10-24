@@ -24,7 +24,6 @@ type t = {
 let do_dmg c dmg = 
   Printf.printf "%s has taken %d damage\n" c.char_name dmg;
   let remaining_health = c.cur_hp - dmg in
-  Printf.printf "%s has %d health left\n" c.char_name remaining_health;
   if remaining_health > 0 then c.cur_hp <- remaining_health else
     (Printf.printf "\n%s has fallen!\n" c.char_name;
      c.cur_hp <- 0;  c.active <- false)
