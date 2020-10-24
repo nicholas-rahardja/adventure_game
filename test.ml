@@ -93,8 +93,28 @@ let get_damange_helper name expected player enemy move =
   name >:: (fun _ -> assert_equal expected (get_damage player enemy move) 
                ~printer:string_of_float)
 
-let move_tests = [
+let move_1 = Option.get (get_move t1 1) 
+let move_2 = Option.get (get_move t1 2) 
+let move_16 = Option.get (get_move t1 16) 
+let move_11 = Option.get (get_move t1 11)
+let c_3 = Option.get (get_char t1 3) 
+let c_12 = Option.get (get_char t1 12)
 
+let move_tests = [
+  move_getter_test_helper "get name move 1" get_move_name move_1 "Rising Slash";
+  move_getter_test_helper "get name move 16" get_move_name move_16 
+    "magic missiles";
+  move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
+  move_getter_test_helper "get attack move 2" get_move_atk move_2 10;
+  move_getter_test_helper "get scale of move 1" get_scale move_1 2.0;
+  move_getter_test_helper "get move element of move 16" get_move_element move_16
+    Normal;
+  get_effectiveness_tests_helper 
+    "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
+  get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
+
+  get_damange_helper "grass move vs fire character with base attack 10"
+    5. c_12 c_3 move_11;
 ]
 
 let suite =

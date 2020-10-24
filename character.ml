@@ -113,7 +113,7 @@ let get_move_name (move:move) : string =
 let get_move_desc (move:move) : string = 
   move.description
 
-let get_atk (move:move) : int = 
+let get_move_atk (move:move) : int = 
   move.atk
 
 let get_scale (move:move) : float = 
@@ -128,7 +128,7 @@ let get_move_element (move:move) : element =
 let get_effectiveness (move:move) (character:c) : float = 
   match (move.element, character.element) with 
   | (Fire, Fire) | (Fire,Normal) | (Water,Water) | (Water,Normal) 
-  | (Grass, Grass) | (Grass,Normal) -> 1.0
+  | (Grass, Grass) | (Grass,Normal) | (Normal, _ ) -> 1.0
   | (Fire,Grass) | (Water, Fire) | (Grass, Water) -> 1.5 
   | _ -> 0.5 
 

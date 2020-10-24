@@ -65,7 +65,7 @@ val get_move_name : move -> string
 val get_move_desc : move -> string
 
 (** [get_atk t move] is [move]'s base attack value. *)
-val get_atk : move -> int
+val get_move_atk : move -> int
 
 (** [get_scale t move] is [move]'s attack value multiplier. *)
 val get_scale : move -> float
