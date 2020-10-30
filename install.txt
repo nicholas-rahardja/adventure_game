@@ -1,0 +1,3 @@
+To run the game, execute the following commands:
+`make build`
+`make play`
