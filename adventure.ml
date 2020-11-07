@@ -39,7 +39,7 @@ let room_of_json json ={
   name = json |> member "name" |> to_string;
   initial_message = json |>  member "initial message" |> to_string;
   enemy_ids = json |> member "enemy ids" |> to_list |> List.map to_int;
-  shop = json |> member "shops" |> to_list |> List.map to_string;
+  shop = json |> member "shop" |> to_list |> List.map to_string;
   rewards = json |> member "rewards" |> to_list |> List.map to_string;
   difficulty = json |> member "difficulty" |> to_int;
   exits = json |> member "exits" |> to_list |> List.map exit_of_json;
@@ -71,7 +71,7 @@ let exits a r =
 let next_room a r e = 
   match ((get_room a r).exits |> List.filter (fun (x:exit) -> x.name = e)) with 
   | [] -> raise (UnknownExit e) 
-  | h::t -> h 
+  | h::t -> h.room_id 
 
 let next_rooms a r = 
   (get_room a r).exits |> List.map (fun x -> x.room_id) 

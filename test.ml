@@ -1,7 +1,7 @@
 open OUnit2
 open Yojson.Basic
 open Character
-open Adventure
+
 
 (* Load JSON files here for testing.
    Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
@@ -118,18 +118,52 @@ let move_tests = [
     5. c_12 c_3 move_11;
 ]
 
-let test_adventure = from_json (Yojson.Basic.from_file "adventure.json")
-let room_ids_test_helper name a expected = name >::
-                                           (fun _ -> assert_equal expected (room_ids a)) 
+open Adventure
+let test_adventure = from_json (from_file "adventure_test.json")
+let room_ids_test_helper name a expected = name >::(fun _ -> 
+    assert_equal expected (room_ids a)) 
+let start_room_test_helper name a expected = name >::(fun _ -> 
+    assert_equal expected (start_room a)) 
+let message_test_helper name a r expected = name >:: (fun _ -> 
+    assert_equal expected (message a r))
+let exits_test_helper name a r expected = name >:: (fun _ -> 
+    assert_equal expected (exits a r))
+let next_room_test_helper name a r e expected = name >:: (fun _ -> 
+    assert_equal expected (next_room a r e))
+let next_rooms_test_helper name a r expected = name >:: (fun _ -> 
+    assert_equal expected (next_rooms a r))
+let enemies_test_helper name a r expected = name >::(fun _ -> 
+    assert_equal expected (enemies a r)) 
+let shop_test_helper name a r expected = name >::(fun _ -> 
+    assert_equal expected (shop a r)) 
+let rewards_test_helper name a r expected = name >::(fun _ -> 
+    assert_equal expected (rewards a r)) 
+let difficulty_test_helper name a r expected = name >::(fun _ -> 
+    assert_equal expected (difficulty a r)) 
 
 let map_test = [
-
+  start_room_test_helper "start room of adventure test" test_adventure 1;
+  room_ids_test_helper "room ids in adventure test" test_adventure [1;2;3];
+  message_test_helper "message in room 1 of adventure test" test_adventure 1 
+    "You are at Room A";
+  message_test_helper "message in room 3 of adventure test" test_adventure 3 
+    "You are at Room C";
+  exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
+    ["Exit to Room A";"Exit to Room C"];
+  next_room_test_helper "next from from room 3 to room 1" test_adventure 3 
+    "Exit to Room A" 1;
+  next_rooms_test_helper "next rooms from room 2" test_adventure 2 [1;3];
+  enemies_test_helper "enemy in room 1" test_adventure 1 [1;2];
+  shop_test_helper "shop in room 2" test_adventure 2 ["item 2"];
+  rewards_test_helper "reward in room 3" test_adventure 3 ["reward 3"];
+  difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
 ]
 
 let suite =
   "test suite"  >::: List.flatten [
     char_tests;
     move_tests;
+    map_test;
   ]
 
 let _ = run_test_tt_main suite

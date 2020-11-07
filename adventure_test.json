@@ -9,10 +9,10 @@
         2
       ],
       "shop": [
-        "medicine"
+        "item 1"
       ],
       "rewards": [
-        "coin"
+        "reward 1"
       ],
       "difficulty": 1,
       "exits": [
@@ -30,9 +30,16 @@
       "id": 2,
       "name": "Room B",
       "initial message": "You are at Room B",
-      "enemy ids": [],
-      "shop": [],
-      "rewards": [],
+      "enemy ids": [
+        3,
+        4
+      ],
+      "shop": [
+        "item 2"
+      ],
+      "rewards": [
+        "reward 2"
+      ],
       "difficulty": 1,
       "exits": [
         {
@@ -50,13 +57,14 @@
       "name": "Room C",
       "initial message": "You are at Room C",
       "enemy ids": [
-        3
+        5,
+        6
       ],
       "shop": [
-        "pokeball"
+        "item 3"
       ],
       "rewards": [
-        "cash"
+        "reward 3"
       ],
       "difficulty": 1,
       "exits": [
