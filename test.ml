@@ -1,6 +1,7 @@
 open OUnit2
 open Yojson.Basic
 open Character
+open Adventure
 
 (* Load JSON files here for testing.
    Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
@@ -115,6 +116,14 @@ let move_tests = [
 
   get_damange_helper "grass move vs fire character with base attack 10"
     5. c_12 c_3 move_11;
+]
+
+let test_adventure = from_json (Yojson.Basic.from_file "adventure.json")
+let room_ids_test_helper name a expected = name >::
+                                           (fun _ -> assert_equal expected (room_ids a)) 
+
+let map_test = [
+
 ]
 
 let suite =

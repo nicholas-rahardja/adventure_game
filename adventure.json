@@ -1,0 +1,75 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Room A",
+      "initial message": "You are at Room A",
+      "enemy ids": [
+        1,
+        2
+      ],
+      "shop": [
+        "medicine"
+      ],
+      "rewards": [
+        "coin"
+      ],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Exit to Room B",
+          "room id": 2
+        },
+        {
+          "name": "Exit to Room C",
+          "room id": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Room B",
+      "initial message": "You are at Room B",
+      "enemy ids": [],
+      "shop": [],
+      "rewards": [],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Exit to Room A",
+          "room id": 1
+        },
+        {
+          "name": "Exit to Room C",
+          "room id": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Room C",
+      "initial message": "You are at Room C",
+      "enemy ids": [
+        3
+      ],
+      "shop": [
+        "pokeball"
+      ],
+      "rewards": [
+        "cash"
+      ],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Exit to Room A",
+          "room id": 1
+        },
+        {
+          "name": "Exit to Room B",
+          "room id": 2
+        }
+      ]
+    }
+  ],
+  "start room": 1
+}
