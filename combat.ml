@@ -11,6 +11,7 @@ type c = {
   mutable buffs : unit list; 
   mutable active: bool;
 }
+type char_t = Character.t
 
 type team = c list
 
@@ -20,8 +21,33 @@ type t = {
   mutable winner: int;
 }
 
+
+(* Constants *)
+let max_char_per_team = 3
+let max_char_id = 12
+let max_selections = 7
+let dmg_variation = 5
+
+
+
+(** [vary k percent] returns a value that deviates from [k] 
+    by at most +- [percent]%.
+    Requires: 0 <= percent <= 100*)
+let vary (k : float) percent = 
+  let rand_factor = Random.int (2 * percent + 1) - percent |> float_of_int in 
+  print_float rand_factor;
+  (rand_factor /. 100. +. 1.) *. k
+
+(** [proc k] is a random number generator. Returns true with a probability
+    of k/100.
+    Requires: 0 <= k <= 100 *)
+let proc k =
+  let rand_int = Random.int 100 + 1 in
+  rand_int <= k
+
 (** [do_dmg c dmg] inflicts dmg amount of damage on character c. *)
-let do_dmg c dmg = 
+let do_dmg c (dmg : float) = 
+  let dmg = vary dmg dmg_variation |> Float.round |> int_of_float in
   Printf.printf "%s has taken %d damage\n" c.char_name dmg;
   let remaining_health = c.cur_hp - dmg in
   Printf.printf "%s has %d health left\n" c.char_name remaining_health;
@@ -30,7 +56,15 @@ let do_dmg c dmg =
      c.cur_hp <- 0;  c.active <- false);
   print_newline ()
 
-(** [is_dead c] returns true if a character's hp is below 0. *)
+
+(** [getextract_char c] extracts the c from the c option*)
+let getextract_char c = match
+    c with
+| None -> failwith "character not found"
+| Some x -> x
+
+
+(** [is_active c] returns true if a character's hp is above 0. *)
 let is_active c = c.active = true
 
 (** [get_active] returns a list with only the active characters *)
@@ -57,7 +91,7 @@ let print_targets team =
   Printf.printf "Please enter a target number of the opposition team to attack next: \n";
   fun () ->
     List.iter (print_char_name) team; print_newline ();
-  counter := 1
+    counter := 1
 
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
 let ask_user = 
@@ -118,13 +152,13 @@ let rec select_move (move_list: Character.move list) =
 
 
 (** [use_move opp_team c] asks the user to attack with character c.*)
-let use_move n opp_team c= 
+let use_move n opp_team c = 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
   Printf.printf "Character %s is attacking: \n" c.char_name;
   let move = select_move c.char_moves in 
   let target = select_enemy act_enemy in 
-  Character.get_damage c.char_c target.char_c move |> int_of_float |>
+  Character.get_damage c.char_c target.char_c move  |>
   do_dmg target
 
 (* let use_move opp_team c= 
@@ -168,6 +202,63 @@ let start_t t =
 
 let winner t = t.winner
 
+
+(** [print_char_select t k] prints a message, to signify that the id k will 
+      choose a character with that id in t.
+*)
+let print_char_select t id = 
+  let cha_name = 
+    Character.get_char t id |> getextract_char |> Character.get_char_name
+  in 
+  Printf.printf "Type %d to select %s \n" id cha_name
+
+
+let rec player_pick_helper k (lst : int list) (acc : int list) = 
+  if k = 0 then acc else begin 
+    print_endline "Please pick a character";
+    let choice = ask_user () in
+    if List.mem choice lst then player_pick_helper (k - 1) lst (choice :: acc)
+    else player_pick_helper k lst acc end
+
+(** requires k > 0*)
+let player_pick k lst = player_pick_helper k lst []
+
+
+
+(** [random_pick_char t k] allows users to pick k character from max_id choices*)
+let random_pick_char t k max_id choices=
+  print_endline "Choose your team";
+  let lst = ref [] in
+  while ((List.length !lst) < choices) do
+    let rand_id = Random.int max_id |> (+) 1 in 
+    lst := List.sort_uniq compare (rand_id :: !lst)
+  done;
+  List.iter (print_char_select t) !lst;
+  print_endline 
+    "Please enter the character number to select the character: \n";
+  player_pick k !lst
+
+
+
+
+
+
+(** random_clst randomly chooses k characters from the list of all possible
+    characters, and then returns a Character.c list containing their choices*)
+let random_clst n t k max_id choices = 
+  Printf.printf "Hi Player %d, it is you're turn to build your team!\n" n;
+  let player_choicelst = random_pick_char t k max_id choices in
+  let get_char_from_id id = Character.get_char t id |> getextract_char in 
+  List.map get_char_from_id player_choicelst 
+
+let mult_print n = 
+  Printf.printf "Hi Player %d, it is you're turn to build your team!\n" n
+
+let build_list k = List.init k (fun _ -> 0)
+
+
+
+
 let process_char cchar = {
   char_c= cchar;
   char_name = Character.get_char_name cchar;
@@ -190,3 +281,13 @@ let init clst1 clst2 = {
 let start clst1 clst2 = 
   let init = init clst1 clst2 in 
   start_t init
+
+
+let init_from_player t= 
+  let team1 = random_clst 1 t max_char_per_team max_char_id max_selections in
+  let team2 = random_clst 2 t max_char_per_team max_char_id max_selections in 
+  init team1 team2 
+
+(** [mult_start] initiates combat, with character/moves contained in [t]*)
+let mult_start t = 
+  init_from_player t |> start_t 
