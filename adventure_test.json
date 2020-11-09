@@ -130,15 +130,15 @@
         10
       ],
       "shop": [
-        "item 7",
-        "item 8",
         "item 1",
-        "item 2"
+        "item 2",
+        "item 7",
+        "item 8"
       ],
       "rewards": [
+        "reward 3",
         "reward 6",
-        "reward 7",
-        "reward 3"
+        "reward 7"
       ],
       "difficulty": 3,
       "exits": [
@@ -162,15 +162,15 @@
         13
       ],
       "shop": [
-        "item 9",
-        "item 10",
         "item 1",
-        "item 3"
+        "item 3",
+        "item 9",
+        "item 10"
       ],
       "rewards": [
+        "reward 3",
         "reward 8",
-        "reward 9",
-        "reward 3"
+        "reward 9"
       ],
       "difficulty": 3,
       "exits": [
