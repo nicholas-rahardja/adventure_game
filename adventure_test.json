@@ -2,14 +2,32 @@
   "rooms": [
     {
       "id": 1,
-      "name": "Room A",
-      "initial message": "You are at Room A",
+      "name": "Home Base",
+      "initial message": "You are at Home Base",
       "enemy ids": [
-        1,
-        2
       ],
       "shop": [
-        "item 1"
+      ],
+      "rewards": [
+      ],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Training Gym",
+          "room id": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Training Gym",
+      "initial message": "You are at Training Gym",
+      "enemy ids": [
+        1
+      ],
+      "shop": [
+        "item 1",
+        "item 2"
       ],
       "rewards": [
         "reward 1"
@@ -17,64 +35,181 @@
       "difficulty": 1,
       "exits": [
         {
-          "name": "Exit to Room B",
-          "room id": 2
-        },
-        {
-          "name": "Exit to Room C",
-          "room id": 3
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Room B",
-      "initial message": "You are at Room B",
-      "enemy ids": [
-        3,
-        4
-      ],
-      "shop": [
-        "item 2"
-      ],
-      "rewards": [
-        "reward 2"
-      ],
-      "difficulty": 1,
-      "exits": [
-        {
-          "name": "Exit to Room A",
-          "room id": 1
-        },
-        {
-          "name": "Exit to Room C",
+          "name": "Somerset Town",
           "room id": 3
         }
       ]
     },
     {
       "id": 3,
-      "name": "Room C",
-      "initial message": "You are at Room C",
+      "name": "Somerset Town",
+      "initial message": "You are at Somerset Town",
       "enemy ids": [
-        5,
-        6
+        2,
+        3
       ],
       "shop": [
-        "item 3"
+        "item 3",
+        "item 4",
+        "item 5",
+        "item 6"
       ],
       "rewards": [
+        "reward 2",
         "reward 3"
       ],
       "difficulty": 1,
       "exits": [
         {
-          "name": "Exit to Room A",
-          "room id": 1
+          "name": "Black Forest",
+          "room id": 4
         },
         {
-          "name": "Exit to Room B",
-          "room id": 2
+          "name": "Gobi Desert",
+          "room id": 5
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Black Forest",
+      "initial message": "You are at Black Forest",
+      "enemy ids": [
+        4,
+        5
+      ],
+      "shop": [
+      ],
+      "rewards": [
+        "reward 4"
+      ],
+      "difficulty": 2,
+      "exits": [
+        {
+          "name": "Somerset Town",
+          "room id": 3
+        },
+        {
+          "name": "Hallerbos Forest",
+          "room id": 6
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Gobi Desert",
+      "initial message": "You are at Gobi Desert",
+      "enemy ids": [
+        6,
+        7
+      ],
+      "shop": [
+      ],
+      "rewards": [
+        "reward 5"
+      ],
+      "difficulty": 2,
+      "exits": [
+        {
+          "name": "Somerset Town",
+          "room id": 3
+        },
+        {
+          "name": "Thar Desert",
+          "room id": 7
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Hallerbos Forest",
+      "initial message": "You are at Hallerbos Forest",
+      "enemy ids": [
+        8,
+        9,
+        10
+      ],
+      "shop": [
+        "item 7",
+        "item 8",
+        "item 1",
+        "item 2"
+      ],
+      "rewards": [
+        "reward 6",
+        "reward 7",
+        "reward 3"
+      ],
+      "difficulty": 3,
+      "exits": [
+        {
+          "name": "Black Forest",
+          "room id": 4
+        },
+        {
+          "name": "Yulu Temple",
+          "room id": 8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Thar Desert",
+      "initial message": "You are at Thar Desert",
+      "enemy ids": [
+        11,
+        12,
+        13
+      ],
+      "shop": [
+        "item 9",
+        "item 10",
+        "item 1",
+        "item 3"
+      ],
+      "rewards": [
+        "reward 8",
+        "reward 9",
+        "reward 3"
+      ],
+      "difficulty": 3,
+      "exits": [
+        {
+          "name": "Gobi Desert",
+          "room id": 5
+        },
+        {
+          "name": "Yulu Temple",
+          "room id": 8
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Yulu Temple",
+      "initial message": "You are at Yulu Temple",
+      "enemy ids": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "shop": [
+      ],
+      "rewards": [
+        "reward 10",
+        "reward 11"
+      ],
+      "difficulty": 5,
+      "exits": [
+        {
+          "name": "Hallerbos Forest",
+          "room id": 6
+        },
+        {
+          "name": "Thar Desert",
+          "room id": 7
         }
       ]
     }
