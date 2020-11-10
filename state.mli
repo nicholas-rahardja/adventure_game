@@ -20,7 +20,7 @@ val init_state : Adventure.t -> Character.c list -> t
 
 (** [get_chars t] is the set-like list of characters of the player with state 
     [t]. *)
-val get_chars : t -> Character.c
+val get_chars : t -> Character.c list
 
 (** [get_level t] is the level of the player with state [t]. *)
 val get_level : t -> level
