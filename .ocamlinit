@@ -4,3 +4,5 @@
 #directory "_build";;
 #load "character.cmo";;
 #load "combat.cmo";;
+#load "adventure.cmo";;
+#load "state.cmo";;

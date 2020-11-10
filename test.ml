@@ -25,6 +25,20 @@ let pp_list pp_elt lst =
     in loop 0 "" lst
   in "[" ^ pp_elts lst ^ "]"
 
+(** [cmp_set_like_lists lst1 lst2] compares two lists to see whether
+    they are equivalent set-like lists.  That means checking two things.
+    First, they must both be {i set-like}, meaning that they do not
+    contain any duplicates.  Second, they must contain the same elements,
+    though not necessarily in the same order. *)
+let cmp_set_like_lists lst1 lst2 =
+  let uniq1 = List.sort_uniq compare lst1 in
+  let uniq2 = List.sort_uniq compare lst2 in
+  List.length lst1 = List.length uniq1
+  &&
+  List.length lst2 = List.length uniq2
+  &&
+  uniq1 = uniq2
+
 (* Other comparison and printer functions *)
 let cmp_unordered_lists lst1 lst2 =
   List.sort compare lst1 = List.sort compare lst2
@@ -161,11 +175,59 @@ let map_test = [
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
 ]
 
+(* START: State tests *)
+
+(* Helper functions *)
+let get_char_list l =
+  List.filter_map (fun x -> get_char t1 x) l
+
+let state_chars_test name input expected_output =
+  name >:: (fun _ -> assert_equal expected_output (input |> State.get_chars) 
+               ~printer:(pp_list (fun x -> get_char_name x)))
+
+let state_int_test name input f expected_output =
+  name >:: (fun _ -> assert_equal expected_output (input |> f)
+               ~printer:string_of_int)
+
+let state_visited_test name input expected_output =
+  name >:: (fun _ -> assert_equal expected_output (input |> State.get_visited) 
+               ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)
+
+let state_move_test name input room new_visited =
+  match State.move input room with
+  | Illegal -> name >:: (fun _ -> assert_equal [] new_visited)
+  | Legal t' -> state_visited_test name t' new_visited
+
+(* States and character lists *)
+let cl1 = get_char_list [1; 2; 3]
+let s1 = State.init_state test_adventure cl1
+let s2 = State.add_char s1 (get_char t1 4 |> Option.get)
+let s3 = State.add_char s2 (get_char t1 4 |> Option.get)
+let s4 = State.remove_char s2 (get_char t1 2 |> Option.get)
+let s5 = State.remove_char s2 (get_char t1 7 |> Option.get)
+
+let state_tests = [
+  state_chars_test "get_chars test" s1 cl1;
+  state_int_test "get_level test" s1 State.get_level 1;
+  state_int_test "get_room test" s1 State.get_room 1;
+  state_visited_test "get_visited test" s1 [1];
+  state_chars_test "add new char to s1" s2 (get_char_list [1; 2; 3; 4]);
+  state_chars_test "add existing char to s2" s3 (get_char_list [1; 2; 3; 4]);
+  state_chars_test "remove existing char from s2" s4 (get_char_list [1; 3; 4]);
+  state_chars_test "remove nonexistent char from s2" s5 
+    (get_char_list [1; 2; 3; 4]);
+  state_int_test "set_level test" (State.set_level s1 5) State.get_level 5;
+  state_int_test  "incr_level test" (State.incr_level s1) State.get_level 2;
+  state_move_test "legal move" s1 2 [2; 1];
+  state_move_test "illegal move" s1 4 [];
+]
+
 let suite =
   "test suite"  >::: List.flatten [
     char_tests;
     move_tests;
     map_test;
+    state_tests;
   ]
 
 let _ = run_test_tt_main suite
