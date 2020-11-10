@@ -33,12 +33,12 @@ val get_room : t -> Adventure.room_id
     state [t] has visited. *)
 val get_visited : t -> Adventure.room_id list
 
-(** [add_char t c] is the state [t] with character [c] added to the list of
+(** [add_char t c] is the state [t] with character [c] added to the set of
     playable characters. *)
 val add_char : t -> Character.c -> t
 
-(** [remove_char t c] is the state [t] with character [c] removed from the list
-    of playable characters *)
+(** [remove_char t c] is the state [t] without character [c] in the set
+    of playable characters. *)
 val remove_char : t -> Character.c -> t
 
 (** [set_level t l] is the state [t] with the player's level changed to [l]. *)
