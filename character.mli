@@ -35,6 +35,9 @@ val from_json : Yojson.Basic.t -> t
 (** [get_char t id] returns the character with ID [id] in [t]. *)
 val get_char : t -> int -> c option
 
+(** [get_char_id c] returns the ID of character [c]. *)
+val get_char_id : c -> int
+
 (** [get_char_name c] returns the name of [c]. *)
 val get_char_name : c -> string
 

@@ -49,6 +49,8 @@ let chars_str_test name json f expected =
                ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
 
 let char_tests = [
+  chars_test "char id test" j1 get_char_id (pp_list string_of_int)
+    [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 1001];
   chars_str_test "char name test" j1 get_char_name
     ["Brave Warrior Clarkson"; "Wise Sage Gries"; "Nether Imp"; "Harpy"; 
      "Forest Fairy"; "Mountain Thug"; "Holy Knight Xenon"; "Paladin"; 
@@ -165,7 +167,6 @@ let suite =
     move_tests;
     map_test;
   ]
-
 
 let _ = run_test_tt_main suite
 

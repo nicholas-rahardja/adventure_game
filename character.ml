@@ -35,6 +35,9 @@ type t = {
 let get_char t id =
   List.assoc_opt id t.all_chars
 
+let get_char_id c =
+  c.id
+
 let get_char_name c =
   c.name
 
