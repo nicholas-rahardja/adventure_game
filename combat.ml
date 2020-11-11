@@ -27,6 +27,7 @@ let max_char_per_team = 3
 let max_char_id = 12
 let max_selections = 7
 let dmg_variation = 5
+let health_mod = 5
 
 
 
@@ -95,7 +96,7 @@ let print_targets team =
 
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
 let ask_user = 
-  (* print_endline "Pick your move: ";  *)
+
   read_int
 
 (** [select_enemy] ask the user to pick an enemy to target. They will have to 

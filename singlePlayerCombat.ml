@@ -1,7 +1,7 @@
 include Combat
 
 (** Seconds for program to sleep before next action by enemy is used *)
-let delay_time = 2
+let delay_time = 1
 
 (** probability that enemy will use a smart move. Turn into a function
     later *)
