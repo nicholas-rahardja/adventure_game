@@ -201,22 +201,29 @@ let state_move_test name input room new_visited =
 
 (* States and character lists *)
 let cl1 = get_char_list [1; 2; 3]
+let cl2 = get_char_list [4; 1; 2; 3]
 let s1 = State.init_state test_adventure cl1
-let s2 = State.add_char s1 (get_char t1 4 |> Option.get)
-let s3 = State.add_char s2 (get_char t1 4 |> Option.get)
-let s4 = State.remove_char s2 (get_char t1 2 |> Option.get)
-let s5 = State.remove_char s2 (get_char t1 7 |> Option.get)
+let s2 = State.set_chars s1 cl2
+let s3 = 
+  let open State in 
+  let mv r s = 
+    match move s r with
+    | Legal t' -> t'
+    | Illegal -> failwith "Illegal move" in
+  s2
+  |> mv 2
+  |> mv 3
+  |> mv 4
+  |> mv 3
+
 
 let state_tests = [
   state_chars_test "get_chars test" s1 cl1;
   state_int_test "get_level test" s1 State.get_level 1;
   state_int_test "get_room test" s1 State.get_room 1;
   state_visited_test "get_visited test" s1 [1];
-  state_chars_test "add new char to s1" s2 (get_char_list [1; 2; 3; 4]);
-  state_chars_test "add existing char to s2" s3 (get_char_list [1; 2; 3; 4]);
-  state_chars_test "remove existing char from s2" s4 (get_char_list [1; 3; 4]);
-  state_chars_test "remove nonexistent char from s2" s5 
-    (get_char_list [1; 2; 3; 4]);
+  state_visited_test "visited no dups test" s3 [1; 2; 3; 4];
+  state_chars_test "set new char list for s1" s2 (get_char_list [4; 1; 2; 3]);
   state_int_test "set_level test" (State.set_level s1 5) State.get_level 5;
   state_int_test  "incr_level test" (State.incr_level s1) State.get_level 2;
   state_move_test "legal move" s1 2 [2; 1];

@@ -2,9 +2,9 @@
    Representation of single player game state.
 
    This module represents the player's state in the single player mode of the 
-   game. It contains information about the player's characters, level, location, 
-   and the list of visited locations. There are also functions that query the 
-   aforementioned information, as well as change them.
+   game. It contains information about the player's characters and their order, 
+   level, location, and the list of visited locations. There are also functions 
+   that query the aforementioned information, as well as change them.
 *)
 
 (** The abstract type of values representing the game state. *)
@@ -18,7 +18,7 @@ type level = int
     and the list of visited rooms is empty. *)
 val init_state : Adventure.t -> Character.c list -> t
 
-(** [get_chars t] is the set-like list of characters of the player with state 
+(** [get_chars t] is the ordered list of characters for the player with state 
     [t]. *)
 val get_chars : t -> Character.c list
 
@@ -33,13 +33,9 @@ val get_room : t -> Adventure.room_id
     state [t] has visited. *)
 val get_visited : t -> Adventure.room_id list
 
-(** [add_char t c] is the state [t] with character [c] added to the set of
-    playable characters. *)
-val add_char : t -> Character.c -> t
-
-(** [remove_char t c] is the state [t] without character [c] in the set
-    of playable characters. *)
-val remove_char : t -> Character.c -> t
+(** [set_chars t clist] is the state [t] with character list changed to 
+    [clist]. *)
+val set_chars : t -> Character.c list -> t
 
 (** [set_level t l] is the state [t] with the player's level changed to [l]. *)
 val set_level : t -> level -> t
