@@ -137,7 +137,7 @@ let move_tests = [
 open Adventure
 let test_adventure = from_json (from_file "adventure_test.json")
 let room_ids_test_helper name a expected = name >::(fun _ -> 
-    assert_equal expected (room_ids a)) 
+    assert_equal expected (room_ids a) ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)  
 let start_room_test_helper name a expected = name >::(fun _ -> 
     assert_equal expected (start_room a)) 
 let message_test_helper name a r expected = name >:: (fun _ -> 
@@ -159,19 +159,20 @@ let difficulty_test_helper name a r expected = name >::(fun _ ->
 
 let map_test = [
   start_room_test_helper "start room of adventure test" test_adventure 1;
-  room_ids_test_helper "room ids in adventure test" test_adventure [1;2;3];
+  room_ids_test_helper "room ids in adventure test" test_adventure [1;2;3;4;5;6;7;8];
   message_test_helper "message in room 1 of adventure test" test_adventure 1 
-    "You are at Room A";
+    "You are at Home Base";
   message_test_helper "message in room 3 of adventure test" test_adventure 3 
-    "You are at Room C";
+    "You are at Somerset Town";
   exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
-    ["Exit to Room A";"Exit to Room C"];
-  next_room_test_helper "next from from room 3 to room 1" test_adventure 3 
-    "Exit to Room A" 1;
-  next_rooms_test_helper "next rooms from room 2" test_adventure 2 [1;3];
-  enemies_test_helper "enemy in room 1" test_adventure 1 [1;2];
-  shop_test_helper "shop in room 2" test_adventure 2 ["item 2"];
-  rewards_test_helper "reward in room 3" test_adventure 3 ["reward 3"];
+    ["Somerset Town"];
+  next_room_test_helper "next from room 3 to room 4" test_adventure 3 
+    "Black Forest" 4;
+  next_rooms_test_helper "next rooms from room 2" test_adventure 2 [3];
+  enemies_test_helper "enemy in room 1" test_adventure 1 [];
+  enemies_test_helper "enemy in room 2" test_adventure 2 [1];
+  shop_test_helper "shop in room 2" test_adventure 2 ["item 1"; "item 2"];
+  rewards_test_helper "reward in room 3" test_adventure 3 ["reward 2"; "reward 3"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
 ]
 
