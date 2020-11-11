@@ -1,6 +1,6 @@
 type level = int
 
-(** Invariant: [chars] and [visited] must contain no duplicates. *)
+(** Invariant: [visited] must contain no duplicates. *)
 type t = 
   {
     chars : Character.c list;
@@ -35,11 +35,8 @@ let cmp_chars c1 c2 =
   let get_id = Character.get_char_id in
   get_id c1 - get_id c2
 
-let add_char t c =
-  {t with chars = List.sort_uniq cmp_chars (c :: t.chars)}
-
-let remove_char t c =
-  {t with chars = List.filter (fun x -> cmp_chars x c <> 0) t.chars}
+let set_chars t c =
+  {t with chars = c}
 
 let set_level t l =
   {t with lvl = l}
