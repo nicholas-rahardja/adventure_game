@@ -16,7 +16,7 @@ test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
 zip:
-	zip -r project.zip *.ml *.mli json/* _tags Makefile install.txt .merlin
+	zip -r project.zip *.ml *.mli json/* _tags Makefile install.txt .merlin adventure_test.json
 
 play:
 	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)

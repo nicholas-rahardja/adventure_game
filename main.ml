@@ -40,9 +40,15 @@ let print_int_line adv_t x =
 let print_rooms room_lst adv_t = List.iter (print_int_line adv_t) room_lst
 
 
-let rec match_move t = match State.move t (read_int ()) with 
-  | Illegal -> print_endline "enter a valid room exit"; match_move t
-  | Legal x -> x
+let rec match_move t = 
+  try begin
+    match State.move t (read_int ()) with 
+    | Illegal -> print_endline "enter a valid room exit"; match_move t
+    | Legal x -> x
+
+  end
+  with 
+  | _ -> print_endline "enter a valid room exit"; match_move t
 
 
 (** [one_round state adv_t] carries out the combat in a single room, and then

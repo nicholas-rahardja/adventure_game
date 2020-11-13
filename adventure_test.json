@@ -155,8 +155,8 @@
       "initial message": "You are at Thar Desert",
       "enemy ids": [
         11,
-        12,
-        13
+        9,
+        10
       ],
       "shop": [
         "item 1",
@@ -186,11 +186,9 @@
       "name": "Yulu Temple",
       "initial message": "You are at Yulu Temple",
       "enemy ids": [
-        14,
-        15,
-        16,
-        17,
-        18
+        9,
+        10,
+        11
       ],
       "shop": [],
       "rewards": [

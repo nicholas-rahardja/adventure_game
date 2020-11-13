@@ -1,3 +1,6 @@
 To run the game, execute the following commands:
 `make build`
 `make play`
+for playing:
+  type 1 for multiplayer
+  type 2 for singleplayer
