@@ -4,12 +4,9 @@
       "id": 1,
       "name": "Home Base",
       "initial message": "You are at Home Base",
-      "enemy ids": [
-      ],
-      "shop": [
-      ],
-      "rewards": [
-      ],
+      "enemy ids": [],
+      "shop": [],
+      "rewards": [],
       "difficulty": 1,
       "exits": [
         {
@@ -46,7 +43,8 @@
       "initial message": "You are at Somerset Town",
       "enemy ids": [
         2,
-        3
+        3,
+        4
       ],
       "shop": [
         "item 3",
@@ -76,10 +74,10 @@
       "initial message": "You are at Black Forest",
       "enemy ids": [
         4,
-        5
+        5,
+        12
       ],
-      "shop": [
-      ],
+      "shop": [],
       "rewards": [
         "reward 4"
       ],
@@ -103,8 +101,7 @@
         6,
         7
       ],
-      "shop": [
-      ],
+      "shop": [],
       "rewards": [
         "reward 5"
       ],
@@ -195,8 +192,7 @@
         17,
         18
       ],
-      "shop": [
-      ],
+      "shop": [],
       "rewards": [
         "reward 10",
         "reward 11"

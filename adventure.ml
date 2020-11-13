@@ -64,6 +64,9 @@ let get_room a r =
 let message a r = 
   (get_room a r).initial_message
 
+let room_name a r =
+  (get_room a r).name
+
 let exits a r = 
   (get_room a r).exits |> List.map (fun (x:exit) -> x.name) 
   |> List.sort_uniq compare

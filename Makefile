@@ -1,4 +1,4 @@
-MODULES=author character combat main singlePlayerCombat adventure state
+MODULES=author character combat main adventure state
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)

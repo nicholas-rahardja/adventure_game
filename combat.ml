@@ -28,15 +28,16 @@ let max_char_id = 12
 let max_selections = 7
 let dmg_variation = 5
 let health_mod = 5
-
+let delay_time = 1
+let smartness = 100
 
 
 (** [vary k percent] returns a value that deviates from [k] 
     by at most +- [percent]%.
     Requires: 0 <= percent <= 100*)
+(* TODO: FIX FORMULA *)
 let vary (k : float) percent = 
   let rand_factor = Random.int (2 * percent + 1) - percent |> float_of_int in 
-  print_float rand_factor;
   (rand_factor /. 100. +. 1.) *. k
 
 (** [proc k] is a random number generator. Returns true with a probability
@@ -49,11 +50,16 @@ let proc k =
 (** [do_dmg c dmg] inflicts dmg amount of damage on character c. *)
 let do_dmg c (dmg : float) = 
   let dmg = vary dmg dmg_variation |> Float.round |> int_of_float in
-  Printf.printf "%s has taken %d damage\n" c.char_name dmg;
+  let blue_char_name () = ANSITerminal.(print_string [blue] c.char_name) in
+  (blue_char_name (); 
+   Printf.printf " has taken %d damage\n" dmg);
   let remaining_health = c.cur_hp - dmg in
-  Printf.printf "%s has %d health left\n" c.char_name remaining_health;
-  if remaining_health > 0 then c.cur_hp <- remaining_health else
-    (Printf.printf "\n%s has fallen!\n" c.char_name;
+  if remaining_health > 0 then begin
+    blue_char_name ();
+    Printf.printf " has %d health left\n" remaining_health;
+    c.cur_hp <- remaining_health end else
+    (blue_char_name ();
+     Printf.printf " has fallen!\n";
      c.cur_hp <- 0;  c.active <- false);
   print_newline ()
 
@@ -83,7 +89,9 @@ let counter = ref 1
 (** [print_char_name inte c] prints:
     "inte target is c_name" where c_name is the char_name of c*)
 let print_char_name c= 
-  Printf.printf "Target %d : %s ~ %i remaining health left \n" !counter c.char_name c.cur_hp;
+  Printf.printf "Target %d : " !counter;
+  ANSITerminal.(print_string [blue] c.char_name);
+  Printf.printf " ~ %i remaining health left \n" c.cur_hp;
   incr counter
 
 (** [print_targets team] prints out the possible targets to choose *)
@@ -156,7 +164,9 @@ let rec select_move (move_list: Character.move list) =
 let use_move n opp_team c = 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
-  Printf.printf "Character %s is attacking: \n" c.char_name;
+  let char_name = c.char_name in
+  ANSITerminal.(print_string [blue] char_name);
+  print_string " is attacking: \n\n";
   let move = select_move c.char_moves in 
   let target = select_enemy act_enemy in 
   Character.get_damage c.char_c target.char_c move  |>
@@ -198,7 +208,7 @@ let start_t t =
       team_n_turn 2 t;
     done
   end
-  with Winner inte -> Printf.printf "Congratulation, team %d is the Winner!\n" inte;
+  with Winner inte -> Printf.printf "Congratulation, team %d is the Winner!\n\n" inte;
     t.winner <- inte
 
 let winner t = t.winner
@@ -208,18 +218,22 @@ let winner t = t.winner
       choose a character with that id in t.
 *)
 let print_char_select t id = 
-  let cha_name = 
+  let char_name = 
     Character.get_char t id |> getextract_char |> Character.get_char_name
   in 
-  Printf.printf "Type %d to select %s \n" id cha_name
+  Printf.printf "Type %d to select " id;
+  ANSITerminal.(print_string [blue] char_name);
+  print_newline ()
 
 
 let rec player_pick_helper k (lst : int list) (acc : int list) = 
   if k = 0 then acc else begin 
-    print_endline "Please pick a character";
+    Printf.printf "Please pick %d more characters\n" k;
     let choice = ask_user () in
     if List.mem choice lst then player_pick_helper (k - 1) lst (choice :: acc)
-    else player_pick_helper k lst acc end
+    else (
+      print_endline "That is not a character in the list, please pick again!";
+      player_pick_helper k lst acc) end
 
 (** requires k > 0*)
 let player_pick k lst = player_pick_helper k lst []
@@ -292,3 +306,100 @@ let init_from_player t=
 (** [mult_start] initiates combat, with character/moves contained in [t]*)
 let mult_start t = 
   init_from_player t |> start_t 
+
+
+
+
+(* BEGIN SINGLE PLAYER COMBAT MODULE *)
+
+let rand_in_lst lst =   
+  let range = List.length lst  in 
+  let index = Random.int range in
+  List.nth lst index
+
+let print_move (m : Character.move) = 
+  Printf.printf "Move option : '%s'\n" (Character.get_move_name m)
+
+let rand_move c = 
+  List.iter print_move c.char_moves;
+  rand_in_lst c.char_moves 
+
+let rand_target team = 
+  rand_in_lst team
+
+let enemy_select_move c = 
+  let x = rand_move c in 
+  x
+
+let enemy_select_target team = rand_target team
+
+
+let best_dmg_move c (target : c) = 
+  let move_lst = c.char_moves in 
+  let dmg move = Character.get_damage c.char_c target.char_c move in
+  let acc_func acc move = (move, dmg move) :: acc in
+  (* Compares in reverse order *)
+  let compare_tuple (_, a) (_, b) = compare b a in 
+  let sorted_lst = List.fold_left acc_func [] move_lst 
+                   |> List.sort compare_tuple in
+  let (move, dmg) = List.hd sorted_lst in (target, move, dmg)
+
+
+
+let best_action c targets = 
+  let lst = List.map (best_dmg_move c) targets in 
+  let compare_tri_tuple (_, _ , a) (_, _, b) = compare b a in 
+  let sorted_lst = List.sort compare_tri_tuple lst in 
+  let (target, move, _) = List.hd sorted_lst in (move, target)
+
+
+
+
+let enemy_select_action c targets chance : (Character.move * c) = 
+  if proc chance then best_action c targets
+  else (rand_move c, rand_target targets)
+
+
+let enemy_use_move_mult n opp_team c = 
+
+  let act_enemy = get_active opp_team in 
+  check_winner act_enemy n;
+  Printf.printf "Character %s is attacking: \n" c.char_name;
+  Unix.sleep delay_time;
+  let (move, target) = enemy_select_action c act_enemy smartness
+  (* Change later to a probability *) 
+  in
+  Printf.printf "%s used '%s'\n" c.char_name (Character.get_move_name move);
+  Unix.sleep delay_time;
+  Character.get_damage c.char_c target.char_c move  |>
+  do_dmg target
+
+let execute_turn n t : unit = 
+  let (fri_team, enemy_team) = get_team n t in
+  let act_friendly = get_active fri_team in 
+  check_winner (get_active enemy_team) n;
+  if n = 1 then begin
+    ANSITerminal.( print_string [red] "It is your turn to attack: \n");
+    use_item fri_team; 
+    List.iter (use_move n enemy_team) act_friendly
+  end
+  else begin
+    ANSITerminal.( print_string [red] "The enemy is attacking! \n");
+    List.iter (enemy_use_move_mult n enemy_team) act_friendly
+  end
+
+let start_t_mult t = 
+  try begin
+    while (true) do
+      execute_turn 1 t;
+      execute_turn 2 t;
+    done
+  end
+  with Winner inte -> 
+    ANSITerminal.(print_string 
+                    [red] "Congratulation, you defeated the enemy!\n");
+    t.winner <- inte
+
+let start_mult clst1 clst2 = 
+  let init = init clst1 clst2 in 
+  start_t_mult init

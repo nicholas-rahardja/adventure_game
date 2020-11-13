@@ -141,3 +141,9 @@ val winner: t -> int
 val mult_start: Character.t -> unit
 
 
+(* Sp combat functions *)
+
+val start_mult: Character.c list -> Character.c list -> unit
+
+
+

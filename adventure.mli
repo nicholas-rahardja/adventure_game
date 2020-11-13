@@ -36,6 +36,10 @@ val room_ids : t -> room_id list
     Raises [Not_found] if [r] is not a room identifier in [a]. *)
 val message : t -> room_id -> string
 
+(** [message a r] is the initial message of room [r] in adventure [a]. 
+    Raises [Not_found] if [r] is not a room identifier in [a]. *)
+val room_name : t -> room_id -> string
+
 (** [exits a r] is a set-like list of all exit names from room [r] in 
     adventure [a].
     Raises [UnknownRoom r] if [r] is not a room identifier in [a]. *)
