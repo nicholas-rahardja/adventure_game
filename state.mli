@@ -10,20 +10,39 @@
 (** The abstract type of values representing the game state. *)
 type t
 
-(** The type of values representing the player's level. *)
+(** The type of values representing a character's level. The relation of level 
+    [l] to experience [x] is [x = l * l + l]. *)
 type level = int
+
+(** The type of values representing a character's experience points. *)
+type xp = int
 
 (** [init_state a clist] is the state at the start of the game in adventure [a] 
     with character list [clist]. The current room is the starting room of [a] 
-    and the list of visited rooms is empty. *)
+    and the list of visited rooms is empty. Each character has experience and 
+    level 0. *)
 val init_state : Adventure.t -> Character.c list -> t
 
 (** [get_chars t] is the ordered list of characters for the player with state 
     [t]. *)
 val get_chars : t -> Character.c list
 
-(** [get_level t] is the level of the player with state [t]. *)
-val get_level : t -> level
+(** [get_char n t] is the character in index [n] of [t]'s character list. 
+    Raises: [Failure] if the list is too short.
+    [Invalid_argument] if n is negative. *)
+val get_char : int -> t -> Character.c
+
+(** [get_xp n t] is the experience points of the the character with index [n] in
+    the character list for the player with state [t]. 
+    Raises: [Failure] if the list is too short.
+    [Invalid_argument] if n is negative. *)
+val get_xp : int -> t -> xp
+
+(** [get_level n t] is the level of the character with index [n] in the 
+    character list for the player with state [t]. 
+    Raises: [Failure] if the list is too short.
+    [Invalid_argument] if n is negative. *)
+val get_level : int -> t -> level
 
 (** [get_room t] is the ID of the room the player with state [t] is currently 
     in. *)
@@ -33,15 +52,30 @@ val get_room : t -> Adventure.room_id
     state [t] has visited. *)
 val get_visited : t -> Adventure.room_id list
 
-(** [set_chars t clist] is the state [t] with character list changed to 
-    [clist]. *)
-val set_chars : t -> Character.c list -> t
+(** [add_chars c ~xp:e ~lvl:l n t] adds character [c] with experience points [e] 
+    and level [l] in index [n] of the character list of the player with state
+    [t]. If [n] is -1, the character is appended to the end of the list. [e] 
+    and [l] are optional and will both default to 0. 
+    Raises: [Failure] if [n] is less than -1 or more than 
+    [List.length n] *)
+val add_char : Character.c -> ?xp:xp -> int -> t -> t
 
-(** [set_level t l] is the state [t] with the player's level changed to [l]. *)
-val set_level : t -> level -> t
+(** [remove_char n t] is state [t] with the character in index [n] of the 
+    character list removed. 
+    Raises: [Failure] if [n] is not a valid index of the character 
+    list. *)
+val remove_char : int -> t -> t
 
-(** [incr_level t] increments [t]'s level by 1. *)
-val incr_level : t -> t
+(** [swap_chars n1 n2] swaps the characters at indices [n1] and [n2] of [t]'s 
+    character list. 
+    Raises: [Failure] if [n1] and [n2] are not valid indices of the
+    character list. *)
+val swap_chars : int -> int -> t -> t
+
+(** [add_xp n e t] is the state [t] with the experience points of the character 
+    at index [n] in the character list incremented by [e]. It is complemented
+    by a boolean that is [true] if the addition results in a level increase. *)
+val add_xp : int -> xp -> t -> t * bool
 
 (** The type representing the result of an attempted move. *)
 type result =
