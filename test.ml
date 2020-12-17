@@ -177,22 +177,37 @@ let map_test = [
 ]
 
 (* START: State tests *)
-
+open State
 (* Helper functions *)
 let get_char_list l =
-  List.filter_map (fun x -> get_char t1 x) l
+  List.filter_map (fun x -> Character.get_char t1 x) l
 
 let state_chars_test name input expected_output =
-  name >:: (fun _ -> assert_equal expected_output (input |> State.get_chars) 
+  name >:: (fun _ -> assert_equal expected_output (input |> get_chars) 
                ~printer:(pp_list (fun x -> get_char_name x)))
+
+let state_get_char_test name state index expected_output =
+  name >:: (fun _ -> assert_equal 
+               (Character.get_char t1 expected_output |> Option.get) 
+               (get_char index state) 
+               ~printer:get_char_name)
+
+let state_exn_test name input expected_output =
+  name >:: (fun _ -> assert_raises expected_output input)
 
 let state_int_test name input f expected_output =
   name >:: (fun _ -> assert_equal expected_output (input |> f)
                ~printer:string_of_int)
 
 let state_visited_test name input expected_output =
-  name >:: (fun _ -> assert_equal expected_output (input |> State.get_visited) 
+  name >:: (fun _ -> assert_equal expected_output (input |> get_visited) 
                ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)
+
+let state_add_xp_test name state index amt new_xp up =
+  let (t', r) = add_xp index amt state in
+  name >:: (fun _ -> assert_equal (new_xp, up) (get_xp index t', r) 
+               ~printer:(fun (x, b) -> "(" ^ string_of_int x ^ ", " 
+                                       ^ string_of_bool b ^ ")"))
 
 let state_move_test name input room new_visited =
   match State.move input room with
@@ -201,33 +216,121 @@ let state_move_test name input room new_visited =
 
 (* States and character lists *)
 let cl1 = get_char_list [1; 2; 3]
-let cl2 = get_char_list [4; 1; 2; 3]
-let s1 = State.init_state test_adventure cl1
-let s2 = State.set_chars s1 cl2
-let s3 = 
+let cl2 = get_char_list [4; 1; 2; 2; 3]
+let s0 = init_state test_adventure [] (* Empty chars *)
+let s1 = init_state test_adventure cl1
+let s2 = init_state test_adventure cl2 (* Duplicate chars *)
+let s3 = (* Moving around *)
   let open State in 
   let mv r s = 
     match move s r with
     | Legal t' -> t'
     | Illegal -> failwith "Illegal move" in
-  s2
+  s1
   |> mv 2
   |> mv 3
   |> mv 4
   |> mv 3
+(* Add char with XP *)
+let s4 = s2 |> add_char (Character.get_char t1 2 |> Option.get) ~xp:50 3 
 
 
 let state_tests = [
   state_chars_test "get_chars test" s1 cl1;
-  state_int_test "get_level test" s1 State.get_level 1;
+  state_chars_test "get_chars empty" s0 [];
+  state_get_char_test "get_char test" s1 1 2;
+  state_get_char_test "get_char test with dups 1" s2 2 2;
+  state_get_char_test "get_char test with dups 2" s2 3 2;
+  state_exn_test "get_char beyond index" (fun _ -> get_char 3 s1) 
+    (Failure "nth");
+  state_exn_test "get_char negative" (fun _ -> get_char ~-1 s1) 
+    (Invalid_argument "List.nth");
+  state_int_test "get_xp 0 test" s1 (get_xp 0) 0;
+  state_int_test "get_xp test" s4 (get_xp 3) 50;
+  state_exn_test "get_xp beyond index" (fun _ -> get_xp 3 s1) 
+    (Failure "nth");
+  state_exn_test "get_xp negative" (fun _ -> get_xp ~-1 s1) 
+    (Invalid_argument "List.nth");
+  state_int_test "get_level 0 test" s1 (get_level 0) 0;
+  state_int_test "get_level test" s4 (get_level 3) 6;
+  state_exn_test "get_level beyond index" (fun _ -> get_level 3 s1) 
+    (Failure "nth");
+  state_exn_test "get_level negative" (fun _ -> get_level ~-1 s1) 
+    (Invalid_argument "List.nth");
   state_int_test "get_room test" s1 State.get_room 1;
   state_visited_test "get_visited test" s1 [1];
   state_visited_test "visited no dups test" s3 [1; 2; 3; 4];
-  state_chars_test "set new char list for s1" s2 (get_char_list [4; 1; 2; 3]);
-  state_int_test "set_level test" (State.set_level s1 5) State.get_level 5;
-  state_int_test  "incr_level test" (State.incr_level s1) State.get_level 2;
+  state_chars_test "add_chars prepend" (add_char 
+                                          (Character.get_char t1 11 
+                                           |> Option.get) 0 s2)
+    (get_char_list [11; 4; 1; 2; 2; 3]);
+  state_chars_test "add_chars append using -1" (add_char 
+                                                  (Character.get_char t1 10 
+                                                   |> Option.get) ~-1 s2)
+    (get_char_list [4; 1; 2; 2; 3; 10]);
+  state_chars_test "add_chars append" (add_char 
+                                         (Character.get_char t1 10 
+                                          |> Option.get) 5 s2) 
+    (get_char_list [4; 1; 2; 2; 3; 10]);
+  state_chars_test "add_char middle" (add_char 
+                                        (Character.get_char t1 9 
+                                         |> Option.get) 3 s2) 
+    (get_char_list [4; 1; 2; 9; 2; 3]);
+  state_chars_test "add_char empty" (add_char 
+                                       (Character.get_char t1 8 
+                                        |> Option.get) 0 s0) 
+    (get_char_list [8]);
+  state_chars_test "add_char empty using -1" (add_char 
+                                                (Character.get_char t1 8 
+                                                 |> Option.get) ~-1 s0) 
+    (get_char_list [8]);
+  state_int_test "add_char with nonzero xp in char list with dups" s4 (get_xp 3)
+    50;
+  state_exn_test "add_char negative" (fun _ -> add_char 
+                                         (Character.get_char t1 1 |> Option.get) 
+                                         ~-2 s1) (Failure "Invalid index");
+  state_exn_test "add_char beyond index" (fun _ -> add_char 
+                                             (Character.get_char t1 1 
+                                              |> Option.get) 
+                                             4 s1) (Failure "Invalid index");
+  state_chars_test "remove_chars on first" (remove_char 0 s2)
+    (get_char_list [1; 2; 2; 3]);
+  state_chars_test "remove_chars on last" (remove_char 4 s2)
+    (get_char_list [4; 1; 2; 2]);
+  state_int_test "remove_chars in middle with dups" 
+    (remove_char 4 s4) (get_xp 3) 50;
+  state_exn_test "remove_char negative" (fun _ -> remove_char ~-1 s1) 
+    (Failure "Invalid index");
+  state_exn_test "remove_char beyond index" (fun _ -> remove_char 3 s1) 
+    (Failure "Invalid index");
+  state_exn_test "remove_char empty" (fun _ -> remove_char 0 s0) 
+    (Failure "Invalid index");
+  state_chars_test "swap_chars" (swap_chars 1 2 s1)
+    (get_char_list [1; 3; 2]);
+  state_chars_test "swap_chars same char" (swap_chars 1 1 s1)
+    (get_char_list [1; 2; 3]);
+  state_int_test "swap_chars dups" (swap_chars 3 2 s4) (get_xp 2) 50;
+  state_exn_test "swap_chars n1 beyond index" (fun _ -> swap_chars 0 3 s1) 
+    (Failure "nth");
+  state_exn_test "swap_chars n2 beyond index" (fun _ -> swap_chars 3 0 s1) 
+    (Failure "nth");
+  state_exn_test "swap_chars n1 and n2 beyond index" 
+    (fun _ -> swap_chars 3 4 s1) (Failure "nth");
+  state_exn_test "swap_chars n1 negative" (fun _ -> swap_chars ~-3 1 s1) 
+    (Failure "Invalid index");
+  state_exn_test "swap_chars n2 negative" (fun _ -> swap_chars 1 ~-3 s1) 
+    (Failure "Invalid index");
+  state_exn_test "swap_chars n1 and n2 negative" 
+    (fun _ -> swap_chars ~-1 ~-3 s1) (Failure "Invalid index");
   state_move_test "legal move" s1 2 [2; 1];
   state_move_test "illegal move" s1 4 [];
+  state_add_xp_test "add_xp to 0 xp" s1 0 25 25 true;
+  state_add_xp_test "add_xp no level up" s4 3 1 51 false;
+  state_add_xp_test "add_xp with level up" s4 3 1000 1050 true;
+  state_exn_test "add_xp beyond index" (fun _ -> add_xp 3 100 s1) 
+    (Failure "Invalid index");
+  state_exn_test "add_xp negative index" (fun _ -> add_xp ~-1 100 s1) 
+    (Failure "Invalid index");
 ]
 
 (* (* STARTING combat tests *)

@@ -10,12 +10,13 @@
 (** The abstract type of values representing the game state. *)
 type t
 
-(** The type of values representing a character's level. The relation of level 
-    [l] to experience [x] is [x = l * l + l]. *)
-type level = int
-
 (** The type of values representing a character's experience points. *)
 type xp = int
+
+(** The type of values representing a character's level. The relation of level 
+    [l] to experience [x] is [l] must be the largest integer where [l * l + l] 
+    is less than [x]. *)
+type level = int
 
 (** [init_state a clist] is the state at the start of the game in adventure [a] 
     with character list [clist]. The current room is the starting room of [a] 
@@ -52,10 +53,10 @@ val get_room : t -> Adventure.room_id
     state [t] has visited. *)
 val get_visited : t -> Adventure.room_id list
 
-(** [add_chars c ~xp:e ~lvl:l n t] adds character [c] with experience points [e] 
-    and level [l] in index [n] of the character list of the player with state
-    [t]. If [n] is -1, the character is appended to the end of the list. [e] 
-    and [l] are optional and will both default to 0. 
+(** [add_chars c ~xp:e n t] adds character [c] with experience points [e] in 
+    index [n] of the character list of the player with state [t]. If [n] is -1, 
+    the character is appended to the end of the list. [e] is optional and will 
+    default to 0. 
     Raises: [Failure] if [n] is less than -1 or more than 
     [List.length n] *)
 val add_char : Character.c -> ?xp:xp -> int -> t -> t
@@ -74,7 +75,9 @@ val swap_chars : int -> int -> t -> t
 
 (** [add_xp n e t] is the state [t] with the experience points of the character 
     at index [n] in the character list incremented by [e]. It is complemented
-    by a boolean that is [true] if the addition results in a level increase. *)
+    by a boolean that is [true] if the addition results in a level increase. 
+    Raises: [Failure] if [n] is not a valid index of the character 
+    list. *)
 val add_xp : int -> xp -> t -> t * bool
 
 (** The type representing the result of an attempted move. *)
