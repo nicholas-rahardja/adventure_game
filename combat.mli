@@ -39,10 +39,6 @@ type t ={
 
 exception Winner of int
 
-exception UnknownMove
-
-exception UnknownTarget
-
 (** [move_select] distinguishes between a valid move that the user can enter,
     , or if 
     an input that does not lead to a valid move*)
@@ -209,9 +205,9 @@ val mult_start: Character.t -> unit
 (** [load_char char] loads [char] from Character into a [c] type record*)
 val load_char: Character.c -> c
 
-(** [is_off_cd cd] returns true if [cd] is off cd, which means its 
-    "turns_left" field reached 0. *)
-val is_off_cd: move_cd -> bool
+(** [is_on_cd cd] returns true if [cd] is on cd, which means its 
+    "turns_left" field above 0. *)
+val is_on_cd: move_cd -> bool
 
 (** [add_cd move cd_lst] adds [move] to the cooldown list [cd_lst], with 
     the move's given cooldown*)
@@ -225,10 +221,28 @@ val update_cd: move_cd -> move_cd
     If a move's cooldown reaches 0, then it is removed from the list.  *)
 val update_cd_lst: cd_lst -> cd_lst
 
+(** [add_cd_to_char c move] returns a cd_lst of character [c] with [move] 
+    on cooldown*)
+val add_cd_to_char:  c -> Character.move -> move_cd list
+
+(** [move_on_cd cd_lst move] checks if [move] is on cooldown, looking at 
+    [cd_lst] *)
+val move_on_cd: move_cd list -> Character.move -> bool
+
+(** [moves_off_cd move_lst cd_lst] returns a list of all moves from [move_lst] 
+    that are off_cooldown in [cd_lst] *)
+val moves_off_cd: Character.move list -> move_cd list -> Character.move list
+
+(** [char_moves_off_cd c] returns a list of all moves that [c] has that 
+    are off_cd *)
+val char_moves_off_cd: c -> Character.move list
+
+(** [update_cd_team team] updates all character's cooldowns on [team] *)
+val update_cd_team: team -> unit
 
 (* Sp combat functions *)
 
-val start_mult: Character.c list -> Character.c list -> unit
+val start_sing: Character.c list -> Character.c list -> unit
 
 
 
