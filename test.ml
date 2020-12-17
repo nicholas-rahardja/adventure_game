@@ -232,7 +232,9 @@ let s3 = (* Moving around *)
   |> mv 4
   |> mv 3
 (* Add char with XP *)
-let s4 = s2 |> add_char (Character.get_char t1 2 |> Option.get) ~xp:50 3 
+let s4 = s2 |> add_char (Character.get_char t1 2 |> Option.get) ~xp:50 3
+let s5 = s1 |> add_gold 50 (* Added gold *)
+let s6 = s5 |> sub_gold 20 (* Succesful gold removal *)
 
 
 let state_tests = [
@@ -260,6 +262,8 @@ let state_tests = [
   state_int_test "get_room test" s1 State.get_room 1;
   state_visited_test "get_visited test" s1 [1];
   state_visited_test "visited no dups test" s3 [1; 2; 3; 4];
+  state_int_test "get_gold 0 test" s1 get_gold 0;
+  state_int_test "get_gold, add_gold test" s5 get_gold 50;
   state_chars_test "add_chars prepend" (add_char 
                                           (Character.get_char t1 11 
                                            |> Option.get) 0 s2)
@@ -331,6 +335,9 @@ let state_tests = [
     (Failure "Invalid index");
   state_exn_test "add_xp negative index" (fun _ -> add_xp ~-1 100 s1) 
     (Failure "Invalid index");
+  state_int_test "sub_gold successful test" s6 get_gold 30;
+  state_exn_test "sub_gold insufficient test" (fun _ -> sub_gold 60 s5) 
+    (Failure "Insufficient gold");
 ]
 
 (* (* STARTING combat tests *)

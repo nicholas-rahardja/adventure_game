@@ -18,10 +18,14 @@ type xp = int
     is less than [x]. *)
 type level = int
 
+(** The type of values representing gold, the in-game currency. The player must 
+    never have negative gold. *)
+type gold = int
+
 (** [init_state a clist] is the state at the start of the game in adventure [a] 
     with character list [clist]. The current room is the starting room of [a] 
     and the list of visited rooms is empty. Each character has experience and 
-    level 0. *)
+    gold equal to 0. *)
 val init_state : Adventure.t -> Character.c list -> t
 
 (** [get_chars t] is the ordered list of characters for the player with state 
@@ -53,6 +57,9 @@ val get_room : t -> Adventure.room_id
     state [t] has visited. *)
 val get_visited : t -> Adventure.room_id list
 
+(** [get_gold t] is the amount of gold the player with state [t] has. *)
+val get_gold : t -> gold
+
 (** [add_chars c ~xp:e n t] adds character [c] with experience points [e] in 
     index [n] of the character list of the player with state [t]. If [n] is -1, 
     the character is appended to the end of the list. [e] is optional and will 
@@ -79,6 +86,14 @@ val swap_chars : int -> int -> t -> t
     Raises: [Failure] if [n] is not a valid index of the character 
     list. *)
 val add_xp : int -> xp -> t -> t * bool
+
+(** [add_gold amt t] is state [t] with [amt] gold added. *)
+val add_gold : gold -> t -> t
+
+(** [sub_gold amt t] is state [t] with [amt] gold subtracted if [amt] is not 
+    more than the amount in the player's account.
+    Raises: [Failure] if the player has insufficient gold. *)
+val sub_gold : gold -> t -> t
 
 (** The type representing the result of an attempted move. *)
 type result =

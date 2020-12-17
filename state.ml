@@ -2,13 +2,16 @@ type level = int
 
 type xp = int
 
+type gold = int
+
 (** Invariant: [visited] must contain no duplicates. *)
 type t = 
   {
     chars : (Character.c * xp) list;
     current_room : Adventure.room_id;
     visited : Adventure.room_id list;
-    map : Adventure.t
+    map : Adventure.t;
+    gold : gold
   }
 
 let rec init_clist clist exp =
@@ -21,7 +24,8 @@ let init_state a clist =
     chars = init_clist clist 0;
     current_room = Adventure.start_room a;
     visited = [Adventure.start_room a];
-    map = a
+    map = a;
+    gold = 0
   }
 
 let rec extract_chars chars = 
@@ -51,9 +55,8 @@ let get_room t =
 let get_visited t =
   t.visited
 
-let cmp_chars c1 c2 =
-  let get_id = Character.get_char_id in
-  get_id c1 - get_id c2
+let get_gold t =
+  t.gold
 
 (** Precondition: [n] must be between -1 and [List.length clist], inclusive. *)
 let rec add_helper c xp n clist =
@@ -122,6 +125,21 @@ let add_xp n e t =
       } 
     in
     (t', get_level n t' > get_level n t)
+
+let add_gold amt t =
+  {
+    t with
+    gold = t.gold + amt
+  }
+
+let sub_gold amt t =
+  let sub = t.gold - amt in
+  if sub < 0 then failwith "Insufficient gold"
+  else
+    {
+      t with
+      gold = sub
+    }
 
 (** The type representing the result of an attempted move. *)
 type result =
