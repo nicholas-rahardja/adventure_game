@@ -25,7 +25,7 @@ type gold = int
 (** [init_state a clist] is the state at the start of the game in adventure [a] 
     with character list [clist]. The current room is the starting room of [a] 
     and the list of visited rooms is empty. Each character has experience and 
-    gold equal to 0. *)
+    gold equal to 0. The inventory is empty. *)
 val init_state : Adventure.t -> Character.c list -> t
 
 (** [get_chars t] is the ordered list of characters for the player with state 
@@ -59,6 +59,10 @@ val get_visited : t -> Adventure.room_id list
 
 (** [get_gold t] is the amount of gold the player with state [t] has. *)
 val get_gold : t -> gold
+
+(** [get_inventory t] is the (ordered) list of all the items that the player 
+    with state [t] has. The order is used in [remove_inventory]. *)
+val get_inventory : t -> Adventure.item list
 
 (** [add_chars c ~xp:e n t] adds character [c] with experience points [e] in 
     index [n] of the character list of the player with state [t]. If [n] is -1, 
@@ -94,6 +98,15 @@ val add_gold : gold -> t -> t
     more than the amount in the player's account.
     Raises: [Failure] if the player has insufficient gold. *)
 val sub_gold : gold -> t -> t
+
+(** [add_inventory item t] is [t] with [item] prepended to the player's 
+    inventory. *)
+val add_inventory : Adventure.item -> t -> t
+
+(** [remove_inventory i t] is [t] with the item at index [i] according to 
+    [get_inventory] removed from the player's inventory.
+    Raises: [Failure] if [i] is not a valid index of the player's inventory. *)
+val remove_inventory : int -> t -> t
 
 (** The type representing the result of an attempted move. *)
 type result =

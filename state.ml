@@ -11,7 +11,8 @@ type t =
     current_room : Adventure.room_id;
     visited : Adventure.room_id list;
     map : Adventure.t;
-    gold : gold
+    gold : gold;
+    inventory : Adventure.item list
   }
 
 let rec init_clist clist exp =
@@ -25,7 +26,8 @@ let init_state a clist =
     current_room = Adventure.start_room a;
     visited = [Adventure.start_room a];
     map = a;
-    gold = 0
+    gold = 0;
+    inventory = []
   }
 
 let rec extract_chars chars = 
@@ -57,6 +59,9 @@ let get_visited t =
 
 let get_gold t =
   t.gold
+
+let get_inventory t =
+  t.inventory
 
 (** Precondition: [n] must be between -1 and [List.length clist], inclusive. *)
 let rec add_helper c xp n clist =
@@ -139,6 +144,25 @@ let sub_gold amt t =
     {
       t with
       gold = sub
+    }
+
+let add_inventory item t =
+  {
+    t with
+    inventory = item :: t.inventory
+  }
+
+let rec remove_inventory_helper i = function
+  | [] -> failwith "Precondition violated"
+  | h :: t when i = 0 -> t
+  | h :: t -> h :: remove_inventory_helper (i - 1) t
+
+let remove_inventory i t =
+  if i < 0 || i >= List.length t.inventory then failwith "Invalid index"
+  else
+    {
+      t with
+      inventory = remove_inventory_helper i t.inventory
     }
 
 (** The type representing the result of an attempted move. *)

@@ -147,15 +147,15 @@ let item_string i =
     | FlatHp (n, x) -> 
       n ^ ": " ^ string_of_int x ^ " " ^ n ^ " HP Medicine" 
     | PercentHp (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ " HP Medicine"
+      n ^ ": " ^ string_of_float (f *. 100.) ^ "% HP Medicine"
     | AtkBooster (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ " Attack Booster"  
+      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Attack Booster"  
     | DebuffRemover n -> n ^ ": " ^ "Debuff Remover"
     | DamageBooster (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ " Damage Booster" 
+      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Damage Booster" 
     | RevivalItem n -> n ^ ": " ^ "Revival Item"
     | DamageReducer (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ " Damage Reducer"
+      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Damage Reducer"
   end
 
 let item_wrapper_string i =
