@@ -1,8 +1,5 @@
 open Printf
 exception Winner of int
-exception UnknownMove
-exception UnknownTarget
-
 
 type move_cd = 
   {move: Character.move;
@@ -33,7 +30,6 @@ type move_select =
   | Valid_m of Character.move
   | Invalid_m
 
-
 type target_select = 
   | Valid_tar of c
   | Invalid_tar
@@ -53,6 +49,7 @@ let dmg_variation = 5
 let health_mod = 5
 let delay_time = 1
 let smartness = 100
+let permanent = 9999999
 
 
 (** [vary k percent] returns a value that deviates from [k] 
@@ -146,6 +143,50 @@ let print_targets team =
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
 let ask_user = read_int
 
+(** DEBUG CODE *)
+let print_cd cd = 
+  let move_name = Character.get_move_name cd.move in
+  Printf.printf " %s has %d turns remaining \n" move_name cd.turns_left
+
+let is_on_cd cd = 
+  cd.turns_left > 0
+
+(* TODO *)
+let get_move_cd move = 3
+
+let add_cd move cd_lst = 
+  let cd = get_move_cd move in 
+  let new_entry =  {move = move;
+                    turns_left = cd;} in 
+  new_entry :: cd_lst
+
+let update_cd move_cd = 
+  (* Printf.printf " current move cd is %d" move_cd.turns_left; *)
+  let next_cd = move_cd.turns_left - 1 in 
+  let new_cd = {move_cd with turns_left = next_cd} in 
+  (* print_cd new_cd; *)
+  new_cd
+
+let update_cd_lst cd_lst = 
+  let not_trimmed_lst = List.map update_cd cd_lst in 
+  List.filter is_on_cd not_trimmed_lst
+
+let update_cd_char c = 
+  let new_lst = update_cd_lst c.cooldown in 
+  c.cooldown <- new_lst
+
+let update_cd_team team = 
+  List.iter update_cd_char team
+
+let add_cd_to_char c move = 
+  add_cd move c.cooldown 
+
+let reassign_char_cd c move = 
+  let new_lst = add_cd_to_char c move in 
+  print_int ((List.nth new_lst 0).turns_left);
+  print_newline ();
+  c.cooldown <- new_lst
+
 (** Requires: team must be an active_team, meaning no one is dead *)
 let target_input team input = 
   try
@@ -169,7 +210,6 @@ let rec select_enemy team =
   | Invalid_tar -> 
     print_endline "\n That is not a valid target, please choose again: \n"; 
     select_enemy team
-
 
 (** [is_team_dead act_team] checks if [act_team] is all dead.
     Requires: act_team must be a team type that passed through the get_active
@@ -201,6 +241,25 @@ let move_input (move_lst : Character.move list) input =
   with
     _ -> Invalid_m
 
+let move_on_cd_helper move cd = 
+  let move1_name = Character.get_move_name cd.move in
+  let move2_name = Character.get_move_name move in
+  move1_name = move2_name
+
+let move_on_cd cd_lst move = 
+  let lst = List.filter (move_on_cd_helper move) cd_lst in 
+  List.length lst = 0
+
+let moves_off_cd move_lst cd_lst = 
+  List.filter (move_on_cd cd_lst) move_lst
+
+let char_moves_off_cd c = 
+  let char_moves = c.char_moves in 
+  let cd_lst = c.cooldown in 
+  moves_off_cd char_moves cd_lst
+
+
+
 (** [select_move move_list] prints out the possible moves to use,
     and asks for the user to input an int. the function evaluates to the 
     move they chose. Will ask and repeat if the user does not select
@@ -225,11 +284,16 @@ let use_move n opp_team c =
   check_winner act_enemy n;
   blue_char_name c;
   print_string " is attacking: \n\n";
-  let move = select_move c.char_moves in 
-  let target = select_enemy act_enemy in 
-
-  Character.get_damage c.char_c target.char_c move  |> int_of_float |>
-  do_dmg target
+  let act_moves = char_moves_off_cd c in 
+  if List.length act_moves = 0 then 
+    print_endline "All this character's moves are on cooldown, can't attack!"
+  else begin
+    let move = select_move act_moves in 
+    let target = select_enemy act_enemy in 
+    reassign_char_cd c move;
+    Character.get_damage c.char_c target.char_c move  |> int_of_float |>
+    do_dmg target
+  end
 
 (** [get_team n t] will return tuple of [(current_team, opposing team)]. 
     [current_team] is denotes that it is this team's turn to attack. 
@@ -245,30 +309,12 @@ let get_team n t =
     then choose a target to use it on.*)
 let team_n_turn n t : unit = 
   let (fri_team, enemy_team) = get_team n t in
+  update_cd_team fri_team;
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
   Printf.printf "\n It is team %d's turn to start!\n\n" n;
   use_item fri_team; 
   List.iter (use_move n enemy_team) act_friendly
-
-let is_off_cd cd = 
-  cd.turns_left <= 0
-
-let get_move_cd move = failwith "TODO"
-
-let add_cd move cd_lst = 
-  let cd = get_move_cd move in 
-  let new_entry =  {move = move;
-                    turns_left = cd;} in 
-  new_entry :: cd_lst
-
-let update_cd move_cd = 
-  let next_cd = move_cd.turns_left - 1 in 
-  {move_cd with turns_left = next_cd}
-
-let update_cd_lst cd_lst = 
-  let not_trimmed_lst = List.map update_cd cd_lst in 
-  List.filter is_off_cd not_trimmed_lst
 
 
 (** [start_t t] starts combat from the representation type t. the while loop
@@ -307,13 +353,12 @@ let rec player_pick_helper k (lst : int list) (acc : int list) =
       print_endline "That is not a character in the list, please pick again!";
       player_pick_helper k lst acc) end
 
-(** requires k > 0*)
+(** [player_pick k lst] allows player to pick [k] characters
+    requires k > 0*)
 let player_pick k lst = player_pick_helper k lst []
 
-
-
 (** [random_pick_char t k] allows users to pick k character from max_id choices*)
-let random_pick_char t k max_id choices=
+let random_pick_char t k max_id choices =
   print_endline "Choose your team";
   let lst = ref [] in
   while ((List.length !lst) < choices) do
@@ -326,10 +371,6 @@ let random_pick_char t k max_id choices=
   player_pick k !lst
 
 
-
-
-
-
 (** random_clst randomly chooses k characters from the list of all possible
     characters, and then returns a Character.c list containing their choices*)
 let random_clst n t k max_id choices = 
@@ -338,17 +379,12 @@ let random_clst n t k max_id choices =
   let get_char_from_id id = Character.get_char t id |> getextract_char in 
   List.map get_char_from_id player_choicelst 
 
-let mult_print n = 
-  Printf.printf "Hi Player %d, it is you're turn to build your team!\n" n
-
-let build_list k = List.init k (fun _ -> 0)
-
 
 let load_char char = {
   char_c= char;
   char_name = Character.get_char_name char;
   char_moves = Character.get_moves char;
-  cur_hp = Character.get_hp char;
+  cur_hp = Character.get_hp char * health_mod;
   buffs= []; 
   active= true; 
   cooldown = []}
@@ -376,9 +412,6 @@ let init_from_player t=
 let mult_start t = 
   init_from_player t |> start_t 
 
-
-
-
 (* BEGIN SINGLE PLAYER COMBAT MODULE *)
 
 let rand_in_lst lst =   
@@ -390,26 +423,25 @@ let print_move (m : Character.move) =
   Printf.printf "Move option : '%s'\n" (Character.get_move_name m)
 
 let rand_move c = 
-  List.iter print_move c.char_moves;
-  rand_in_lst c.char_moves 
+  let act_moves = char_moves_off_cd c in 
+  rand_in_lst act_moves
 
 let rand_target team = 
   rand_in_lst team
-
+(*
 let enemy_select_move c = 
   let x = rand_move c in 
-  x
+  x*)
 
 let enemy_select_target team = rand_target team
 
-
 let best_dmg_move c (target : c) = 
-  let move_lst = c.char_moves in 
+  let act_move_lst = char_moves_off_cd c in 
   let dmg move = Character.get_damage c.char_c target.char_c move in
   let acc_func acc move = (move, dmg move) :: acc in
   (* Compares in reverse order *)
   let compare_tuple (_, a) (_, b) = compare b a in 
-  let sorted_lst = List.fold_left acc_func [] move_lst 
+  let sorted_lst = List.fold_left acc_func [] act_move_lst 
                    |> List.sort compare_tuple in
   let (move, dmg) = List.hd sorted_lst in (target, move, dmg)
 
@@ -421,43 +453,53 @@ let best_action c targets =
   let sorted_lst = List.sort compare_tri_tuple lst in 
   let (target, move, _) = List.hd sorted_lst in (move, target)
 
-
-
-
 let enemy_select_action c targets chance : (Character.move * c) = 
   if proc chance then best_action c targets
   else (rand_move c, rand_target targets)
 
+(** [print_flush] simply prints a new line, while flushing all 
+    previous prints in the queue *)
+let print_flush () = print_endline ""
 
-let enemy_use_move_mult n opp_team c = 
+let enemy_use_move_sing n opp_team c = 
 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
-  Printf.printf "Character %s is attacking: \n" c.char_name;
+  Printf.printf "Character %s is attacking: " c.char_name;
+  print_flush ();
   Unix.sleep delay_time;
-  let (move, target) = enemy_select_action c act_enemy smartness
-  (* Change later to a probability *) 
-  in
-  Printf.printf "%s used '%s'\n" c.char_name (Character.get_move_name move);
-  Unix.sleep delay_time;
-  Character.get_damage c.char_c target.char_c move  |> int_of_float |>
-  do_dmg target
+  let act_moves = char_moves_off_cd c in 
+  if List.length act_moves = 0 then
+    print_endline "This character has no available moves, can't attack!"
+  else begin
+    let (move, target) = enemy_select_action c act_enemy smartness
+    (* TODO Change later to a probability *) 
+    in
+    reassign_char_cd c move;
+    Printf.printf "%s used " c.char_name;
+    ANSITerminal.(print_string [red] (Character.get_move_name move));
+    print_flush ();
+    Unix.sleep delay_time;
+    Character.get_damage c.char_c target.char_c move  |> int_of_float |>
+    do_dmg target
+  end
 
 let execute_turn n t : unit = 
   let (fri_team, enemy_team) = get_team n t in
+  update_cd_team fri_team;
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
   if n = 1 then begin
-    ANSITerminal.( print_string [red] "It is your turn to attack: \n");
+    ANSITerminal.(print_string [red] "It is your turn to attack: \n");
     use_item fri_team; 
     List.iter (use_move n enemy_team) act_friendly
   end
   else begin
     ANSITerminal.( print_string [red] "The enemy is attacking! \n");
-    List.iter (enemy_use_move_mult n enemy_team) act_friendly
+    List.iter (enemy_use_move_sing n enemy_team) act_friendly
   end
 
-let start_t_mult t = 
+let start_t_sing t = 
   try begin
     while (true) do
       execute_turn 1 t;
@@ -469,6 +511,6 @@ let start_t_mult t =
                     [red] "Congratulation, you defeated the enemy!\n");
     t.winner <- inte
 
-let start_mult clst1 clst2 = 
+let start_sing clst1 clst2 = 
   let init = init clst1 clst2 in 
-  start_t_mult init
+  start_t_sing init

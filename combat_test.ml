@@ -1,7 +1,6 @@
 open OUnit2
 open Character
 open Combat
-open SinglePlayerCombat
 
 let j1 = Yojson.Basic.from_file "json/charmovetest.json"
 let t1 = from_json j1
@@ -23,5 +22,16 @@ let test_unit_god = getextract_char 1001
 let test_team1 = [michael;char3;char5]
 let test_team2 = [gries;char4;char6]
 
+let move_1 = Option.get (get_move t1 1)
 
-let go = SinglePlayerCombat.start test_team1 test_team2
+let move_2 = Option.get (get_move t1 3)
+
+let move_3 = Option.get (get_move t1 3)
+
+let move_cd1 = add_cd move_1 []
+
+let update1 = update_cd_lst move_cd1
+
+let update2 = update_cd_lst update1
+
+let update3 = update_cd_lst update2

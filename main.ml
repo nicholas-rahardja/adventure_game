@@ -60,7 +60,7 @@ let rec one_round (state : State.t) adv_t =
   if List.length enemies = 0 then print_endline "No enemies found\n" else
     (* Load player_team from State.t, and load enemies from Adventure.enemies *)
     (ANSITerminal.(print_string [red] "An enemy has attacked! \n\n");
-     Combat.start_mult player_team (char_list enemies));
+     Combat.start_sing player_team (char_list enemies));
   print_endline "Where do you want to go next?";
   let x = Adventure.next_rooms adv_t cur_room in 
   print_rooms x adv_t;
