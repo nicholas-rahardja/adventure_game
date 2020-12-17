@@ -136,30 +136,44 @@ let move_tests = [
 
 open Adventure
 let test_adventure = from_json (from_file "adventure_test.json")
-let room_ids_test_helper name a expected = name >::(fun _ -> 
-    assert_equal expected (room_ids a) ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)  
-let start_room_test_helper name a expected = name >::(fun _ -> 
-    assert_equal expected (start_room a)) 
-let message_test_helper name a r expected = name >:: (fun _ -> 
-    assert_equal expected (message a r))
-let exits_test_helper name a r expected = name >:: (fun _ -> 
-    assert_equal expected (exits a r))
-let next_room_test_helper name a r e expected = name >:: (fun _ -> 
-    assert_equal expected (next_room a r e))
-let next_rooms_test_helper name a r expected = name >:: (fun _ -> 
-    assert_equal expected (next_rooms a r))
-let enemies_test_helper name a r expected = name >::(fun _ -> 
-    assert_equal expected (enemies a r)) 
-let shop_test_helper name a r expected = name >::(fun _ -> 
-    assert_equal expected (shop a r)) 
-let rewards_test_helper name a r expected = name >::(fun _ -> 
-    assert_equal expected (rewards a r)) 
-let difficulty_test_helper name a r expected = name >::(fun _ -> 
-    assert_equal expected (difficulty a r)) 
+
+let room_ids_test_helper name a expected = 
+  name >::(fun _ -> assert_equal expected (room_ids a) 
+              ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists) 
+
+let start_room_test_helper name a expected = 
+  name >::(fun _ -> assert_equal expected (start_room a)) 
+
+let message_test_helper name a r expected = 
+  name >:: (fun _ -> assert_equal expected (message a r))
+
+let exits_test_helper name a r expected = 
+  name >:: (fun _ -> assert_equal expected (exits a r))
+
+let next_room_test_helper name a r e expected = 
+  name >:: (fun _ -> assert_equal expected (next_room a r e))
+
+let next_rooms_test_helper name a r expected = 
+  name >:: (fun _ -> assert_equal expected (next_rooms a r))
+
+let enemies_test_helper name a r expected = 
+  name >::(fun _ -> assert_equal expected (enemies a r)) 
+
+let shop_test_helper name a r expected =
+  name >::(fun _ -> assert_equal expected (shop a r)
+              ~cmp:cmp_set_like_lists ~printer:(pp_list item_wrapper_string)) 
+
+let rewards_test_helper name a r expected =
+  name >::(fun _ -> assert_equal expected (rewards a r)
+              ~cmp:cmp_set_like_lists ~printer:(pp_list item_string)) 
+
+let difficulty_test_helper name a r expected = 
+  name >::(fun _ -> assert_equal expected (difficulty a r)) 
 
 let map_test = [
   start_room_test_helper "start room of adventure test" test_adventure 1;
-  room_ids_test_helper "room ids in adventure test" test_adventure [1;2;3;4;5;6;7;8];
+  room_ids_test_helper "room ids in adventure test" test_adventure 
+    [1;2;3;4;5;6;7;8];
   message_test_helper "message in room 1 of adventure test" test_adventure 1 
     "You are at Home Base";
   message_test_helper "message in room 3 of adventure test" test_adventure 3 
@@ -171,8 +185,44 @@ let map_test = [
   next_rooms_test_helper "next rooms from room 2" test_adventure 2 [3];
   enemies_test_helper "enemy in room 1" test_adventure 1 [];
   enemies_test_helper "enemy in room 2" test_adventure 2 [1];
-  shop_test_helper "shop in room 2" test_adventure 2 ["item 1"; "item 2"];
-  rewards_test_helper "reward in room 3" test_adventure 3 ["reward 2"; "reward 3"];
+  shop_test_helper "shop in room 2" test_adventure 2 
+    [
+      {
+        item = FlatHp ("PH", 5);
+        price = 3
+      };
+      {
+        item = DebuffRemover "PH";
+        price = 2
+      }
+    ];
+  shop_test_helper "shop in room 3" test_adventure 3 
+    [
+      {
+        item = PercentHp ("PH", 0.1);
+        price = 10
+      };
+      {
+        item = AtkBooster ("PH", 0.05);
+        price = 7
+      };
+      {
+        item = RevivalItem "PH";
+        price = 8
+      };
+      {
+        item = DamageBooster ("PH", 0.03);
+        price = 4
+      };
+      {
+        item = DamageReducer ("PH", 0.1);
+        price = 12
+      };
+    ];
+  rewards_test_helper "rewards in room 2" test_adventure 2 
+    [DamageReducer ("R", 0.1)];
+  rewards_test_helper "rewards in room 3" test_adventure 3 
+    [FlatHp ("R", 5); DebuffRemover "R"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
 ]
 

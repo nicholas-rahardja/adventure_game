@@ -23,11 +23,25 @@
         1
       ],
       "shop": [
-        "item 1",
-        "item 2"
+        {
+          "name": "PH",
+          "item": "FlatHp",
+          "eff": 5,
+          "price": 3
+        },
+        {
+          "name": "PH",
+          "item": "DebuffRemover",
+          "eff": 0,
+          "price": 2
+        }
       ],
       "rewards": [
-        "reward 1"
+        {
+          "name": "R",
+          "item": "DamageReducer",
+          "eff": 0.1
+        }
       ],
       "difficulty": 1,
       "exits": [
@@ -47,14 +61,48 @@
         4
       ],
       "shop": [
-        "item 3",
-        "item 4",
-        "item 5",
-        "item 6"
+        {
+          "name": "PH",
+          "item": "PercentHp",
+          "eff": 0.1,
+          "price": 10
+        },
+        {
+          "name": "PH",
+          "item": "AtkBooster",
+          "eff": 0.05,
+          "price": 7
+        },
+        {
+          "name": "PH",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 8
+        },
+        {
+          "name": "PH",
+          "item": "DamageBooster",
+          "eff": 0.03,
+          "price": 4
+        },
+        {
+          "name": "PH",
+          "item": "DamageReducer",
+          "eff": 0.1,
+          "price": 12
+        }
       ],
       "rewards": [
-        "reward 2",
-        "reward 3"
+        {
+          "name": "R",
+          "item": "FlatHp",
+          "eff": 5
+        },
+        {
+          "name": "R",
+          "item": "DebuffRemover",
+          "eff": 0
+        }
       ],
       "difficulty": 1,
       "exits": [
@@ -78,9 +126,7 @@
         12
       ],
       "shop": [],
-      "rewards": [
-        "reward 4"
-      ],
+      "rewards": [],
       "difficulty": 2,
       "exits": [
         {
@@ -102,9 +148,7 @@
         7
       ],
       "shop": [],
-      "rewards": [
-        "reward 5"
-      ],
+      "rewards": [],
       "difficulty": 2,
       "exits": [
         {
@@ -126,17 +170,8 @@
         9,
         10
       ],
-      "shop": [
-        "item 1",
-        "item 2",
-        "item 7",
-        "item 8"
-      ],
-      "rewards": [
-        "reward 3",
-        "reward 6",
-        "reward 7"
-      ],
+      "shop": [],
+      "rewards": [],
       "difficulty": 3,
       "exits": [
         {
@@ -158,17 +193,8 @@
         9,
         10
       ],
-      "shop": [
-        "item 1",
-        "item 3",
-        "item 9",
-        "item 10"
-      ],
-      "rewards": [
-        "reward 3",
-        "reward 8",
-        "reward 9"
-      ],
+      "shop": [],
+      "rewards": [],
       "difficulty": 3,
       "exits": [
         {
@@ -191,10 +217,7 @@
         11
       ],
       "shop": [],
-      "rewards": [
-        "reward 10",
-        "reward 11"
-      ],
+      "rewards": [],
       "difficulty": 5,
       "exits": [
         {

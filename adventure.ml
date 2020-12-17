@@ -13,13 +13,28 @@ type exit ={
   room_id:int;
 }
 
+type item =
+  | FlatHp of string * int 
+  | PercentHp of string * float 
+  | AtkBooster of string * float 
+  | DebuffRemover of string
+  | DamageBooster of string * float 
+  | RevivalItem of string
+  | DamageReducer of string * float
+
+type item_wrapper =
+  {
+    item : item;
+    price : int
+  }
+
 type room ={
   id : room_id;
   name : string;
   initial_message : string;
   enemy_ids : int list;
-  shop : string list;
-  rewards : string list;
+  shop : item_wrapper list;
+  rewards : item list;
   difficulty : int; 
   exits : exit list 
 }
@@ -34,13 +49,47 @@ let exit_of_json json = {
   room_id = json |> member "room id" |> to_int;
 }
 
+let item_matcher o =
+  match o |> member "item" |> to_string with
+  | "FlatHp" -> 
+    FlatHp (o |> member "name" |> to_string, o |> member "eff" |> to_int)
+  | "PercentHp" -> 
+    PercentHp (o |> member "name" |> to_string, 
+               o |> member "eff" |> to_float)
+  | "AtkBooster" -> 
+    AtkBooster (o |> member "name" |> to_string, 
+                o |> member "eff" |> to_float)
+  | "DebuffRemover" -> DebuffRemover (o |> member "name" |> to_string) 
+  | "DamageBooster" -> 
+    DamageBooster (o |> member "name" |> to_string, 
+                   o |> member "eff" |> to_float)
+  | "RevivalItem" -> RevivalItem (o |> member "name" |> to_string)
+  | "DamageReducer" -> 
+    DamageReducer (o |> member "name" |> to_string, 
+                   o |> member "eff" |> to_float)
+  | _ -> failwith "Invalid item"
+
+let shop_of_json json =
+  let raw_list = json |> member "shop" |> to_list in
+  let process o =
+    {
+      item = item_matcher o;  
+      price = o |> member "price" |> to_int;
+    }
+  in
+  List.map process raw_list
+
+let rewards_of_json json =
+  let raw_list = json |> member "rewards" |> to_list in
+  List.map item_matcher raw_list
+
 let room_of_json json ={
   id = json |> member "id" |> to_int;
   name = json |> member "name" |> to_string;
   initial_message = json |>  member "initial message" |> to_string;
   enemy_ids = json |> member "enemy ids" |> to_list |> List.map to_int;
-  shop = json |> member "shop" |> to_list |> List.map to_string;
-  rewards = json |> member "rewards" |> to_list |> List.map to_string;
+  shop = json |> shop_of_json;
+  rewards = json |> rewards_of_json;
   difficulty = json |> member "difficulty" |> to_int;
   exits = json |> member "exits" |> to_list |> List.map exit_of_json;
 }
@@ -91,6 +140,26 @@ let rewards a r =
 
 let difficulty a r = 
   (get_room a r).difficulty
+
+let item_string i =
+  begin
+    match i with
+    | FlatHp (n, x) -> 
+      n ^ ": " ^ string_of_int x ^ " " ^ n ^ " HP Medicine" 
+    | PercentHp (n, f) -> 
+      n ^ ": " ^ string_of_float (f *. 100.) ^ " HP Medicine"
+    | AtkBooster (n, f) -> 
+      n ^ ": " ^ string_of_float (f *. 100.) ^ " Attack Booster"  
+    | DebuffRemover n -> n ^ ": " ^ "Debuff Remover"
+    | DamageBooster (n, f) -> 
+      n ^ ": " ^ string_of_float (f *. 100.) ^ " Damage Booster" 
+    | RevivalItem n -> n ^ ": " ^ "Revival Item"
+    | DamageReducer (n, f) -> 
+      n ^ ": " ^ string_of_float (f *. 100.) ^ " Damage Reducer"
+  end
+
+let item_wrapper_string i =
+  item_string i.item ^ " [Price: " ^ string_of_int i.price ^ "]"
 
 
 

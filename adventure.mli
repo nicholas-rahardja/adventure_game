@@ -60,14 +60,38 @@ val next_rooms : t -> room_id -> room_id list
     Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
 val enemies : t -> room_id -> int list 
 
-(** [shop a r] is a list of all the items in the shop in room [r] in adventure 
-    [a]. Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
-val shop: t -> room_id -> string list 
-
-(** [rewards a r] is a list of all the rewards  in room [r] in adventure [a].
-    Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
-val rewards: t -> room_id -> string list 
-
 (** [diffculty a r] is the dificulty level of the enemy in room [r] in 
     adventure [a]. Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
 val difficulty: t -> room_id -> int 
+
+(** The type representing item types. The string is the item name. *)
+type item =
+  | FlatHp of string * int (** Recovers flat hp *)
+  | PercentHp of string * float (** Recovers % hp *)
+  | AtkBooster of string * float (** Attack booster by % *)
+  | DebuffRemover of string
+  | DamageBooster of string * float (** Elemental damage booster by % *)
+  | RevivalItem of string
+  | DamageReducer of string * float (** Reduces damage received by a % *)
+
+(** The type of values representing complete item data for the shop. *)
+type item_wrapper =
+  {
+    item : item;
+    price : int
+  }
+
+(** [shop a r] is a list of all the items in the shop in room [r] in adventure 
+    [a]. 
+    Raises: [UnknownRoom r] if [r] is not a room identifier in [a] *)
+val shop: t -> room_id -> item_wrapper list 
+
+(** [rewards a r] is a list of all the rewards  in room [r] in adventure [a].
+    Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
+val rewards: t -> room_id -> item list 
+
+(** [item_string i] is a string representation of [i], without price. *)
+val item_string : item -> string
+
+(** [shop_item_string i] is a string representation of [i], with price. *)
+val item_wrapper_string : item_wrapper -> string
