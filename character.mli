@@ -26,6 +26,15 @@ type t = {
   all_moves : (int * move) list
 }
 
+(** Representation type for a buff *)
+type buff = 
+  | Dot of int * int 
+  | Hot of int * int
+  | DmgDoneMod of int * int
+  | DmgReceivedMod of int * int
+  | ElementalDmgDoneMod of int * int
+  | ElementalVulnerability of int * int
+
 (** [from_json j] is the list of characters and moves that [j] represents.
     Requires: [j] is a valid characters JSON file representation. *)
 val from_json : Yojson.Basic.t -> t
@@ -84,3 +93,9 @@ val get_effectiveness : move -> c -> float
 
 (** [get_damage c e move] is the damage [c] inflicts on [e] with [move]. *)
 val get_damage : c -> c -> move -> float 
+
+(** [get_move_buff t move] is the [move]'s buff. None if it does not 
+    apply a buff. [Some buff] if there is a buff applied, where [buff] is the
+    buff *)
+val get_move_buff : t -> move -> buff option
+

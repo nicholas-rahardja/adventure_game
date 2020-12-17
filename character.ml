@@ -30,6 +30,15 @@ type t = {
   all_moves : (int * move) list
 }
 
+(* First int is the id, 2nd int is the effectiveness *)
+type buff = 
+  | Dot of int * int 
+  | Hot of int * int
+  | DmgDoneMod of int * int
+  | DmgReceivedMod of int * int
+  | ElementalDmgDoneMod of int * int
+  | ElementalVulnerability of int * int
+
 (* Character-related functions *)
 
 let get_char t id =
@@ -140,3 +149,4 @@ let get_damage (player:c) (enemy:c) (move:move) : float =
   let effectiveness = get_effectiveness move enemy in 
   float_of_int(move.atk) *. effectiveness 
 
+let get_move_buff t move = failwith "TODO"

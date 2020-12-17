@@ -103,10 +103,8 @@ let do_heal c heal =
 
 
 (** [getextract_char c] extracts the c from the c option*)
-let getextract_char c = match
-    c with
-| None -> failwith "character not found"
-| Some x -> x
+let getextract_char c = 
+  Option.get c
 
 
 (** [is_active c] returns true if a character's hp is above 0. *)
