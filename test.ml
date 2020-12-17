@@ -230,6 +230,26 @@ let state_tests = [
   state_move_test "illegal move" s1 4 [];
 ]
 
+(* (* STARTING combat tests *)
+
+   (* "Aqua Torrent" *)
+   let move_6 = Option.get (get_move t1 6) 
+   (* "Cyclone" *)
+   let move_7 = Option.get (get_move t1 7) 
+   (* "Icebolt" *)
+   let move_8 = Option.get (get_move t1 8) 
+
+   let move_set1 = [move_6; move_8; move_7]
+
+
+   let assert_eq_help name result exp_output = 
+   name >:: fun _ -> assert_equal exp_output result
+
+   let combat_move_input_test name move_lst input exp_output = 
+   assert_eq_help name (Combat.move_input move_lst input) exp_output 
+
+   let combat_tests = []
+*)
 let suite =
   "test suite"  >::: List.flatten [
     char_tests;
