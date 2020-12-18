@@ -426,8 +426,8 @@ let char_5 = Option.get (Character.get_char t1 5)
 let char_6 = Option.get (Character.get_char t1 6)
 
 let combat_t = 
-  let first_team = [char_1;char_2;char_3] in 
-  let sec_team = [char_4;char_5;char_6] in 
+  let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
+  let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
   init first_team sec_team
 
 (* Get a team object by using [init] like above, then extract the field *)
@@ -450,9 +450,10 @@ let combat_target_input_test name team input exp_output =
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
 
-let do_dmg_test name c dmg exp_health = 
+let do_dmg_test name c dmg = 
+  let exp_hp_after = c.cur_hp - dmg in 
   do_dmg c dmg; 
-  assert_eq_help name (c.cur_hp) exp_health
+  assert_eq_help name (c.cur_hp) exp_hp_after
 
 (* Makes move_cd entry *)
 let make_cd_entry move cd = 
@@ -476,7 +477,8 @@ let combat_tests = [
   (* testing tar_input *)
   combat_target_input_test "valid target" team1 "1" (Valid_tar team1_first_target); 
   assert_eq_help "update cd, turns left" update_move6.turns_left 2;
-  assert_eq_help "update cd, move" update_move6.move move_6
+  assert_eq_help "update cd, move" update_move6.move move_6;
+  do_dmg_test "do 10 damage" team1_first_target 10;
 ]
 
 let suite =
