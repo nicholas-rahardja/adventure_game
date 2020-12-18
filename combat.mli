@@ -12,7 +12,8 @@ type move_cd =
     from the cd list *)
 type cd_lst = move_cd list
 
-(**[type c] represents one character, and their current hp. Must include Character.c in its representation *)
+(**[type c] represents one character, and their current hp. 
+  Must include Character.c in its representation *)
 type c =
   {
     char_c: Character.c;
@@ -257,6 +258,7 @@ val start_sing: (Character.c * int) list -> (Character.c * int) list -> unit
 (** [rand_in_lst lst] returns a random element in lst *)
 val rand_in_lst : 'a list -> 'a
 
-
+(** [start_t_sing t] executes turns for the single player mode *)
+val start_t_sing: t -> unit 
 
 

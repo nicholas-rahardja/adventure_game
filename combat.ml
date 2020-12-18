@@ -58,7 +58,7 @@ let multiplayer_base_lvl = 10
     by at most +- [percent]%.
     Requires: 0 <= percent <= 100*)
 let vary (k : float) percent = 
-  let rand_int = Random.int (percent * 10 + 1) in 
+  let rand_int = Random.int (percent * 10 + 1) in
   let rand_float = float_of_int (rand_int) /. 10. in 
   let mult = rand_float /. 100. in 
   let pos_or_neg = 
@@ -76,6 +76,7 @@ let proc k =
 
 (** [blue_char_name c] prints [c]'s name in blue. *)
 let blue_char_name c = ANSITerminal.(print_string [blue] c.char_name)
+
 
 (** [do_dmg c dmg] inflicts [dmg] amount of damage on character c.
     Does not take into account damage variation, or buffs, etc. *)
@@ -524,10 +525,10 @@ let start_t_sing t =
     done
   end
   with Winner inte -> 
-    ANSITerminal.(print_string 
-                    [red] "Congratulation, you defeated the enemy!\n");
     t.winner <- inte
 
 let start_sing clst1 clst2 = 
   let init = init clst1 clst2 in 
-  start_t_sing init
+  start_t_sing init;
+  ANSITerminal.(print_string 
+                    [red] "Congratulation, you defeated the enemy!\n");
