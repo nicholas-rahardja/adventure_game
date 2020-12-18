@@ -1,10 +1,11 @@
+(*
 type buff = 
-  | Dot of string * int 
-  | Hot of string * int
-  | DmgDoneMod of string * int
-  | DmgReceivedMod of string * int
-  | ElementalDmgDoneMod of string * int
-  | ElementalVulnerability of string * int
+  | Dot of string * int * int
+  | Hot of string * int * int
+  | DmgDoneMod of string * int * int
+  | DmgReceivedMod of string * int * int
+  | ElementalDmgDoneMod of string * int * int
+  | ElementalVulnerability of string * int * int
 
 let process_end_of_turn target buff = 
   match buff with 
@@ -37,3 +38,5 @@ let process_attacker_buff attacker move buff =
     if get_char_type attacker = (get_move_type move)
     then int_to_percent x else 0.
   | _ -> 0.
+
+  *)

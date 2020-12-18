@@ -113,8 +113,14 @@ let get_damange_helper name expected player enemy move =
 
 let move_1 = Option.get (get_move t1 1) 
 let move_2 = Option.get (get_move t1 2) 
-let move_16 = Option.get (get_move t1 16) 
+let move_3 = Option.get (get_move t1 3) 
+let move_5 = Option.get (get_move t1 5) 
 let move_11 = Option.get (get_move t1 11)
+let move_16 = Option.get (get_move t1 16) 
+let move_17 = Option.get (get_move t1 17) 
+let move_1001 = Option.get (get_move t1 1001)
+let move_1002 = Option.get (get_move t1 1002)
+
 let c_3 = Option.get (get_char t1 3) 
 let c_12 = Option.get (get_char t1 12)
 
@@ -444,23 +450,125 @@ let char_3 = Option.get (Character.get_char t1 3)
 let char_4 = Option.get (Character.get_char t1 4)
 let char_5 = Option.get (Character.get_char t1 5)
 let char_6 = Option.get (Character.get_char t1 6)
+let char_1001 = Option.get (Character.get_char t1 1001)
 
-let combat_t = 
-  let first_team = [char_1;char_2;char_3] in 
-  let sec_team = [char_4;char_5;char_6] in 
+let char_lst1 = [char_1;char_2; char_3]
+let char_lst2 = [char_4;char_1001]
+
+let char_lst1_lst2_t =
+{
+  team1 = 
+  [
+    {
+      char_c = char_1;
+      char_name = "Brave Warrior Clarkson";
+      char_moves = [move_1; move_2];
+      cur_hp = 1250;
+      atk = 10;
+      buffs = []; 
+      active = true;
+      cooldown = []
+    };
+    {
+      char_c = char_2;
+      char_name = "Wise Sage Gries";
+      char_moves = [move_16; move_17];
+      cur_hp = 1250;
+      atk = 10;
+      buffs = []; 
+      active = true;
+      cooldown = []
+    };
+    {
+      char_c = char_3;
+      char_name = "Nether Imp";
+      char_moves = [move_3; move_5];
+      cur_hp = 1250;
+      atk = 10;
+      buffs = []; 
+      active = true;
+      cooldown = []
+    };
+  ];
+  team2 =
+  [
+    {
+      char_c = char_3;
+      char_name = "Nether Imp";
+      char_moves = [move_3; move_5];
+      cur_hp = 1250;
+      atk = 10;
+      buffs = []; 
+      active = true;
+      cooldown = []
+    };
+    {
+      char_c = char_1001;
+      char_name = "test char";
+      char_moves = [move_1001; move_1002];
+      cur_hp = 5000;
+      atk = 1000;
+      buffs = []; 
+      active = true;
+      cooldown = []
+    }
+  ];
+  winner = 0
+}
+
+let combat_t1 = 
+  let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
+  let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
   init first_team sec_team
+
+let combat_t2 = 
+  let first_team = [char_1001, 10] in 
+  let sec_team = [char_4, 10;char_5, 10] in 
+  init first_team sec_team
+
+let combat_end_game first_team sec_team = 
+  let t = init first_team sec_team in
+  Combat.start_t_sing t;
+  t
+
+let combat_end_t1 = 
+  let first_team = [char_1, 10;char_2, 10] in 
+  let sec_team = [] in 
+  combat_end_game first_team sec_team
+
+let combat_end_t2 = 
+  let first_team = [] in 
+  let sec_team = [char_5, 10] in 
+  combat_end_game first_team sec_team
 
 (* Get a team object by using [init] like above, then extract the field *)
 
-let team1 = combat_t.team1 
-let team2 = combat_t.team2
+let team1 = combat_t1.team1 
+let team2 = combat_t1.team2
+let team3 = combat_t2.team1
+let team4 = combat_t2.team2
 
 (* Access each target in a team using List.nth *)
-let team1_first_target = List.nth team1 0
+let team_target team nth = 
+  List.nth team nth
 
+let team1_first_target = team_target team1 0
+let team1_first_target_hp = team1_first_target.cur_hp
+
+let team2_first_target = team_target team2 0
+let team2_first_target_hp = team2_first_target.cur_hp
+let team2_first_target_half_hp = team2_first_target_hp / 2
+let team2_first_target_rem_hp = 
+  team2_first_target_hp - team2_first_target_half_hp
+
+let team3_first_target = team_target team3 0
+let team3_first_target_hp = team3_first_target.cur_hp
+
+let team4_first_target = team_target team4 0
+let team4_first_target_hp = team4_first_target.cur_hp
 
 let assert_eq_help name result exp_output = 
-  name >:: fun _ -> assert_equal exp_output result
+  name >:: fun _ -> assert_equal exp_output result 
 
 let combat_move_input_test name move_lst input exp_output = 
   let result = Combat.move_input move_lst input in
@@ -470,9 +578,24 @@ let combat_target_input_test name team input exp_output =
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
 
-let do_dmg_test name c dmg exp_health = 
+let do_dmg_test name c dmg expected = 
   do_dmg c dmg; 
-  assert_eq_help name (c.cur_hp) exp_health
+  name >:: fun _ -> 
+    assert_equal expected c.cur_hp ~printer:(string_of_int)
+
+let combat_init_test name clst1 clst2 expected = 
+  let init = Combat.init clst1 clst2 in
+  name >:: fun _ -> assert_equal init expected 
+
+let combat_vary_test name k percent = 
+  let value = Combat.vary k percent in 
+  let margin = k *. (float_of_int percent) /. 100.0 in
+  if value < k then assert_eq_help name ((k -. value) <= margin) true
+  else assert_eq_help name ((value -. k) <= margin) true
+
+(* One of the teams ar*)
+let combat_winner_test name t expected = 
+  assert_eq_help name (t.winner) expected
 
 (* Makes move_cd entry *)
 let make_cd_entry move cd = 
@@ -494,9 +617,32 @@ let combat_tests = [
     move_set1 "Kick" (Invalid_m);
   combat_move_input_test "invalid move" move_set1 "asdfg" (Invalid_m);
   (* testing tar_input *)
-  combat_target_input_test "valid target" team1 "1" (Valid_tar team1_first_target); 
+  combat_target_input_test "valid target for team1" team1 "1" 
+    (Valid_tar team1_first_target);
+  combat_target_input_test "valid target for team2" team2 "1" 
+    (Valid_tar team2_first_target);  
+  combat_target_input_test "invalid target for team1" team1 "5" Invalid_tar; 
+  combat_target_input_test "invalid target for team2" team2 "4" Invalid_tar;
   assert_eq_help "update cd, turns left" update_move6.turns_left 2;
-  assert_eq_help "update cd, move" update_move6.move move_6
+  assert_eq_help "update cd, move" update_move6.move move_6;
+  combat_vary_test "vary by 0 percent from 10" 10. 0;
+  combat_vary_test "vary by 0 percent from 0" 0. 0;
+  combat_vary_test "vary by 100 percent from 0" 0. 100;
+  combat_vary_test "vary by 20 percent from 10" 10. 20;
+  combat_vary_test "vary by 20 percent from 0" 0. 20;
+  combat_winner_test "winner of an ongoing game is 0" combat_t1 0;
+  combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
+  combat_winner_test "winner of an ending game is 2" combat_end_t2 2;
+  do_dmg_test "subtracts all health of team1[0]" 
+    team1_first_target team1_first_target_hp 0;
+  do_dmg_test "subtracts 0 from health from team4[1]" 
+    team4_first_target 0 team4_first_target_hp;
+  do_dmg_test "subtracts half of the health from team2[1]" 
+    team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
+  do_dmg_test "subtracts big value 100000 from health" 
+    team3_first_target 100000 0;
+  (* combat_init_test "initialize a game state t" 
+    char_lst1 char_lst2 char_lst1_lst2_t; *)
 ]
 
 let suite =

@@ -12,12 +12,14 @@ type move_cd =
     from the cd list *)
 type cd_lst = move_cd list
 
-(**[type c] represents one character, and their current hp. Must include Character.c in its representation *)
+(**[type c] represents one character, and their current hp. 
+  Must include Character.c in its representation *)
 type c =
   {
     char_c: Character.c;
     char_name: string;
     char_moves: Character.move list;
+    atk: int;
     mutable cur_hp: int;
     mutable buffs : unit list; 
     mutable active: bool;
@@ -187,14 +189,17 @@ val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
 
 
 
-(** [init] clst1 clst2 initializes a game state t with the given character lists *)
-val init: Character.c list -> Character.c list -> t
+(** [init] clst1 clst2 initializes a game state t with the given character
+    and level pair lists *)
+val init: (Character.c * int) list -> (Character.c * int) list -> t
 
-(** [start] clst1 clst2 initializes a game state t with the given character lists,
-    evaluates to a int for who wins combat. 1 for team 1 win, 2 for team 2 win.
+(** [start] clst1 clst2 initializes a game state t with the given character
+    and level pair lists,
+    raises an exception for who wins combat. 
+    [Winner 1] for team 1 win, [Winner 2] for team 2 win.
     Once combat ends, it must allow the function [winner] to return the
     correct winner*)
-val start: Character.c list -> Character.c list -> unit
+val start: (Character.c * int) list -> (Character.c * int) list -> unit
 
 (** [winner] returns the winner of combat. Is 0 if game is still going on *)
 val winner: t -> int
@@ -202,8 +207,9 @@ val winner: t -> int
 (** [mult_start] initiates combat, with character/moves contained in [t]*)
 val mult_start: Character.t -> unit
 
-(** [load_char char] loads [char] from Character into a [c] type record*)
-val load_char: Character.c -> c
+(** [load_char (char, lvl)] loads [char] from Character into a [c] type record
+    with level [lvl]*)
+val load_char: Character.c * int -> c
 
 (** [is_on_cd cd] returns true if [cd] is on cd, which means its 
     "turns_left" field above 0. *)
@@ -240,9 +246,19 @@ val char_moves_off_cd: c -> Character.move list
 (** [update_cd_team team] updates all character's cooldowns on [team] *)
 val update_cd_team: team -> unit
 
+(** [set_teamlvl team lvl] returns a list of (Character.c, level) pair list
+    with level [lvl] *)
+val set_teamlvl: Character.c list -> int -> (Character.c * int) list
 (* Sp combat functions *)
 
-val start_sing: Character.c list -> Character.c list -> unit
+(** [start_sing clst1 clst2] is similar to [start], but clst2 will be controlled
+    by the computer.*)
+val start_sing: (Character.c * int) list -> (Character.c * int) list -> unit
 
+(** [rand_in_lst lst] returns a random element in lst *)
+val rand_in_lst : 'a list -> 'a
+
+(** [start_t_sing t] executes turns for the single player mode *)
+val start_t_sing: t -> unit 
 
 

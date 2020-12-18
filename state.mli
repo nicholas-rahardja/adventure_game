@@ -37,11 +37,24 @@ val get_chars : t -> Character.c list
     [Invalid_argument] if n is negative. *)
 val get_char : int -> t -> Character.c
 
-(** [get_xp n t] is the experience points of the the character with index [n] in
+(** [get_xp n t] is the experience points of the character with index [n] in
     the character list for the player with state [t]. 
     Raises: [Failure] if the list is too short.
     [Invalid_argument] if n is negative. *)
 val get_xp : int -> t -> xp
+
+(** [get_char_with_xp n t] is a pair containing the character and its experience
+    points at index [n] in
+    the character list for the player with state [t]. 
+    Raises: [Failure] if the list is too short.
+    [Invalid_argument] if n is negative. *)
+val get_char_with_xp : int -> t -> Character.c * xp
+
+(** [get_char_with_xp_lst t] is same as [get_char_with_xp], but returns
+    a list of pairs containing the player's current party of characters and 
+    xp *)
+val get_char_with_xp_lst : t -> (Character.c * xp) list
+
 
 (** [get_level n t] is the level of the character with index [n] in the 
     character list for the player with state [t]. 
