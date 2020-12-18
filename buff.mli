@@ -1,6 +1,6 @@
 (** A module handing all buffs/debuffs, including status effects, and damage
     over time or healing over time*)
-
+(*
 (** Representation type for a buff *)
 type buff
 
@@ -22,3 +22,4 @@ val process_defender_buff : Character.c -> Character.move -> buff -> float
 (** [process_attacker_buff attacker move buff] returns a modifier to boost
     or decrease the damage done by [attacker] due to buff [buff] *)
 val process_attacker_buff : Character.c -> Character.move -> buff -> float
+*)

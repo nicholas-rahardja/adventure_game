@@ -46,6 +46,12 @@ let get_xp n t =
   match List.nth t.chars n with
   | (c, xp) -> xp
 
+let get_char_with_xp n t = 
+  (get_char n t, get_xp n t)
+
+let get_char_with_xp_lst t = 
+  t.chars
+
 let get_level n t =
   match List.nth t.chars n with
   | (c, xp) -> (-1. +. sqrt (1. +. 4. *. (float_of_int xp))) /. 2. 

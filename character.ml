@@ -39,6 +39,10 @@ type buff =
   | ElementalDmgDoneMod of int * int
   | ElementalVulnerability of int * int
 
+(* Constants *)
+let atk_per_lvl = 5
+let hp_per_lvl = 10
+
 (* Character-related functions *)
 
 let get_char t id =
@@ -157,3 +161,12 @@ let get_damage (player:c) (enemy:c) (move:move) : float =
   float_of_int(move.atk) *. effectiveness 
 
 let get_move_buff t move = failwith "TODO"
+
+
+let get_char_atk_lvl c lvl = 
+  let offset = lvl * atk_per_lvl in 
+  offset + get_char_atk c
+
+let get_char_hp_lvl c lvl = 
+  let offset = lvl * hp_per_lvl in 
+  offset + get_hp c

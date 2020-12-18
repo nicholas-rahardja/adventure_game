@@ -11,6 +11,7 @@ type c = {
   char_c: Character.c;
   char_name: string;
   char_moves: Character.move list;
+  atk: int;
   mutable cur_hp: int;
   mutable buffs : unit list; 
   mutable active: bool;
@@ -50,6 +51,7 @@ let health_mod = 5
 let delay_time = 1
 let smartness = 100
 let permanent = 9999999
+let multiplayer_base_lvl = 10
 
 
 (** [vary k percent] returns a value that deviates from [k] 
@@ -275,6 +277,19 @@ let rec select_move (move_list: Character.move list) =
     print_endline "\nthat is not a valid move, please choose agin: \n";
     select_move move_list
 
+(** calculates the damage of move with atk [atk] to [target] *)
+let calc_dmg move atk target = 
+  let base = Character.get_move_atk move |> float_of_int in 
+  let offset = float_of_int atk *. Character.get_scale move in 
+  let dmg = base +. offset in 
+  dmg *. Character.get_effectiveness move target.char_c
+
+let vary_dmg attacker move target = 
+  let atk = attacker.atk in 
+  let fix_dmg = calc_dmg move atk target in 
+  let vary_dmg = vary fix_dmg dmg_variation |> int_of_float in 
+  do_dmg target vary_dmg
+
 
 (** [use_move opp_team c] asks the user to attack with character c.*)
 let use_move n opp_team c = 
@@ -289,8 +304,7 @@ let use_move n opp_team c =
     let move = select_move act_moves in 
     let target = select_enemy act_enemy in 
     reassign_char_cd c move;
-    Character.get_damage c.char_c target.char_c move  |> int_of_float |>
-    do_dmg target
+    vary_dmg c move target
   end
 
 (** [get_team n t] will return tuple of [(current_team, opposing team)]. 
@@ -378,11 +392,12 @@ let random_clst n t k max_id choices =
   List.map get_char_from_id player_choicelst 
 
 
-let load_char char = {
+let load_char (char, lvl) = {
   char_c= char;
   char_name = Character.get_char_name char;
   char_moves = Character.get_moves char;
-  cur_hp = Character.get_hp char * health_mod;
+  cur_hp = (Character.get_char_hp_lvl char lvl) * health_mod;
+  atk = Character.get_char_atk_lvl char lvl;
   buffs= []; 
   active= true; 
   cooldown = []}
@@ -400,11 +415,16 @@ let start clst1 clst2 =
   let init = init clst1 clst2 in 
   start_t init
 
+let set_teamlvl team lvl = 
+  let pair_creator char = (char, lvl) in 
+  List.map pair_creator team
 
 let init_from_player t= 
   let team1 = random_clst 1 t max_char_per_team max_char_id max_selections in
   let team2 = random_clst 2 t max_char_per_team max_char_id max_selections in 
-  init team1 team2 
+  let team_pair1 = set_teamlvl team1 multiplayer_base_lvl in 
+  let team_pair2 = set_teamlvl team2 multiplayer_base_lvl in 
+  init team_pair1 team_pair2
 
 (** [mult_start] initiates combat, with character/moves contained in [t]*)
 let mult_start t = 
@@ -478,8 +498,7 @@ let enemy_use_move_sing n opp_team c =
     ANSITerminal.(print_string [red] (Character.get_move_name move));
     print_flush ();
     Unix.sleep delay_time;
-    Character.get_damage c.char_c target.char_c move  |> int_of_float |>
-    do_dmg target
+    vary_dmg c move target
   end
 
 let execute_turn n t : unit = 
