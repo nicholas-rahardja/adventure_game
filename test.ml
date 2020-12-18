@@ -1,6 +1,7 @@
 open OUnit2
 open Yojson.Basic
 open Character
+open Combat
 
 
 (* Load JSON files here for testing.
@@ -406,32 +407,59 @@ let state_tests = [
   state_move_test "illegal move" s1 4 [];
 ]
 
-(* (* STARTING combat tests *)
+(* STARTING combat tests *)
 
-   (* "Aqua Torrent" *)
-   let move_6 = Option.get (get_move t1 6) 
-   (* "Cyclone" *)
-   let move_7 = Option.get (get_move t1 7) 
-   (* "Icebolt" *)
-   let move_8 = Option.get (get_move t1 8) 
+(* "Aqua Torrent" *)
+let move_6 = Option.get (get_move t1 6) 
+(* "Cyclone" *)
+let move_7 = Option.get (get_move t1 7) 
+(* "Icebolt" *)
+let move_8 = Option.get (get_move t1 8) 
 
-   let move_set1 = [move_6; move_8; move_7]
+let move_set1 = [move_6; move_8; move_7]
 
 
-   let assert_eq_help name result exp_output = 
-   name >:: fun _ -> assert_equal exp_output result
+let assert_eq_help name result exp_output = 
+  name >:: fun _ -> assert_equal exp_output result
 
-   let combat_move_input_test name move_lst input exp_output = 
-   assert_eq_help name (Combat.move_input move_lst input) exp_output 
+let combat_move_input_test name move_lst input exp_output = 
+  let result = Combat.move_input move_lst input in
+  assert_eq_help name result exp_output 
 
-   let combat_tests = []
-*)
+let combat_target_input_test name team input exp_output = 
+  let result = Combat.target_input team input in
+  assert_eq_help name result exp_output
+
+(* Makes move_cd entry *)
+let make_cd_entry move cd = 
+  {move = move;
+   turns_left = cd;}
+
+(* move6, 3 turns*)
+let move_6_cd = make_cd_entry move_6 3
+
+let update_move6 = update_cd move_6_cd
+
+let combat_tests = [
+  (* testing move_input *)
+  combat_move_input_test "valid move 6" 
+    move_set1 "Aqua torrent" (Valid_m move_6);
+  combat_move_input_test "valid move 7" move_set1 "cyclone" (Valid_m move_7);
+  combat_move_input_test "valid move 8" move_set1 "Icebolt" (Valid_m move_8);
+  combat_move_input_test "invalid move, move not part of list" 
+    move_set1 "Kick" (Invalid_m);
+  combat_move_input_test "invalid move" move_set1 "asdfg" (Invalid_m);
+  assert_eq_help "update cd, turns left" update_move6.turns_left 2;
+  assert_eq_help "update cd, move" update_move6.move move_6
+]
+
 let suite =
   "test suite"  >::: List.flatten [
     char_tests;
     move_tests;
     map_test;
     state_tests;
+    combat_tests;
   ]
 
 let _ = run_test_tt_main suite
