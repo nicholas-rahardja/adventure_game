@@ -137,7 +137,7 @@ let get_move_element (move:move) : element =
 
 (* Attack-related functions *)
 
-let get_effectiveness (move:move) (character:c) : float = 
+let get_effectiveness (move : move) (character :c) : float = 
   match (move.element, character.element) with 
   | (Fire, Fire) | (Fire,Normal) | (Water,Water) | (Water,Normal) 
   | (Grass, Grass) | (Grass,Normal) | (Normal, _ ) -> 1.0

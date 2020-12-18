@@ -418,6 +418,26 @@ let move_8 = Option.get (get_move t1 8)
 
 let move_set1 = [move_6; move_8; move_7]
 
+let char_1 = Option.get (Character.get_char t1 1)
+let char_2 = Option.get (Character.get_char t1 2)
+let char_3 = Option.get (Character.get_char t1 3)
+let char_4 = Option.get (Character.get_char t1 4)
+let char_5 = Option.get (Character.get_char t1 5)
+let char_6 = Option.get (Character.get_char t1 6)
+
+let combat_t = 
+  let first_team = [char_1;char_2;char_3] in 
+  let sec_team = [char_4;char_5;char_6] in 
+  init first_team sec_team
+
+(* Get a team object by using [init] like above, then extract the field *)
+
+let team1 = combat_t.team1 
+let team2 = combat_t.team2
+
+(* Access each target in a team using List.nth *)
+let team1_first_target = List.nth team1 0
+
 
 let assert_eq_help name result exp_output = 
   name >:: fun _ -> assert_equal exp_output result
@@ -429,6 +449,10 @@ let combat_move_input_test name move_lst input exp_output =
 let combat_target_input_test name team input exp_output = 
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
+
+let do_dmg_test name c dmg exp_health = 
+  do_dmg c dmg; 
+  assert_eq_help name (c.cur_hp) exp_health
 
 (* Makes move_cd entry *)
 let make_cd_entry move cd = 
@@ -449,6 +473,8 @@ let combat_tests = [
   combat_move_input_test "invalid move, move not part of list" 
     move_set1 "Kick" (Invalid_m);
   combat_move_input_test "invalid move" move_set1 "asdfg" (Invalid_m);
+  (* testing tar_input *)
+  combat_target_input_test "valid target" team1 "1" (Valid_tar team1_first_target); 
   assert_eq_help "update cd, turns left" update_move6.turns_left 2;
   assert_eq_help "update cd, move" update_move6.move move_6
 ]
