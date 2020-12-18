@@ -47,7 +47,7 @@ let max_char_id = 12
 let max_selections = 7
 
 let dmg_variation = 5
-let health_mod = 1
+let health_mod = 5
 let delay_time = 1
 let permanent = 9999999
 let multiplayer_base_lvl = 10
@@ -398,13 +398,13 @@ let load_char (char, lvl) = {
   char_name = Character.get_char_name char;
   char_moves = Character.get_moves char;
   cur_hp = (Character.get_char_hp_lvl char lvl) * health_mod;
-  atk = Character.get_char_atk_lvl char lvl;
+  atk = Character.get_char_atk_lvl char lvl; 
   buffs= []; 
   active= true; 
   cooldown = []}
 
 let init_team clst = 
-  List.map load_char clst
+  List.map load_char clst 
 
 let init clst1 clst2 = {
   team1 = init_team clst1;
