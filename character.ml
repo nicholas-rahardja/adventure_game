@@ -139,9 +139,16 @@ let get_move_element (move:move) : element =
 
 let get_effectiveness (move : move) (character :c) : float = 
   match (move.element, character.element) with 
-  | (Fire, Fire) | (Fire,Normal) | (Water,Water) | (Water,Normal) 
-  | (Grass, Grass) | (Grass,Normal) | (Normal, _ ) -> 1.0
-  | (Fire,Grass) | (Water, Fire) | (Grass, Water) -> 1.5 
+  | (Fire, Fire) 
+  | (Fire,Normal) 
+  | (Water,Water) 
+  | (Water,Normal) 
+  | (Grass, Grass) 
+  | (Grass,Normal) 
+  | (Normal, _ ) -> 1.0
+  | (Fire,Grass) 
+  | (Water, Fire) 
+  | (Grass, Water) -> 1.5 
   | _ -> 0.5 
 
 (**discuss with AL how we want to implement damage*)
