@@ -21,3 +21,7 @@ _build
 # vs code
 .vscode
 
+# bisect
+*.coverage
+_coverage
+
