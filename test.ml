@@ -264,10 +264,24 @@ let state_add_xp_test name state index amt new_xp up =
                ~printer:(fun (x, b) -> "(" ^ string_of_int x ^ ", " 
                                        ^ string_of_bool b ^ ")"))
 
+let state_printer c s =
+  "{\n" ^ "Characters: " 
+  ^ pp_list (fun x -> Character.get_char_id x |> string_of_int) (get_chars s)
+  ^ "\n" ^ "Current room: " ^ string_of_int (get_room s) ^ "\n"
+  ^ "Visited: " ^ pp_list (string_of_int) (get_visited s) ^ "\n"
+  ^ "Gold: " ^ string_of_int (get_gold s) ^ "\n"
+  ^ "Inventory: " ^ pp_list (item_string) (get_inventory s)
+  ^ "\n}"
+
 let state_move_test name input room new_visited =
   match State.move input room with
   | Illegal -> name >:: (fun _ -> assert_equal [] new_visited)
   | Legal t' -> state_visited_test name t' new_visited
+
+let state_save_test name state adv c path =
+  save state path;
+  name >:: (fun _ -> assert_equal (load adv c path) state 
+               ~printer:(state_printer c))
 
 (* States and character lists *)
 let cl1 = get_char_list [1; 2; 3]
@@ -405,6 +419,12 @@ let state_tests = [
     (fun _ -> remove_inventory ~-1 s7) (Failure "Invalid index");
   state_move_test "legal move" s1 2 [2; 1];
   state_move_test "illegal move" s1 4 [];
+  state_save_test "save test, minimal" s0 test_adventure t1 "./s0.json";
+  state_save_test "save test, normal" s1 test_adventure t1 "./s1.json";
+  state_save_test "save test, with dups" s2 test_adventure t1 "./s2.json";
+  state_save_test "save test, with xp" s4 test_adventure t1 "./s4.json";
+  state_save_test "save test, with gold" s5 test_adventure t1 "./s5.json";
+  state_save_test "save test, with inv" s7 test_adventure t1 "./s7.json";
 ]
 
 (* STARTING combat tests *)

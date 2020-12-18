@@ -179,3 +179,87 @@ let move t r =
                  current_room = r; 
                  visited = List.sort_uniq compare (r :: t.visited)
                 }
+
+open Adventure
+open Yojson.Basic
+open Yojson.Basic.Util
+
+let char_to_json (c, xp) =
+  `Assoc [("id", `Int (Character.get_char_id c)); ("xp", `Int xp)]
+
+let item_json i =
+  match i with
+  | FlatHp (n, x) -> 
+    `Assoc [
+      ("name", `String n);
+      ("item", `String "FlatHp");
+      ("eff", `Int x)
+    ]
+  | PercentHp (n, f) -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "PercentHp");
+        ("eff", `Float f)
+      ]
+  | AtkBooster (n, f) -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "AtkBooster");
+        ("eff", `Float f)
+      ] 
+  | DebuffRemover n -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "DebuffRemover");
+      ] 
+  | DamageBooster (n, f) -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "DamageBooster");
+        ("eff", `Float f)
+      ] 
+  | RevivalItem n -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "RevivalItem");
+      ] 
+  | DamageReducer (n, f) -> 
+    `Assoc 
+      [
+        ("name", `String n);
+        ("item", `String "DamageReducer");
+        ("eff", `Float f)
+      ]
+
+let to_json t =
+  `Assoc
+    [
+      ("chars", `List (List.map char_to_json t.chars));
+      ("current_room", `Int t.current_room);
+      ("visited", `List (List.map (fun x -> `Int x) t.visited));
+      ("gold", `Int t.gold);
+      ("inventory", `List (List.map item_json t.inventory))
+    ]
+
+let save t path =
+  t |> to_json |> to_file path
+
+let char_from_json c o =
+  (o |> member "id" |> to_int |> Character.get_char c |> Option.get, 
+   o |> member "xp" |> to_int)
+
+let load adv c path =
+  let json = from_file path in
+  {
+    chars = json |> member "chars" |> to_list |> List.map (char_from_json c);
+    current_room = json |> member "current_room" |> to_int;
+    visited = json |> member "visited" |> to_list |> List.map to_int;
+    map = adv;
+    gold = json |> member "gold" |> to_int;
+    inventory = json |> member "inventory" |> to_list |> List.map item_matcher
+  }

@@ -25,3 +25,5 @@ _build
 *.coverage
 _coverage
 
+# test files
+s?.json

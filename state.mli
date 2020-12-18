@@ -117,3 +117,12 @@ type result =
     player moved to room with ID [r] if the move is legal. If the move is not 
     legal, it returns [Illegal]. *)
 val move : t -> Adventure.room_id -> result
+
+(** [save t path] saves state [t] as a JSON file to [path]. 
+    Requires: [path] must be a valid, writable path. *)
+val save : t -> string -> unit
+
+(** [load adv c path] loads the JSON save file from [path] using adventure 
+    information from [adv] and character information from [c]. 
+    Requires: [path] must be a valid, readable path. *)
+val load : Adventure.t -> Character.t -> string -> t

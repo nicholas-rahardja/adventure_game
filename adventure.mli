@@ -90,6 +90,10 @@ val shop: t -> room_id -> item_wrapper list
     Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
 val rewards: t -> room_id -> item list 
 
+(** [item_matcher o] is the [item]-typed value represented by the JSON object 
+    [o]. *)
+val item_matcher : Yojson.Basic.t -> item
+
 (** [item_string i] is a string representation of [i], without price. *)
 val item_string : item -> string
 
