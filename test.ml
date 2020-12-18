@@ -456,65 +456,65 @@ let char_lst1 = [char_1;char_2; char_3]
 let char_lst2 = [char_4;char_1001]
 
 let char_lst1_lst2_t =
-{
-  team1 = 
-  [
-    {
-      char_c = char_1;
-      char_name = "Brave Warrior Clarkson";
-      char_moves = [move_1; move_2];
-      cur_hp = 1250;
-      atk = 10;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_2;
-      char_name = "Wise Sage Gries";
-      char_moves = [move_16; move_17];
-      cur_hp = 1250;
-      atk = 10;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_3;
-      char_name = "Nether Imp";
-      char_moves = [move_3; move_5];
-      cur_hp = 1250;
-      atk = 10;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-  ];
-  team2 =
-  [
-    {
-      char_c = char_3;
-      char_name = "Nether Imp";
-      char_moves = [move_3; move_5];
-      cur_hp = 1250;
-      atk = 10;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_1001;
-      char_name = "test char";
-      char_moves = [move_1001; move_1002];
-      cur_hp = 5000;
-      atk = 1000;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    }
-  ];
-  winner = 0
-}
+  {
+    team1 = 
+      [
+        {
+          char_c = char_1;
+          char_name = "Brave Warrior Clarkson";
+          char_moves = [move_1; move_2];
+          cur_hp = 1250;
+          atk = 10;
+          buffs = []; 
+          active = true;
+          cooldown = []
+        };
+        {
+          char_c = char_2;
+          char_name = "Wise Sage Gries";
+          char_moves = [move_16; move_17];
+          cur_hp = 1250;
+          atk = 10;
+          buffs = []; 
+          active = true;
+          cooldown = []
+        };
+        {
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1250;
+          atk = 10;
+          buffs = []; 
+          active = true;
+          cooldown = []
+        };
+      ];
+    team2 =
+      [
+        {
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1250;
+          atk = 10;
+          buffs = []; 
+          active = true;
+          cooldown = []
+        };
+        {
+          char_c = char_1001;
+          char_name = "test char";
+          char_moves = [move_1001; move_1002];
+          cur_hp = 5000;
+          atk = 1000;
+          buffs = []; 
+          active = true;
+          cooldown = []
+        }
+      ];
+    winner = 0
+  }
 
 let combat_t1 = 
   let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
@@ -642,7 +642,7 @@ let combat_tests = [
   do_dmg_test "subtracts big value 100000 from health" 
     team3_first_target 100000 0;
   (* combat_init_test "initialize a game state t" 
-    char_lst1 char_lst2 char_lst1_lst2_t; *)
+     char_lst1 char_lst2 char_lst1_lst2_t; *)
 ]
 
 let suite =

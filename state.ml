@@ -57,6 +57,15 @@ let get_level n t =
   | (c, xp) -> (-1. +. sqrt (1. +. 4. *. (float_of_int xp))) /. 2. 
                |> int_of_float
 
+
+
+let xp_of_lvl lvl = 
+  (lvl * lvl) + lvl
+
+let next_xp_of_lvl lvl = 
+  let next_lvl = lvl + 1 in 
+  xp_of_lvl next_lvl - (xp_of_lvl lvl)
+
 let get_room t =
   t.current_room
 

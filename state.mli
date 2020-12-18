@@ -62,6 +62,12 @@ val get_char_with_xp_lst : t -> (Character.c * xp) list
     [Invalid_argument] if n is negative. *)
 val get_level : int -> t -> level
 
+(** [xp_of_lvl lvl] is the total amount of xp to level from 0 to [lvl] *)
+val xp_of_lvl: level -> xp
+
+(** [next_xp_of_lvl lvl] is the amount of xp to level up from [lvl] to [lvl + 1]*)
+val next_xp_of_lvl : level -> xp
+
 (** [get_room t] is the ID of the room the player with state [t] is currently 
     in. *)
 val get_room : t -> Adventure.room_id
@@ -84,6 +90,7 @@ val get_inventory : t -> Adventure.item list
     Raises: [Failure] if [n] is less than -1 or more than 
     [List.length n] *)
 val add_char : Character.c -> ?xp:xp -> int -> t -> t
+
 
 (** [remove_char n t] is state [t] with the character in index [n] of the 
     character list removed. 

@@ -47,9 +47,8 @@ let max_char_id = 12
 let max_selections = 7
 
 let dmg_variation = 5
-let health_mod = 5
+let health_mod = 1
 let delay_time = 1
-let smartness = 100
 let permanent = 9999999
 let multiplayer_base_lvl = 10
 
@@ -111,7 +110,7 @@ let getextract_char c =
 
 
 (** [is_active c] returns true if a character's hp is above 0. *)
-let is_active c = c.active = true
+let is_active c = c.active
 
 (** [get_active] returns a list with only the active characters *)
 let get_active team = 
@@ -278,7 +277,8 @@ let rec select_move (move_list: Character.move list) =
     print_endline "\nthat is not a valid move, please choose agin: \n";
     select_move move_list
 
-(** calculates the damage of move with atk [atk] to [target] *)
+(** calculates the damage of move with atk [atk] to [target]. Takes into
+    account effectiveness *)
 let calc_dmg move atk target = 
   let base = Character.get_move_atk move |> float_of_int in 
   let offset = float_of_int atk *. Character.get_scale move in 
@@ -447,10 +447,6 @@ let rand_move c =
 
 let rand_target team = 
   rand_in_lst team
-(*
-let enemy_select_move c = 
-  let x = rand_move c in 
-  x*)
 
 let enemy_select_target team = rand_target team
 
@@ -480,8 +476,12 @@ let enemy_select_action c targets chance : (Character.move * c) =
     previous prints in the queue *)
 let print_flush () = print_endline ""
 
-let enemy_use_move_sing n opp_team c = 
+(** [smartness = c.atk / 2.5, which is rougly its level * 2 ] *)
+let smartness_of_c c = 
+  let result = c.atk / 5 * 2 in 
+  if result > 100 then 100 else result
 
+let enemy_use_move_sing n opp_team c = 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
   Printf.printf "Character %s is attacking: " c.char_name;
@@ -491,8 +491,8 @@ let enemy_use_move_sing n opp_team c =
   if List.length act_moves = 0 then
     print_endline "This character has no available moves, can't attack!"
   else begin
+    let smartness = smartness_of_c c in 
     let (move, target) = enemy_select_action c act_enemy smartness
-    (* TODO Change later to a probability *) 
     in
     reassign_char_cd c move;
     Printf.printf "%s used " c.char_name;
@@ -531,4 +531,4 @@ let start_sing clst1 clst2 =
   let init = init clst1 clst2 in 
   start_t_sing init;
   ANSITerminal.(print_string 
-                    [red] "Congratulation, you defeated the enemy!\n");
+                  [red] "Congratulation, you defeated the enemy!\n");
