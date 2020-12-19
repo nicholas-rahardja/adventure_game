@@ -82,7 +82,7 @@ val get_move_atk : move -> int
 (** [get_scale t move] is [move]'s attack value multiplier. *)
 val get_scale : move -> float
 
-(** [get_char_element t move] is [move]'s element. *)
+(** [get_move_element t move] is [move]'s element. *)
 val get_move_element : move -> element
 
 (* Attack-related functions *)
