@@ -92,7 +92,7 @@ let do_dmg c (dmg : int) =
      c.cur_hp <- 0;  c.active <- false);
   print_newline ()
 
-let do_heal c heal = 
+let do_heal c heal =  
   (blue_char_name c; 
    Printf.printf " has healed by %d \n" heal);
   let added_health = c.cur_hp + heal in 

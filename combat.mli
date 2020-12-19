@@ -82,7 +82,7 @@ val proc: int -> bool
 val do_dmg: c -> int -> unit
 
 
-(** [do_heal c heal] adds exatly [heal] to character [c] health. The health 
+(** [do_heal c heal] adds exactly [heal] to character [c] health. The health 
     after cannot exceed [c]'s maximum health.
     Does not take into account  variation / buffs, etc. *)
 val do_heal: c -> int -> unit
@@ -209,7 +209,7 @@ val mult_start: Character.t -> unit
 
 (** [load_char (char, lvl)] loads [char] from Character into a [c] type record
     with level [lvl]*)
-val load_char: Character.c * int -> c
+val load_char: Character.c * int -> c 
 
 (** [is_on_cd cd] returns true if [cd] is on cd, which means its 
     "turns_left" field above 0. *)
