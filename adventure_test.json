@@ -28,12 +28,6 @@
           "item": "FlatHp",
           "eff": 5,
           "price": 3
-        },
-        {
-          "name": "PH",
-          "item": "DebuffRemover",
-          "eff": 0,
-          "price": 2
         }
       ],
       "rewards": [
@@ -69,27 +63,9 @@
         },
         {
           "name": "PH",
-          "item": "AtkBooster",
-          "eff": 0.05,
-          "price": 7
-        },
-        {
-          "name": "PH",
           "item": "RevivalItem",
           "eff": 0,
           "price": 8
-        },
-        {
-          "name": "PH",
-          "item": "DamageBooster",
-          "eff": 0.03,
-          "price": 4
-        },
-        {
-          "name": "PH",
-          "item": "DamageReducer",
-          "eff": 0.1,
-          "price": 12
         }
       ],
       "rewards": [
