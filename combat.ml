@@ -92,7 +92,7 @@ let do_dmg c (dmg : int) =
      c.cur_hp <- 0;  c.active <- false);
   print_newline ()
 
-let do_heal c heal = 
+let do_heal c heal =  
   (blue_char_name c; 
    Printf.printf " has healed by %d \n" heal);
   let added_health = c.cur_hp + heal in 
@@ -398,13 +398,13 @@ let load_char (char, lvl) = {
   char_name = Character.get_char_name char;
   char_moves = Character.get_moves char;
   cur_hp = (Character.get_char_hp_lvl char lvl) * health_mod;
-  atk = Character.get_char_atk_lvl char lvl;
+  atk = Character.get_char_atk_lvl char lvl; 
   buffs= []; 
   active= true; 
   cooldown = []}
 
 let init_team clst = 
-  List.map load_char clst
+  List.map load_char clst 
 
 let init clst1 clst2 = {
   team1 = init_team clst1;
