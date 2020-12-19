@@ -210,10 +210,6 @@ let map_test = [
         item = FlatHp ("PH", 5);
         price = 3
       };
-      {
-        item = DebuffRemover "PH";
-        price = 2
-      }
     ];
   shop_test_helper "shop in room 3" test_adventure 3 
     [
@@ -222,20 +218,8 @@ let map_test = [
         price = 10
       };
       {
-        item = AtkBooster ("PH", 0.05);
-        price = 7
-      };
-      {
         item = RevivalItem "PH";
         price = 8
-      };
-      {
-        item = DamageBooster ("PH", 0.03);
-        price = 4
-      };
-      {
-        item = DamageReducer ("PH", 0.1);
-        price = 12
       };
     ];
   rewards_test_helper "rewards in room 2" test_adventure 2 

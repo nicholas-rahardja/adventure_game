@@ -96,13 +96,14 @@ val get_active: team -> team
 (** [select_enemy team] ask the user to pick an enemy from [team]
     to target. They will have to enter an int. 1 for the 1st target, 2 for the 
     2nd target, 3 for the 3rd target. If the pick an int that is out of range,
-    the function will ask again
+    the function will ask again.
 *)
 val select_enemy : team -> c
 
 (** [target_input team input] checks if [input] is a valid target in [team]
     If it is, return [Valid_tar target], where target is the target chosen.
     Else, return [Invalid_tar]
+    Requires: team must be an active_team, meaning no one is dead 
 *)
 val target_input : team -> string -> target_select
 
@@ -119,7 +120,8 @@ val check_winner: team -> int -> unit
 (** PH function. Will be used to allow usage of items *)
 val use_item: team -> unit
 
-(** [is_move input move] checks if [input] matches the name of [move] *)
+(*print [is_move input move] checks if [input] matches the name of [move], 
+    it disregards capitalization  *)
 val is_move: string -> Character.move -> bool
 
 (** [select_move move_list] prints out the possible moves to use,
@@ -155,7 +157,8 @@ val start_t: t -> unit
 val print_char_select: Character.t -> int -> unit
 
 (** [player_pick k lst] allows the user to pick k characters from a [lst],
-    which is the list of character ids. Returns the int list they chose *)
+    which is the list of character ids. Returns the int list they chose 
+    Requires: k > 0*)
 val player_pick : int -> int list -> int list
 
 (** [random_pick_char t k] allows users to pick 
