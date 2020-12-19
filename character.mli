@@ -99,7 +99,6 @@ val get_damage : c -> c -> move -> float
     buff *)
 val get_move_buff : t -> move -> buff option
 
-
 (** [get_char_atk_lvl c lvl] is [c]'s attack stat at level [lvl]. *)
 val get_char_atk_lvl : c -> int -> int 
 

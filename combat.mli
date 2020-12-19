@@ -4,7 +4,7 @@
     and the number of turns left to get off cooldown. *)
 type move_cd = 
   {move: Character.move;
-   turns_left : int;}
+   turns_left: int;}
 
 (** [type cd_lst] contains a list of moves of characters that are on cooldown.
     It includes the number of turns left until it is off cooldown. If 
@@ -13,7 +13,7 @@ type move_cd =
 type cd_lst = move_cd list
 
 (**[type c] represents one character, and their current hp. 
-  Must include Character.c in its representation *)
+   Must include Character.c in its representation *)
 type c =
   {
     char_c: Character.c;
@@ -42,14 +42,13 @@ type t ={
 exception Winner of int
 
 (** [move_select] distinguishes between a valid move that the user can enter,
-    , or if 
-    an input that does not lead to a valid move*)
+    , or if an input that does not lead to a valid move*)
 type move_select =
   | Valid_m of Character.move
   | Invalid_m
 
-(** [target_select] distinguishes between a valid target that the user can enter,
-    and an input that does not lead to a valid move*)
+(** [target_select] distinguishes between a valid target that the user can 
+    enter, and an input that does not lead to a valid move*)
 type target_select = 
   | Valid_tar of c
   | Invalid_tar
@@ -71,7 +70,6 @@ val dmg_variation : int
     Requires: 0 <= percent <= 100*)
 val vary : float -> int -> float
 
-
 (** [proc k] is a random number generator. Returns true with a probability
     of k/100.
     Requires: 0 <= k <= 100 *)
@@ -81,13 +79,10 @@ val proc: int -> bool
     Does not take into account  variation / buffs, etc. *)
 val do_dmg: c -> int -> unit
 
-
 (** [do_heal c heal] adds exactly [heal] to character [c] health. The health 
     after cannot exceed [c]'s maximum health.
     Does not take into account  variation / buffs, etc. *)
 val do_heal: c -> int -> unit
-
-
 
 (** [is_active c] returns true if a character's hp is above 0. *)
 val is_active: c -> bool
@@ -114,18 +109,15 @@ val target_input : team -> string -> target_select
 val is_team_dead: team -> bool
 
 (** [check_winner act_team inte] raises [Winner inte] exception if act_team 
-    is dead. 
-    function 
+    is dead.  
     requires: [team] is an active team*)
 val check_winner: team -> int -> unit
-
 
 (** PH function. Will be used to allow usage of items *)
 val use_item: team -> unit
 
 (** [is_move input move] checks if [input] matches the name of [move] *)
 val is_move: string -> Character.move -> bool
-
 
 (** [select_move move_list] prints out the possible moves to use,
     and asks for the user to input an int. the function evaluates to the 
@@ -134,60 +126,46 @@ val is_move: string -> Character.move -> bool
 val select_move: Character.move list -> Character.move
 
 (** [move_input move_lst input] checks if [input] is a valid move of [char_c].
-    Returns: [Valid_m move] for a valid [move]. Else, it returns [Invalid_m]. 
-*)
+    Returns: [Valid_m move] for a valid [move]. Else, it returns [Invalid_m].*)
 val move_input: Character.move list -> string -> move_select 
 
 (** [use_move opp_team c] asks the user to attack with character [c].
     The possible targets are [opp_team]*)
 val use_move: int -> c list -> c -> unit
 
-
-
 (** [get_team n t] will return tuple of [(current_team, opposing team)]. 
-    [current_team] is denotes that it is this team's turn to attack. 
+    [current_team] denotes that it is this team's turn to attack. 
     [opposing team] is the team being attacked *)
 val get_team: int -> t -> team * team
-
 
 (** [team_n_turn n t] carries out the functions of 1 turn. It allows team [n]
     one item usage, and then each character on the team will choose a move, and
     then choose a target to use it on.*)
 val team_n_turn: int -> t -> unit
 
-
 (** [start_t t] starts combat from the representation type t. the while loop
     only ends when a team has won *)
 val start_t: t -> unit
 
-
 (** [print_char_select t k] prints a message, to signify that the id k will 
-      choose a character with that id in t.
-*)
+      choose a character with that id in t.*)
 val print_char_select: Character.t -> int -> unit
-
 
 (** [player_pick k lst] allows the user to pick k characters from a [lst],
     which is the list of character ids. Returns the int list they chose *)
 val player_pick : int -> int list -> int list
-
-
 
 (** [random_pick_char t k] allows users to pick 
     [k] character from [choices] number of choices. 
     Requires : [max_id] must be less than the number of possible character *)
 val random_pick_char : Character.t -> int -> int -> int -> int list
 
-
-
-
-(** [random_clst n t k max_id choices] gives the user a random list of characters
-    containing [choices] number of characters. They are allowed to choose [k]
-    characters, and then returns a Character.c list containing their choices
+(** [random_clst n t k max_id choices] gives the user a random list of 
+    characters containing [choices] number of characters. They are allowed to 
+    choose [k] characters, and then returns a Character.c list containing 
+    their choices.
     Requires : [max_id] must be less than the number of possible character *)
 val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
-
-
 
 (** [init] clst1 clst2 initializes a game state t with the given character
     and level pair lists *)
@@ -261,4 +239,9 @@ val rand_in_lst : 'a list -> 'a
 (** [start_t_sing t] executes turns for the single player mode *)
 val start_t_sing: t -> unit 
 
+(**[smartness_of_c char] is the smartness of the character [char]*)
+val smartness_of_c: c -> int 
 
+(** [calc_dmg move atk target] is the damage done by [move] with [atk] to 
+    [target]. Takes into account effectiveness *)
+val calc_dmg: Character.move -> int -> c -> float 
