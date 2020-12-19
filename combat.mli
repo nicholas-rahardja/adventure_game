@@ -1,6 +1,7 @@
-(** A module representing combat*)
+(** A module that initiates and handles combat, given a list of characters.
+*)
 
-(** [move_cd] is an entry in the cooldown list. It has the move on cooldown,
+(** [move_cd] is an entry in the cooldown list. It has the [move] on cooldown,
     and the number of turns left to get off cooldown. *)
 type move_cd = 
   {move: Character.move;
@@ -12,14 +13,15 @@ type move_cd =
     from the cd list *)
 type cd_lst = move_cd list
 
-(**[type c] represents one character, and their current hp. 
-   Must include Character.c in its representation *)
+(**[type c] represents one character on a team.
+   Must include Character.c in its representation.*)
 type c =
   {
     char_c: Character.c;
     char_name: string;
     char_moves: Character.move list;
     atk: int;
+    level: int;
     mutable cur_hp: int;
     mutable buffs : unit list; 
     mutable active: bool;
@@ -37,6 +39,7 @@ type t ={
   team1: team;
   team2: team;
   mutable winner: int;
+  mutable items: Adventure.item list
 }
 
 exception Winner of int
@@ -167,17 +170,27 @@ val random_pick_char : Character.t -> int -> int -> int -> int list
     Requires : [max_id] must be less than the number of possible character *)
 val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
 
+                                                             <<<<<<< HEAD
 (** [init] clst1 clst2 initializes a game state t with the given character
     and level pair lists *)
 val init: (Character.c * int) list -> (Character.c * int) list -> t
+                                                                  =======
 
-(** [start] clst1 clst2 initializes a game state t with the given character
-    and level pair lists,
+
+                                                                  (** [init clst1 clst2 items] initializes a game state t with the given character
+                                                                      and level pair lists, with [items] loaded *)
+val init: (Character.c * int) list -> (Character.c * int) list -> 
+  Adventure.item list -> t
+  >>>>>>> 34ca318d5a2240284741eda3b17964758d06dfa9
+
+(** [start clst1 clst2 items] initializes a game state t with the given character
+    and level pair lists, with the given [items]
     raises an exception for who wins combat. 
     [Winner 1] for team 1 win, [Winner 2] for team 2 win.
     Once combat ends, it must allow the function [winner] to return the
     correct winner*)
-val start: (Character.c * int) list -> (Character.c * int) list -> unit
+val start: (Character.c * int) list -> (Character.c * int) list -> 
+  Adventure.item list -> unit
 
 (** [winner] returns the winner of combat. Is 0 if game is still going on *)
 val winner: t -> int
@@ -229,9 +242,11 @@ val update_cd_team: team -> unit
 val set_teamlvl: Character.c list -> int -> (Character.c * int) list
 (* Sp combat functions *)
 
-(** [start_sing clst1 clst2] is similar to [start], but clst2 will be controlled
-    by the computer.*)
-val start_sing: (Character.c * int) list -> (Character.c * int) list -> unit
+(** [start_sing clst1 clst2 items] is similar to [start], 
+    but clst2 will be controlled
+    by the computer, and [items] are loaded in.*)
+val start_sing: (Character.c * int) list -> (Character.c * int) list -> 
+  Adventure.item list -> unit
 
 (** [rand_in_lst lst] returns a random element in lst *)
 val rand_in_lst : 'a list -> 'a

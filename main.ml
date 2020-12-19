@@ -150,8 +150,9 @@ let init_combat cur_room enemies state adv_t =
   let player_team = State.get_char_with_xp_lst state in 
   let difficulty = Adventure.difficulty adv_t cur_room in 
   let pairs = Combat.set_teamlvl enemies difficulty in 
+  let items = State.get_inventory state in 
   ANSITerminal.(print_string [red] "An enemy has attacked! \n\n");
-  Combat.start_sing player_team pairs;
+  Combat.start_sing player_team pairs items;
   ANSITerminal.(print_string [red] "You won! \n");
   let exp_gained = State.xp_of_lvl difficulty in 
   Printf.printf "Your characters gained %d experience \n" exp_gained;
