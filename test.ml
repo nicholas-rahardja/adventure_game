@@ -463,6 +463,8 @@ let char_lst2 = [char_3, 10;char_1001, 10]
 let char_lst3 = []
 let char_lst4 = [char_10, 10; char_11, 20; char_12, 20]
 
+let empty_item_lst = []
+
 let char_lst1_lst2_t =
   {
     team1 = 
@@ -526,7 +528,8 @@ let char_lst1_lst2_t =
           level = 10
         }
       ];
-    winner = 0
+    winner = 0;
+    items = empty_item_lst
   }
 
 let char_lst3_lst4_t =
@@ -569,28 +572,31 @@ let char_lst3_lst4_t =
           level = 20
         }
       ];
-    winner = 0
+    winner = 0;
+    items = empty_item_lst
   }
 
 let char_lst3_lst3_t =
   {
     team1 = [];
     team2 = [];
-    winner = 0
+    winner = 0;
+    items = empty_item_lst
   }
+
 
 let combat_t1 = 
   let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
   let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
-  init first_team sec_team
+  init first_team sec_team empty_item_lst
 
 let combat_t2 = 
   let first_team = [char_1001, 10] in 
   let sec_team = [char_4, 10;char_5, 10] in 
-  init first_team sec_team
+  init first_team sec_team empty_item_lst
 
 let combat_end_game first_team sec_team = 
-  let t = init first_team sec_team in
+  let t = init first_team sec_team  empty_item_lst in
   Combat.start_t_sing t;
   t
 
@@ -678,7 +684,7 @@ let do_heal_test name c heal expected =
     assert_equal expected c.cur_hp ~printer:(string_of_int)
 
 let combat_init_test name clst1 clst2 expected = 
-  let init = Combat.init clst1 clst2 in
+  let init = Combat.init clst1 clst2 empty_item_lst in
   name >:: fun _ -> assert_equal init expected 
 
 let combat_vary_test name k percent = 

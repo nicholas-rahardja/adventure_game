@@ -26,6 +26,7 @@ type t = {
   team1: team;
   team2: team;
   mutable winner: int;
+  mutable items: Adventure.item list;
 }
 
 type move_select =
@@ -409,14 +410,15 @@ let load_char (char, lvl) = {
 let init_team clst = 
   List.map load_char clst 
 
-let init clst1 clst2 = {
+let init clst1 clst2 items = {
   team1 = init_team clst1;
   team2 = init_team clst2;
-  winner = 0
+  winner = 0;
+  items = items;
 }
 
-let start clst1 clst2 = 
-  let init = init clst1 clst2 in 
+let start clst1 clst2 items = 
+  let init = init clst1 clst2 items in 
   start_t init
 
 let set_teamlvl team lvl = 
@@ -432,7 +434,7 @@ let init_from_player t=
 
 (** [mult_start] initiates combat, with character/moves contained in [t]*)
 let mult_start t = 
-  init_from_player t |> start_t 
+  init_from_player t [] |> start_t 
 
 (* BEGIN SINGLE PLAYER COMBAT MODULE *)
 
@@ -530,8 +532,8 @@ let start_t_sing t =
   with Winner inte -> 
     t.winner <- inte
 
-let start_sing clst1 clst2 = 
-  let init = init clst1 clst2 in 
+let start_sing clst1 clst2 items = 
+  let init = init clst1 clst2 items in 
   start_t_sing init;
   ANSITerminal.(print_string 
                   [red] "Congratulation, you defeated the enemy!\n");
