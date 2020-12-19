@@ -682,6 +682,7 @@ let c5_level_0 =
     buffs = []; 
     active = true;
     cooldown = [];
+    level = 0;
   }
 
 let c5_level10 = 
@@ -694,6 +695,7 @@ let c5_level10 =
     buffs = []; 
     active = true;
     cooldown = [];
+    level = 10;
   }
 
 let c12_level5 = 
@@ -706,6 +708,7 @@ let c12_level5 =
     buffs = []; 
     active = true;
     cooldown = [];
+    level = 5;
   }
 
 let assert_eq_help name result exp_output = 

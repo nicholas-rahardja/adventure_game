@@ -170,18 +170,16 @@ val random_pick_char : Character.t -> int -> int -> int -> int list
     Requires : [max_id] must be less than the number of possible character *)
 val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
 
-                                                             <<<<<<< HEAD
-(** [init] clst1 clst2 initializes a game state t with the given character
-    and level pair lists *)
-val init: (Character.c * int) list -> (Character.c * int) list -> t
-                                                                  =======
 
 
-                                                                  (** [init clst1 clst2 items] initializes a game state t with the given character
-                                                                      and level pair lists, with [items] loaded *)
+
+
+
+(** [init clst1 clst2 items] initializes a game state t with the given character
+    and level pair lists, with [items] loaded *)
 val init: (Character.c * int) list -> (Character.c * int) list -> 
   Adventure.item list -> t
-  >>>>>>> 34ca318d5a2240284741eda3b17964758d06dfa9
+
 
 (** [start clst1 clst2 items] initializes a game state t with the given character
     and level pair lists, with the given [items]
