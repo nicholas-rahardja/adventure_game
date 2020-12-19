@@ -464,112 +464,120 @@ let char_lst3 = []
 let char_lst4 = [char_10, 10; char_11, 20; char_12, 20]
 
 let char_lst1_lst2_t =
-{
-  team1 = 
-  [
-    { 
-      char_c = char_1;
-      char_name = "Brave Warrior Clarkson";
-      char_moves = [move_1; move_2];
-      cur_hp = 1750;
-      atk = 60;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_2;
-      char_name = "Wise Sage Gries";
-      char_moves = [move_16; move_17];
-      cur_hp = 1750;
-      atk = 60;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_3;
-      char_name = "Nether Imp";
-      char_moves = [move_3; move_5];
-      cur_hp = 1750;
-      atk = 60;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    }
-  ];
-  team2 =
-  [
-    { 
-      char_c = char_3;
-      char_name = "Nether Imp";
-      char_moves = [move_3; move_5];
-      cur_hp = 1750;
-      atk = 60;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_1001;
-      char_name = "test char";
-      char_moves = [move_1001; move_1002];
-      cur_hp = 5500;
-      atk = 1050;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    }
-  ];
-  winner = 0
-}
+  {
+    team1 = 
+      [
+        { 
+          char_c = char_1;
+          char_name = "Brave Warrior Clarkson";
+          char_moves = [move_1; move_2];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_2;
+          char_name = "Wise Sage Gries";
+          char_moves = [move_16; move_17];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        }
+      ];
+    team2 =
+      [
+        { 
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_1001;
+          char_name = "test char";
+          char_moves = [move_1001; move_1002];
+          cur_hp = 5500;
+          atk = 1050;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        }
+      ];
+    winner = 0
+  }
 
 let char_lst3_lst4_t =
-{
-  team1 = 
-  [];
-  team2 =
-  [
-    {
-      char_c = char_10;
-      char_name = "Alpha Wolf";
-      char_moves = [move_1; move_2];
-      cur_hp = 1750;
-      atk = 60;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_11;
-      char_name = "Wolf";
-      char_moves = [move_1; move_2];
-      cur_hp = 2250;
-      atk = 110;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    };
-    {
-      char_c = char_12;
-      char_name = "Mermaid";
-      char_moves = [move_6; move_15];
-      cur_hp = 2250;
-      atk = 110;
-      buffs = []; 
-      active = true;
-      cooldown = []
-    }
-  ];
-  winner = 0
-}
+  {
+    team1 = 
+      [];
+    team2 =
+      [
+        {
+          char_c = char_10;
+          char_name = "Alpha Wolf";
+          char_moves = [move_1; move_2];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_11;
+          char_name = "Wolf";
+          char_moves = [move_1; move_2];
+          cur_hp = 2250;
+          atk = 110;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 20
+        };
+        {
+          char_c = char_12;
+          char_name = "Mermaid";
+          char_moves = [move_6; move_15];
+          cur_hp = 2250;
+          atk = 110;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 20
+        }
+      ];
+    winner = 0
+  }
 
 let char_lst3_lst3_t =
-{
-  team1 = [];
-  team2 = [];
-  winner = 0
-}
+  {
+    team1 = [];
+    team2 = [];
+    winner = 0
+  }
 
 let combat_t1 = 
   let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
@@ -632,6 +640,7 @@ let c1 =
     buffs = []; 
     active = true;
     cooldown = [];
+    level = 10
   }
 
 let c2 = 
@@ -644,6 +653,7 @@ let c2 =
     buffs = []; 
     active = false;
     cooldown = [];
+    level = 10
   }
 
 let assert_eq_help name result exp_output = 
@@ -742,7 +752,8 @@ let cd_team_1 =
       atk = 60;
       buffs = []; 
       active = true;
-      cooldown = []
+      cooldown = [];
+      level = 10
     };
     {
       char_c = char_12;
@@ -752,7 +763,8 @@ let cd_team_1 =
       atk = 110;
       buffs = []; 
       active = true;
-      cooldown = []
+      cooldown = [];
+      level = 10
     }
   ]
 
@@ -766,7 +778,8 @@ let cd_team_2 =
       atk = 60;
       buffs = []; 
       active = true;
-      cooldown = [move_cd_1; move_cd_1_new]
+      cooldown = [move_cd_1; move_cd_1_new];
+      level = 10
     };
     {
       char_c = char_12;
@@ -776,7 +789,8 @@ let cd_team_2 =
       atk = 110;
       buffs = []; 
       active = true;
-      cooldown = [move_cd_15]
+      cooldown = [move_cd_15];
+      level = 10
     }
   ]
 
@@ -790,7 +804,8 @@ let cd_team_2_new =
       atk = 60;
       buffs = []; 
       active = true;
-      cooldown = [move_cd_1_new; move_cd_1_8]
+      cooldown = [move_cd_1_new; move_cd_1_8];
+      level = 10
     };
     {
       char_c = char_12;
@@ -800,7 +815,8 @@ let cd_team_2_new =
       atk = 110;
       buffs = []; 
       active = true;
-      cooldown = []
+      cooldown = [];
+      level = 10
     }
   ]
 
@@ -814,7 +830,8 @@ let cd_team_3 =
       atk = 1050;
       buffs = []; 
       active = true;
-      cooldown = [move_cd_1001; move_cd_1002]
+      cooldown = [move_cd_1001; move_cd_1002];
+      level = 10
     };
     {
       char_c = char_3;
@@ -824,10 +841,11 @@ let cd_team_3 =
       atk = 60;
       buffs = []; 
       active = true;
-      cooldown = [move_cd_3]
+      cooldown = [move_cd_3];
+      level = 10
     };
   ]
-  
+
 let cd_team_3_new =
   [
     {
@@ -838,7 +856,8 @@ let cd_team_3_new =
       atk = 1050;
       buffs = []; 
       active = true;
-      cooldown = []
+      cooldown = [];
+      level = 10
     };
     {
       char_c = char_3;
@@ -848,7 +867,8 @@ let cd_team_3_new =
       atk = 60;
       buffs = []; 
       active = true;
-      cooldown = []
+      cooldown = [];
+      level = 10
     };
   ]
 
@@ -862,7 +882,8 @@ let team_no_health =
       atk = 1050;
       buffs = []; 
       active = false;
-      cooldown = []
+      cooldown = [];
+      level = 10
     };
     {
       char_c = char_3;
@@ -872,7 +893,8 @@ let team_no_health =
       atk = 60;
       buffs = []; 
       active = false;
-      cooldown = []
+      cooldown = [];
+      level = 10
     };
   ]
 

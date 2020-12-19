@@ -12,6 +12,7 @@ type c = {
   char_name: string;
   char_moves: Character.move list;
   atk: int;
+  level: int;
   mutable cur_hp: int;
   mutable buffs : unit list; 
   mutable active: bool;
@@ -96,7 +97,7 @@ let do_heal c heal =
   (blue_char_name c; 
    Printf.printf " has healed by %d \n" heal);
   let added_health = c.cur_hp + heal in 
-  let max_hp = Character.get_hp c.char_c in 
+  let max_hp = Character.get_char_hp_lvl c.char_c c.level in 
   let final_health = if added_health > max_hp then max_hp 
     else added_health in
   c.cur_hp <- final_health; 
@@ -401,7 +402,9 @@ let load_char (char, lvl) = {
   atk = Character.get_char_atk_lvl char lvl; 
   buffs= []; 
   active= true; 
-  cooldown = []}
+  cooldown = [];
+  level = lvl
+}
 
 let init_team clst = 
   List.map load_char clst 

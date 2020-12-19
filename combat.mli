@@ -13,13 +13,14 @@ type move_cd =
 type cd_lst = move_cd list
 
 (**[type c] represents one character, and their current hp. 
-  Must include Character.c in its representation *)
+   Must include Character.c in its representation *)
 type c =
   {
     char_c: Character.c;
     char_name: string;
     char_moves: Character.move list;
     atk: int;
+    level: int;
     mutable cur_hp: int;
     mutable buffs : unit list; 
     mutable active: bool;
