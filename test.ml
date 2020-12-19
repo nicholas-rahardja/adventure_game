@@ -63,6 +63,15 @@ let chars_str_test name json f expected =
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
                ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
 
+let get_char_hp_lvl_test name char level expected = 
+  name >:: (fun _ -> assert_equal expected (get_char_hp_lvl char level))
+
+let get_char_atk_lvl_test name char level expected = 
+  name >:: (fun _ -> assert_equal expected (get_char_atk_lvl char level))
+
+let c_3 = Option.get (get_char t1 3) 
+let c_12 = Option.get (get_char t1 12)
+
 let char_tests = [
   chars_test "char id test" j1 get_char_id (pp_list string_of_int)
     [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 1001];
@@ -96,6 +105,10 @@ let char_tests = [
   chars_test "char element test" j1 get_char_element (pp_list string_of_element) 
     [Normal; Normal; Fire; Normal; Grass; Normal; Normal; Normal; Normal; 
      Normal; Normal; Normal; Normal];
+  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 300; 
+  get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 270; 
+  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 15; 
+  get_char_atk_lvl_test "atk of character 12 at level 8" c_3 8 50;
 ]
 
 (** Testing the move functions *)
@@ -122,9 +135,6 @@ let move_16 = Option.get (get_move t1 16)
 let move_17 = Option.get (get_move t1 17) 
 let move_1001 = Option.get (get_move t1 1001)
 let move_1002 = Option.get (get_move t1 1002)
-
-let c_3 = Option.get (get_char t1 3) 
-let c_12 = Option.get (get_char t1 12)
 
 let move_tests = [
   move_getter_test_helper "get name move 1" get_move_name move_1 "Rising Slash";
@@ -611,11 +621,11 @@ let combat_end_t2 =
   combat_end_game first_team sec_team
 
 (* Get a team object by using [init] like above, then extract the field *)
-
 let team1 = combat_t1.team1 
 let team2 = combat_t1.team2
 let team3 = combat_t2.team1
 let team4 = combat_t2.team2
+let empty_team = combat_end_t2.team1
 
 (* Access each target in a team using List.nth *)
 let team_target team nth = 
@@ -662,6 +672,45 @@ let c2 =
     level = 10
   }
 
+let c5_level_0 = 
+  {
+    char_c = char_5;
+    char_name = "Forest Fairy";
+    char_moves = [move_6; move_10];
+    atk = 10;
+    cur_hp = 1250;
+    buffs = []; 
+    active = true;
+    cooldown = [];
+    level = 0;
+  }
+
+let c5_level10 = 
+  {
+    char_c = char_5; 
+    char_name = "Forest Fairy";
+    char_moves = [move_6; move_10];
+    atk = 60;
+    cur_hp = 1750; 
+    buffs = []; 
+    active = true;
+    cooldown = [];
+    level = 10;
+  }
+
+let c12_level5 = 
+  {
+    char_c = c_12;
+    char_name = "Mermaid";
+    char_moves = [move_6; move_15];
+    atk = 35; 
+    cur_hp = 1500; 
+    buffs = []; 
+    active = true;
+    cooldown = [];
+    level = 5;
+  }
+
 let assert_eq_help name result exp_output = 
   name >:: fun _ -> assert_equal exp_output result 
 
@@ -702,6 +751,27 @@ let combat_get_active_test name team expected =
 let is_team_dead_test name team expected = 
   let active_team = Combat.get_active team in 
   assert_eq_help name (Combat.is_team_dead active_team) expected
+
+let get_team_test name n t expected = 
+  let result = Combat.get_team n t in 
+  assert_eq_help name result expected 
+
+let is_move_test name move_name m expected = 
+  let result = Combat.is_move move_name m in 
+  assert_eq_help name result expected 
+
+let load_char_test name character level expected = 
+  let char_new = Combat.load_char (character, level) in
+  assert_eq_help name char_new expected
+
+let load_char_test name char_level expected = 
+  assert_eq_help name (Combat.load_char char_level) expected 
+
+let smartness_of_c_test name char expected = 
+  assert_eq_help name (Combat.smartness_of_c char) expected 
+
+let check_winner_test name team team_num expected = 
+  assert_eq_help name (Combat.check_winner team team_num) expected
 
 (* One of the teams ar*)
 let combat_winner_test name t expected = 
@@ -971,6 +1041,25 @@ let combat_tests = [
   combat_get_active_test "team with all characters dead" team_no_health [];
   is_team_dead_test "team with all characters dead" team_no_health true;
   is_team_dead_test "team with characters alive" cd_team_3 false;
+  get_team_test "team 1 followed by team 2 in combat 1" 
+    1 combat_t1 (team1, team2);
+  get_team_test "team 2 followed by team 1 in combat 2" 
+    2 combat_t1 (team2, team1);
+  get_team_test "team 1 followed by team 2 in combat 2" 
+    1 combat_t2 (team3, team4);
+  get_team_test "team 2 followed by team 1 in combat 2" 
+    2 combat_t2 (team4, team3);
+  is_move_test "testing move with wrong name" "aqua" move_6 false; 
+  is_move_test "testing empty string input" "" move_7 false; 
+  is_move_test "testing move with all underscore letters" 
+    "aqua torrent" move_6 true; 
+  is_move_test "testing move 8 with exact name" "Icebolt" move_8 true;
+  load_char_test "load character 5 at level 0" (char_5, 0) c5_level_0;  
+  load_char_test "load character 5 at level 10" (char_5, 10) c5_level10;
+  load_char_test "load character 12 at level 5" (char_12,5) c12_level5;
+  smartness_of_c_test "smartness of character 5 at level 0" c5_level_0 4;
+  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 14;
+  check_winner_test "non empty team" team1 1 ();
 ]
 
 

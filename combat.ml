@@ -279,8 +279,7 @@ let rec select_move (move_list: Character.move list) =
     print_endline "\nthat is not a valid move, please choose agin: \n";
     select_move move_list
 
-(** calculates the damage of move with atk [atk] to [target]. Takes into
-    account effectiveness *)
+
 let calc_dmg move atk target = 
   let base = Character.get_move_atk move |> float_of_int in 
   let offset = float_of_int atk *. Character.get_scale move in 
