@@ -47,7 +47,7 @@ let max_char_id = 12
 let max_selections = 7
 
 let dmg_variation = 5
-let health_mod = 1
+let health_mod = 5
 let delay_time = 1
 let permanent = 9999999
 let multiplayer_base_lvl = 10
