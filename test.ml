@@ -167,7 +167,7 @@ let move_tests = [
 ]
 
 open Adventure
-let test_adventure = from_json (from_file "adventure_test.json")
+let test_adventure = from_json (from_file "./json/adventure_test.json")
 
 let room_ids_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (room_ids a) 

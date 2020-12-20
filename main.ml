@@ -4,7 +4,7 @@ let j1 = Yojson.Basic.from_file "json/charmove_game.json"
 
 let t1 = from_json j1
 let adventure_t = 
-  Adventure.from_json (Yojson.Basic.from_file "adventure_game.json")
+  Adventure.from_json (Yojson.Basic.from_file "json/adventure_game.json")
 
 type player_choice = 
   | Yes
