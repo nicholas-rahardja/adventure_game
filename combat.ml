@@ -61,14 +61,14 @@ let max_char_id = 12
 let max_selections = 7
 
 let dmg_variation = 5
-let health_mod = 5
+let health_mod = 1
 let delay_time = 1
 let multiplayer_base_lvl = 3
 
 let revive_base_hp = 0.5
 
 (* Single player constants *)
-let dmg_mod = 1
+let dmg_mod = 2
 
 exception WinnerSingPlayer of int * (item list)
 
@@ -406,15 +406,18 @@ let switch_n n =
   match n with 
   | 1 -> 2
   | 2 -> 1
-  | _ -> failwith "switch_n error, should not happen
-"
+  | _ -> failwith "switch_n error, should not happen"
+
+let print_green str =
+  ANSITerminal.(print_string [green] str)
+
 let team_n_turn n t : unit = 
   let (fri_team, enemy_team) = get_team n t in
   update_cd_team fri_team;
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
   check_winner (act_friendly) (switch_n n);
-  Printf.printf "\n It is team %d's turn to start!\n\n" n;
+  print_green ("\nIt is team " ^ (string_of_int n) ^ "'s turn to start!\n\n");
   List.iter (use_move n enemy_team) act_friendly
 
 let start_t t = 
