@@ -1,6 +1,6 @@
 open Character
 
-let j1 = Yojson.Basic.from_file "json/charmove.json"
+let j1 = Yojson.Basic.from_file "json/charmove_game.json"
 
 let t1 = from_json j1
 let adventure_t = 
@@ -11,7 +11,7 @@ type player_choice =
   | No
   | Invalid
 
-let enemy_join_chance = 100
+let enemy_join_chance = 50
 
 let rooms_visited_count = ref 0
 
@@ -55,14 +55,10 @@ let getextract_char id =
 
 let michael = getextract_char 1
 let gries = getextract_char 2 
-let xenon = getextract_char 7
-let mermaid = getextract_char 12
-let fairy = getextract_char 5
 let imp = getextract_char 3
 
 
-let player_team = [michael; imp; mermaid]
-let test_team2 = [fairy; fairy; fairy]
+let player_team = [michael; gries; imp]
 
 (* processes int list into char.c list *)
 
@@ -118,6 +114,7 @@ and add_to_team_yes char state lvl =
 let add_to_team enemy_team state difficulty = 
   if Combat.proc enemy_join_chance then begin 
     let rand_choice = Combat.rand_in_lst enemy_team in 
+    print_newline ();
     let char_name = Character.get_char_name rand_choice in 
     print_red char_name;
     Printf.printf " with level %d wants to join your team! \n" difficulty;
@@ -158,7 +155,7 @@ let add_xp_func n exp state =
 (** Grants player gold based on enemy lvl *)
 let add_gold_helper lvl state = 
   let amt = 10 * lvl in 
-  Printf.printf "You have received %d gold! \n" amt;
+  Printf.printf "You have received %d gold! \n\n" amt;
   State.add_gold amt state
 
 let handle_winner integer = 
@@ -179,7 +176,7 @@ let init_combat cur_room enemies state adv_t =
   let state_update_items = State.load_inventory items state in 
   print_red "You won! \n";
   let exp_gained = State.xp_of_lvl difficulty in 
-  Printf.printf "Your characters gained %d experience \n" exp_gained;
+  Printf.printf "Your characters gained %d experience \n\n" exp_gained;
   let state_ref = ref state_update_items in
   for i = 0 to List.length (player_team) - 1 do 
     state_ref := (add_xp_func i exp_gained !state_ref)
@@ -234,14 +231,14 @@ let rec ask_shop_item shop state =
     end
   with e -> 
   match e with 
-  | NoItemSelected -> print_endline "You decided not to buy anything"; state
+  | NoItemSelected -> print_endline "You decided not to buy anything.\n"; state
   | _ -> print_endline "enter a valid int"; ask_shop_item shop state
 
 
 let state_shop_helper shop state = 
   if List.length shop = 0 then state else begin
     print_endline "A shopkeeper greets you: ";
-    ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look \
+    ANSITerminal.(print_string [blue] "\nWelcome to my shop! Have a look \
                                        around...\n");
     print_endline "Type the int of the item you want. You can only buy one.";
     print_string "Or type ";
@@ -251,7 +248,7 @@ let state_shop_helper shop state =
     let cur_gold = State.get_gold state |> string_of_int in
     ANSITerminal.(print_string [yellow] (cur_gold ^ " gold\n") );
     let new_state = ask_shop_item shop state in 
-    print_endline "The shopkeeper says: Come again anytime!";
+    print_endline "The shopkeeper says: Come again anytime!\n";
     new_state
   end
 
@@ -262,7 +259,7 @@ For example, type 'save1' or 'Clarksons_adventure'";
     let input = read_line () in 
     let file_name =  input ^ ".json" in
     let path = "./" ^ file_name in 
-    Printf.printf "Saved as %s \n" file_name;
+    Printf.printf "Saved as %s \n\n" file_name;
     State.save state path
   with _ -> print_endline "That is not a valid file name, please try again";
     ask_save_yes state
@@ -327,8 +324,9 @@ let sing_player () =
   match e with 
   | SinglePlayerLost -> print_endline "Please restart the game to play again!"
   | SingPlayerCompleted -> 
-    print_endline "Congratulations!!! You have completed the game! \ 
-  Thank you for playing!"
+    ANSITerminal.(print_string 
+                    [yellow] "Congratulations!!! You have completed the game! 
+  Thank you for playing!")
   | _ -> ()
 
 let rec load_game () = 

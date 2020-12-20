@@ -1,3 +1,31 @@
+(**We implemented both black box and white box approach to our testing strategy.
+   In this sense, we used TDD to write black-box test cases on our functions 
+   based on the function specification before coding the function. 
+   We ensured that for each function we tested the boundary and corner cases 
+   based on the specification. Next, after coding the function, we used 
+   white-box testing to ensure that we have covered all of the paths through 
+   the function. Specifically, our tests contained tests of many functions 
+   in the State, Adventure, and Character modules, since they did not depend 
+   on state, and had definitive return values.
+
+   We did not do this to all the functions we wrote, since many of our functions 
+   are helpers which we have indirectly tested through testing the main 
+   functions where they are used. We also avoided testing functions that only 
+   print out values to the screen, as they return units, so no real test cases 
+   can be made for them. For this reason as well, we avoid testing many functions
+   in the Combat and Main module, because require input from the user, the 
+   outputs depend heavily on state, and some outputs are even random. 
+   So, we manually tested functions by running our game and making sure 
+   the features implemented worked properly.
+
+   Overall we believe that our test cases demonstrate the correctness of our 
+   system, as we have implemented both black box and white box testing to 
+   our main functions which should have adequately represented the domain 
+   of many possible inputs to the functions, and we made sure that the 
+   functions returned the values that they were expected to.
+*)
+
+
 open OUnit2
 open Yojson.Basic
 open Character
@@ -706,8 +734,8 @@ let combat_target_input_test name team input exp_output =
   assert_eq_help name result exp_output
 
 (* let do_dmg_test name c dmg expected = 
-  do_dmg c dmg; 
-  name >:: fun _ -> 
+   do_dmg c dmg; 
+   name >:: fun _ -> 
     assert_equal expected c.cur_hp ~printer:(string_of_int) *)
 
 let do_heal_test name c heal expected = 
@@ -984,13 +1012,13 @@ let combat_tests = [
   (* combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
      combat_winner_test "winner of an ending game is 2" combat_end_t2 2; *)
   (* do_dmg_test "subtracts all health of team1[0]" 
-    team1_first_target team1_first_target_hp 0;
-  do_dmg_test "subtracts 0 from health from team4[1]" 
-    team4_first_target 0 team4_first_target_hp;
-  do_dmg_test "subtracts half of the health from team2[1]" 
-    team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
-  do_dmg_test "subtracts big value 100000 from health" 
-    team3_first_target 100000 0; *)
+     team1_first_target team1_first_target_hp 0;
+     do_dmg_test "subtracts 0 from health from team4[1]" 
+     team4_first_target 0 team4_first_target_hp;
+     do_dmg_test "subtracts half of the health from team2[1]" 
+     team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
+     do_dmg_test "subtracts big value 100000 from health" 
+     team3_first_target 100000 0; *)
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 

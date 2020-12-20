@@ -6,12 +6,12 @@
       "description": "A brave warrior from another dimension",
       "moves": [
         1,
-        2
+        2,
+        20
       ],
       "atk": 10,
-      "hp": 250,
-      "element": "normal",
-      "cooldown": 3
+      "hp": 300,
+      "element": "normal"
     },
     {
       "id": 2,
@@ -19,10 +19,11 @@
       "description": "Wise he is, with many years of experience",
       "moves": [
         16,
-        17
+        17,
+        22
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 300,
       "element": "normal"
     },
     {
@@ -31,7 +32,8 @@
       "description": "An imp of fire",
       "moves": [
         3,
-        5
+        5,
+        23
       ],
       "atk": 10,
       "hp": 250,
@@ -43,7 +45,8 @@
       "description": "a flying harpy",
       "moves": [
         1,
-        2
+        2,
+        12
       ],
       "atk": 10,
       "hp": 250,
@@ -55,7 +58,8 @@
       "description": "a mystical fairy",
       "moves": [
         6,
-        10
+        10,
+        9
       ],
       "atk": 10,
       "hp": 250,
@@ -67,10 +71,11 @@
       "description": "a thug here to ruin your day",
       "moves": [
         1,
-        2
+        2,
+        18
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 230,
       "element": "normal"
     },
     {
@@ -79,10 +84,11 @@
       "description": "a knight of justice",
       "moves": [
         18,
-        20
+        20,
+        12
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 280,
       "element": "normal"
     },
     {
@@ -91,10 +97,11 @@
       "description": "a paladin",
       "moves": [
         18,
-        19
+        19,
+        20
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 210,
       "element": "normal"
     },
     {
@@ -102,11 +109,12 @@
       "name": "Dark priestess",
       "description": "evil priestess",
       "moves": [
-        25,
-        26
+        21,
+        22,
+        16
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 200,
       "element": "normal"
     },
     {
@@ -115,10 +123,11 @@
       "description": "A bigger than usual wolf",
       "moves": [
         1,
-        2
+        2,
+        4
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 270,
       "element": "normal"
     },
     {
@@ -127,10 +136,11 @@
       "description": "an average wolf",
       "moves": [
         1,
-        2
+        2,
+        4
       ],
       "atk": 10,
-      "hp": 250,
+      "hp": 200,
       "element": "normal"
     },
     {
@@ -139,7 +149,8 @@
       "description": "the lower half is fishy",
       "moves": [
         6,
-        15
+        15,
+        8
       ],
       "atk": 10,
       "hp": 250,
@@ -163,17 +174,17 @@
       "id": 1,
       "name": "Rising Slash",
       "description": "A huge slash",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 30,
+      "scale": 1.2,
       "element": "normal",
-      "cooldown": 1
+      "cooldown": 2
     },
     {
       "id": 2,
       "name": "Kick",
       "description": "just a kick",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "normal",
       "cooldown": 1
     },
@@ -182,33 +193,33 @@
       "name": "magic missiles",
       "description": "they are magical",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "normal",
-      "cooldown": 3
+      "cooldown": 1
     },
     {
       "id": 17,
       "name": "arcanic blast",
       "description": "a blast of magic",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 50,
+      "scale": 1.3,
       "element": "normal",
-      "cooldown": 3
+      "cooldown": 4
     },
     {
       "id": 3,
       "name": "Fireball",
       "description": "a ball of fire??",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "fire",
-      "cooldown": 3
+      "cooldown": 1
     },
     {
       "id": 4,
       "name": "Phoenix Flame",
       "description": "A majestic flame worthy of a phoenix",
-      "atk": 10,
+      "atk": 30,
       "scale": 2.0,
       "element": "fire",
       "cooldown": 3
@@ -217,16 +228,16 @@
       "id": 5,
       "name": "Eruption",
       "description": "an eruption of fire from the ground",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 50,
+      "scale": 1.5,
       "element": "fire",
-      "cooldown": 3
+      "cooldown": 4
     },
     {
       "id": 12,
       "name": "Thunderbolt",
       "description": "thunder straight from the sky",
-      "atk": 10,
+      "atk": 30,
       "scale": 2.0,
       "element": "fire",
       "cooldown": 3
@@ -235,16 +246,16 @@
       "id": 13,
       "name": "Meteor",
       "description": "Calls down a meteor",
-      "atk": 10,
+      "atk": 25,
       "scale": 2.0,
       "element": "fire",
-      "cooldown": 3
+      "cooldown": 2
     },
     {
       "id": 14,
       "name": "Sunfire",
       "description": "fire from the sun",
-      "atk": 10,
+      "atk": 25,
       "scale": 2.0,
       "element": "fire",
       "cooldown": 3
@@ -253,8 +264,8 @@
       "id": 6,
       "name": "Aqua Torrent",
       "description": "a jet of water",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 30,
+      "scale": 1.2,
       "element": "water",
       "cooldown": 3
     },
@@ -262,17 +273,17 @@
       "id": 7,
       "name": "Cyclone",
       "description": "strong gusts of wind",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 30,
+      "scale": 1.5,
       "element": "water",
-      "cooldown": 3
+      "cooldown": 2
     },
     {
       "id": 8,
       "name": "Icebolt",
       "description": "a piecing bolt made of frozen water",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 40,
+      "scale": 1.5,
       "element": "water",
       "cooldown": 3
     },
@@ -280,8 +291,8 @@
       "id": 15,
       "name": "Watersprout",
       "description": "A tornado of water",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 40,
+      "scale": 1.5,
       "element": "water",
       "cooldown": 3
     },
@@ -290,24 +301,24 @@
       "name": "Entangling Thorns",
       "description": "piercing thorns",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "grass",
-      "cooldown": 3
+      "cooldown": 1
     },
     {
       "id": 10,
       "name": "Leaf Hurricane",
-      "description": "Stronger gusts of wind",
+      "description": "Strong gusts of wind",
       "atk": 10,
       "scale": 2.0,
       "element": "grass",
-      "cooldown": 3
+      "cooldown": 2
     },
     {
       "id": 11,
       "name": "Bloom",
       "description": "a burst of nature",
-      "atk": 10,
+      "atk": 40,
       "scale": 2.0,
       "element": "grass",
       "cooldown": 3
@@ -316,17 +327,17 @@
       "id": 18,
       "name": "Blinding Flare",
       "description": "It burrrns",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 30,
+      "scale": 1.2,
       "element": "normal",
-      "cooldown": 3
+      "cooldown": 2
     },
     {
       "id": 19,
       "name": "Holy Strike",
       "description": "justice strikes again",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "normal",
       "cooldown": 3
     },
@@ -334,8 +345,8 @@
       "id": 20,
       "name": "Divine Judgment",
       "description": "divinely.... judgment?",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 40,
+      "scale": 1.5,
       "element": "normal",
       "cooldown": 3
     },
@@ -344,16 +355,16 @@
       "name": "Shadowbolt",
       "description": "a shadowy projectile",
       "atk": 10,
-      "scale": 2.0,
+      "scale": 1.0,
       "element": "normal",
-      "cooldown": 3
+      "cooldown": 1
     },
     {
       "id": 22,
       "name": "Coalescing Nightmares",
       "description": "inflicts nightmares",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 40,
+      "scale": 1.0,
       "element": "normal",
       "cooldown": 3
     },
@@ -361,8 +372,8 @@
       "id": 23,
       "name": "Inferno",
       "description": "a strong burst of fire",
-      "atk": 10,
-      "scale": 2.0,
+      "atk": 40,
+      "scale": 1.5,
       "element": "fire",
       "cooldown": 3
     },

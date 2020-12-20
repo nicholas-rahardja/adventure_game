@@ -41,8 +41,8 @@ type buff =
   | ElementalVulnerability of int * int
 
 (* Constants *)
-let atk_per_lvl = 5
-let hp_per_lvl = 10
+let atk_per_lvl = 3
+let hp_per_lvl = 20
 
 (* Character-related functions *)
 
