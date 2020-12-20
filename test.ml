@@ -12,9 +12,9 @@
    are helpers which we have indirectly tested through testing the main 
    functions where they are used. We also avoided testing functions that only 
    print out values to the screen, as they return units, so no real test cases 
-   can be made for them. For this reason as well, we avoid testing many functions
-   in the Combat and Main module, because require input from the user, the 
-   outputs depend heavily on state, and some outputs are even random. 
+   can be made for them. For this reason as well, we avoid testing many 
+   functions in the Combat and Main module, because require input from the user,
+   the outputs depend heavily on state, and some outputs are even random. 
    So, we manually tested functions by running our game and making sure 
    the features implemented worked properly.
 
