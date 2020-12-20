@@ -21,7 +21,7 @@ exception UnknownRoom of room_id
 (** Raised when an unknown exit is encountered. *)
 exception UnknownExit of exit_name
 
-(** [from_json j] is the adventure that [j] represents.*)
+(** [from_json j] is the adventure that [j] represents. *)
 val from_json : Yojson.Basic.t -> t
 
 (** [start_room a] is the identifier of the starting room in adventure 
@@ -53,12 +53,12 @@ val next_room : t -> room_id -> exit_name -> room_id
 val next_rooms : t -> room_id -> room_id list
 
 (** [enemies a r] is a list of all the enemy ids in room [r] in adventure [a].
-    Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
+    Raises [UnknownRoom r] if [r] is not a room identifier in [a]. *)
 val enemies : t -> room_id -> int list 
 
 (** [diffculty a r] is the dificulty level of the enemy in room [r] in 
     adventure [a]. Raises [UnknownRoom r] if [r] is not a room identifier 
-    in [a]*)
+    in [a]. *)
 val difficulty: t -> room_id -> int 
 
 (** The type representing item types. The string is the item name. *)
@@ -83,7 +83,7 @@ type item_wrapper =
     Raises: [UnknownRoom r] if [r] is not a room identifier in [a] *)
 val shop: t -> room_id -> item_wrapper list 
 
-(** [rewards a r] is a list of all the rewards  in room [r] in adventure [a].
+(** [rewards a r] is a list of all the rewards in room [r] in adventure [a].
     Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
 val rewards: t -> room_id -> item list 
 
@@ -94,5 +94,5 @@ val item_matcher : Yojson.Basic.t -> item
 (** [item_string i] is a string representation of [i], without price. *)
 val item_string : item -> string
 
-(** [shop_item_string i] is a string representation of [i], with price. *)
+(** [item_wrapper_string i] is a string representation of [i], with price. *)
 val item_wrapper_string : item_wrapper -> string
