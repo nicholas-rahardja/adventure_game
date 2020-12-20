@@ -3,7 +3,6 @@ open Yojson.Basic
 open Character
 open Combat
 
-
 (* Load JSON files here for testing.
    Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
 let j1 = from_file "json/charmove.json"
