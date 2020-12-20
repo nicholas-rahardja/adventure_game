@@ -1,10 +1,9 @@
 open Printf
 exception Winner of int
 
-
-type move_cd = 
-  {move: Character.move;
-   turns_left : int;}
+type move_cd = {
+  move: Character.move;
+  turns_left : int;}
 
 type cd_lst = move_cd list
 
@@ -21,7 +20,7 @@ type c = {
   atk: int;
   level: int;
   mutable cur_hp: int;
-  mutable buffs : unit list; 
+  mutable buffs: unit list; 
   mutable active: bool;
   mutable cooldown: cd_lst;}
 
@@ -59,12 +58,10 @@ type item_select =
 let max_char_per_team = 3
 let max_char_id = 12
 let max_selections = 7
-
 let dmg_variation = 5
 let health_mod = 1
 let delay_time = 1
 let multiplayer_base_lvl = 3
-
 let revive_base_hp = 0.5
 
 (* Single player constants *)
@@ -79,7 +76,7 @@ let vary (k : float) percent =
   let pos_or_neg = 
     if Random.bool () then float_of_int ~-1
     else 1. in 
-  let offset = k *.  (mult *. pos_or_neg) in
+  let offset = k *. (mult *. pos_or_neg) in
   k +. offset
 
 let proc k =
@@ -93,18 +90,18 @@ let do_dmg c (dmg : int) =
   (blue_char_name c; 
    Printf.printf " has taken %d damage\n" dmg);
   let remaining_health = c.cur_hp - dmg in
-  if remaining_health > 0 then begin
-    blue_char_name c;
-    Printf.printf " has %d health left\n" remaining_health;
-    c.cur_hp <- remaining_health end else
+  if remaining_health > 0 then 
+    (blue_char_name c;
+     Printf.printf " has %d health left\n" remaining_health;
+     c.cur_hp <- remaining_health) 
+  else
     (blue_char_name c;
      Printf.printf " has fallen!\n";
      c.cur_hp <- 0;  c.active <- false);
   print_newline ()
 
 let do_heal c heal =  
-  (blue_char_name c; 
-   Printf.printf " has healed by %d \n" heal);
+  (blue_char_name c; Printf.printf " has healed by %d \n" heal);
   let added_health = c.cur_hp + heal in 
   let max_hp = health_mod * Character.get_char_hp_lvl c.char_c c.level in 
   let final_health = if added_health > max_hp then max_hp 
@@ -126,7 +123,7 @@ let get_active team =
 
 let get_dead team = List.filter is_dead team
 
-(** [target index team]. Returns the character at index [index].
+(** [target index team] returns the character at index [index].
     Requires: all characters in team must be active
     index must be < team.length *)
 let target index (team : team) = 
@@ -136,15 +133,13 @@ let counter = ref 1
 
 (** [print_char_name inte c] prints:
     "inte target is c_name" where c_name is the char_name of c*)
-let print_char_name c= 
+let print_char_name c = 
   Printf.printf "Target %d : " !counter;
   blue_char_name c;
   Printf.printf " ~ %i remaining health left \n" c.cur_hp;
   incr counter
 
-
 (** [print_targets team] prints out the possible targets to choose *)
-(* bol = true if targeting attack. false if target to use item on *)
 let print_targets team = 
   fun () ->
   List.iter (print_char_name) team; print_newline ();
@@ -153,25 +148,19 @@ let print_targets team =
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
 let ask_user = read_int
 
-(** DEBUG CODE *)
-let print_cd cd = 
-  let move_name = Character.get_move_name cd.move in
-  Printf.printf " %s has %d turns remaining \n" move_name cd.turns_left
-
 let is_on_cd cd = 
   cd.turns_left > 0
 
 let add_cd move cd_lst = 
   let cd = Character.get_move_cd move in 
-  let new_entry =  {move = move;
-                    turns_left = cd;} in 
+  let new_entry =  {
+    move = move;
+    turns_left = cd;} in 
   new_entry :: cd_lst
 
 let update_cd move_cd = 
-  (* Printf.printf " current move cd is %d" move_cd.turns_left; *)
   let next_cd = move_cd.turns_left - 1 in 
   let new_cd = {move_cd with turns_left = next_cd} in 
-  (* print_cd new_cd; *)
   new_cd
 
 let update_cd_lst cd_lst = 
@@ -218,7 +207,6 @@ let is_team_dead act_team = act_team = []
 let check_winner act_team inte= 
   if is_team_dead act_team then raise (Winner inte) else ()
 
-
 let print_item_use name c = 
   Printf.printf "You used %s on " name;
   blue_char_name c; print_newline ()
@@ -240,14 +228,11 @@ let revival_item name c =
   Printf.printf 
     "%s has been revived, but they are too weak to attack this turn!" char_name
 
-
 let match_item item c = 
   match item with
   | Adventure.RevivalItem name -> revival_item name c
   | Adventure.FlatHp (name, value) -> flat_hp name value c
   | Adventure.PercentHp (name, percent) -> percent_hp name percent c
-
-
 
 let print_item n item = 
   let item_name = Adventure.item_string item in 
@@ -266,20 +251,15 @@ let print_item_choices items =
   print_endline " to not use any item \n";
   List.iteri (print_item) items
 
-(* let item_input items input = 
-   try 
-   let integer = int_of_string input in 
-   match integer with 
-   | 0 -> 0
-   | x when (x <= List.length items) && (x>0) -> x
-   | _ -> InvalidItem *)
-
-
 let rec revival_item_select_helper team = 
   let act_team = get_active team in 
-  if 0 = List.compare_lengths team act_team then (
-    print_endline "All your team is alive! You cannot use this a revival item";
-    raise RevivalItemException) else begin
+  if 0 = List.compare_lengths team act_team then 
+    begin
+      print_endline 
+        "All your team is alive! You cannot use this a revival item";
+      raise RevivalItemException 
+    end 
+  else 
     let dead_team = get_dead team in 
     Printf.printf 
       "Please enter a target number of your team to use the item on: \n";
@@ -291,11 +271,9 @@ let rec revival_item_select_helper team =
       print_endline "that is not a valid target, please type again"; 
       revival_item_select_helper team
     | Valid_tar c -> c
-  end
 
 let no_item_exp input = 
   if input = 0 then raise NoItemSelected
-
 
 (** PH function. Will be used to allow usage of items *)
 let rec use_item team items t = 
@@ -316,8 +294,6 @@ let rec use_item team items t =
       match_item item_selected char_selected;
       let new_item_lst = remove (input - 1) items in 
       t.items <- new_item_lst
-
-
     end
   with e -> match e with 
     | NoItemSelected -> print_endline "you decided not to use an item"
@@ -327,10 +303,10 @@ let rec use_item team items t =
 
 let is_move input move = 
   let move1 = Character.get_move_name move |>  String.lowercase_ascii in 
-  let move2 = (input |>  String.lowercase_ascii) in 
+  let move2 = input |>  String.lowercase_ascii in 
   move1 = move2
 
-let move_input (move_lst : Character.move list) input = 
+let move_input (move_lst: Character.move list) input = 
   try 
     let correct_move = List.find (is_move input) move_lst in
     Valid_m correct_move
@@ -355,7 +331,7 @@ let char_moves_off_cd c =
   moves_off_cd char_moves cd_lst
 
 let rec select_move (move_list: Character.move list) =
-  let print_move (m : Character.move) = 
+  let print_move (m: Character.move) = 
     Printf.printf "Move option : '%s'\n" (Character.get_move_name m) in
   List.iter print_move move_list; 
   print_endline "\nPlease enter a move name to attack your enemy:"; 
@@ -387,14 +363,13 @@ let use_move n opp_team c =
   let act_moves = char_moves_off_cd c in 
   if List.length act_moves = 0 then 
     print_endline "All this character's moves are on cooldown, can't attack!\n"
-  else begin
+  else 
     let move = select_move act_moves in 
     Printf.printf 
       "Please enter a target number of the opposition team to attack next: \n";
     let target = select_enemy act_enemy in 
     reassign_char_cd c move;
     vary_dmg c move target
-  end
 
 let get_team n t = 
   match n with
@@ -421,12 +396,13 @@ let team_n_turn n t : unit =
   List.iter (use_move n enemy_team) act_friendly
 
 let start_t t = 
-  try begin
-    while (true) do
-      team_n_turn 1 t;
-      team_n_turn 2 t;
-    done
-  end
+  try 
+    begin
+      while (true) do
+        team_n_turn 1 t;
+        team_n_turn 2 t;
+      done
+    end
   with Winner inte -> 
     Printf.printf "Congratulation, team %d is the Winner!\n\n" inte;
     t.winner <- inte
@@ -435,20 +411,21 @@ let winner t = t.winner
 
 let print_char_select t id = 
   let char_name = 
-    Character.get_char t id |> getextract_char |> Character.get_char_name
-  in 
+    Character.get_char t id |> getextract_char |> Character.get_char_name in 
   Printf.printf "Type %d to select " id;
   ANSITerminal.(print_string [blue] char_name);
   print_newline ()
 
-let rec player_pick_helper k (lst : int list) (acc : int list) = 
-  if k = 0 then acc else begin 
-    Printf.printf "Please pick %d more characters\n" k;
-    let choice = ask_user () in
-    if List.mem choice lst then player_pick_helper (k - 1) lst (choice :: acc)
-    else (
-      print_endline "That is not a character in the list, please pick again!";
-      player_pick_helper k lst acc) end
+let rec player_pick_helper k (lst: int list) (acc: int list) = 
+  if k = 0 then acc else 
+    begin 
+      Printf.printf "Please pick %d more characters\n" k;
+      let choice = ask_user () in
+      if List.mem choice lst then player_pick_helper (k - 1) lst (choice :: acc)
+      else (
+        print_endline "That is not a character in the list, please pick again!";
+        player_pick_helper k lst acc)
+    end
 
 let player_pick k lst = player_pick_helper k lst []
 
@@ -517,7 +494,7 @@ let rand_in_lst lst =
   let index = Random.int range in
   List.nth lst index
 
-let print_move (m : Character.move) = 
+let print_move (m: Character.move) = 
   Printf.printf "Move option : '%s'\n" (Character.get_move_name m)
 
 let rand_move c = 
@@ -529,7 +506,7 @@ let rand_target team =
 
 let enemy_select_target team = rand_target team
 
-let best_dmg_move c (target : c) = 
+let best_dmg_move c (target: c) = 
   let act_move_lst = char_moves_off_cd c in 
   let dmg move = Character.get_damage c.char_c target.char_c move in
   let acc_func acc move = (move, dmg move) :: acc in
@@ -591,7 +568,7 @@ let execute_turn n t : unit =
     List.iter (use_move n enemy_team) act_friendly
   end
   else begin
-    ANSITerminal.( print_string [red] "The enemy is attacking! \n\n");
+    ANSITerminal.(print_string [red] "The enemy is attacking! \n\n");
     List.iter (enemy_use_move_sing n enemy_team) act_friendly
   end
 
@@ -610,6 +587,6 @@ let start_sing clst1 clst2 items =
   try 
     let init_t = init clst1 clst2 items in 
     let _ = start_t_sing init_t in
-    ANSITerminal.(print_string [red] "Congratulation, you defeated the enemy!\n");
+    ANSITerminal.(print_string [red] "Congrats, you defeated the enemy!\n");
     raise (Failure "Should not reach here")
   with WinnerSingPlayer (winner, items)  -> (winner, items)
