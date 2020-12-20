@@ -1,0 +1,254 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Home Base",
+      "initial message": "You are at Home Base",
+      "enemy ids": [],
+      "shop": [],
+      "rewards": [],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Mountain Side",
+          "room id": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Mountain Side",
+      "initial message": "You are at Mountain Side",
+      "enemy ids": [
+        1
+      ],
+      "shop": [
+        {
+          "name": "Medicine",
+          "item": "FlatHp",
+          "eff": 50,
+          "price": 3
+        }
+      ],
+      "rewards": [
+        {
+          "name": "Healing Balm",
+          "item": "FlatHp",
+          "eff": 100,
+          "price": 3
+        }
+      ],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Somerset Town",
+          "room id": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Somerset Town",
+      "initial message": "You are at Somerset Town",
+      "enemy ids": [
+        2,
+        3,
+        4
+      ],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.5,
+          "price": 15
+        },
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
+      "rewards": [
+        {
+          "name": "Medicine",
+          "item": "FlatHp",
+          "eff": 100
+        }
+      ],
+      "difficulty": 1,
+      "exits": [
+        {
+          "name": "Black Forest",
+          "room id": 4
+        },
+        {
+          "name": "Gobi Desert",
+          "room id": 5
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Black Forest",
+      "initial message": "You are at Black Forest",
+      "enemy ids": [
+        4,
+        5,
+        12
+      ],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.7,
+          "price": 15
+        },
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
+      "rewards": [],
+      "difficulty": 2,
+      "exits": [
+        {
+          "name": "Somerset Town",
+          "room id": 3
+        },
+        {
+          "name": "Hallerbos Forest",
+          "room id": 6
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Gobi Desert",
+      "initial message": "You are at Gobi Desert",
+      "enemy ids": [
+        6,
+        7
+      ],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.7,
+          "price": 20
+        }
+      ],
+      "rewards": [],
+      "difficulty": 2,
+      "exits": [
+        {
+          "name": "Somerset Town",
+          "room id": 3
+        },
+        {
+          "name": "Thar Desert",
+          "room id": 7
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Hallerbos Forest",
+      "initial message": "You are at Hallerbos Forest",
+      "enemy ids": [
+        8,
+        9,
+        10
+      ],
+      "shop": [
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
+      "rewards": [],
+      "difficulty": 3,
+      "exits": [
+        {
+          "name": "Black Forest",
+          "room id": 4
+        },
+        {
+          "name": "Yulu Temple",
+          "room id": 8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Thar Desert",
+      "initial message": "You are at Thar Desert",
+      "enemy ids": [
+        11,
+        9,
+        10
+      ],
+      "shop": [
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
+      "rewards": [],
+      "difficulty": 3,
+      "exits": [
+        {
+          "name": "Gobi Desert",
+          "room id": 5
+        },
+        {
+          "name": "Yulu Temple",
+          "room id": 8
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Yulu Temple",
+      "initial message": "You are at Yulu Temple",
+      "enemy ids": [
+        9,
+        10,
+        11
+      ],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.9,
+          "price": 15
+        },
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
+      "rewards": [],
+      "difficulty": 5,
+      "exits": [
+        {
+          "name": "Hallerbos Forest",
+          "room id": 6
+        },
+        {
+          "name": "Thar Desert",
+          "room id": 7
+        }
+      ]
+    }
+  ],
+  "start room": 1
+}
