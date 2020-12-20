@@ -65,6 +65,44 @@ let get_hp c =
 let get_move (t:t) (move_id: int) : move option = 
   List.assoc_opt move_id t.all_moves
 
+let to_move a =
+  (member "id" a |> to_int,
+    {
+      cooldown = member "cooldown" a |> to_int;
+      id = member "id" a |> to_int;
+      name = member "name" a |> to_string;
+      description = member "description" a |> to_string;
+      atk = member "atk" a |> to_int;
+      scale = member "scale" a |> to_float;
+      element = match member "element" a |> to_string with
+        | "normal" -> Normal
+        | "water" -> Water
+        | "fire" -> Fire
+        | "grass" -> Grass
+        | _ -> failwith "Cannot match element in from_json"
+    })
+
+let to_char p a = 
+  (member "id" a |> to_int,
+    {
+      id = member "id" a |> to_int;
+      name = member "name" a |> to_string;
+      description = member "description" a |> to_string;
+      moves = member "moves" a 
+              |> to_list 
+              |> List.map to_int 
+              |> List.map (get_move p)
+              |> List.map Option.get;
+      atk = member "atk" a |> to_int;
+      hp = member "hp" a |> to_int;
+      element = match member "element" a |> to_string with
+        | "normal" -> Normal
+        | "water" -> Water
+        | "fire" -> Fire
+        | "grass" -> Grass
+        | _ -> failwith "Cannot match element in from_json"
+    })
+
 (** [from_json j] first generates a "premature" [t] with only the list of moves
     and no characters in order to be used in get_move later. Then, it populates 
     the list of characters and uses get_move to convert the list of move IDs in
@@ -72,48 +110,11 @@ let get_move (t:t) (move_id: int) : move option =
 let from_json j =
   let char_list = member "chars" j |> to_list in
   let moves_list = member "moves" j |> to_list in
-  let to_move a =
-    (member "id" a |> to_int,
-     {
-       cooldown = member "cooldown" a |> to_int;
-       id = member "id" a |> to_int;
-       name = member "name" a |> to_string;
-       description = member "description" a |> to_string;
-       atk = member "atk" a |> to_int;
-       scale = member "scale" a |> to_float;
-       element = match member "element" a |> to_string with
-         | "normal" -> Normal
-         | "water" -> Water
-         | "fire" -> Fire
-         | "grass" -> Grass
-         | _ -> failwith "Cannot match element in from_json"
-     }) in
   let premature_t = {
     all_chars = [];
     all_moves = List.map to_move moves_list
   } in
-  let to_char a = 
-    (member "id" a |> to_int,
-     {
-       id = member "id" a |> to_int;
-       name = member "name" a |> to_string;
-       description = member "description" a |> to_string;
-       moves = member "moves" a 
-               |> to_list 
-               |> List.map to_int 
-               |> List.map (get_move premature_t)
-               |> List.map Option.get;
-       atk = member "atk" a |> to_int;
-       hp = member "hp" a |> to_int;
-       element = match member "element" a |> to_string with
-         | "normal" -> Normal
-         | "water" -> Water
-         | "fire" -> Fire
-         | "grass" -> Grass
-         | _ -> failwith "Cannot match element in from_json"
-     })
-  in
-  {premature_t with all_chars = List.map to_char char_list}
+  {premature_t with all_chars = List.map (to_char premature_t) char_list}
 
 let get_move_name (move:move) : string = 
   move.name 
