@@ -293,13 +293,8 @@ let rec one_round (state : State.t) adv_t =
   first_room cur_room (fun _ -> ask_save state);
   let enemies = Adventure.enemies adv_t cur_room |> char_list in 
   let new_state = 
-<<<<<<< HEAD
     if List.length enemies = 0 then state else 
       init_combat cur_room enemies state adv_t
-=======
-    if List.length enemies = 0 then (print_endline "No enemies found\n"; state) 
-    else init_combat cur_room enemies state adv_t
->>>>>>> 1f83af94a3944c047a333c7785d2dea25ff80cb7
   in
   let rewards = Adventure.rewards adv_t cur_room in 
   let state_after_rewards = add_rewards rewards new_state in

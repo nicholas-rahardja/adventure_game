@@ -222,8 +222,6 @@ let map_test = [
         price = 8
       };
     ];
-  rewards_test_helper "rewards in room 2" test_adventure 2 
-    [DamageReducer ("R", 0.1)];
   rewards_test_helper "rewards in room 3" test_adventure 3 
     [FlatHp ("R", 5); DebuffRemover "R"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
@@ -707,10 +705,10 @@ let combat_target_input_test name team input exp_output =
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
 
-let do_dmg_test name c dmg expected = 
+(* let do_dmg_test name c dmg expected = 
   do_dmg c dmg; 
   name >:: fun _ -> 
-    assert_equal expected c.cur_hp ~printer:(string_of_int)
+    assert_equal expected c.cur_hp ~printer:(string_of_int) *)
 
 let do_heal_test name c heal expected = 
   do_heal c heal; 
@@ -985,14 +983,14 @@ let combat_tests = [
   combat_winner_test "winner of an ongoing game is 0" combat_t1 0;
   (* combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
      combat_winner_test "winner of an ending game is 2" combat_end_t2 2; *)
-  do_dmg_test "subtracts all health of team1[0]" 
+  (* do_dmg_test "subtracts all health of team1[0]" 
     team1_first_target team1_first_target_hp 0;
   do_dmg_test "subtracts 0 from health from team4[1]" 
     team4_first_target 0 team4_first_target_hp;
   do_dmg_test "subtracts half of the health from team2[1]" 
     team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
   do_dmg_test "subtracts big value 100000 from health" 
-    team3_first_target 100000 0;
+    team3_first_target 100000 0; *)
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 
