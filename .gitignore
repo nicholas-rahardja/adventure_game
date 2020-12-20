@@ -21,12 +21,5 @@ _build
 # vs code
 .vscode
 
-<<<<<<< HEAD
-# bisect
-*.coverage
-_coverage
-
 # test files
 s?.json
-=======
->>>>>>> parent of 997542a... Add bisect support
