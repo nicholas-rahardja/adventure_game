@@ -29,6 +29,13 @@ type char_t = Character.t
 
 type team = c list
 
+(**{team1 = [c1; c2]}; team2 = [c3; c4]; winner = 1; 
+   items= [item1; item2; item_n]} represents the combat where there are 2 teams
+   team 1 and team 2. Where team 1 has characters c1 and c2, and team 2 has 
+   characters c3 and c4. Items are all the items held by team 1 (only valid in 
+   single player mode). The winner of the game is team1. Note if winner is 0, 
+   then no team has won yet.
+   RI:  [winner] can only be 0,1,2*)
 type t = {
   team1: team;
   team2: team;
