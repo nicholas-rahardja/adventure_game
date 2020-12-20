@@ -223,7 +223,7 @@ val update_cd_lst: cd_lst -> cd_lst
 
 (** [add_cd_to_char c move] returns a cd_lst of character [c] with [move] 
     on cooldown*)
-val add_cd_to_char:  c -> Character.move -> move_cd list
+val add_cd_to_char: c -> Character.move -> move_cd list
 
 (** [move_on_cd cd_lst move] checks if [move] is on cooldown, looking at 
     [cd_lst] *)
@@ -243,15 +243,15 @@ val update_cd_team: team -> unit
 (** [set_teamlvl team lvl] returns a list of (Character.c, level) pair list
     with level [lvl] *)
 val set_teamlvl: Character.c list -> int -> (Character.c * int) list
+
 (* Sp combat functions *)
 
 (** [start_sing clst1 clst2 items] is similar to [start], 
-    but clst2 will be controlled
-    by the computer, and [items] are loaded in.*)
+    but [clst2] will be controlled by the computer, and [items] are loaded in.*)
 val start_sing: (Character.c * int) list -> (Character.c * int) list -> 
   Adventure.item list -> int * item list
 
-(** [rand_in_lst lst] returns a random element in lst *)
+(** [rand_in_lst lst] returns a random element in [lst] *)
 val rand_in_lst : 'a list -> 'a
 
 (** [start_t_sing t] executes turns for the single player mode *)
