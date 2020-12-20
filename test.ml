@@ -75,13 +75,6 @@ let c_12 = Option.get (get_char t1 12)
 let char_tests = [
   chars_test "char id test" j1 get_char_id (pp_list string_of_int)
     [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 1001];
-  chars_str_test "char name test" j1 get_char_name
-    ["Brave Warrior Clarkson"; "Wise Sage Gries"; "Nether Imp"; "Harpy"; 
-     "Forest Fairy"; "Mountain Thug"; "Holy Knight Xenon"; "Paladin"; 
-     "Dark priestess"; "Alpha Wolf"; "Wolf"; "Mermaid"; "test char"];
-  chars_str_test "char desc test" j1 get_char_desc
-    ["PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; 
-     "test character. DO NOT USE IN REAL GAME"];
   chars_test "char moves test" j1 get_moves (pp_list (pp_list get_move_name))
     [
       [Option.get (get_move t1 1); Option.get (get_move t1 2)];
@@ -102,9 +95,6 @@ let char_tests = [
     [10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 1000];
   chars_test "char hp test" j1 get_hp (pp_list string_of_int) 
     [250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 1000];
-  chars_test "char element test" j1 get_char_element (pp_list string_of_element) 
-    [Normal; Normal; Fire; Normal; Grass; Normal; Normal; Normal; Normal; 
-     Normal; Normal; Normal; Normal];
   get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 300; 
   get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 270; 
   get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 15; 
@@ -140,11 +130,8 @@ let move_tests = [
   move_getter_test_helper "get name move 1" get_move_name move_1 "Rising Slash";
   move_getter_test_helper "get name move 16" get_move_name move_16 
     "magic missiles";
-  move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
   move_getter_test_helper "get attack move 2" get_move_atk move_2 10;
   move_getter_test_helper "get scale of move 1" get_scale move_1 2.0;
-  move_getter_test_helper "get move element of move 16" get_move_element 
-    move_16 Normal;
   get_effectiveness_tests_helper 
     "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
   get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
@@ -162,9 +149,6 @@ let room_ids_test_helper name a expected =
 
 let start_room_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (start_room a)) 
-
-let message_test_helper name a r expected = 
-  name >:: (fun _ -> assert_equal expected (message a r))
 
 let exits_test_helper name a r expected = 
   name >:: (fun _ -> assert_equal expected (exits a r))
@@ -193,10 +177,6 @@ let map_test = [
   start_room_test_helper "start room of adventure test" test_adventure 1;
   room_ids_test_helper "room ids in adventure test" test_adventure 
     [1;2;3;4;5;6;7;8];
-  message_test_helper "message in room 1 of adventure test" test_adventure 1 
-    "You are at Home Base";
-  message_test_helper "message in room 3 of adventure test" test_adventure 3 
-    "You are at Somerset Town";
   exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
     ["Somerset Town"];
   next_room_test_helper "next from room 3 to room 4" test_adventure 3 

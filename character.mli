@@ -50,9 +50,6 @@ val get_char_id : c -> int
 (** [get_char_name c] returns the name of [c]. *)
 val get_char_name : c -> string
 
-(** [get_char_desc c] returns the description of [c]. *)
-val get_char_desc : c -> string
-
 (** [get_moves c] is the list of moves that [c] has. *)
 val get_moves : c -> move list
 
@@ -62,9 +59,6 @@ val get_char_atk : c -> int
 (** [get_hp c] is [c]'s initial HP. *)
 val get_hp : c -> int 
 
-(** [get_char_element c] is the element of [c]. *)
-val get_char_element : c -> element
-
 (* Move-related functions *)
 
 (** [get_move t id] is the move with ID [id] in [t]. *)
@@ -73,17 +67,11 @@ val get_move : t -> int -> move option
 (** [get_move_name id] is the [move]'s name. *)
 val get_move_name : move -> string
 
-(** [get_move_desc move] is [move]'s description. *)
-val get_move_desc : move -> string
-
 (** [get_move_atk move] is [move]'s base attack value. *)
 val get_move_atk : move -> int
 
 (** [get_scale move] is [move]'s attack value multiplier. *)
 val get_scale : move -> float
-
-(** [get_move_element move] is [move]'s element. *)
-val get_move_element : move -> element
 
 (* Attack-related functions *)
 

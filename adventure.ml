@@ -110,9 +110,6 @@ let get_room a r =
   | [] -> raise (UnknownRoom r) 
   | h::t -> h 
 
-let message a r = 
-  (get_room a r).initial_message
-
 let room_name a r =
   (get_room a r).name
 
