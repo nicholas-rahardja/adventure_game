@@ -1,0 +1,1 @@
+{"chars":[{"id":1,"xp":4},{"id":3,"xp":4},{"id":12,"xp":4}],"current_room":4,"visited":[1,2,3,4],"gold":7,"inventory":[{"name":"PH","item":"PercentHp","eff":0.1},{"name":"R","item":"DebuffRemover"},{"name":"R","item":"FlatHp","eff":5},{"name":"PH","item":"FlatHp","eff":5},{"name":"PH","item":"FlatHp","eff":6}]}

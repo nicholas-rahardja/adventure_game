@@ -143,8 +143,8 @@ let move_tests = [
   move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
   move_getter_test_helper "get attack move 2" get_move_atk move_2 10;
   move_getter_test_helper "get scale of move 1" get_scale move_1 2.0;
-  move_getter_test_helper "get move element of move 16" get_move_element move_16
-    Normal;
+  move_getter_test_helper "get move element of move 16" get_move_element 
+    move_16 Normal;
   get_effectiveness_tests_helper 
     "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
   get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
@@ -222,8 +222,6 @@ let map_test = [
         price = 8
       };
     ];
-  rewards_test_helper "rewards in room 2" test_adventure 2 
-    [DamageReducer ("R", 0.1)];
   rewards_test_helper "rewards in room 3" test_adventure 3 
     [FlatHp ("R", 5); DebuffRemover "R"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
@@ -589,28 +587,29 @@ let combat_t2 =
   let sec_team = [char_4, 10;char_5, 10] in 
   init first_team sec_team empty_item_lst
 
-let combat_end_game first_team sec_team = 
-  let t = init first_team sec_team  empty_item_lst in
-  Combat.start_t_sing t;
-  t
+(* let combat_end_game first_team sec_team = 
+   let t = init first_team sec_team  empty_item_lst in
+   Combat.start_t_sing t;
+   t 
 
-let combat_end_t1 = 
-  let first_team = [char_1, 10;char_2, 10] in 
-  let sec_team = [] in 
-  combat_end_game first_team sec_team
+   let combat_end_t1 = 
+   let first_team = [char_1, 10;char_2, 10] in 
+   let sec_team = [] in 
+   combat_end_game first_team sec_team
 
-let combat_end_t2 = 
-  let first_team = [] in 
-  let sec_team = [char_5, 10] in 
-  combat_end_game first_team sec_team
-
+   let combat_end_t2 = 
+   let first_team = [] in 
+   let sec_team = [char_5, 10] in 
+   combat_end_game first_team sec_team
+*)
 (* Get a team object by using [init] like above, then extract the field *)
 let team1 = combat_t1.team1 
 let team2 = combat_t1.team2
 let team3 = combat_t2.team1
 let team4 = combat_t2.team2
+(*
 let empty_team = combat_end_t2.team1
-
+*)
 (* Access each target in a team using List.nth *)
 let team_target team nth = 
   List.nth team nth
@@ -706,10 +705,10 @@ let combat_target_input_test name team input exp_output =
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
 
-let do_dmg_test name c dmg expected = 
+(* let do_dmg_test name c dmg expected = 
   do_dmg c dmg; 
   name >:: fun _ -> 
-    assert_equal expected c.cur_hp ~printer:(string_of_int)
+    assert_equal expected c.cur_hp ~printer:(string_of_int) *)
 
 let do_heal_test name c heal expected = 
   do_heal c heal; 
@@ -982,16 +981,16 @@ let combat_tests = [
   combat_vary_test "vary by 20 percent from 10" 10. 20;
   combat_vary_test "vary by 20 percent from 0" 0. 20;
   combat_winner_test "winner of an ongoing game is 0" combat_t1 0;
-  combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
-  combat_winner_test "winner of an ending game is 2" combat_end_t2 2;
-  do_dmg_test "subtracts all health of team1[0]" 
+  (* combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
+     combat_winner_test "winner of an ending game is 2" combat_end_t2 2; *)
+  (* do_dmg_test "subtracts all health of team1[0]" 
     team1_first_target team1_first_target_hp 0;
   do_dmg_test "subtracts 0 from health from team4[1]" 
     team4_first_target 0 team4_first_target_hp;
   do_dmg_test "subtracts half of the health from team2[1]" 
     team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
   do_dmg_test "subtracts big value 100000 from health" 
-    team3_first_target 100000 0;
+    team3_first_target 100000 0; *)
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 

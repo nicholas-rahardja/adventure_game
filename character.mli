@@ -70,19 +70,19 @@ val get_char_element : c -> element
 (** [get_move t id] is the move with ID [id] in [t]. *)
 val get_move : t -> int -> move option
 
-(** [get_move t id] is the [move]'s name. *)
+(** [get_move_name id] is the [move]'s name. *)
 val get_move_name : move -> string
 
-(** [get_desc t move] is [move]'s description. *)
+(** [get_move_desc move] is [move]'s description. *)
 val get_move_desc : move -> string
 
-(** [get_atk t move] is [move]'s base attack value. *)
+(** [get_move_atk move] is [move]'s base attack value. *)
 val get_move_atk : move -> int
 
-(** [get_scale t move] is [move]'s attack value multiplier. *)
+(** [get_scale move] is [move]'s attack value multiplier. *)
 val get_scale : move -> float
 
-(** [get_move_element t move] is [move]'s element. *)
+(** [get_move_element move] is [move]'s element. *)
 val get_move_element : move -> element
 
 (* Attack-related functions *)
@@ -94,13 +94,11 @@ val get_effectiveness : move -> c -> float
 (** [get_damage c e move] is the damage [c] inflicts on [e] with [move]. *)
 val get_damage : c -> c -> move -> float 
 
-(** [get_move_buff t move] is the [move]'s buff. None if it does not 
-    apply a buff. [Some buff] if there is a buff applied, where [buff] is the
-    buff *)
-val get_move_buff : t -> move -> buff option
-
 (** [get_char_atk_lvl c lvl] is [c]'s attack stat at level [lvl]. *)
 val get_char_atk_lvl : c -> int -> int 
 
 (** [get_hp_lvl c lvl] is [c] HP at level [lvl]. *)
 val get_char_hp_lvl : c -> int -> int 
+
+(** [get_move_cd move] gets the [cooldown] of [move] *)
+val get_move_cd : move -> int

@@ -32,9 +32,10 @@
       ],
       "rewards": [
         {
-          "name": "R",
-          "item": "DamageReducer",
-          "eff": 0.1
+          "name": "PH",
+          "item": "FlatHp",
+          "eff": 6,
+          "price": 3
         }
       ],
       "difficulty": 1,

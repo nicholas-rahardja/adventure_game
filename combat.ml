@@ -1,11 +1,18 @@
 open Printf
 exception Winner of int
 
+
 type move_cd = 
   {move: Character.move;
    turns_left : int;}
 
 type cd_lst = move_cd list
+
+type item = Adventure.item
+
+exception RevivalItemException
+exception NoItemSelected
+exception LeftOverItems of item list
 
 type c = {
   char_c: Character.c;
@@ -39,8 +46,8 @@ type target_select =
 
 (* TODO *)
 type item_select = 
-  | Valid_item of unit
-  | Invalid_item
+  | ValidItem of item
+  | InvalidItem
 
 (* Constants *)
 let max_char_per_team = 3
@@ -52,6 +59,13 @@ let health_mod = 5
 let delay_time = 1
 let permanent = 9999999
 let multiplayer_base_lvl = 10
+
+let revive_base_hp = 50.
+
+(* Single player constants *)
+let dmg_mod = 10
+
+exception WinnerSingPlayer of int * (item list)
 
 let vary (k : float) percent = 
   let rand_int = Random.int (percent * 10 + 1) in
@@ -87,12 +101,12 @@ let do_heal c heal =
   (blue_char_name c; 
    Printf.printf " has healed by %d \n" heal);
   let added_health = c.cur_hp + heal in 
-  let max_hp = Character.get_char_hp_lvl c.char_c c.level in 
+  let max_hp = health_mod * Character.get_char_hp_lvl c.char_c c.level in 
   let final_health = if added_health > max_hp then max_hp 
     else added_health in
   c.cur_hp <- final_health; 
   blue_char_name c; 
-  Printf.printf " healed to %d hp" final_health
+  Printf.printf " healed to %d hp \n" final_health
 
 (** [getextract_char c] extracts the c from the c option*)
 let getextract_char c = 
@@ -100,8 +114,12 @@ let getextract_char c =
 
 let is_active c = c.active
 
+let is_dead c = not c.active
+
 let get_active team = 
   List.filter is_active team
+
+let get_dead team = List.filter is_dead team
 
 (** [target index team]. Returns the character at index [index].
     Requires: all characters in team must be active
@@ -119,13 +137,13 @@ let print_char_name c=
   Printf.printf " ~ %i remaining health left \n" c.cur_hp;
   incr counter
 
+
 (** [print_targets team] prints out the possible targets to choose *)
+(* bol = true if targeting attack. false if target to use item on *)
 let print_targets team = 
-  Printf.printf 
-    "Please enter a target number of the opposition team to attack next: \n";
   fun () ->
-    List.iter (print_char_name) team; print_newline ();
-    counter := 1
+  List.iter (print_char_name) team; print_newline ();
+  counter := 1
 
 (** [ask_user] asks the user to pick an int, and will evaluate to that int *)
 let ask_user = read_int
@@ -138,11 +156,8 @@ let print_cd cd =
 let is_on_cd cd = 
   cd.turns_left > 0
 
-(* TODO *)
-let get_move_cd move = 3
-
 let add_cd move cd_lst = 
-  let cd = get_move_cd move in 
+  let cd = Character.get_move_cd move in 
   let new_entry =  {move = move;
                     turns_left = cd;} in 
   new_entry :: cd_lst
@@ -184,7 +199,7 @@ let target_input team input =
 let rec select_enemy team = 
   print_newline ();
   let act_team = get_active team in
-  print_targets act_team ();
+  print_targets act_team  ();
   let input = read_line () in 
   let target = target_input act_team input in 
   match target with 
@@ -198,8 +213,108 @@ let is_team_dead act_team = act_team = []
 let check_winner act_team inte= 
   if is_team_dead act_team then raise (Winner inte) else ()
 
+
+let print_item_use name c = 
+  Printf.printf "You used %s on " name;
+  blue_char_name c; print_newline ()
+
+let flat_hp name value c = 
+  print_item_use name c;
+  do_heal c value
+
+let percent_hp name percent c = 
+  print_item_use name c;
+  let max_hp = Character.get_char_hp_lvl c.char_c c.level * health_mod
+               |> float_of_int in 
+  let hp_restored = max_hp *. percent |> int_of_float in 
+  do_heal c hp_restored
+
+let revival_item name c = 
+  percent_hp name revive_base_hp c; c.active <- true
+
+let match_item item c = 
+  match item with
+  | Adventure.RevivalItem name -> revival_item name c
+  | Adventure.FlatHp (name, value) -> flat_hp name value c
+  | Adventure.PercentHp (name, percent) -> percent_hp name percent c
+  | _ -> failwith "item unimplemented"
+
+
+
+let print_item n item = 
+  let item_name = Adventure.item_string item in 
+  Printf.printf "Type %d to use item %s \n" (n + 1) item_name
+
+(* Helper to remove [n]th element from list [lst] *)
+let rec remove n lst = 
+  match lst with 
+  | [] -> []
+  | h :: t -> if n = 0 then t else h :: remove (n - 1) t
+
+let print_item_choices items = 
+  print_endline "You may use an item";
+  print_endline 
+    "Type the int to select your item. Or type 0 to not use any item \n";
+  List.iteri (print_item) items
+
+(* let item_input items input = 
+   try 
+   let integer = int_of_string input in 
+   match integer with 
+   | 0 -> 0
+   | x when (x <= List.length items) && (x>0) -> x
+   | _ -> InvalidItem *)
+
+
+let rec revival_item_select_helper team = 
+  let act_team = get_active team in 
+  if 0 = List.compare_lengths team act_team then (
+    print_endline "All your team is alive! You cannot use this a revival item";
+    raise RevivalItemException) else begin
+    let dead_team = get_dead team in 
+    Printf.printf 
+      "Please enter a target number of your team to use the item on: \n";
+    print_targets dead_team ();
+    let input = read_line () in 
+    let target = target_input dead_team input in 
+    match target with 
+    | Invalid_tar -> 
+      print_endline "that is not a valid target, please type again"; 
+      revival_item_select_helper team
+    | Valid_tar c -> c
+  end
+
+let no_item_exp input = 
+  if input = 0 then raise NoItemSelected
+
+
 (** PH function. Will be used to allow usage of items *)
-let use_item team = ()
+let rec use_item team items t = 
+  try
+    if List.length items > 0 then begin 
+      print_item_choices items;
+      let input = read_int () in 
+      no_item_exp input;
+      let item_selected = List.nth items (input - 1) in 
+      let char_selected = begin
+        match item_selected with 
+        | Adventure.RevivalItem _ -> 
+          revival_item_select_helper team
+        | _ -> print_endline "Please enter the integer to select which
+        character to use this item on";
+          select_enemy team
+      end in 
+      match_item item_selected char_selected;
+      let new_item_lst = remove (input - 1) items in 
+      t.items <- new_item_lst
+
+
+    end
+  with e -> match e with 
+    | NoItemSelected -> print_endline "you decided not to use an item"
+    | RevivalItemException -> use_item team items t
+    | _ -> print_endline "that is not a valid item, please type again"; 
+      use_item team items t
 
 let is_move input move = 
   let move1 = Character.get_move_name move |>  String.lowercase_ascii in 
@@ -253,7 +368,7 @@ let vary_dmg attacker move target =
   let atk = attacker.atk in 
   let fix_dmg = calc_dmg move atk target in 
   let vary_dmg = vary fix_dmg dmg_variation |> int_of_float in 
-  do_dmg target vary_dmg
+  do_dmg target (vary_dmg * dmg_mod)
 
 let use_move n opp_team c = 
   let act_enemy = get_active opp_team in 
@@ -262,9 +377,11 @@ let use_move n opp_team c =
   print_string " is attacking: \n\n";
   let act_moves = char_moves_off_cd c in 
   if List.length act_moves = 0 then 
-    print_endline "All this character's moves are on cooldown, can't attack!"
+    print_endline "All this character's moves are on cooldown, can't attack!\n"
   else begin
     let move = select_move act_moves in 
+    Printf.printf 
+      "Please enter a target number of the opposition team to attack next: \n";
     let target = select_enemy act_enemy in 
     reassign_char_cd c move;
     vary_dmg c move target
@@ -276,13 +393,19 @@ let get_team n t =
   | 2 -> (t.team2, t.team1)
   | _ -> failwith "None"
 
+let switch_n n = 
+  match n with 
+  | 1 -> 2
+  | 2 -> 1
+  | _ -> failwith "switch_n error, should not happen
+"
 let team_n_turn n t : unit = 
   let (fri_team, enemy_team) = get_team n t in
   update_cd_team fri_team;
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
+  check_winner (act_friendly) (switch_n n);
   Printf.printf "\n It is team %d's turn to start!\n\n" n;
-  use_item fri_team; 
   List.iter (use_move n enemy_team) act_friendly
 
 let start_t t = 
@@ -426,7 +549,8 @@ let smartness_of_c c =
 let enemy_use_move_sing n opp_team c = 
   let act_enemy = get_active opp_team in 
   check_winner act_enemy n;
-  Printf.printf "Character %s is attacking: " c.char_name;
+  blue_char_name c;
+  print_string " is attacking:";
   print_flush ();
   Unix.sleep delay_time;
   let act_moves = char_moves_off_cd c in 
@@ -449,12 +573,12 @@ let execute_turn n t : unit =
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
   if n = 1 then begin
-    ANSITerminal.(print_string [red] "It is your turn to attack: \n");
-    use_item fri_team; 
+    ANSITerminal.(print_string [red] "It is your turn to attack: \n\n");
+    use_item fri_team t.items t; 
     List.iter (use_move n enemy_team) act_friendly
   end
   else begin
-    ANSITerminal.( print_string [red] "The enemy is attacking! \n");
+    ANSITerminal.( print_string [red] "The enemy is attacking! \n\n");
     List.iter (enemy_use_move_sing n enemy_team) act_friendly
   end
 
@@ -466,9 +590,13 @@ let start_t_sing t =
     done
   end
   with Winner inte -> 
-    t.winner <- inte
+    t.winner <- inte; 
+    raise (WinnerSingPlayer (t.winner, t.items))
 
 let start_sing clst1 clst2 items = 
-  let init = init clst1 clst2 items in 
-  start_t_sing init;
-  ANSITerminal.(print_string [red] "Congratulation, you defeated the enemy!\n");
+  try 
+    let init_t = init clst1 clst2 items in 
+    let _ = start_t_sing init_t in
+    ANSITerminal.(print_string [red] "Congratulation, you defeated the enemy!\n");
+    raise (Failure "Should not reach here")
+  with WinnerSingPlayer (winner, items)  -> (winner, items)

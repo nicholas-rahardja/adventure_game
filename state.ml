@@ -278,3 +278,6 @@ let load adv c path =
     gold = json |> member "gold" |> to_int;
     inventory = json |> member "inventory" |> to_list |> List.map item_matcher
   }
+
+let load_inventory items t = 
+  {t with inventory = items}

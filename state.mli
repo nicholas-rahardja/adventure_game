@@ -65,7 +65,8 @@ val get_level : int -> t -> level
 (** [xp_of_lvl lvl] is the total amount of xp to level from 0 to [lvl] *)
 val xp_of_lvl: level -> xp
 
-(** [next_xp_of_lvl lvl] is the amount of xp to level up from [lvl] to [lvl + 1]*)
+(** [next_xp_of_lvl lvl] is the amount of xp to level up from [lvl] to 
+    [lvl + 1]*)
 val next_xp_of_lvl : level -> xp
 
 (** [get_room t] is the ID of the room the player with state [t] is currently 
@@ -83,6 +84,10 @@ val get_gold : t -> gold
     with state [t] has. The order is used in [remove_inventory]. *)
 val get_inventory : t -> Adventure.item list
 
+(** [load_inventory items t] is the state of the game with the items replaced
+    with [items] *)
+val load_inventory: Adventure.item list -> t -> t
+
 (** [add_chars c ~xp:e n t] adds character [c] with experience points [e] in 
     index [n] of the character list of the player with state [t]. If [n] is -1, 
     the character is appended to the end of the list. [e] is optional and will 
@@ -98,7 +103,7 @@ val add_char : Character.c -> ?xp:xp -> int -> t -> t
     list. *)
 val remove_char : int -> t -> t
 
-(** [swap_chars n1 n2] swaps the characters at indices [n1] and [n2] of [t]'s 
+(** [swap_chars n1 n2 t] swaps the characters at indices [n1] and [n2] of [t]'s 
     character list. 
     Raises: [Failure] if [n1] and [n2] are not valid indices of the
     character list. *)

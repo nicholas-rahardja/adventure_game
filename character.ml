@@ -12,7 +12,8 @@ type move = {
   description : string; 
   atk : int; 
   scale : float; 
-  element : element 
+  element : element ;
+  cooldown : int;
 }
 
 type c = {
@@ -84,6 +85,7 @@ let from_json j =
   let to_move a =
     (member "id" a |> to_int,
      {
+       cooldown = member "cooldown" a |> to_int;
        id = member "id" a |> to_int;
        name = member "name" a |> to_string;
        description = member "description" a |> to_string;
@@ -138,6 +140,9 @@ let get_scale (move:move) : float =
 let get_move_element (move:move) : element = 
   move.element 
 
+let get_move_cd move = 
+  move.cooldown
+
 
 (* Attack-related functions *)
 
@@ -155,13 +160,9 @@ let get_effectiveness (move : move) (character :c) : float =
   | (Grass, Water) -> 1.5 
   | _ -> 0.5 
 
-(**discuss with AL how we want to implement damage*)
 let get_damage (player:c) (enemy:c) (move:move) : float = 
   let effectiveness = get_effectiveness move enemy in 
   float_of_int(move.atk) *. effectiveness 
-
-let get_move_buff t move = failwith "TODO"
-
 
 let get_char_atk_lvl c lvl = 
   let offset = lvl * atk_per_lvl in 
