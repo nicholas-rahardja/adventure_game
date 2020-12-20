@@ -12,7 +12,8 @@ type move = {
   description : string; 
   atk : int; 
   scale : float; 
-  element : element 
+  element : element ;
+  cooldown : int;
 }
 
 type c = {
@@ -25,6 +26,10 @@ type c = {
   element : element
 }
 
+(**AF: {all_chars = [(1,c1); (2,c2); (3,c3); ...; (n,cn)]}; 
+   all_moves = [(1,m1);(2,m2);....;(n,mn)]} are the characters 
+   c1, c2, c3,..., cn, with all the possible moves in the game. 
+   RI: None*)
 type t = {
   all_chars : (int * c) list;
   all_moves : (int * move) list
@@ -40,8 +45,8 @@ type buff =
   | ElementalVulnerability of int * int
 
 (* Constants *)
-let atk_per_lvl = 5
-let hp_per_lvl = 10
+let atk_per_lvl = 3
+let hp_per_lvl = 20
 
 (* Character-related functions *)
 
@@ -54,9 +59,6 @@ let get_char_id c =
 let get_char_name c =
   c.name
 
-let get_char_desc c =
-  c.description
-
 let get_moves c =
   c.moves
 
@@ -65,9 +67,6 @@ let get_char_atk c =
 
 let get_hp c =
   c.hp 
-
-let get_char_element c =
-  c.element
 
 (* Move-related functions *)
 
@@ -84,6 +83,7 @@ let from_json j =
   let to_move a =
     (member "id" a |> to_int,
      {
+       cooldown = member "cooldown" a |> to_int;
        id = member "id" a |> to_int;
        name = member "name" a |> to_string;
        description = member "description" a |> to_string;
@@ -126,17 +126,14 @@ let from_json j =
 let get_move_name (move:move) : string = 
   move.name 
 
-let get_move_desc (move:move) : string = 
-  move.description
-
 let get_move_atk (move:move) : int = 
   move.atk
 
 let get_scale (move:move) : float = 
   move.scale
-
-let get_move_element (move:move) : element = 
-  move.element 
+  
+let get_move_cd move = 
+  move.cooldown
 
 
 (* Attack-related functions *)
@@ -155,13 +152,9 @@ let get_effectiveness (move : move) (character :c) : float =
   | (Grass, Water) -> 1.5 
   | _ -> 0.5 
 
-(**discuss with AL how we want to implement damage*)
 let get_damage (player:c) (enemy:c) (move:move) : float = 
   let effectiveness = get_effectiveness move enemy in 
   float_of_int(move.atk) *. effectiveness 
-
-let get_move_buff t move = failwith "TODO"
-
 
 let get_char_atk_lvl c lvl = 
   let offset = lvl * atk_per_lvl in 

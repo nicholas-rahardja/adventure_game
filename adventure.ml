@@ -39,6 +39,9 @@ type room ={
   exits : exit list 
 }
 
+(**AF: {rooms = [room_1; room_2;...; room_n]; start_room = room_s} is the
+   adventure with the starting room at room_ s and that has n number of rooms.
+   RI: The same room can only appear once in the list.*)
 type t ={
   rooms : room list;
   start_room: room_id;
@@ -109,9 +112,6 @@ let get_room a r =
   match (a.rooms |> List.filter (fun x -> x.id = r)) with 
   | [] -> raise (UnknownRoom r) 
   | h::t -> h 
-
-let message a r = 
-  (get_room a r).initial_message
 
 let room_name a r =
   (get_room a r).name

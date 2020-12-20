@@ -1,5 +1,4 @@
-(** A module that initiates and handles combat, given a list of characters.
-*)
+(** A module that initiates and handles combat, given a list of characters.*)
 
 (** [move_cd] is an entry in the cooldown list. It has the [move] on cooldown,
     and the number of turns left to get off cooldown. *)
@@ -12,6 +11,9 @@ type move_cd =
     a move goes from on cooldown to off cooldown, then it should be removed
     from the cd list *)
 type cd_lst = move_cd list
+
+(** [type item] represents an item from the [Adventure] module *)
+type item = Adventure.item
 
 (**[type c] represents one character on a team.
    Must include Character.c in its representation.*)
@@ -39,7 +41,7 @@ type t ={
   team1: team;
   team2: team;
   mutable winner: int;
-  mutable items: Adventure.item list
+  mutable items: item list
 }
 
 exception Winner of int
@@ -60,8 +62,8 @@ type target_select =
 (** [item_select] distinguishes between a valid item that the user can use,
     and an input that does not lead to a valid item*)
 type item_select = 
-  | Valid_item of unit
-  | Invalid_item
+  | ValidItem of item
+  | InvalidItem
 
 (** [dmg_variation] is the variation % that all damage/healing is subjected to.
     Example: if dmg_variation = 5, then a damage of 100 can be randomly 
@@ -96,13 +98,14 @@ val get_active: team -> team
 (** [select_enemy team] ask the user to pick an enemy from [team]
     to target. They will have to enter an int. 1 for the 1st target, 2 for the 
     2nd target, 3 for the 3rd target. If the pick an int that is out of range,
-    the function will ask again
+    the function will ask again.
 *)
 val select_enemy : team -> c
 
 (** [target_input team input] checks if [input] is a valid target in [team]
     If it is, return [Valid_tar target], where target is the target chosen.
     Else, return [Invalid_tar]
+    Requires: team must be an active_team, meaning no one is dead 
 *)
 val target_input : team -> string -> target_select
 
@@ -117,9 +120,10 @@ val is_team_dead: team -> bool
 val check_winner: team -> int -> unit
 
 (** PH function. Will be used to allow usage of items *)
-val use_item: team -> unit
+val use_item: team -> item list -> t ->  unit
 
-(** [is_move input move] checks if [input] matches the name of [move] *)
+(*print [is_move input move] checks if [input] matches the name of [move], 
+    it disregards capitalization  *)
 val is_move: string -> Character.move -> bool
 
 (** [select_move move_list] prints out the possible moves to use,
@@ -155,7 +159,8 @@ val start_t: t -> unit
 val print_char_select: Character.t -> int -> unit
 
 (** [player_pick k lst] allows the user to pick k characters from a [lst],
-    which is the list of character ids. Returns the int list they chose *)
+    which is the list of character ids. Returns the int list they chose 
+    Requires: k > 0*)
 val player_pick : int -> int list -> int list
 
 (** [random_pick_char t k] allows users to pick 
@@ -175,14 +180,14 @@ val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
 
 
 
-(** [init clst1 clst2 items] initializes a game state t with the given character
-    and level pair lists, with [items] loaded *)
+(** [init clst1 clst2 items] initializes a game state t with the given 
+    character and level pair lists, with [items] loaded *)
 val init: (Character.c * int) list -> (Character.c * int) list -> 
   Adventure.item list -> t
 
 
-(** [start clst1 clst2 items] initializes a game state t with the given character
-    and level pair lists, with the given [items]
+(** [start clst1 clst2 items] initializes a game state t with the given 
+    character and level pair lists, with the given [items]
     raises an exception for who wins combat. 
     [Winner 1] for team 1 win, [Winner 2] for team 2 win.
     Once combat ends, it must allow the function [winner] to return the
@@ -244,7 +249,7 @@ val set_teamlvl: Character.c list -> int -> (Character.c * int) list
     but clst2 will be controlled
     by the computer, and [items] are loaded in.*)
 val start_sing: (Character.c * int) list -> (Character.c * int) list -> 
-  Adventure.item list -> unit
+  Adventure.item list -> int * item list
 
 (** [rand_in_lst lst] returns a random element in lst *)
 val rand_in_lst : 'a list -> 'a

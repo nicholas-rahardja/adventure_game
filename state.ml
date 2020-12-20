@@ -4,7 +4,13 @@ type xp = int
 
 type gold = int
 
-(** Invariant: [visited] must contain no duplicates. *)
+(** AF: {chars = [(c1,1);(c2,2)]; current_room = r1; visited = [r2;r3]; map = m;
+    gold = g; inventory = [item1;item2]} is the state of the game containing 
+    characters c1 and c2, that have xp 1 and 2 respectively. The current room 
+    the player is in is room r1, and the player has visited rooms r2 and r3. 
+    The map m is currently in use, the player has g amounts of gold, and they
+    have items item1 and item2.
+    RI: [visited] must contain no duplicates. *)
 type t = 
   {
     chars : (Character.c * xp) list;
@@ -57,14 +63,8 @@ let get_level n t =
   | (c, xp) -> (-1. +. sqrt (1. +. 4. *. (float_of_int xp))) /. 2. 
                |> int_of_float
 
-
-
 let xp_of_lvl lvl = 
   (lvl * lvl) + lvl
-
-let next_xp_of_lvl lvl = 
-  let next_lvl = lvl + 1 in 
-  xp_of_lvl next_lvl - (xp_of_lvl lvl)
 
 let get_room t =
   t.current_room
@@ -112,19 +112,6 @@ let remove_char n t =
       t with
       chars = remove_helper n clist
     }
-
-let swap_chars n1 n2 t =
-  if n1 < 0 || n2 < 0 then failwith "Invalid index"
-  else
-    let c1 = get_char n1 t in
-    let exp1 = get_xp n1 t in
-    let c2 = get_char n2 t in
-    let exp2 = get_xp n2 t in
-    t
-    |> remove_char n1
-    |> add_char c2 ~xp:exp2 n1
-    |> remove_char n2
-    |> add_char c1 ~xp:exp1 n2
 
 (** Precondition: [n] must be between 0 and [List.length clist - 1], 
     inclusive. *)
@@ -278,3 +265,6 @@ let load adv c path =
     gold = json |> member "gold" |> to_int;
     inventory = json |> member "inventory" |> to_list |> List.map item_matcher
   }
+
+let load_inventory items t = 
+  {t with inventory = items}

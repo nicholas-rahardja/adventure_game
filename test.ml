@@ -1,8 +1,34 @@
+(**We implemented both black box and white box approach to our testing strategy.
+   In this sense, we used TDD to write black-box test cases on our functions 
+   based on the function specification before coding the function. 
+   We ensured that for each function we tested the boundary and corner cases 
+   based on the specification. Next, after coding the function, we used 
+   white-box testing to ensure that we have covered all of the paths through 
+   the function. Specifically, our tests contained tests of many functions 
+   in the State, Adventure, and Character modules, since they did not depend 
+   on state, and had definitive return values.
+
+   We did not do this to all the functions we wrote, since many of our functions 
+   are helpers which we have indirectly tested through testing the main 
+   functions where they are used. We also avoided testing functions that only 
+   print out values to the screen, as they return units, so no real test cases 
+   can be made for them. For this reason as well, we avoid testing many 
+   functions in the Combat and Main module, because require input from the user,
+   the outputs depend heavily on state, and some outputs are even random. 
+   So, we manually tested functions by running our game and making sure 
+   the features implemented worked properly.
+
+   Overall we believe that our test cases demonstrate the correctness of our 
+   system, as we have implemented both black box and white box testing to 
+   our main functions which should have adequately represented the domain 
+   of many possible inputs to the functions, and we made sure that the 
+   functions returned the values that they were expected to.
+*)
+
 open OUnit2
 open Yojson.Basic
 open Character
 open Combat
-
 
 (* Load JSON files here for testing.
    Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
@@ -75,13 +101,6 @@ let c_12 = Option.get (get_char t1 12)
 let char_tests = [
   chars_test "char id test" j1 get_char_id (pp_list string_of_int)
     [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 1001];
-  chars_str_test "char name test" j1 get_char_name
-    ["Brave Warrior Clarkson"; "Wise Sage Gries"; "Nether Imp"; "Harpy"; 
-     "Forest Fairy"; "Mountain Thug"; "Holy Knight Xenon"; "Paladin"; 
-     "Dark priestess"; "Alpha Wolf"; "Wolf"; "Mermaid"; "test char"];
-  chars_str_test "char desc test" j1 get_char_desc
-    ["PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; "PH"; 
-     "test character. DO NOT USE IN REAL GAME"];
   chars_test "char moves test" j1 get_moves (pp_list (pp_list get_move_name))
     [
       [Option.get (get_move t1 1); Option.get (get_move t1 2)];
@@ -102,13 +121,10 @@ let char_tests = [
     [10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 1000];
   chars_test "char hp test" j1 get_hp (pp_list string_of_int) 
     [250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 1000];
-  chars_test "char element test" j1 get_char_element (pp_list string_of_element) 
-    [Normal; Normal; Fire; Normal; Grass; Normal; Normal; Normal; Normal; 
-     Normal; Normal; Normal; Normal];
-  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 300; 
-  get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 270; 
-  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 15; 
-  get_char_atk_lvl_test "atk of character 12 at level 8" c_3 8 50;
+  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 350; 
+  get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 290; 
+  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 13; 
+  get_char_atk_lvl_test "atk of character 12 at level 8" c_3 8 34;
 ]
 
 (** Testing the move functions *)
@@ -140,11 +156,8 @@ let move_tests = [
   move_getter_test_helper "get name move 1" get_move_name move_1 "Rising Slash";
   move_getter_test_helper "get name move 16" get_move_name move_16 
     "magic missiles";
-  move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
   move_getter_test_helper "get attack move 2" get_move_atk move_2 10;
   move_getter_test_helper "get scale of move 1" get_scale move_1 2.0;
-  move_getter_test_helper "get move element of move 16" get_move_element move_16
-    Normal;
   get_effectiveness_tests_helper 
     "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
   get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
@@ -162,9 +175,6 @@ let room_ids_test_helper name a expected =
 
 let start_room_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (start_room a)) 
-
-let message_test_helper name a r expected = 
-  name >:: (fun _ -> assert_equal expected (message a r))
 
 let exits_test_helper name a r expected = 
   name >:: (fun _ -> assert_equal expected (exits a r))
@@ -193,10 +203,6 @@ let map_test = [
   start_room_test_helper "start room of adventure test" test_adventure 1;
   room_ids_test_helper "room ids in adventure test" test_adventure 
     [1;2;3;4;5;6;7;8];
-  message_test_helper "message in room 1 of adventure test" test_adventure 1 
-    "You are at Home Base";
-  message_test_helper "message in room 3 of adventure test" test_adventure 3 
-    "You are at Somerset Town";
   exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
     ["Somerset Town"];
   next_room_test_helper "next from room 3 to room 4" test_adventure 3 
@@ -210,10 +216,6 @@ let map_test = [
         item = FlatHp ("PH", 5);
         price = 3
       };
-      {
-        item = DebuffRemover "PH";
-        price = 2
-      }
     ];
   shop_test_helper "shop in room 3" test_adventure 3 
     [
@@ -222,24 +224,10 @@ let map_test = [
         price = 10
       };
       {
-        item = AtkBooster ("PH", 0.05);
-        price = 7
-      };
-      {
         item = RevivalItem "PH";
         price = 8
       };
-      {
-        item = DamageBooster ("PH", 0.03);
-        price = 4
-      };
-      {
-        item = DamageReducer ("PH", 0.1);
-        price = 12
-      };
     ];
-  rewards_test_helper "rewards in room 2" test_adventure 2 
-    [DamageReducer ("R", 0.1)];
   rewards_test_helper "rewards in room 3" test_adventure 3 
     [FlatHp ("R", 5); DebuffRemover "R"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
@@ -400,23 +388,6 @@ let state_tests = [
     (Failure "Invalid index");
   state_exn_test "remove_char empty" (fun _ -> remove_char 0 s0) 
     (Failure "Invalid index");
-  state_chars_test "swap_chars" (swap_chars 1 2 s1)
-    (get_char_list [1; 3; 2]);
-  state_chars_test "swap_chars same char" (swap_chars 1 1 s1)
-    (get_char_list [1; 2; 3]);
-  state_int_test "swap_chars dups" (swap_chars 3 2 s4) (get_xp 2) 50;
-  state_exn_test "swap_chars n1 beyond index" (fun _ -> swap_chars 0 3 s1) 
-    (Failure "nth");
-  state_exn_test "swap_chars n2 beyond index" (fun _ -> swap_chars 3 0 s1) 
-    (Failure "nth");
-  state_exn_test "swap_chars n1 and n2 beyond index" 
-    (fun _ -> swap_chars 3 4 s1) (Failure "nth");
-  state_exn_test "swap_chars n1 negative" (fun _ -> swap_chars ~-3 1 s1) 
-    (Failure "Invalid index");
-  state_exn_test "swap_chars n2 negative" (fun _ -> swap_chars 1 ~-3 s1) 
-    (Failure "Invalid index");
-  state_exn_test "swap_chars n1 and n2 negative" 
-    (fun _ -> swap_chars ~-1 ~-3 s1) (Failure "Invalid index");
   state_add_xp_test "add_xp to 0 xp" s1 0 25 25 true;
   state_add_xp_test "add_xp no level up" s4 3 1 51 false;
   state_add_xp_test "add_xp with level up" s4 3 1000 1050 true;
@@ -483,8 +454,8 @@ let char_lst1_lst2_t =
           char_c = char_1;
           char_name = "Brave Warrior Clarkson";
           char_moves = [move_1; move_2];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -494,8 +465,8 @@ let char_lst1_lst2_t =
           char_c = char_2;
           char_name = "Wise Sage Gries";
           char_moves = [move_16; move_17];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -505,8 +476,8 @@ let char_lst1_lst2_t =
           char_c = char_3;
           char_name = "Nether Imp";
           char_moves = [move_3; move_5];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -519,8 +490,8 @@ let char_lst1_lst2_t =
           char_c = char_3;
           char_name = "Nether Imp";
           char_moves = [move_3; move_5];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -530,8 +501,8 @@ let char_lst1_lst2_t =
           char_c = char_1001;
           char_name = "test char";
           char_moves = [move_1001; move_1002];
-          cur_hp = 5500;
-          atk = 1050;
+          cur_hp = 1200;
+          atk = 1030;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -552,8 +523,8 @@ let char_lst3_lst4_t =
           char_c = char_10;
           char_name = "Alpha Wolf";
           char_moves = [move_1; move_2];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -563,8 +534,8 @@ let char_lst3_lst4_t =
           char_c = char_11;
           char_name = "Wolf";
           char_moves = [move_1; move_2];
-          cur_hp = 2250;
-          atk = 110;
+          cur_hp = 650;
+          atk = 70;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -574,8 +545,8 @@ let char_lst3_lst4_t =
           char_c = char_12;
           char_name = "Mermaid";
           char_moves = [move_6; move_15];
-          cur_hp = 2250;
-          atk = 110;
+          cur_hp = 650;
+          atk = 70;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -594,7 +565,6 @@ let char_lst3_lst3_t =
     items = empty_item_lst
   }
 
-
 let combat_t1 = 
   let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
   let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
@@ -605,27 +575,11 @@ let combat_t2 =
   let sec_team = [char_4, 10;char_5, 10] in 
   init first_team sec_team empty_item_lst
 
-let combat_end_game first_team sec_team = 
-  let t = init first_team sec_team  empty_item_lst in
-  Combat.start_t_sing t;
-  t
-
-let combat_end_t1 = 
-  let first_team = [char_1, 10;char_2, 10] in 
-  let sec_team = [] in 
-  combat_end_game first_team sec_team
-
-let combat_end_t2 = 
-  let first_team = [] in 
-  let sec_team = [char_5, 10] in 
-  combat_end_game first_team sec_team
-
 (* Get a team object by using [init] like above, then extract the field *)
 let team1 = combat_t1.team1 
 let team2 = combat_t1.team2
 let team3 = combat_t2.team1
 let team4 = combat_t2.team2
-let empty_team = combat_end_t2.team1
 
 (* Access each target in a team using List.nth *)
 let team_target team nth = 
@@ -678,7 +632,7 @@ let c5_level_0 =
     char_name = "Forest Fairy";
     char_moves = [move_6; move_10];
     atk = 10;
-    cur_hp = 1250;
+    cur_hp = 250;
     buffs = []; 
     active = true;
     cooldown = [];
@@ -690,8 +644,8 @@ let c5_level10 =
     char_c = char_5; 
     char_name = "Forest Fairy";
     char_moves = [move_6; move_10];
-    atk = 60;
-    cur_hp = 1750; 
+    atk = 40;
+    cur_hp = 450; 
     buffs = []; 
     active = true;
     cooldown = [];
@@ -703,8 +657,8 @@ let c12_level5 =
     char_c = c_12;
     char_name = "Mermaid";
     char_moves = [move_6; move_15];
-    atk = 35; 
-    cur_hp = 1500; 
+    atk = 25; 
+    cur_hp = 350; 
     buffs = []; 
     active = true;
     cooldown = [];
@@ -721,11 +675,6 @@ let combat_move_input_test name move_lst input exp_output =
 let combat_target_input_test name team input exp_output = 
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
-
-let do_dmg_test name c dmg expected = 
-  do_dmg c dmg; 
-  name >:: fun _ -> 
-    assert_equal expected c.cur_hp ~printer:(string_of_int)
 
 let do_heal_test name c heal expected = 
   do_heal c heal; 
@@ -998,16 +947,6 @@ let combat_tests = [
   combat_vary_test "vary by 20 percent from 10" 10. 20;
   combat_vary_test "vary by 20 percent from 0" 0. 20;
   combat_winner_test "winner of an ongoing game is 0" combat_t1 0;
-  combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
-  combat_winner_test "winner of an ending game is 2" combat_end_t2 2;
-  do_dmg_test "subtracts all health of team1[0]" 
-    team1_first_target team1_first_target_hp 0;
-  do_dmg_test "subtracts 0 from health from team4[1]" 
-    team4_first_target 0 team4_first_target_hp;
-  do_dmg_test "subtracts half of the health from team2[1]" 
-    team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
-  do_dmg_test "subtracts big value 100000 from health" 
-    team3_first_target 100000 0;
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 
@@ -1058,10 +997,9 @@ let combat_tests = [
   load_char_test "load character 5 at level 10" (char_5, 10) c5_level10;
   load_char_test "load character 12 at level 5" (char_12,5) c12_level5;
   smartness_of_c_test "smartness of character 5 at level 0" c5_level_0 4;
-  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 14;
+  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 10;
   check_winner_test "non empty team" team1 1 ();
 ]
-
 
 let suite =
   "test suite"  >::: List.flatten [

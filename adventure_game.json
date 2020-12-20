@@ -10,31 +10,31 @@
       "difficulty": 1,
       "exits": [
         {
-          "name": "Training Gym",
+          "name": "Mountain Side",
           "room id": 2
         }
       ]
     },
     {
       "id": 2,
-      "name": "Training Gym",
-      "initial message": "You are at Training Gym",
+      "name": "Mountain Side",
+      "initial message": "You are at Mountain Side",
       "enemy ids": [
         1
       ],
       "shop": [
         {
-          "name": "PH",
+          "name": "Medicine",
           "item": "FlatHp",
-          "eff": 5,
+          "eff": 50,
           "price": 3
         }
       ],
       "rewards": [
         {
-          "name": "PH",
+          "name": "Healing Balm",
           "item": "FlatHp",
-          "eff": 6,
+          "eff": 100,
           "price": 3
         }
       ],
@@ -57,28 +57,23 @@
       ],
       "shop": [
         {
-          "name": "PH",
+          "name": "Life Flower",
           "item": "PercentHp",
-          "eff": 0.1,
-          "price": 10
+          "eff": 0.5,
+          "price": 15
         },
         {
-          "name": "PH",
+          "name": "Blessing of Lyra",
           "item": "RevivalItem",
           "eff": 0,
-          "price": 8
+          "price": 20
         }
       ],
       "rewards": [
         {
-          "name": "R",
+          "name": "Medicine",
           "item": "FlatHp",
-          "eff": 5
-        },
-        {
-          "name": "R",
-          "item": "DebuffRemover",
-          "eff": 0
+          "eff": 100
         }
       ],
       "difficulty": 1,
@@ -102,7 +97,20 @@
         5,
         12
       ],
-      "shop": [],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.7,
+          "price": 15
+        },
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
       "rewards": [],
       "difficulty": 2,
       "exits": [
@@ -124,7 +132,14 @@
         6,
         7
       ],
-      "shop": [],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.7,
+          "price": 20
+        }
+      ],
       "rewards": [],
       "difficulty": 2,
       "exits": [
@@ -147,7 +162,14 @@
         9,
         10
       ],
-      "shop": [],
+      "shop": [
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
       "rewards": [],
       "difficulty": 3,
       "exits": [
@@ -170,7 +192,14 @@
         9,
         10
       ],
-      "shop": [],
+      "shop": [
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
       "rewards": [],
       "difficulty": 3,
       "exits": [
@@ -193,7 +222,20 @@
         10,
         11
       ],
-      "shop": [],
+      "shop": [
+        {
+          "name": "Life Flower",
+          "item": "PercentHp",
+          "eff": 0.9,
+          "price": 15
+        },
+        {
+          "name": "Blessing of Lyra",
+          "item": "RevivalItem",
+          "eff": 0,
+          "price": 20
+        }
+      ],
       "rewards": [],
       "difficulty": 5,
       "exits": [

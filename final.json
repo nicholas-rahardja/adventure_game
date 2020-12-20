@@ -1,0 +1,1 @@
+{"chars":[{"id":1,"xp":4},{"id":2,"xp":4},{"id":3,"xp":4}],"current_room":4,"visited":[1,2,3,4],"gold":2,"inventory":[{"name":"Life Flower","item":"PercentHp","eff":0.5},{"name":"Medicine","item":"FlatHp","eff":100}]}
