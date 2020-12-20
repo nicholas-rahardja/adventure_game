@@ -1,0 +1,3265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="coverage.css" />
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="index.html">
+          <span class="dirname"></span>test.ml
+        </a>
+      </h1>
+      <h2>99.46%</h2>
+    </div>
+    <div id="navbar">
+      <span class="unvisited" style="top:2.23%"></span>
+      <span class="unvisited" style="top:4.46%"></span>
+      <span class="unvisited" style="top:4.83%"></span>
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span > </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span class="unvisited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span > </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span > </span>
+<a id="L34"></a><span > </span>
+<a id="L35"></a><span class="visited"> </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span > </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span class="unvisited"> </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span class="visited"> </span>
+<a id="L52"></a><span class="unvisited"> </span>
+<a id="L53"></a><span class="visited"> </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
+<a id="L56"></a><span > </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
+<a id="L59"></a><span > </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span > </span>
+<a id="L62"></a><span class="visited"> </span>
+<a id="L63"></a><span class="visited"> </span>
+<a id="L64"></a><span class="visited"> </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span class="visited"> </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span > </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span > </span>
+<a id="L74"></a><span > </span>
+<a id="L75"></a><span > </span>
+<a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span > </span>
+<a id="L78"></a><span > </span>
+<a id="L79"></a><span class="visited"> </span>
+<a id="L80"></a><span class="visited"> </span>
+<a id="L81"></a><span class="visited"> </span>
+<a id="L82"></a><span class="visited"> </span>
+<a id="L83"></a><span class="visited"> </span>
+<a id="L84"></a><span class="visited"> </span>
+<a id="L85"></a><span class="visited"> </span>
+<a id="L86"></a><span > </span>
+<a id="L87"></a><span class="visited"> </span>
+<a id="L88"></a><span class="visited"> </span>
+<a id="L89"></a><span class="visited"> </span>
+<a id="L90"></a><span class="visited"> </span>
+<a id="L91"></a><span class="visited"> </span>
+<a id="L92"></a><span class="visited"> </span>
+<a id="L93"></a><span class="visited"> </span>
+<a id="L94"></a><span class="visited"> </span>
+<a id="L95"></a><span class="visited"> </span>
+<a id="L96"></a><span > </span>
+<a id="L97"></a><span class="visited"> </span>
+<a id="L98"></a><span > </span>
+<a id="L99"></a><span class="visited"> </span>
+<a id="L100"></a><span > </span>
+<a id="L101"></a><span > </span>
+<a id="L102"></a><span > </span>
+<a id="L103"></a><span > </span>
+<a id="L104"></a><span class="visited"> </span>
+<a id="L105"></a><span class="visited"> </span>
+<a id="L106"></a><span class="visited"> </span>
+<a id="L107"></a><span > </span>
+<a id="L108"></a><span class="visited"> </span>
+<a id="L109"></a><span class="visited"> </span>
+<a id="L110"></a><span class="visited"> </span>
+<a id="L111"></a><span class="visited"> </span>
+<a id="L112"></a><span > </span>
+<a id="L113"></a><span > </span>
+<a id="L114"></a><span class="visited"> </span>
+<a id="L115"></a><span > </span>
+<a id="L116"></a><span class="visited"> </span>
+<a id="L117"></a><span class="visited"> </span>
+<a id="L118"></a><span > </span>
+<a id="L119"></a><span class="visited"> </span>
+<a id="L120"></a><span class="visited"> </span>
+<a id="L121"></a><span class="visited"> </span>
+<a id="L122"></a><span > </span>
+<a id="L123"></a><span class="visited"> </span>
+<a id="L124"></a><span class="visited"> </span>
+<a id="L125"></a><span class="visited"> </span>
+<a id="L126"></a><span > </span>
+<a id="L127"></a><span > </span>
+<a id="L128"></a><span class="visited"> </span>
+<a id="L129"></a><span > </span>
+<a id="L130"></a><span class="visited"> </span>
+<a id="L131"></a><span > </span>
+<a id="L132"></a><span class="visited"> </span>
+<a id="L133"></a><span > </span>
+<a id="L134"></a><span class="visited"> </span>
+<a id="L135"></a><span > </span>
+<a id="L136"></a><span class="visited"> </span>
+<a id="L137"></a><span > </span>
+<a id="L138"></a><span > </span>
+<a id="L139"></a><span class="visited"> </span>
+<a id="L140"></a><span > </span>
+<a id="L141"></a><span class="visited"> </span>
+<a id="L142"></a><span class="visited"> </span>
+<a id="L143"></a><span > </span>
+<a id="L144"></a><span class="visited"> </span>
+<a id="L145"></a><span class="visited"> </span>
+<a id="L146"></a><span class="visited"> </span>
+<a id="L147"></a><span > </span>
+<a id="L148"></a><span > </span>
+<a id="L149"></a><span class="visited"> </span>
+<a id="L150"></a><span class="visited"> </span>
+<a id="L151"></a><span > </span>
+<a id="L152"></a><span class="visited"> </span>
+<a id="L153"></a><span class="visited"> </span>
+<a id="L154"></a><span > </span>
+<a id="L155"></a><span > </span>
+<a id="L156"></a><span class="visited"> </span>
+<a id="L157"></a><span class="visited"> </span>
+<a id="L158"></a><span > </span>
+<a id="L159"></a><span class="visited"> </span>
+<a id="L160"></a><span class="visited"> </span>
+<a id="L161"></a><span class="visited"> </span>
+<a id="L162"></a><span class="visited"> </span>
+<a id="L163"></a><span > </span>
+<a id="L164"></a><span class="visited"> </span>
+<a id="L165"></a><span > </span>
+<a id="L166"></a><span > </span>
+<a id="L167"></a><span class="visited"> </span>
+<a id="L168"></a><span > </span>
+<a id="L169"></a><span > </span>
+<a id="L170"></a><span class="visited"> </span>
+<a id="L171"></a><span > </span>
+<a id="L172"></a><span class="visited"> </span>
+<a id="L173"></a><span class="visited"> </span>
+<a id="L174"></a><span > </span>
+<a id="L175"></a><span class="visited"> </span>
+<a id="L176"></a><span class="visited"> </span>
+<a id="L177"></a><span > </span>
+<a id="L178"></a><span class="visited"> </span>
+<a id="L179"></a><span class="visited"> </span>
+<a id="L180"></a><span > </span>
+<a id="L181"></a><span > </span>
+<a id="L182"></a><span class="visited"> </span>
+<a id="L183"></a><span class="visited"> </span>
+<a id="L184"></a><span > </span>
+<a id="L185"></a><span > </span>
+<a id="L186"></a><span class="visited"> </span>
+<a id="L187"></a><span > </span>
+<a id="L188"></a><span > </span>
+<a id="L189"></a><span class="visited"> </span>
+<a id="L190"></a><span class="visited"> </span>
+<a id="L191"></a><span > </span>
+<a id="L192"></a><span > </span>
+<a id="L193"></a><span class="visited"> </span>
+<a id="L194"></a><span class="visited"> </span>
+<a id="L195"></a><span > </span>
+<a id="L196"></a><span class="visited"> </span>
+<a id="L197"></a><span class="visited"> </span>
+<a id="L198"></a><span > </span>
+<a id="L199"></a><span > </span>
+<a id="L200"></a><span > </span>
+<a id="L201"></a><span class="visited"> </span>
+<a id="L202"></a><span > </span>
+<a id="L203"></a><span > </span>
+<a id="L204"></a><span > </span>
+<a id="L205"></a><span > </span>
+<a id="L206"></a><span > </span>
+<a id="L207"></a><span > </span>
+<a id="L208"></a><span > </span>
+<a id="L209"></a><span > </span>
+<a id="L210"></a><span > </span>
+<a id="L211"></a><span > </span>
+<a id="L212"></a><span > </span>
+<a id="L213"></a><span > </span>
+<a id="L214"></a><span class="visited"> </span>
+<a id="L215"></a><span > </span>
+<a id="L216"></a><span > </span>
+<a id="L217"></a><span > </span>
+<a id="L218"></a><span class="visited"> </span>
+<a id="L219"></a><span > </span>
+<a id="L220"></a><span > </span>
+<a id="L221"></a><span > </span>
+<a id="L222"></a><span > </span>
+<a id="L223"></a><span class="visited"> </span>
+<a id="L224"></a><span > </span>
+<a id="L225"></a><span > </span>
+<a id="L226"></a><span > </span>
+<a id="L227"></a><span > </span>
+<a id="L228"></a><span > </span>
+<a id="L229"></a><span > </span>
+<a id="L230"></a><span class="visited"> </span>
+<a id="L231"></a><span > </span>
+<a id="L232"></a><span > </span>
+<a id="L233"></a><span class="visited"> </span>
+<a id="L234"></a><span > </span>
+<a id="L235"></a><span > </span>
+<a id="L236"></a><span > </span>
+<a id="L237"></a><span class="visited"> </span>
+<a id="L238"></a><span > </span>
+<a id="L239"></a><span > </span>
+<a id="L240"></a><span class="visited"> </span>
+<a id="L241"></a><span class="visited"> </span>
+<a id="L242"></a><span > </span>
+<a id="L243"></a><span class="visited"> </span>
+<a id="L244"></a><span > </span>
+<a id="L245"></a><span class="visited"> </span>
+<a id="L246"></a><span > </span>
+<a id="L247"></a><span > </span>
+<a id="L248"></a><span > </span>
+<a id="L249"></a><span > </span>
+<a id="L250"></a><span > </span>
+<a id="L251"></a><span > </span>
+<a id="L252"></a><span class="visited"> </span>
+<a id="L253"></a><span > </span>
+<a id="L254"></a><span > </span>
+<a id="L255"></a><span class="visited"> </span>
+<a id="L256"></a><span > </span>
+<a id="L257"></a><span > </span>
+<a id="L258"></a><span class="visited"> </span>
+<a id="L259"></a><span > </span>
+<a id="L260"></a><span class="visited"> </span>
+<a id="L261"></a><span > </span>
+<a id="L262"></a><span class="visited"> </span>
+<a id="L263"></a><span > </span>
+<a id="L264"></a><span class="visited"> </span>
+<a id="L265"></a><span class="visited"> </span>
+<a id="L266"></a><span > </span>
+<a id="L267"></a><span > </span>
+<a id="L268"></a><span class="visited"> </span>
+<a id="L269"></a><span class="visited"> </span>
+<a id="L270"></a><span > </span>
+<a id="L271"></a><span class="visited"> </span>
+<a id="L272"></a><span class="visited"> </span>
+<a id="L273"></a><span class="visited"> </span>
+<a id="L274"></a><span > </span>
+<a id="L275"></a><span class="visited"> </span>
+<a id="L276"></a><span class="visited"> </span>
+<a id="L277"></a><span class="visited"> </span>
+<a id="L278"></a><span > </span>
+<a id="L279"></a><span class="visited"> </span>
+<a id="L280"></a><span class="visited"> </span>
+<a id="L281"></a><span class="visited"> </span>
+<a id="L282"></a><span class="visited"> </span>
+<a id="L283"></a><span class="visited"> </span>
+<a id="L284"></a><span > </span>
+<a id="L285"></a><span class="visited"> </span>
+<a id="L286"></a><span > </span>
+<a id="L287"></a><span class="visited"> </span>
+<a id="L288"></a><span class="visited"> </span>
+<a id="L289"></a><span class="visited"> </span>
+<a id="L290"></a><span class="visited"> </span>
+<a id="L291"></a><span class="visited"> </span>
+<a id="L292"></a><span > </span>
+<a id="L293"></a><span > </span>
+<a id="L294"></a><span class="visited"> </span>
+<a id="L295"></a><span class="visited"> </span>
+<a id="L296"></a><span > </span>
+<a id="L297"></a><span class="visited"> </span>
+<a id="L298"></a><span > </span>
+<a id="L299"></a><span class="visited"> </span>
+<a id="L300"></a><span > </span>
+<a id="L301"></a><span class="visited"> </span>
+<a id="L302"></a><span class="visited"> </span>
+<a id="L303"></a><span > </span>
+<a id="L304"></a><span class="visited"> </span>
+<a id="L305"></a><span class="visited"> </span>
+<a id="L306"></a><span class="visited"> </span>
+<a id="L307"></a><span > </span>
+<a id="L308"></a><span > </span>
+<a id="L309"></a><span class="visited"> </span>
+<a id="L310"></a><span > </span>
+<a id="L311"></a><span class="visited"> </span>
+<a id="L312"></a><span > </span>
+<a id="L313"></a><span > </span>
+<a id="L314"></a><span class="visited"> </span>
+<a id="L315"></a><span class="visited"> </span>
+<a id="L316"></a><span > </span>
+<a id="L317"></a><span > </span>
+<a id="L318"></a><span > </span>
+<a id="L319"></a><span class="visited"> </span>
+<a id="L320"></a><span > </span>
+<a id="L321"></a><span > </span>
+<a id="L322"></a><span class="visited"> </span>
+<a id="L323"></a><span class="visited"> </span>
+<a id="L324"></a><span class="visited"> </span>
+<a id="L325"></a><span class="visited"> </span>
+<a id="L326"></a><span > </span>
+<a id="L327"></a><span class="visited"> </span>
+<a id="L328"></a><span > </span>
+<a id="L329"></a><span class="visited"> </span>
+<a id="L330"></a><span > </span>
+<a id="L331"></a><span class="visited"> </span>
+<a id="L332"></a><span class="visited"> </span>
+<a id="L333"></a><span class="visited"> </span>
+<a id="L334"></a><span class="visited"> </span>
+<a id="L335"></a><span class="visited"> </span>
+<a id="L336"></a><span class="visited"> </span>
+<a id="L337"></a><span class="visited"> </span>
+<a id="L338"></a><span class="visited"> </span>
+<a id="L339"></a><span class="visited"> </span>
+<a id="L340"></a><span class="visited"> </span>
+<a id="L341"></a><span class="visited"> </span>
+<a id="L342"></a><span class="visited"> </span>
+<a id="L343"></a><span class="visited"> </span>
+<a id="L344"></a><span class="visited"> </span>
+<a id="L345"></a><span > </span>
+<a id="L346"></a><span class="visited"> </span>
+<a id="L347"></a><span class="visited"> </span>
+<a id="L348"></a><span class="visited"> </span>
+<a id="L349"></a><span > </span>
+<a id="L350"></a><span > </span>
+<a id="L351"></a><span class="visited"> </span>
+<a id="L352"></a><span class="visited"> </span>
+<a id="L353"></a><span class="visited"> </span>
+<a id="L354"></a><span > </span>
+<a id="L355"></a><span > </span>
+<a id="L356"></a><span class="visited"> </span>
+<a id="L357"></a><span class="visited"> </span>
+<a id="L358"></a><span > </span>
+<a id="L359"></a><span class="visited"> </span>
+<a id="L360"></a><span class="visited"> </span>
+<a id="L361"></a><span class="visited"> </span>
+<a id="L362"></a><span > </span>
+<a id="L363"></a><span class="visited"> </span>
+<a id="L364"></a><span class="visited"> </span>
+<a id="L365"></a><span class="visited"> </span>
+<a id="L366"></a><span > </span>
+<a id="L367"></a><span class="visited"> </span>
+<a id="L368"></a><span class="visited"> </span>
+<a id="L369"></a><span > </span>
+<a id="L370"></a><span > </span>
+<a id="L371"></a><span class="visited"> </span>
+<a id="L372"></a><span class="visited"> </span>
+<a id="L373"></a><span class="visited"> </span>
+<a id="L374"></a><span class="visited"> </span>
+<a id="L375"></a><span > </span>
+<a id="L376"></a><span class="visited"> </span>
+<a id="L377"></a><span > </span>
+<a id="L378"></a><span class="visited"> </span>
+<a id="L379"></a><span class="visited"> </span>
+<a id="L380"></a><span class="visited"> </span>
+<a id="L381"></a><span > </span>
+<a id="L382"></a><span class="visited"> </span>
+<a id="L383"></a><span > </span>
+<a id="L384"></a><span class="visited"> </span>
+<a id="L385"></a><span class="visited"> </span>
+<a id="L386"></a><span class="visited"> </span>
+<a id="L387"></a><span class="visited"> </span>
+<a id="L388"></a><span class="visited"> </span>
+<a id="L389"></a><span class="visited"> </span>
+<a id="L390"></a><span class="visited"> </span>
+<a id="L391"></a><span class="visited"> </span>
+<a id="L392"></a><span class="visited"> </span>
+<a id="L393"></a><span class="visited"> </span>
+<a id="L394"></a><span class="visited"> </span>
+<a id="L395"></a><span class="visited"> </span>
+<a id="L396"></a><span class="visited"> </span>
+<a id="L397"></a><span class="visited"> </span>
+<a id="L398"></a><span class="visited"> </span>
+<a id="L399"></a><span class="visited"> </span>
+<a id="L400"></a><span class="visited"> </span>
+<a id="L401"></a><span class="visited"> </span>
+<a id="L402"></a><span class="visited"> </span>
+<a id="L403"></a><span class="visited"> </span>
+<a id="L404"></a><span class="visited"> </span>
+<a id="L405"></a><span class="visited"> </span>
+<a id="L406"></a><span > </span>
+<a id="L407"></a><span class="visited"> </span>
+<a id="L408"></a><span class="visited"> </span>
+<a id="L409"></a><span > </span>
+<a id="L410"></a><span class="visited"> </span>
+<a id="L411"></a><span > </span>
+<a id="L412"></a><span class="visited"> </span>
+<a id="L413"></a><span class="visited"> </span>
+<a id="L414"></a><span class="visited"> </span>
+<a id="L415"></a><span class="visited"> </span>
+<a id="L416"></a><span class="visited"> </span>
+<a id="L417"></a><span class="visited"> </span>
+<a id="L418"></a><span class="visited"> </span>
+<a id="L419"></a><span class="visited"> </span>
+<a id="L420"></a><span class="visited"> </span>
+<a id="L421"></a><span > </span>
+<a id="L422"></a><span class="visited"> </span>
+<a id="L423"></a><span class="visited"> </span>
+<a id="L424"></a><span class="visited"> </span>
+<a id="L425"></a><span class="visited"> </span>
+<a id="L426"></a><span class="visited"> </span>
+<a id="L427"></a><span class="visited"> </span>
+<a id="L428"></a><span class="visited"> </span>
+<a id="L429"></a><span class="visited"> </span>
+<a id="L430"></a><span class="visited"> </span>
+<a id="L431"></a><span > </span>
+<a id="L432"></a><span class="visited"> </span>
+<a id="L433"></a><span class="visited"> </span>
+<a id="L434"></a><span class="visited"> </span>
+<a id="L435"></a><span class="visited"> </span>
+<a id="L436"></a><span > </span>
+<a id="L437"></a><span class="visited"> </span>
+<a id="L438"></a><span > </span>
+<a id="L439"></a><span class="visited"> </span>
+<a id="L440"></a><span class="visited"> </span>
+<a id="L441"></a><span class="visited"> </span>
+<a id="L442"></a><span class="visited"> </span>
+<a id="L443"></a><span class="visited"> </span>
+<a id="L444"></a><span class="visited"> </span>
+<a id="L445"></a><span class="visited"> </span>
+<a id="L446"></a><span > </span>
+<a id="L447"></a><span > </span>
+<a id="L448"></a><span class="visited"> </span>
+<a id="L449"></a><span > </span>
+<a id="L450"></a><span class="visited"> </span>
+<a id="L451"></a><span class="visited"> </span>
+<a id="L452"></a><span class="visited"> </span>
+<a id="L453"></a><span class="visited"> </span>
+<a id="L454"></a><span class="visited"> </span>
+<a id="L455"></a><span class="visited"> </span>
+<a id="L456"></a><span class="visited"> </span>
+<a id="L457"></a><span class="visited"> </span>
+<a id="L458"></a><span > </span>
+<a id="L459"></a><span > </span>
+<a id="L460"></a><span > </span>
+<a id="L461"></a><span > </span>
+<a id="L462"></a><span > </span>
+<a id="L463"></a><span > </span>
+<a id="L464"></a><span > </span>
+<a id="L465"></a><span > </span>
+<a id="L466"></a><span > </span>
+<a id="L467"></a><span > </span>
+<a id="L468"></a><span > </span>
+<a id="L469"></a><span > </span>
+<a id="L470"></a><span > </span>
+<a id="L471"></a><span > </span>
+<a id="L472"></a><span > </span>
+<a id="L473"></a><span > </span>
+<a id="L474"></a><span > </span>
+<a id="L475"></a><span > </span>
+<a id="L476"></a><span > </span>
+<a id="L477"></a><span > </span>
+<a id="L478"></a><span > </span>
+<a id="L479"></a><span > </span>
+<a id="L480"></a><span > </span>
+<a id="L481"></a><span > </span>
+<a id="L482"></a><span > </span>
+<a id="L483"></a><span > </span>
+<a id="L484"></a><span > </span>
+<a id="L485"></a><span > </span>
+<a id="L486"></a><span > </span>
+<a id="L487"></a><span > </span>
+<a id="L488"></a><span > </span>
+<a id="L489"></a><span > </span>
+<a id="L490"></a><span > </span>
+<a id="L491"></a><span > </span>
+<a id="L492"></a><span > </span>
+<a id="L493"></a><span > </span>
+<a id="L494"></a><span > </span>
+<a id="L495"></a><span > </span>
+<a id="L496"></a><span > </span>
+<a id="L497"></a><span > </span>
+<a id="L498"></a><span > </span>
+<a id="L499"></a><span > </span>
+<a id="L500"></a><span > </span>
+<a id="L501"></a><span > </span>
+<a id="L502"></a><span > </span>
+<a id="L503"></a><span > </span>
+<a id="L504"></a><span > </span>
+<a id="L505"></a><span > </span>
+<a id="L506"></a><span > </span>
+<a id="L507"></a><span > </span>
+<a id="L508"></a><span > </span>
+<a id="L509"></a><span > </span>
+<a id="L510"></a><span > </span>
+<a id="L511"></a><span > </span>
+<a id="L512"></a><span > </span>
+<a id="L513"></a><span > </span>
+<a id="L514"></a><span > </span>
+<a id="L515"></a><span > </span>
+<a id="L516"></a><span > </span>
+<a id="L517"></a><span > </span>
+<a id="L518"></a><span > </span>
+<a id="L519"></a><span > </span>
+<a id="L520"></a><span > </span>
+<a id="L521"></a><span > </span>
+<a id="L522"></a><span > </span>
+<a id="L523"></a><span > </span>
+<a id="L524"></a><span > </span>
+<a id="L525"></a><span > </span>
+<a id="L526"></a><span > </span>
+<a id="L527"></a><span > </span>
+<a id="L528"></a><span > </span>
+<a id="L529"></a><span > </span>
+<a id="L530"></a><span > </span>
+<a id="L531"></a><span > </span>
+<a id="L532"></a><span > </span>
+<a id="L533"></a><span > </span>
+<a id="L534"></a><span > </span>
+<a id="L535"></a><span > </span>
+<a id="L536"></a><span > </span>
+<a id="L537"></a><span > </span>
+<a id="L538"></a><span > </span>
+<a id="L539"></a><span > </span>
+<a id="L540"></a><span > </span>
+<a id="L541"></a><span > </span>
+<a id="L542"></a><span > </span>
+<a id="L543"></a><span > </span>
+<a id="L544"></a><span > </span>
+<a id="L545"></a><span > </span>
+<a id="L546"></a><span > </span>
+<a id="L547"></a><span > </span>
+<a id="L548"></a><span > </span>
+<a id="L549"></a><span > </span>
+<a id="L550"></a><span > </span>
+<a id="L551"></a><span > </span>
+<a id="L552"></a><span > </span>
+<a id="L553"></a><span > </span>
+<a id="L554"></a><span > </span>
+<a id="L555"></a><span > </span>
+<a id="L556"></a><span > </span>
+<a id="L557"></a><span > </span>
+<a id="L558"></a><span > </span>
+<a id="L559"></a><span > </span>
+<a id="L560"></a><span > </span>
+<a id="L561"></a><span > </span>
+<a id="L562"></a><span > </span>
+<a id="L563"></a><span > </span>
+<a id="L564"></a><span > </span>
+<a id="L565"></a><span > </span>
+<a id="L566"></a><span > </span>
+<a id="L567"></a><span > </span>
+<a id="L568"></a><span > </span>
+<a id="L569"></a><span > </span>
+<a id="L570"></a><span > </span>
+<a id="L571"></a><span > </span>
+<a id="L572"></a><span > </span>
+<a id="L573"></a><span > </span>
+<a id="L574"></a><span > </span>
+<a id="L575"></a><span class="visited"> </span>
+<a id="L576"></a><span > </span>
+<a id="L577"></a><span > </span>
+<a id="L578"></a><span > </span>
+<a id="L579"></a><span > </span>
+<a id="L580"></a><span class="visited"> </span>
+<a id="L581"></a><span > </span>
+<a id="L582"></a><span > </span>
+<a id="L583"></a><span > </span>
+<a id="L584"></a><span > </span>
+<a id="L585"></a><span class="visited"> </span>
+<a id="L586"></a><span > </span>
+<a id="L587"></a><span > </span>
+<a id="L588"></a><span > </span>
+<a id="L589"></a><span class="visited"> </span>
+<a id="L590"></a><span > </span>
+<a id="L591"></a><span class="visited"> </span>
+<a id="L592"></a><span > </span>
+<a id="L593"></a><span > </span>
+<a id="L594"></a><span > </span>
+<a id="L595"></a><span > </span>
+<a id="L596"></a><span > </span>
+<a id="L597"></a><span > </span>
+<a id="L598"></a><span > </span>
+<a id="L599"></a><span class="visited"> </span>
+<a id="L600"></a><span > </span>
+<a id="L601"></a><span class="visited"> </span>
+<a id="L602"></a><span > </span>
+<a id="L603"></a><span > </span>
+<a id="L604"></a><span > </span>
+<a id="L605"></a><span > </span>
+<a id="L606"></a><span > </span>
+<a id="L607"></a><span > </span>
+<a id="L608"></a><span > </span>
+<a id="L609"></a><span > </span>
+<a id="L610"></a><span > </span>
+<a id="L611"></a><span class="visited"> </span>
+<a id="L612"></a><span > </span>
+<a id="L613"></a><span > </span>
+<a id="L614"></a><span class="visited"> </span>
+<a id="L615"></a><span > </span>
+<a id="L616"></a><span > </span>
+<a id="L617"></a><span > </span>
+<a id="L618"></a><span class="visited"> </span>
+<a id="L619"></a><span > </span>
+<a id="L620"></a><span > </span>
+<a id="L621"></a><span > </span>
+<a id="L622"></a><span > </span>
+<a id="L623"></a><span > </span>
+<a id="L624"></a><span > </span>
+<a id="L625"></a><span > </span>
+<a id="L626"></a><span class="visited"> </span>
+<a id="L627"></a><span > </span>
+<a id="L628"></a><span > </span>
+<a id="L629"></a><span > </span>
+<a id="L630"></a><span class="visited"> </span>
+<a id="L631"></a><span > </span>
+<a id="L632"></a><span > </span>
+<a id="L633"></a><span > </span>
+<a id="L634"></a><span > </span>
+<a id="L635"></a><span > </span>
+<a id="L636"></a><span > </span>
+<a id="L637"></a><span > </span>
+<a id="L638"></a><span > </span>
+<a id="L639"></a><span > </span>
+<a id="L640"></a><span > </span>
+<a id="L641"></a><span > </span>
+<a id="L642"></a><span > </span>
+<a id="L643"></a><span > </span>
+<a id="L644"></a><span > </span>
+<a id="L645"></a><span > </span>
+<a id="L646"></a><span class="visited"> </span>
+<a id="L647"></a><span > </span>
+<a id="L648"></a><span > </span>
+<a id="L649"></a><span > </span>
+<a id="L650"></a><span > </span>
+<a id="L651"></a><span class="visited"> </span>
+<a id="L652"></a><span > </span>
+<a id="L653"></a><span class="visited"> </span>
+<a id="L654"></a><span > </span>
+<a id="L655"></a><span > </span>
+<a id="L656"></a><span > </span>
+<a id="L657"></a><span > </span>
+<a id="L658"></a><span class="visited"> </span>
+<a id="L659"></a><span > </span>
+<a id="L660"></a><span > </span>
+<a id="L661"></a><span > </span>
+<a id="L662"></a><span > </span>
+<a id="L663"></a><span class="visited"> </span>
+<a id="L664"></a><span > </span>
+<a id="L665"></a><span > </span>
+<a id="L666"></a><span class="visited"> </span>
+<a id="L667"></a><span class="visited"> </span>
+<a id="L668"></a><span class="visited"> </span>
+<a id="L669"></a><span > </span>
+<a id="L670"></a><span > </span>
+<a id="L671"></a><span > </span>
+<a id="L672"></a><span > </span>
+<a id="L673"></a><span > </span>
+<a id="L674"></a><span > </span>
+<a id="L675"></a><span > </span>
+<a id="L676"></a><span > </span>
+<a id="L677"></a><span class="visited"> </span>
+<a id="L678"></a><span class="visited"> </span>
+<a id="L679"></a><span > </span>
+<a id="L680"></a><span > </span>
+<a id="L681"></a><span > </span>
+<a id="L682"></a><span > </span>
+<a id="L683"></a><span class="visited"> </span>
+<a id="L684"></a><span > </span>
+<a id="L685"></a><span > </span>
+<a id="L686"></a><span > </span>
+<a id="L687"></a><span > </span>
+<a id="L688"></a><span class="visited"> </span>
+<a id="L689"></a><span > </span>
+<a id="L690"></a><span class="visited"> </span>
+<a id="L691"></a><span > </span>
+<a id="L692"></a><span class="visited"> </span>
+<a id="L693"></a><span > </span>
+<a id="L694"></a><span class="visited"> </span>
+<a id="L695"></a><span > </span>
+<a id="L696"></a><span class="visited"> </span>
+<a id="L697"></a><span > </span>
+<a id="L698"></a><span class="visited"> </span>
+<a id="L699"></a><span > </span>
+<a id="L700"></a><span > </span>
+<a id="L701"></a><span > </span>
+<a id="L702"></a><span > </span>
+<a id="L703"></a><span > </span>
+<a id="L704"></a><span class="visited"> </span>
+<a id="L705"></a><span > </span>
+<a id="L706"></a><span > </span>
+<a id="L707"></a><span > </span>
+<a id="L708"></a><span class="visited"> </span>
+<a id="L709"></a><span > </span>
+<a id="L710"></a><span class="visited"> </span>
+<a id="L711"></a><span > </span>
+<a id="L712"></a><span > </span>
+<a id="L713"></a><span > </span>
+<a id="L714"></a><span class="visited"> </span>
+<a id="L715"></a><span class="visited"> </span>
+<a id="L716"></a><span > </span>
+<a id="L717"></a><span class="visited"> </span>
+<a id="L718"></a><span class="visited"> </span>
+<a id="L719"></a><span class="visited"> </span>
+<a id="L720"></a><span > </span>
+<a id="L721"></a><span > </span>
+<a id="L722"></a><span class="visited"> </span>
+<a id="L723"></a><span > </span>
+<a id="L724"></a><span > </span>
+<a id="L725"></a><span class="visited"> </span>
+<a id="L726"></a><span > </span>
+<a id="L727"></a><span > </span>
+<a id="L728"></a><span class="visited"> </span>
+<a id="L729"></a><span > </span>
+<a id="L730"></a><span > </span>
+<a id="L731"></a><span > </span>
+<a id="L732"></a><span > </span>
+<a id="L733"></a><span class="visited"> </span>
+<a id="L734"></a><span > </span>
+<a id="L735"></a><span > </span>
+<a id="L736"></a><span class="visited"> </span>
+<a id="L737"></a><span class="visited"> </span>
+<a id="L738"></a><span > </span>
+<a id="L739"></a><span class="visited"> </span>
+<a id="L740"></a><span class="visited"> </span>
+<a id="L741"></a><span class="visited"> </span>
+<a id="L742"></a><span class="visited"> </span>
+<a id="L743"></a><span class="visited"> </span>
+<a id="L744"></a><span > </span>
+<a id="L745"></a><span class="visited"> </span>
+<a id="L746"></a><span class="visited"> </span>
+<a id="L747"></a><span class="visited"> </span>
+<a id="L748"></a><span class="visited"> </span>
+<a id="L749"></a><span class="visited"> </span>
+<a id="L750"></a><span > </span>
+<a id="L751"></a><span class="visited"> </span>
+<a id="L752"></a><span class="visited"> </span>
+<a id="L753"></a><span class="visited"> </span>
+<a id="L754"></a><span > </span>
+<a id="L755"></a><span class="visited"> </span>
+<a id="L756"></a><span > </span>
+<a id="L757"></a><span > </span>
+<a id="L758"></a><span > </span>
+<a id="L759"></a><span > </span>
+<a id="L760"></a><span > </span>
+<a id="L761"></a><span > </span>
+<a id="L762"></a><span > </span>
+<a id="L763"></a><span > </span>
+<a id="L764"></a><span > </span>
+<a id="L765"></a><span > </span>
+<a id="L766"></a><span > </span>
+<a id="L767"></a><span > </span>
+<a id="L768"></a><span > </span>
+<a id="L769"></a><span > </span>
+<a id="L770"></a><span > </span>
+<a id="L771"></a><span > </span>
+<a id="L772"></a><span > </span>
+<a id="L773"></a><span > </span>
+<a id="L774"></a><span > </span>
+<a id="L775"></a><span > </span>
+<a id="L776"></a><span > </span>
+<a id="L777"></a><span > </span>
+<a id="L778"></a><span > </span>
+<a id="L779"></a><span > </span>
+<a id="L780"></a><span > </span>
+<a id="L781"></a><span > </span>
+<a id="L782"></a><span > </span>
+<a id="L783"></a><span > </span>
+<a id="L784"></a><span > </span>
+<a id="L785"></a><span > </span>
+<a id="L786"></a><span > </span>
+<a id="L787"></a><span > </span>
+<a id="L788"></a><span > </span>
+<a id="L789"></a><span > </span>
+<a id="L790"></a><span > </span>
+<a id="L791"></a><span > </span>
+<a id="L792"></a><span > </span>
+<a id="L793"></a><span > </span>
+<a id="L794"></a><span > </span>
+<a id="L795"></a><span > </span>
+<a id="L796"></a><span > </span>
+<a id="L797"></a><span > </span>
+<a id="L798"></a><span > </span>
+<a id="L799"></a><span > </span>
+<a id="L800"></a><span > </span>
+<a id="L801"></a><span > </span>
+<a id="L802"></a><span > </span>
+<a id="L803"></a><span > </span>
+<a id="L804"></a><span > </span>
+<a id="L805"></a><span > </span>
+<a id="L806"></a><span > </span>
+<a id="L807"></a><span > </span>
+<a id="L808"></a><span > </span>
+<a id="L809"></a><span > </span>
+<a id="L810"></a><span > </span>
+<a id="L811"></a><span > </span>
+<a id="L812"></a><span > </span>
+<a id="L813"></a><span > </span>
+<a id="L814"></a><span > </span>
+<a id="L815"></a><span > </span>
+<a id="L816"></a><span > </span>
+<a id="L817"></a><span > </span>
+<a id="L818"></a><span > </span>
+<a id="L819"></a><span > </span>
+<a id="L820"></a><span > </span>
+<a id="L821"></a><span > </span>
+<a id="L822"></a><span > </span>
+<a id="L823"></a><span > </span>
+<a id="L824"></a><span > </span>
+<a id="L825"></a><span > </span>
+<a id="L826"></a><span > </span>
+<a id="L827"></a><span > </span>
+<a id="L828"></a><span > </span>
+<a id="L829"></a><span > </span>
+<a id="L830"></a><span > </span>
+<a id="L831"></a><span > </span>
+<a id="L832"></a><span > </span>
+<a id="L833"></a><span > </span>
+<a id="L834"></a><span > </span>
+<a id="L835"></a><span > </span>
+<a id="L836"></a><span > </span>
+<a id="L837"></a><span > </span>
+<a id="L838"></a><span > </span>
+<a id="L839"></a><span > </span>
+<a id="L840"></a><span > </span>
+<a id="L841"></a><span > </span>
+<a id="L842"></a><span > </span>
+<a id="L843"></a><span > </span>
+<a id="L844"></a><span > </span>
+<a id="L845"></a><span > </span>
+<a id="L846"></a><span > </span>
+<a id="L847"></a><span > </span>
+<a id="L848"></a><span > </span>
+<a id="L849"></a><span > </span>
+<a id="L850"></a><span > </span>
+<a id="L851"></a><span > </span>
+<a id="L852"></a><span > </span>
+<a id="L853"></a><span > </span>
+<a id="L854"></a><span > </span>
+<a id="L855"></a><span > </span>
+<a id="L856"></a><span > </span>
+<a id="L857"></a><span > </span>
+<a id="L858"></a><span > </span>
+<a id="L859"></a><span > </span>
+<a id="L860"></a><span > </span>
+<a id="L861"></a><span > </span>
+<a id="L862"></a><span > </span>
+<a id="L863"></a><span > </span>
+<a id="L864"></a><span > </span>
+<a id="L865"></a><span > </span>
+<a id="L866"></a><span > </span>
+<a id="L867"></a><span > </span>
+<a id="L868"></a><span > </span>
+<a id="L869"></a><span > </span>
+<a id="L870"></a><span > </span>
+<a id="L871"></a><span > </span>
+<a id="L872"></a><span > </span>
+<a id="L873"></a><span > </span>
+<a id="L874"></a><span > </span>
+<a id="L875"></a><span > </span>
+<a id="L876"></a><span > </span>
+<a id="L877"></a><span class="visited"> </span>
+<a id="L878"></a><span > </span>
+<a id="L879"></a><span > </span>
+<a id="L880"></a><span > </span>
+<a id="L881"></a><span class="visited"> </span>
+<a id="L882"></a><span > </span>
+<a id="L883"></a><span class="visited"> </span>
+<a id="L884"></a><span > </span>
+<a id="L885"></a><span > </span>
+<a id="L886"></a><span > </span>
+<a id="L887"></a><span > </span>
+<a id="L888"></a><span class="visited"> </span>
+<a id="L889"></a><span > </span>
+<a id="L890"></a><span > </span>
+<a id="L891"></a><span > </span>
+<a id="L892"></a><span class="visited"> </span>
+<a id="L893"></a><span > </span>
+<a id="L894"></a><span > </span>
+<a id="L895"></a><span > </span>
+<a id="L896"></a><span > </span>
+<a id="L897"></a><span > </span>
+<a id="L898"></a><span > </span>
+<a id="L899"></a><span > </span>
+<a id="L900"></a><span > </span>
+<a id="L901"></a><span class="visited"> </span>
+<a id="L902"></a><span > </span>
+<a id="L903"></a><span > </span>
+<a id="L904"></a><span class="visited"> </span>
+<a id="L905"></a><span > </span>
+<a id="L906"></a><span > </span>
+<a id="L907"></a><span > </span>
+<a id="L908"></a><span > </span>
+<a id="L909"></a><span class="visited"> </span>
+<a id="L910"></a><span > </span>
+<a id="L911"></a><span > </span>
+<a id="L912"></a><span > </span>
+<a id="L913"></a><span class="visited"> </span>
+<a id="L914"></a><span > </span>
+<a id="L915"></a><span class="visited"> </span>
+<a id="L916"></a><span > </span>
+<a id="L917"></a><span > </span>
+<a id="L918"></a><span > </span>
+<a id="L919"></a><span class="visited"> </span>
+<a id="L920"></a><span > </span>
+<a id="L921"></a><span > </span>
+<a id="L922"></a><span class="visited"> </span>
+<a id="L923"></a><span > </span>
+<a id="L924"></a><span > </span>
+<a id="L925"></a><span > </span>
+<a id="L926"></a><span > </span>
+<a id="L927"></a><span > </span>
+<a id="L928"></a><span class="visited"> </span>
+<a id="L929"></a><span > </span>
+<a id="L930"></a><span class="visited"> </span>
+<a id="L931"></a><span > </span>
+<a id="L932"></a><span class="visited"> </span>
+<a id="L933"></a><span > </span>
+<a id="L934"></a><span class="visited"> </span>
+<a id="L935"></a><span > </span>
+<a id="L936"></a><span > </span>
+<a id="L937"></a><span > </span>
+<a id="L938"></a><span > </span>
+<a id="L939"></a><span class="visited"> </span>
+<a id="L940"></a><span > </span>
+<a id="L941"></a><span class="visited"> </span>
+<a id="L942"></a><span > </span>
+<a id="L943"></a><span > </span>
+<a id="L944"></a><span class="visited"> </span>
+<a id="L945"></a><span > </span>
+<a id="L946"></a><span > </span>
+<a id="L947"></a><span class="visited"> </span>
+<a id="L948"></a><span > </span>
+<a id="L949"></a><span > </span>
+<a id="L950"></a><span > </span>
+<a id="L951"></a><span > </span>
+<a id="L952"></a><span > </span>
+<a id="L953"></a><span > </span>
+<a id="L954"></a><span > </span>
+<a id="L955"></a><span class="visited"> </span>
+<a id="L956"></a><span > </span>
+<a id="L957"></a><span > </span>
+<a id="L958"></a><span > </span>
+<a id="L959"></a><span > </span>
+<a id="L960"></a><span class="visited"> </span>
+<a id="L961"></a><span > </span>
+<a id="L962"></a><span > </span>
+<a id="L963"></a><span > </span>
+<a id="L964"></a><span > </span>
+<a id="L965"></a><span > </span>
+<a id="L966"></a><span > </span>
+<a id="L967"></a><span class="visited"> </span>
+<a id="L968"></a><span > </span>
+<a id="L969"></a><span > </span>
+<a id="L970"></a><span > </span>
+<a id="L971"></a><span class="visited"> </span>
+<a id="L972"></a><span > </span>
+<a id="L973"></a><span > </span>
+<a id="L974"></a><span > </span>
+<a id="L975"></a><span > </span>
+<a id="L976"></a><span > </span>
+<a id="L977"></a><span > </span>
+<a id="L978"></a><span > </span>
+<a id="L979"></a><span class="visited"> </span>
+<a id="L980"></a><span > </span>
+<a id="L981"></a><span class="visited"> </span>
+<a id="L982"></a><span class="visited"> </span>
+<a id="L983"></a><span > </span>
+<a id="L984"></a><span class="visited"> </span>
+<a id="L985"></a><span class="visited"> </span>
+<a id="L986"></a><span > </span>
+<a id="L987"></a><span class="visited"> </span>
+<a id="L988"></a><span > </span>
+<a id="L989"></a><span > </span>
+<a id="L990"></a><span class="visited"> </span>
+<a id="L991"></a><span class="visited"> </span>
+<a id="L992"></a><span class="visited"> </span>
+<a id="L993"></a><span > </span>
+<a id="L994"></a><span class="visited"> </span>
+<a id="L995"></a><span > </span>
+<a id="L996"></a><span class="visited"> </span>
+<a id="L997"></a><span class="visited"> </span>
+<a id="L998"></a><span class="visited"> </span>
+<a id="L999"></a><span > </span>
+<a id="L1000"></a><span class="visited"> </span>
+<a id="L1001"></a><span class="visited"> </span>
+<a id="L1002"></a><span class="visited"> </span>
+<a id="L1003"></a><span class="visited"> </span>
+<a id="L1004"></a><span > </span>
+<a id="L1005"></a><span class="visited"> </span>
+<a id="L1006"></a><span class="visited"> </span>
+<a id="L1007"></a><span > </span>
+<a id="L1008"></a><span class="visited"> </span>
+<a id="L1009"></a><span class="visited"> </span>
+<a id="L1010"></a><span class="visited"> </span>
+<a id="L1011"></a><span class="visited"> </span>
+<a id="L1012"></a><span > </span>
+<a id="L1013"></a><span class="visited"> </span>
+<a id="L1014"></a><span > </span>
+<a id="L1015"></a><span > </span>
+<a id="L1016"></a><span > </span>
+<a id="L1017"></a><span > </span>
+<a id="L1018"></a><span > </span>
+<a id="L1019"></a><span > </span>
+<a id="L1020"></a><span > </span>
+<a id="L1021"></a><span > </span>
+<a id="L1022"></a><span > </span>
+<a id="L1023"></a><span > </span>
+<a id="L1024"></a><span > </span>
+<a id="L1025"></a><span > </span>
+<a id="L1026"></a><span > </span>
+<a id="L1027"></a><span > </span>
+<a id="L1028"></a><span > </span>
+<a id="L1029"></a><span > </span>
+<a id="L1030"></a><span > </span>
+<a id="L1031"></a><span > </span>
+<a id="L1032"></a><span > </span>
+<a id="L1033"></a><span > </span>
+<a id="L1034"></a><span > </span>
+<a id="L1035"></a><span > </span>
+<a id="L1036"></a><span > </span>
+<a id="L1037"></a><span > </span>
+<a id="L1038"></a><span > </span>
+<a id="L1039"></a><span > </span>
+<a id="L1040"></a><span > </span>
+<a id="L1041"></a><span > </span>
+<a id="L1042"></a><span > </span>
+<a id="L1043"></a><span > </span>
+<a id="L1044"></a><span > </span>
+<a id="L1045"></a><span > </span>
+<a id="L1046"></a><span > </span>
+<a id="L1047"></a><span > </span>
+<a id="L1048"></a><span > </span>
+<a id="L1049"></a><span > </span>
+<a id="L1050"></a><span > </span>
+<a id="L1051"></a><span > </span>
+<a id="L1052"></a><span > </span>
+<a id="L1053"></a><span > </span>
+<a id="L1054"></a><span > </span>
+<a id="L1055"></a><span > </span>
+<a id="L1056"></a><span > </span>
+<a id="L1057"></a><span > </span>
+<a id="L1058"></a><span > </span>
+<a id="L1059"></a><span > </span>
+<a id="L1060"></a><span > </span>
+<a id="L1061"></a><span > </span>
+<a id="L1062"></a><span > </span>
+<a id="L1063"></a><span > </span>
+<a id="L1064"></a><span > </span>
+<a id="L1065"></a><span > </span>
+<a id="L1066"></a><span > </span>
+<a id="L1067"></a><span > </span>
+<a id="L1068"></a><span > </span>
+<a id="L1069"></a><span > </span>
+<a id="L1070"></a><span > </span>
+<a id="L1071"></a><span > </span>
+<a id="L1072"></a><span > </span>
+<a id="L1073"></a><span > </span>
+<a id="L1074"></a><span > </span>
+<a id="L1075"></a><span > </span>
+<a id="L1076"></a><span > </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1">   1</a>
+<a href="#L2">   2</a>
+<a href="#L3">   3</a>
+<a href="#L4">   4</a>
+<a href="#L5">   5</a>
+<a href="#L6">   6</a>
+<a href="#L7">   7</a>
+<a href="#L8">   8</a>
+<a href="#L9">   9</a>
+<a href="#L10">  10</a>
+<a href="#L11">  11</a>
+<a href="#L12">  12</a>
+<a href="#L13">  13</a>
+<a href="#L14">  14</a>
+<a href="#L15">  15</a>
+<a href="#L16">  16</a>
+<a href="#L17">  17</a>
+<a href="#L18">  18</a>
+<a href="#L19">  19</a>
+<a href="#L20">  20</a>
+<a href="#L21">  21</a>
+<a href="#L22">  22</a>
+<a href="#L23">  23</a>
+<a href="#L24">  24</a>
+<a href="#L25">  25</a>
+<a href="#L26">  26</a>
+<a href="#L27">  27</a>
+<a href="#L28">  28</a>
+<a href="#L29">  29</a>
+<a href="#L30">  30</a>
+<a href="#L31">  31</a>
+<a href="#L32">  32</a>
+<a href="#L33">  33</a>
+<a href="#L34">  34</a>
+<a href="#L35">  35</a>
+<a href="#L36">  36</a>
+<a href="#L37">  37</a>
+<a href="#L38">  38</a>
+<a href="#L39">  39</a>
+<a href="#L40">  40</a>
+<a href="#L41">  41</a>
+<a href="#L42">  42</a>
+<a href="#L43">  43</a>
+<a href="#L44">  44</a>
+<a href="#L45">  45</a>
+<a href="#L46">  46</a>
+<a href="#L47">  47</a>
+<a href="#L48">  48</a>
+<a href="#L49">  49</a>
+<a href="#L50">  50</a>
+<a href="#L51">  51</a>
+<a href="#L52">  52</a>
+<a href="#L53">  53</a>
+<a href="#L54">  54</a>
+<a href="#L55">  55</a>
+<a href="#L56">  56</a>
+<a href="#L57">  57</a>
+<a href="#L58">  58</a>
+<a href="#L59">  59</a>
+<a href="#L60">  60</a>
+<a href="#L61">  61</a>
+<a href="#L62">  62</a>
+<a href="#L63">  63</a>
+<a href="#L64">  64</a>
+<a href="#L65">  65</a>
+<a href="#L66">  66</a>
+<a href="#L67">  67</a>
+<a href="#L68">  68</a>
+<a href="#L69">  69</a>
+<a href="#L70">  70</a>
+<a href="#L71">  71</a>
+<a href="#L72">  72</a>
+<a href="#L73">  73</a>
+<a href="#L74">  74</a>
+<a href="#L75">  75</a>
+<a href="#L76">  76</a>
+<a href="#L77">  77</a>
+<a href="#L78">  78</a>
+<a href="#L79">  79</a>
+<a href="#L80">  80</a>
+<a href="#L81">  81</a>
+<a href="#L82">  82</a>
+<a href="#L83">  83</a>
+<a href="#L84">  84</a>
+<a href="#L85">  85</a>
+<a href="#L86">  86</a>
+<a href="#L87">  87</a>
+<a href="#L88">  88</a>
+<a href="#L89">  89</a>
+<a href="#L90">  90</a>
+<a href="#L91">  91</a>
+<a href="#L92">  92</a>
+<a href="#L93">  93</a>
+<a href="#L94">  94</a>
+<a href="#L95">  95</a>
+<a href="#L96">  96</a>
+<a href="#L97">  97</a>
+<a href="#L98">  98</a>
+<a href="#L99">  99</a>
+<a href="#L100"> 100</a>
+<a href="#L101"> 101</a>
+<a href="#L102"> 102</a>
+<a href="#L103"> 103</a>
+<a href="#L104"> 104</a>
+<a href="#L105"> 105</a>
+<a href="#L106"> 106</a>
+<a href="#L107"> 107</a>
+<a href="#L108"> 108</a>
+<a href="#L109"> 109</a>
+<a href="#L110"> 110</a>
+<a href="#L111"> 111</a>
+<a href="#L112"> 112</a>
+<a href="#L113"> 113</a>
+<a href="#L114"> 114</a>
+<a href="#L115"> 115</a>
+<a href="#L116"> 116</a>
+<a href="#L117"> 117</a>
+<a href="#L118"> 118</a>
+<a href="#L119"> 119</a>
+<a href="#L120"> 120</a>
+<a href="#L121"> 121</a>
+<a href="#L122"> 122</a>
+<a href="#L123"> 123</a>
+<a href="#L124"> 124</a>
+<a href="#L125"> 125</a>
+<a href="#L126"> 126</a>
+<a href="#L127"> 127</a>
+<a href="#L128"> 128</a>
+<a href="#L129"> 129</a>
+<a href="#L130"> 130</a>
+<a href="#L131"> 131</a>
+<a href="#L132"> 132</a>
+<a href="#L133"> 133</a>
+<a href="#L134"> 134</a>
+<a href="#L135"> 135</a>
+<a href="#L136"> 136</a>
+<a href="#L137"> 137</a>
+<a href="#L138"> 138</a>
+<a href="#L139"> 139</a>
+<a href="#L140"> 140</a>
+<a href="#L141"> 141</a>
+<a href="#L142"> 142</a>
+<a href="#L143"> 143</a>
+<a href="#L144"> 144</a>
+<a href="#L145"> 145</a>
+<a href="#L146"> 146</a>
+<a href="#L147"> 147</a>
+<a href="#L148"> 148</a>
+<a href="#L149"> 149</a>
+<a href="#L150"> 150</a>
+<a href="#L151"> 151</a>
+<a href="#L152"> 152</a>
+<a href="#L153"> 153</a>
+<a href="#L154"> 154</a>
+<a href="#L155"> 155</a>
+<a href="#L156"> 156</a>
+<a href="#L157"> 157</a>
+<a href="#L158"> 158</a>
+<a href="#L159"> 159</a>
+<a href="#L160"> 160</a>
+<a href="#L161"> 161</a>
+<a href="#L162"> 162</a>
+<a href="#L163"> 163</a>
+<a href="#L164"> 164</a>
+<a href="#L165"> 165</a>
+<a href="#L166"> 166</a>
+<a href="#L167"> 167</a>
+<a href="#L168"> 168</a>
+<a href="#L169"> 169</a>
+<a href="#L170"> 170</a>
+<a href="#L171"> 171</a>
+<a href="#L172"> 172</a>
+<a href="#L173"> 173</a>
+<a href="#L174"> 174</a>
+<a href="#L175"> 175</a>
+<a href="#L176"> 176</a>
+<a href="#L177"> 177</a>
+<a href="#L178"> 178</a>
+<a href="#L179"> 179</a>
+<a href="#L180"> 180</a>
+<a href="#L181"> 181</a>
+<a href="#L182"> 182</a>
+<a href="#L183"> 183</a>
+<a href="#L184"> 184</a>
+<a href="#L185"> 185</a>
+<a href="#L186"> 186</a>
+<a href="#L187"> 187</a>
+<a href="#L188"> 188</a>
+<a href="#L189"> 189</a>
+<a href="#L190"> 190</a>
+<a href="#L191"> 191</a>
+<a href="#L192"> 192</a>
+<a href="#L193"> 193</a>
+<a href="#L194"> 194</a>
+<a href="#L195"> 195</a>
+<a href="#L196"> 196</a>
+<a href="#L197"> 197</a>
+<a href="#L198"> 198</a>
+<a href="#L199"> 199</a>
+<a href="#L200"> 200</a>
+<a href="#L201"> 201</a>
+<a href="#L202"> 202</a>
+<a href="#L203"> 203</a>
+<a href="#L204"> 204</a>
+<a href="#L205"> 205</a>
+<a href="#L206"> 206</a>
+<a href="#L207"> 207</a>
+<a href="#L208"> 208</a>
+<a href="#L209"> 209</a>
+<a href="#L210"> 210</a>
+<a href="#L211"> 211</a>
+<a href="#L212"> 212</a>
+<a href="#L213"> 213</a>
+<a href="#L214"> 214</a>
+<a href="#L215"> 215</a>
+<a href="#L216"> 216</a>
+<a href="#L217"> 217</a>
+<a href="#L218"> 218</a>
+<a href="#L219"> 219</a>
+<a href="#L220"> 220</a>
+<a href="#L221"> 221</a>
+<a href="#L222"> 222</a>
+<a href="#L223"> 223</a>
+<a href="#L224"> 224</a>
+<a href="#L225"> 225</a>
+<a href="#L226"> 226</a>
+<a href="#L227"> 227</a>
+<a href="#L228"> 228</a>
+<a href="#L229"> 229</a>
+<a href="#L230"> 230</a>
+<a href="#L231"> 231</a>
+<a href="#L232"> 232</a>
+<a href="#L233"> 233</a>
+<a href="#L234"> 234</a>
+<a href="#L235"> 235</a>
+<a href="#L236"> 236</a>
+<a href="#L237"> 237</a>
+<a href="#L238"> 238</a>
+<a href="#L239"> 239</a>
+<a href="#L240"> 240</a>
+<a href="#L241"> 241</a>
+<a href="#L242"> 242</a>
+<a href="#L243"> 243</a>
+<a href="#L244"> 244</a>
+<a href="#L245"> 245</a>
+<a href="#L246"> 246</a>
+<a href="#L247"> 247</a>
+<a href="#L248"> 248</a>
+<a href="#L249"> 249</a>
+<a href="#L250"> 250</a>
+<a href="#L251"> 251</a>
+<a href="#L252"> 252</a>
+<a href="#L253"> 253</a>
+<a href="#L254"> 254</a>
+<a href="#L255"> 255</a>
+<a href="#L256"> 256</a>
+<a href="#L257"> 257</a>
+<a href="#L258"> 258</a>
+<a href="#L259"> 259</a>
+<a href="#L260"> 260</a>
+<a href="#L261"> 261</a>
+<a href="#L262"> 262</a>
+<a href="#L263"> 263</a>
+<a href="#L264"> 264</a>
+<a href="#L265"> 265</a>
+<a href="#L266"> 266</a>
+<a href="#L267"> 267</a>
+<a href="#L268"> 268</a>
+<a href="#L269"> 269</a>
+<a href="#L270"> 270</a>
+<a href="#L271"> 271</a>
+<a href="#L272"> 272</a>
+<a href="#L273"> 273</a>
+<a href="#L274"> 274</a>
+<a href="#L275"> 275</a>
+<a href="#L276"> 276</a>
+<a href="#L277"> 277</a>
+<a href="#L278"> 278</a>
+<a href="#L279"> 279</a>
+<a href="#L280"> 280</a>
+<a href="#L281"> 281</a>
+<a href="#L282"> 282</a>
+<a href="#L283"> 283</a>
+<a href="#L284"> 284</a>
+<a href="#L285"> 285</a>
+<a href="#L286"> 286</a>
+<a href="#L287"> 287</a>
+<a href="#L288"> 288</a>
+<a href="#L289"> 289</a>
+<a href="#L290"> 290</a>
+<a href="#L291"> 291</a>
+<a href="#L292"> 292</a>
+<a href="#L293"> 293</a>
+<a href="#L294"> 294</a>
+<a href="#L295"> 295</a>
+<a href="#L296"> 296</a>
+<a href="#L297"> 297</a>
+<a href="#L298"> 298</a>
+<a href="#L299"> 299</a>
+<a href="#L300"> 300</a>
+<a href="#L301"> 301</a>
+<a href="#L302"> 302</a>
+<a href="#L303"> 303</a>
+<a href="#L304"> 304</a>
+<a href="#L305"> 305</a>
+<a href="#L306"> 306</a>
+<a href="#L307"> 307</a>
+<a href="#L308"> 308</a>
+<a href="#L309"> 309</a>
+<a href="#L310"> 310</a>
+<a href="#L311"> 311</a>
+<a href="#L312"> 312</a>
+<a href="#L313"> 313</a>
+<a href="#L314"> 314</a>
+<a href="#L315"> 315</a>
+<a href="#L316"> 316</a>
+<a href="#L317"> 317</a>
+<a href="#L318"> 318</a>
+<a href="#L319"> 319</a>
+<a href="#L320"> 320</a>
+<a href="#L321"> 321</a>
+<a href="#L322"> 322</a>
+<a href="#L323"> 323</a>
+<a href="#L324"> 324</a>
+<a href="#L325"> 325</a>
+<a href="#L326"> 326</a>
+<a href="#L327"> 327</a>
+<a href="#L328"> 328</a>
+<a href="#L329"> 329</a>
+<a href="#L330"> 330</a>
+<a href="#L331"> 331</a>
+<a href="#L332"> 332</a>
+<a href="#L333"> 333</a>
+<a href="#L334"> 334</a>
+<a href="#L335"> 335</a>
+<a href="#L336"> 336</a>
+<a href="#L337"> 337</a>
+<a href="#L338"> 338</a>
+<a href="#L339"> 339</a>
+<a href="#L340"> 340</a>
+<a href="#L341"> 341</a>
+<a href="#L342"> 342</a>
+<a href="#L343"> 343</a>
+<a href="#L344"> 344</a>
+<a href="#L345"> 345</a>
+<a href="#L346"> 346</a>
+<a href="#L347"> 347</a>
+<a href="#L348"> 348</a>
+<a href="#L349"> 349</a>
+<a href="#L350"> 350</a>
+<a href="#L351"> 351</a>
+<a href="#L352"> 352</a>
+<a href="#L353"> 353</a>
+<a href="#L354"> 354</a>
+<a href="#L355"> 355</a>
+<a href="#L356"> 356</a>
+<a href="#L357"> 357</a>
+<a href="#L358"> 358</a>
+<a href="#L359"> 359</a>
+<a href="#L360"> 360</a>
+<a href="#L361"> 361</a>
+<a href="#L362"> 362</a>
+<a href="#L363"> 363</a>
+<a href="#L364"> 364</a>
+<a href="#L365"> 365</a>
+<a href="#L366"> 366</a>
+<a href="#L367"> 367</a>
+<a href="#L368"> 368</a>
+<a href="#L369"> 369</a>
+<a href="#L370"> 370</a>
+<a href="#L371"> 371</a>
+<a href="#L372"> 372</a>
+<a href="#L373"> 373</a>
+<a href="#L374"> 374</a>
+<a href="#L375"> 375</a>
+<a href="#L376"> 376</a>
+<a href="#L377"> 377</a>
+<a href="#L378"> 378</a>
+<a href="#L379"> 379</a>
+<a href="#L380"> 380</a>
+<a href="#L381"> 381</a>
+<a href="#L382"> 382</a>
+<a href="#L383"> 383</a>
+<a href="#L384"> 384</a>
+<a href="#L385"> 385</a>
+<a href="#L386"> 386</a>
+<a href="#L387"> 387</a>
+<a href="#L388"> 388</a>
+<a href="#L389"> 389</a>
+<a href="#L390"> 390</a>
+<a href="#L391"> 391</a>
+<a href="#L392"> 392</a>
+<a href="#L393"> 393</a>
+<a href="#L394"> 394</a>
+<a href="#L395"> 395</a>
+<a href="#L396"> 396</a>
+<a href="#L397"> 397</a>
+<a href="#L398"> 398</a>
+<a href="#L399"> 399</a>
+<a href="#L400"> 400</a>
+<a href="#L401"> 401</a>
+<a href="#L402"> 402</a>
+<a href="#L403"> 403</a>
+<a href="#L404"> 404</a>
+<a href="#L405"> 405</a>
+<a href="#L406"> 406</a>
+<a href="#L407"> 407</a>
+<a href="#L408"> 408</a>
+<a href="#L409"> 409</a>
+<a href="#L410"> 410</a>
+<a href="#L411"> 411</a>
+<a href="#L412"> 412</a>
+<a href="#L413"> 413</a>
+<a href="#L414"> 414</a>
+<a href="#L415"> 415</a>
+<a href="#L416"> 416</a>
+<a href="#L417"> 417</a>
+<a href="#L418"> 418</a>
+<a href="#L419"> 419</a>
+<a href="#L420"> 420</a>
+<a href="#L421"> 421</a>
+<a href="#L422"> 422</a>
+<a href="#L423"> 423</a>
+<a href="#L424"> 424</a>
+<a href="#L425"> 425</a>
+<a href="#L426"> 426</a>
+<a href="#L427"> 427</a>
+<a href="#L428"> 428</a>
+<a href="#L429"> 429</a>
+<a href="#L430"> 430</a>
+<a href="#L431"> 431</a>
+<a href="#L432"> 432</a>
+<a href="#L433"> 433</a>
+<a href="#L434"> 434</a>
+<a href="#L435"> 435</a>
+<a href="#L436"> 436</a>
+<a href="#L437"> 437</a>
+<a href="#L438"> 438</a>
+<a href="#L439"> 439</a>
+<a href="#L440"> 440</a>
+<a href="#L441"> 441</a>
+<a href="#L442"> 442</a>
+<a href="#L443"> 443</a>
+<a href="#L444"> 444</a>
+<a href="#L445"> 445</a>
+<a href="#L446"> 446</a>
+<a href="#L447"> 447</a>
+<a href="#L448"> 448</a>
+<a href="#L449"> 449</a>
+<a href="#L450"> 450</a>
+<a href="#L451"> 451</a>
+<a href="#L452"> 452</a>
+<a href="#L453"> 453</a>
+<a href="#L454"> 454</a>
+<a href="#L455"> 455</a>
+<a href="#L456"> 456</a>
+<a href="#L457"> 457</a>
+<a href="#L458"> 458</a>
+<a href="#L459"> 459</a>
+<a href="#L460"> 460</a>
+<a href="#L461"> 461</a>
+<a href="#L462"> 462</a>
+<a href="#L463"> 463</a>
+<a href="#L464"> 464</a>
+<a href="#L465"> 465</a>
+<a href="#L466"> 466</a>
+<a href="#L467"> 467</a>
+<a href="#L468"> 468</a>
+<a href="#L469"> 469</a>
+<a href="#L470"> 470</a>
+<a href="#L471"> 471</a>
+<a href="#L472"> 472</a>
+<a href="#L473"> 473</a>
+<a href="#L474"> 474</a>
+<a href="#L475"> 475</a>
+<a href="#L476"> 476</a>
+<a href="#L477"> 477</a>
+<a href="#L478"> 478</a>
+<a href="#L479"> 479</a>
+<a href="#L480"> 480</a>
+<a href="#L481"> 481</a>
+<a href="#L482"> 482</a>
+<a href="#L483"> 483</a>
+<a href="#L484"> 484</a>
+<a href="#L485"> 485</a>
+<a href="#L486"> 486</a>
+<a href="#L487"> 487</a>
+<a href="#L488"> 488</a>
+<a href="#L489"> 489</a>
+<a href="#L490"> 490</a>
+<a href="#L491"> 491</a>
+<a href="#L492"> 492</a>
+<a href="#L493"> 493</a>
+<a href="#L494"> 494</a>
+<a href="#L495"> 495</a>
+<a href="#L496"> 496</a>
+<a href="#L497"> 497</a>
+<a href="#L498"> 498</a>
+<a href="#L499"> 499</a>
+<a href="#L500"> 500</a>
+<a href="#L501"> 501</a>
+<a href="#L502"> 502</a>
+<a href="#L503"> 503</a>
+<a href="#L504"> 504</a>
+<a href="#L505"> 505</a>
+<a href="#L506"> 506</a>
+<a href="#L507"> 507</a>
+<a href="#L508"> 508</a>
+<a href="#L509"> 509</a>
+<a href="#L510"> 510</a>
+<a href="#L511"> 511</a>
+<a href="#L512"> 512</a>
+<a href="#L513"> 513</a>
+<a href="#L514"> 514</a>
+<a href="#L515"> 515</a>
+<a href="#L516"> 516</a>
+<a href="#L517"> 517</a>
+<a href="#L518"> 518</a>
+<a href="#L519"> 519</a>
+<a href="#L520"> 520</a>
+<a href="#L521"> 521</a>
+<a href="#L522"> 522</a>
+<a href="#L523"> 523</a>
+<a href="#L524"> 524</a>
+<a href="#L525"> 525</a>
+<a href="#L526"> 526</a>
+<a href="#L527"> 527</a>
+<a href="#L528"> 528</a>
+<a href="#L529"> 529</a>
+<a href="#L530"> 530</a>
+<a href="#L531"> 531</a>
+<a href="#L532"> 532</a>
+<a href="#L533"> 533</a>
+<a href="#L534"> 534</a>
+<a href="#L535"> 535</a>
+<a href="#L536"> 536</a>
+<a href="#L537"> 537</a>
+<a href="#L538"> 538</a>
+<a href="#L539"> 539</a>
+<a href="#L540"> 540</a>
+<a href="#L541"> 541</a>
+<a href="#L542"> 542</a>
+<a href="#L543"> 543</a>
+<a href="#L544"> 544</a>
+<a href="#L545"> 545</a>
+<a href="#L546"> 546</a>
+<a href="#L547"> 547</a>
+<a href="#L548"> 548</a>
+<a href="#L549"> 549</a>
+<a href="#L550"> 550</a>
+<a href="#L551"> 551</a>
+<a href="#L552"> 552</a>
+<a href="#L553"> 553</a>
+<a href="#L554"> 554</a>
+<a href="#L555"> 555</a>
+<a href="#L556"> 556</a>
+<a href="#L557"> 557</a>
+<a href="#L558"> 558</a>
+<a href="#L559"> 559</a>
+<a href="#L560"> 560</a>
+<a href="#L561"> 561</a>
+<a href="#L562"> 562</a>
+<a href="#L563"> 563</a>
+<a href="#L564"> 564</a>
+<a href="#L565"> 565</a>
+<a href="#L566"> 566</a>
+<a href="#L567"> 567</a>
+<a href="#L568"> 568</a>
+<a href="#L569"> 569</a>
+<a href="#L570"> 570</a>
+<a href="#L571"> 571</a>
+<a href="#L572"> 572</a>
+<a href="#L573"> 573</a>
+<a href="#L574"> 574</a>
+<a href="#L575"> 575</a>
+<a href="#L576"> 576</a>
+<a href="#L577"> 577</a>
+<a href="#L578"> 578</a>
+<a href="#L579"> 579</a>
+<a href="#L580"> 580</a>
+<a href="#L581"> 581</a>
+<a href="#L582"> 582</a>
+<a href="#L583"> 583</a>
+<a href="#L584"> 584</a>
+<a href="#L585"> 585</a>
+<a href="#L586"> 586</a>
+<a href="#L587"> 587</a>
+<a href="#L588"> 588</a>
+<a href="#L589"> 589</a>
+<a href="#L590"> 590</a>
+<a href="#L591"> 591</a>
+<a href="#L592"> 592</a>
+<a href="#L593"> 593</a>
+<a href="#L594"> 594</a>
+<a href="#L595"> 595</a>
+<a href="#L596"> 596</a>
+<a href="#L597"> 597</a>
+<a href="#L598"> 598</a>
+<a href="#L599"> 599</a>
+<a href="#L600"> 600</a>
+<a href="#L601"> 601</a>
+<a href="#L602"> 602</a>
+<a href="#L603"> 603</a>
+<a href="#L604"> 604</a>
+<a href="#L605"> 605</a>
+<a href="#L606"> 606</a>
+<a href="#L607"> 607</a>
+<a href="#L608"> 608</a>
+<a href="#L609"> 609</a>
+<a href="#L610"> 610</a>
+<a href="#L611"> 611</a>
+<a href="#L612"> 612</a>
+<a href="#L613"> 613</a>
+<a href="#L614"> 614</a>
+<a href="#L615"> 615</a>
+<a href="#L616"> 616</a>
+<a href="#L617"> 617</a>
+<a href="#L618"> 618</a>
+<a href="#L619"> 619</a>
+<a href="#L620"> 620</a>
+<a href="#L621"> 621</a>
+<a href="#L622"> 622</a>
+<a href="#L623"> 623</a>
+<a href="#L624"> 624</a>
+<a href="#L625"> 625</a>
+<a href="#L626"> 626</a>
+<a href="#L627"> 627</a>
+<a href="#L628"> 628</a>
+<a href="#L629"> 629</a>
+<a href="#L630"> 630</a>
+<a href="#L631"> 631</a>
+<a href="#L632"> 632</a>
+<a href="#L633"> 633</a>
+<a href="#L634"> 634</a>
+<a href="#L635"> 635</a>
+<a href="#L636"> 636</a>
+<a href="#L637"> 637</a>
+<a href="#L638"> 638</a>
+<a href="#L639"> 639</a>
+<a href="#L640"> 640</a>
+<a href="#L641"> 641</a>
+<a href="#L642"> 642</a>
+<a href="#L643"> 643</a>
+<a href="#L644"> 644</a>
+<a href="#L645"> 645</a>
+<a href="#L646"> 646</a>
+<a href="#L647"> 647</a>
+<a href="#L648"> 648</a>
+<a href="#L649"> 649</a>
+<a href="#L650"> 650</a>
+<a href="#L651"> 651</a>
+<a href="#L652"> 652</a>
+<a href="#L653"> 653</a>
+<a href="#L654"> 654</a>
+<a href="#L655"> 655</a>
+<a href="#L656"> 656</a>
+<a href="#L657"> 657</a>
+<a href="#L658"> 658</a>
+<a href="#L659"> 659</a>
+<a href="#L660"> 660</a>
+<a href="#L661"> 661</a>
+<a href="#L662"> 662</a>
+<a href="#L663"> 663</a>
+<a href="#L664"> 664</a>
+<a href="#L665"> 665</a>
+<a href="#L666"> 666</a>
+<a href="#L667"> 667</a>
+<a href="#L668"> 668</a>
+<a href="#L669"> 669</a>
+<a href="#L670"> 670</a>
+<a href="#L671"> 671</a>
+<a href="#L672"> 672</a>
+<a href="#L673"> 673</a>
+<a href="#L674"> 674</a>
+<a href="#L675"> 675</a>
+<a href="#L676"> 676</a>
+<a href="#L677"> 677</a>
+<a href="#L678"> 678</a>
+<a href="#L679"> 679</a>
+<a href="#L680"> 680</a>
+<a href="#L681"> 681</a>
+<a href="#L682"> 682</a>
+<a href="#L683"> 683</a>
+<a href="#L684"> 684</a>
+<a href="#L685"> 685</a>
+<a href="#L686"> 686</a>
+<a href="#L687"> 687</a>
+<a href="#L688"> 688</a>
+<a href="#L689"> 689</a>
+<a href="#L690"> 690</a>
+<a href="#L691"> 691</a>
+<a href="#L692"> 692</a>
+<a href="#L693"> 693</a>
+<a href="#L694"> 694</a>
+<a href="#L695"> 695</a>
+<a href="#L696"> 696</a>
+<a href="#L697"> 697</a>
+<a href="#L698"> 698</a>
+<a href="#L699"> 699</a>
+<a href="#L700"> 700</a>
+<a href="#L701"> 701</a>
+<a href="#L702"> 702</a>
+<a href="#L703"> 703</a>
+<a href="#L704"> 704</a>
+<a href="#L705"> 705</a>
+<a href="#L706"> 706</a>
+<a href="#L707"> 707</a>
+<a href="#L708"> 708</a>
+<a href="#L709"> 709</a>
+<a href="#L710"> 710</a>
+<a href="#L711"> 711</a>
+<a href="#L712"> 712</a>
+<a href="#L713"> 713</a>
+<a href="#L714"> 714</a>
+<a href="#L715"> 715</a>
+<a href="#L716"> 716</a>
+<a href="#L717"> 717</a>
+<a href="#L718"> 718</a>
+<a href="#L719"> 719</a>
+<a href="#L720"> 720</a>
+<a href="#L721"> 721</a>
+<a href="#L722"> 722</a>
+<a href="#L723"> 723</a>
+<a href="#L724"> 724</a>
+<a href="#L725"> 725</a>
+<a href="#L726"> 726</a>
+<a href="#L727"> 727</a>
+<a href="#L728"> 728</a>
+<a href="#L729"> 729</a>
+<a href="#L730"> 730</a>
+<a href="#L731"> 731</a>
+<a href="#L732"> 732</a>
+<a href="#L733"> 733</a>
+<a href="#L734"> 734</a>
+<a href="#L735"> 735</a>
+<a href="#L736"> 736</a>
+<a href="#L737"> 737</a>
+<a href="#L738"> 738</a>
+<a href="#L739"> 739</a>
+<a href="#L740"> 740</a>
+<a href="#L741"> 741</a>
+<a href="#L742"> 742</a>
+<a href="#L743"> 743</a>
+<a href="#L744"> 744</a>
+<a href="#L745"> 745</a>
+<a href="#L746"> 746</a>
+<a href="#L747"> 747</a>
+<a href="#L748"> 748</a>
+<a href="#L749"> 749</a>
+<a href="#L750"> 750</a>
+<a href="#L751"> 751</a>
+<a href="#L752"> 752</a>
+<a href="#L753"> 753</a>
+<a href="#L754"> 754</a>
+<a href="#L755"> 755</a>
+<a href="#L756"> 756</a>
+<a href="#L757"> 757</a>
+<a href="#L758"> 758</a>
+<a href="#L759"> 759</a>
+<a href="#L760"> 760</a>
+<a href="#L761"> 761</a>
+<a href="#L762"> 762</a>
+<a href="#L763"> 763</a>
+<a href="#L764"> 764</a>
+<a href="#L765"> 765</a>
+<a href="#L766"> 766</a>
+<a href="#L767"> 767</a>
+<a href="#L768"> 768</a>
+<a href="#L769"> 769</a>
+<a href="#L770"> 770</a>
+<a href="#L771"> 771</a>
+<a href="#L772"> 772</a>
+<a href="#L773"> 773</a>
+<a href="#L774"> 774</a>
+<a href="#L775"> 775</a>
+<a href="#L776"> 776</a>
+<a href="#L777"> 777</a>
+<a href="#L778"> 778</a>
+<a href="#L779"> 779</a>
+<a href="#L780"> 780</a>
+<a href="#L781"> 781</a>
+<a href="#L782"> 782</a>
+<a href="#L783"> 783</a>
+<a href="#L784"> 784</a>
+<a href="#L785"> 785</a>
+<a href="#L786"> 786</a>
+<a href="#L787"> 787</a>
+<a href="#L788"> 788</a>
+<a href="#L789"> 789</a>
+<a href="#L790"> 790</a>
+<a href="#L791"> 791</a>
+<a href="#L792"> 792</a>
+<a href="#L793"> 793</a>
+<a href="#L794"> 794</a>
+<a href="#L795"> 795</a>
+<a href="#L796"> 796</a>
+<a href="#L797"> 797</a>
+<a href="#L798"> 798</a>
+<a href="#L799"> 799</a>
+<a href="#L800"> 800</a>
+<a href="#L801"> 801</a>
+<a href="#L802"> 802</a>
+<a href="#L803"> 803</a>
+<a href="#L804"> 804</a>
+<a href="#L805"> 805</a>
+<a href="#L806"> 806</a>
+<a href="#L807"> 807</a>
+<a href="#L808"> 808</a>
+<a href="#L809"> 809</a>
+<a href="#L810"> 810</a>
+<a href="#L811"> 811</a>
+<a href="#L812"> 812</a>
+<a href="#L813"> 813</a>
+<a href="#L814"> 814</a>
+<a href="#L815"> 815</a>
+<a href="#L816"> 816</a>
+<a href="#L817"> 817</a>
+<a href="#L818"> 818</a>
+<a href="#L819"> 819</a>
+<a href="#L820"> 820</a>
+<a href="#L821"> 821</a>
+<a href="#L822"> 822</a>
+<a href="#L823"> 823</a>
+<a href="#L824"> 824</a>
+<a href="#L825"> 825</a>
+<a href="#L826"> 826</a>
+<a href="#L827"> 827</a>
+<a href="#L828"> 828</a>
+<a href="#L829"> 829</a>
+<a href="#L830"> 830</a>
+<a href="#L831"> 831</a>
+<a href="#L832"> 832</a>
+<a href="#L833"> 833</a>
+<a href="#L834"> 834</a>
+<a href="#L835"> 835</a>
+<a href="#L836"> 836</a>
+<a href="#L837"> 837</a>
+<a href="#L838"> 838</a>
+<a href="#L839"> 839</a>
+<a href="#L840"> 840</a>
+<a href="#L841"> 841</a>
+<a href="#L842"> 842</a>
+<a href="#L843"> 843</a>
+<a href="#L844"> 844</a>
+<a href="#L845"> 845</a>
+<a href="#L846"> 846</a>
+<a href="#L847"> 847</a>
+<a href="#L848"> 848</a>
+<a href="#L849"> 849</a>
+<a href="#L850"> 850</a>
+<a href="#L851"> 851</a>
+<a href="#L852"> 852</a>
+<a href="#L853"> 853</a>
+<a href="#L854"> 854</a>
+<a href="#L855"> 855</a>
+<a href="#L856"> 856</a>
+<a href="#L857"> 857</a>
+<a href="#L858"> 858</a>
+<a href="#L859"> 859</a>
+<a href="#L860"> 860</a>
+<a href="#L861"> 861</a>
+<a href="#L862"> 862</a>
+<a href="#L863"> 863</a>
+<a href="#L864"> 864</a>
+<a href="#L865"> 865</a>
+<a href="#L866"> 866</a>
+<a href="#L867"> 867</a>
+<a href="#L868"> 868</a>
+<a href="#L869"> 869</a>
+<a href="#L870"> 870</a>
+<a href="#L871"> 871</a>
+<a href="#L872"> 872</a>
+<a href="#L873"> 873</a>
+<a href="#L874"> 874</a>
+<a href="#L875"> 875</a>
+<a href="#L876"> 876</a>
+<a href="#L877"> 877</a>
+<a href="#L878"> 878</a>
+<a href="#L879"> 879</a>
+<a href="#L880"> 880</a>
+<a href="#L881"> 881</a>
+<a href="#L882"> 882</a>
+<a href="#L883"> 883</a>
+<a href="#L884"> 884</a>
+<a href="#L885"> 885</a>
+<a href="#L886"> 886</a>
+<a href="#L887"> 887</a>
+<a href="#L888"> 888</a>
+<a href="#L889"> 889</a>
+<a href="#L890"> 890</a>
+<a href="#L891"> 891</a>
+<a href="#L892"> 892</a>
+<a href="#L893"> 893</a>
+<a href="#L894"> 894</a>
+<a href="#L895"> 895</a>
+<a href="#L896"> 896</a>
+<a href="#L897"> 897</a>
+<a href="#L898"> 898</a>
+<a href="#L899"> 899</a>
+<a href="#L900"> 900</a>
+<a href="#L901"> 901</a>
+<a href="#L902"> 902</a>
+<a href="#L903"> 903</a>
+<a href="#L904"> 904</a>
+<a href="#L905"> 905</a>
+<a href="#L906"> 906</a>
+<a href="#L907"> 907</a>
+<a href="#L908"> 908</a>
+<a href="#L909"> 909</a>
+<a href="#L910"> 910</a>
+<a href="#L911"> 911</a>
+<a href="#L912"> 912</a>
+<a href="#L913"> 913</a>
+<a href="#L914"> 914</a>
+<a href="#L915"> 915</a>
+<a href="#L916"> 916</a>
+<a href="#L917"> 917</a>
+<a href="#L918"> 918</a>
+<a href="#L919"> 919</a>
+<a href="#L920"> 920</a>
+<a href="#L921"> 921</a>
+<a href="#L922"> 922</a>
+<a href="#L923"> 923</a>
+<a href="#L924"> 924</a>
+<a href="#L925"> 925</a>
+<a href="#L926"> 926</a>
+<a href="#L927"> 927</a>
+<a href="#L928"> 928</a>
+<a href="#L929"> 929</a>
+<a href="#L930"> 930</a>
+<a href="#L931"> 931</a>
+<a href="#L932"> 932</a>
+<a href="#L933"> 933</a>
+<a href="#L934"> 934</a>
+<a href="#L935"> 935</a>
+<a href="#L936"> 936</a>
+<a href="#L937"> 937</a>
+<a href="#L938"> 938</a>
+<a href="#L939"> 939</a>
+<a href="#L940"> 940</a>
+<a href="#L941"> 941</a>
+<a href="#L942"> 942</a>
+<a href="#L943"> 943</a>
+<a href="#L944"> 944</a>
+<a href="#L945"> 945</a>
+<a href="#L946"> 946</a>
+<a href="#L947"> 947</a>
+<a href="#L948"> 948</a>
+<a href="#L949"> 949</a>
+<a href="#L950"> 950</a>
+<a href="#L951"> 951</a>
+<a href="#L952"> 952</a>
+<a href="#L953"> 953</a>
+<a href="#L954"> 954</a>
+<a href="#L955"> 955</a>
+<a href="#L956"> 956</a>
+<a href="#L957"> 957</a>
+<a href="#L958"> 958</a>
+<a href="#L959"> 959</a>
+<a href="#L960"> 960</a>
+<a href="#L961"> 961</a>
+<a href="#L962"> 962</a>
+<a href="#L963"> 963</a>
+<a href="#L964"> 964</a>
+<a href="#L965"> 965</a>
+<a href="#L966"> 966</a>
+<a href="#L967"> 967</a>
+<a href="#L968"> 968</a>
+<a href="#L969"> 969</a>
+<a href="#L970"> 970</a>
+<a href="#L971"> 971</a>
+<a href="#L972"> 972</a>
+<a href="#L973"> 973</a>
+<a href="#L974"> 974</a>
+<a href="#L975"> 975</a>
+<a href="#L976"> 976</a>
+<a href="#L977"> 977</a>
+<a href="#L978"> 978</a>
+<a href="#L979"> 979</a>
+<a href="#L980"> 980</a>
+<a href="#L981"> 981</a>
+<a href="#L982"> 982</a>
+<a href="#L983"> 983</a>
+<a href="#L984"> 984</a>
+<a href="#L985"> 985</a>
+<a href="#L986"> 986</a>
+<a href="#L987"> 987</a>
+<a href="#L988"> 988</a>
+<a href="#L989"> 989</a>
+<a href="#L990"> 990</a>
+<a href="#L991"> 991</a>
+<a href="#L992"> 992</a>
+<a href="#L993"> 993</a>
+<a href="#L994"> 994</a>
+<a href="#L995"> 995</a>
+<a href="#L996"> 996</a>
+<a href="#L997"> 997</a>
+<a href="#L998"> 998</a>
+<a href="#L999"> 999</a>
+<a href="#L1000">1000</a>
+<a href="#L1001">1001</a>
+<a href="#L1002">1002</a>
+<a href="#L1003">1003</a>
+<a href="#L1004">1004</a>
+<a href="#L1005">1005</a>
+<a href="#L1006">1006</a>
+<a href="#L1007">1007</a>
+<a href="#L1008">1008</a>
+<a href="#L1009">1009</a>
+<a href="#L1010">1010</a>
+<a href="#L1011">1011</a>
+<a href="#L1012">1012</a>
+<a href="#L1013">1013</a>
+<a href="#L1014">1014</a>
+<a href="#L1015">1015</a>
+<a href="#L1016">1016</a>
+<a href="#L1017">1017</a>
+<a href="#L1018">1018</a>
+<a href="#L1019">1019</a>
+<a href="#L1020">1020</a>
+<a href="#L1021">1021</a>
+<a href="#L1022">1022</a>
+<a href="#L1023">1023</a>
+<a href="#L1024">1024</a>
+<a href="#L1025">1025</a>
+<a href="#L1026">1026</a>
+<a href="#L1027">1027</a>
+<a href="#L1028">1028</a>
+<a href="#L1029">1029</a>
+<a href="#L1030">1030</a>
+<a href="#L1031">1031</a>
+<a href="#L1032">1032</a>
+<a href="#L1033">1033</a>
+<a href="#L1034">1034</a>
+<a href="#L1035">1035</a>
+<a href="#L1036">1036</a>
+<a href="#L1037">1037</a>
+<a href="#L1038">1038</a>
+<a href="#L1039">1039</a>
+<a href="#L1040">1040</a>
+<a href="#L1041">1041</a>
+<a href="#L1042">1042</a>
+<a href="#L1043">1043</a>
+<a href="#L1044">1044</a>
+<a href="#L1045">1045</a>
+<a href="#L1046">1046</a>
+<a href="#L1047">1047</a>
+<a href="#L1048">1048</a>
+<a href="#L1049">1049</a>
+<a href="#L1050">1050</a>
+<a href="#L1051">1051</a>
+<a href="#L1052">1052</a>
+<a href="#L1053">1053</a>
+<a href="#L1054">1054</a>
+<a href="#L1055">1055</a>
+<a href="#L1056">1056</a>
+<a href="#L1057">1057</a>
+<a href="#L1058">1058</a>
+<a href="#L1059">1059</a>
+<a href="#L1060">1060</a>
+<a href="#L1061">1061</a>
+<a href="#L1062">1062</a>
+<a href="#L1063">1063</a>
+<a href="#L1064">1064</a>
+<a href="#L1065">1065</a>
+<a href="#L1066">1066</a>
+<a href="#L1067">1067</a>
+<a href="#L1068">1068</a>
+<a href="#L1069">1069</a>
+<a href="#L1070">1070</a>
+<a href="#L1071">1071</a>
+<a href="#L1072">1072</a>
+<a href="#L1073">1073</a>
+<a href="#L1074">1074</a>
+<a href="#L1075">1075</a>
+<a href="#L1076">1076</a>
+</pre>
+<pre><code class="ocaml">open OUnit2
+open Yojson.Basic
+open Character
+open Combat
+
+
+(* Load JSON files here for testing.
+   Call [from_file f] here to turn [f] into a value of type [Yojson.Basic.t]. *)
+let j1 = from_fil<span data-count="16">e</span> "json/charmove.json"
+let t1 = from_jso<span data-count="16">n</span> j1
+
+(* Copied from A2 test suite *)
+(** [pp_string s] pretty-prints string [s]. *)
+let pp_string s = <span data-count="312">"</span>\"" ^ s ^ "\""
+
+(** [pp_list pp_elt lst] pretty-prints list [lst], using [pp_elt]
+    to pretty-print each element of [lst]. *)
+let pp_list pp_elt lst =
+  <span data-count="660">l</span>et pp_elts lst =
+    <span data-count="660">l</span>et rec loop n acc = function
+      | <span data-count="72">[</span>] -&gt; acc
+      | <span data-count="588">[</span>h] -&gt; acc ^ pp_el<span data-count="588">t</span> h
+      | <span data-count="1892">h</span>1 :: (h2 :: t as t') -&gt;
+        if n = 100 then <span data-count="0">a</span>cc ^ "..."  (* stop printing long list *)
+        else <span data-count="1892">l</span>oop (n + 1) (acc ^ (pp_el<span data-count="1892">t</span> h1) ^ "; ") t'
+    in loop 0 "" lst
+  in "[" ^ pp_elt<span data-count="660">s</span> lst ^ "]"
+
+(** [cmp_set_like_lists lst1 lst2] compares two lists to see whether
+    they are equivalent set-like lists.  That means checking two things.
+    First, they must both be {i set-like}, meaning that they do not
+    contain any duplicates.  Second, they must contain the same elements,
+    though not necessarily in the same order. *)
+let cmp_set_like_lists lst1 lst2 =
+  <span data-count="48">l</span>et uniq1 = List.sort_uniq compare lst1 in
+  <span data-count="48">l</span>et uniq2 = List.sort_uniq compare lst2 in
+  <span data-count="48">L</span>ist.lengt<span data-count="48">h</span> lst1 = List.lengt<span data-count="48">h</span> uniq1
+  &amp;&amp;
+  <span data-count="48">L</span>ist.lengt<span data-count="48">h</span> lst2 = List.lengt<span data-count="48">h</span> uniq2
+  &amp;&amp;
+  <span data-count="48">u</span>niq1 = uniq2
+
+(* Other comparison and printer functions *)
+let cmp_unordered_lists lst1 lst2 =
+  <span data-count="42">L</span>ist.sor<span data-count="42">t</span> compare lst1 = List.sor<span data-count="42">t</span> compare lst2
+
+let str x = 
+  <span data-count="0">x</span>
+
+let string_of_element = function
+  | <span data-count="132">N</span>ormal -&gt; "Normal"
+  | <span data-count="0">W</span>ater -&gt; "Water"
+  | <span data-count="12">F</span>ire -&gt; "Fire"
+  | <span data-count="12">G</span>rass -&gt; "Grass"
+
+let chars_test name json f p expected =
+  <span data-count="80">n</span>ame &gt;:: (fun _ -&gt; <span data-count="30">a</span>ssert_equal expected 
+               ((from_jso<span data-count="30">n</span> json).all_chars |&gt; List.ma<span data-count="30">p</span> (fun (_, y) -&gt; <span data-count="390">f</span> y))
+               ~cmp:cmp_unordered_lists ~printer:p)
+
+let chars_str_test name json f expected =
+  <span data-count="32">n</span>ame &gt;:: (fun _ -&gt; <span data-count="12">a</span>ssert_equal expected 
+               ((from_jso<span data-count="12">n</span> json).all_chars |&gt; List.ma<span data-count="12">p</span> (fun (_, y) -&gt; <span data-count="156">f</span> y))
+               ~cmp:cmp_unordered_lists ~printer:(pp_lis<span data-count="12">t</span> pp_string))
+
+let get_char_hp_lvl_test name <span data-count="17">c</span>har level expected = 
+  name &gt;:: (fun <span data-count="17">_</span> -&gt; assert_equal expected (get_char_hp_lvl char level))
+
+let get_char_atk_lvl_test<span data-count="17"> </span>name char level expected = 
+  name &gt;:: (fun _ -&gt; assert_equal expected (get_char_atk_lvl char level))
+
+let c_3 = Option.get (get_char t1 3) 
+let c_12 = Option.get (get_char t1 12)
+
+let char_tests = [
+  chars_test "char id test" j1 get_char_id (pp_list string_of_int<span data-count="17">)</span>
+    [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 1001];
+  chars_str_test "char name test" j1 get_char_name
+    ["Brave Warrior Clarkson"; "Wise Sage Gries"; "Nether Imp"; "Harpy<span data-count="16">"</span>; 
+     "Forest Fairy"; "Mountain Thug"<span data-count="17">;</span> "Holy K<span data-count="17">n</span>ight Xenon"; "Paladin"; 
+     "Dark pri<span data-count="16">e</span>stess"; "<span data-count="16">A</span>lpha Wolf"; "Wolf<span data-count="16">"</span>; "Mermai<span data-count="16">d</span>"; "test char"];
+  chars_<span data-count="16">s</span>tr_test "<span data-count="16">c</span>har desc test" j1 <span data-count="16">g</span>et_char_d<span data-count="16">e</span>sc
+    ["PH"; "PH"; "PH"; <span data-count="16">"</span>PH"; "PH"<span data-count="16">;</span> "PH"; "PH"; "PH"<span data-count="16">;</span> "PH"; "P<span data-count="16">H</span>"; "PH"; "PH"; 
+     "tes<span data-count="16">t</span> characte<span data-count="16">r</span>. DO NOT USE IN R<span data-count="16">E</span>AL GAME"]<span data-count="16">;</span>
+  chars_test "char moves<span data-count="16"> </span>test" j1 <span data-count="16">g</span>et_moves (pp_list<span data-count="16"> </span>(pp_list <span data-count="16">g</span>et_move_name))
+    [
+     <span data-count="16"> </span>[Option.g<span data-count="16">e</span>t (get_move t1 1)<span data-count="16">;</span> Option.g<span data-count="16">e</span>t (get_move t1 2)];
+     <span data-count="16"> </span>[Option.g<span data-count="16">e</span>t (get_move t1 16)<span data-count="16">;</span> Option.g<span data-count="16">e</span>t (get_move t1 17)];
+     <span data-count="16"> </span>[Option.g<span data-count="16">e</span>t (get_move t1 3);<span data-count="16"> </span>Option.ge<span data-count="16">t</span> (get_move t1 5)];
+      [<span data-count="16">O</span>ption.get<span data-count="16"> </span>(get_move t1 1); O<span data-count="16">p</span>tion.get <span data-count="16">(</span>get_move t1 2)];
+      [Op<span data-count="16">t</span>ion.get (<span data-count="16">g</span>et_move t1 6); Op<span data-count="16">t</span>ion.get (<span data-count="16">g</span>et_move t1 10)];
+      [O<span data-count="16">p</span>tion.get <span data-count="16">(</span>get_move t1 1); O<span data-count="16">p</span>tion.get <span data-count="16">(</span>get_move t1 2)];
+      [O<span data-count="16">p</span>tion.get <span data-count="16">(</span>get_move t1 18); <span data-count="16">O</span>ption.get<span data-count="16"> </span>(get_move t1 20)];
+      [<span data-count="16">O</span>ption.get<span data-count="16"> </span>(get_move t1 18); Op<span data-count="16">t</span>ion.get (<span data-count="16">g</span>et_move t1 19)];
+      [Option<span data-count="16">.</span>get (get_move t1 25); Option.get (get_mo<span data-count="16">v</span>e t1 26)];
+      [Option.get (get_move t1 1); Option.get (get_move t1 2)];
+      [Option<span data-count="16">.</span>get (get_move t1 1); Option.get (<span data-count="16">g</span>et_move t1 2)];
+      [Option.get (get_move t1 6); Option.get (get_move t1 15)];
+      [Option.get (<span data-count="16">g</span>et_move t1 1001); Option.get (get_move t1 1002)]<span data-count="16">;</span>
+    ];
+  chars_test "char atk test" j1 get_char_atk (pp_list string_of_int) 
+    [10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 1000];
+  chars_test "char hp test" j1 get_hp (pp_list string_of_int) 
+    [250; 250; 250; 250; 2<span data-count="91">5</span>0; 250; 250; 250; <span data-count="31">2</span>50; 250; 250; 250; 100<span data-count="31">0</span>];
+  chars_test "char element test" j1 get_char_element (pp_list string_of_elem<span data-count="31">e</span>nt) 
+    [Normal; <span data-count="11">N</span>ormal; Fire; Normal; Grass; Normal; No<span data-count="11">r</span>mal; Normal; Normal; 
+     Normal; Normal; Normal; Normal];
+  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 <span data-count="16">3</span>00; 
+  get_char_hp<span data-count="6">_</span>lvl_test "hp of character 12 at<span data-count="6"> </span>level 2" c_12 2 270; 
+  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 1<span data-count="16">5</span>; 
+  get_<span data-count="16">c</span>har_atk_lvl_test "atk of chara<span data-count="16">c</span>ter 12 at<span data-count="16"> </span>level 8" c_3 8 50;
+]
+
+(** Test<span data-count="21">i</span>ng the mo<span data-count="16">v</span>e functions *)
+
+let move_gette<span data-count="21">r</span>_test_hel<span data-count="21">p</span>er name f input expected = 
+  n<span data-count="17">a</span>me &gt;:: (f<span data-count="17">u</span>n _ -&gt; assert_equal expected (f<span data-count="16"> </span>input))
+
+<span data-count="17">l</span>et get_effectiveness_tests_help<span data-count="16">e</span>r name ex<span data-count="16">p</span>ected move character = 
+  name <span data-count="16">&gt;</span>:: (fun _<span data-count="16"> </span>-&gt; assert_equal expected (get_ef<span data-count="16">f</span>ectivenes<span data-count="16">s</span> move character) 
+               ~<span data-count="16">p</span>rinter:st<span data-count="16">r</span>ing_of_float)
+
+let get_damange_help<span data-count="16">e</span>r name ex<span data-count="16">p</span>ected player enemy move = 
+  n<span data-count="12">a</span>me &gt;:: (f<span data-count="16">u</span>n _ -&gt; assert_equal expected<span data-count="12"> </span>(get_dama<span data-count="12">g</span>e player enemy move) 
+               ~printer:string<span data-count="16">_</span>of_float)
+
+let move_1 = Option.get (get_move t1 1) 
+let move_2 = Option.get (get<span data-count="12">_</span>move t1 2) 
+let move_3 = Option.get (get_move t1 3) 
+let move_5 = Option.get (get_move t1<span data-count="12"> </span>5) 
+let move_10 = Option.get (get_move t1 10)
+let move_11 = Option.get (get_m<span data-count="16">o</span>ve t1 11)
+let move_15 = Option.get (get_move t1 15)
+let move_16 = Opt<span data-count="14">i</span>on.get (get_move t1 16) 
+let move_17 = Option.get (get_move t1 17) 
+l<span data-count="14">e</span>t move_1001 = Option.get (get_move t1 1001)
+let move_1002 = Option.get (get_move t1 1002)
+
+let move<span data-count="22">_</span>tests = [
+  move_getter_test_helper "get name move 1" get_move_name move_1 "Rising Slash";
+  move_gett<span data-count="12">e</span>r_test_helper "get name move 16" get_move_name move_16 
+    "magic mi<span data-count="12">s</span>siles";
+  move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
+  move_getter_test_helper "get attack <span data-count="12">m</span>ove 2" get<span data-count="16">_</span>move_atk move_2 10;
+  move_getter_test_helper "get scale of move 1" get<span data-count="12">_</span>scale move_1 2.0;
+  move_getter_test_helper "ge<span data-count="6">t</span> move element of move 16" get_move_<span data-count="10">e</span>lement move_16
+    Normal;
+  get_effectiveness_tests_helper 
+    "effectivennes of normal m<span data-count="14">o</span>ve vs fire charac<span data-count="8">t</span>er" 1.0 move_2 c_3;
+  get_effec<span data-count="10">t</span>iveness_tests_helper "grass move vs fire character" 0.<span data-count="23">5</span> move_11 c_3;
+
+  g<span data-count="11">e</span>t_damange_helper "grass move<span data-count="19"> </span>vs fire character with base attack 10"
+    5. c_12 c_<span data-count="14">3</span> move_11;
+]
+
+open <span data-count="16">A</span>dventure
+let test_adventur<span data-count="8">e</span> = from_json (from_file "adventure_test.json")
+
+let room_id<span data-count="22">s</span>_test_helper name <span data-count="8">a</span> expected = 
+  name &gt;::(fun _ <span data-count="8">-</span>&gt; assert_equal expected (room_ids a) 
+              ~printer<span data-count="17">:</span>(pp_list string_of<span data-count="7">_</span>int) ~cmp:cmp_set_like_lists) 
+
+let start_room_test_helper name a expected = 
+  name &gt;:<span data-count="25">:</span>(fun _ -&gt; assert_<span data-count="13">e</span>qual expected (start_room a)<span data-count="14">)</span> 
+
+let message_test_helper name a r expected = 
+  na<span data-count="25">m</span>e &gt;:: (fun _ -&gt; a<span data-count="13">s</span>sert_equal expected (mess<span data-count="13">a</span>ge a r))
+
+let exits_test_helper name a r expected = 
+  name <span data-count="13">&gt;</span>:: (fun _ -&gt; assert_equal expected (exits a r))
+
+let next_room_test_hel<span data-count="26">p</span>er name a r e exp<span data-count="13">e</span>cted = 
+  name &gt;:: (fun _ -&gt;<span data-count="13"> </span>assert_equal expected (next_room a r e))
+
+let next_rooms_tes<span data-count="13">t</span>_helper name a r expected = 
+  name &gt;:: (fun _ -&gt; assert_equal expe<span data-count="17">c</span>ted (next_rooms a<span data-count="11"> </span>r))
+
+let enemies_test_helper na<span data-count="11">m</span>e a r expected = 
+  name &gt;::(fun _ -&gt; assert_equa<span data-count="299">l</span> expected (enemies a r)) 
+
+let shop_test_helper name a r expected =
+  n<span data-count="83">a</span>me &gt;::(fun _ -&gt; assert_equal expected (shop a r)
+              ~cmp:cmp_set_like_lists ~p<span data-count="35">r</span>inter:(pp_list item_wrapper_string)) 
+
+let rewards_test_helper name a r expected =
+  name &gt;::(fun _ -&gt; as<span data-count="183">s</span>ert_equal expected (rewards a r)
+              ~cmp:cmp_set_like_lists ~printer:(pp_list item_string)) 
+
+le<span data-count="35">t</span> difficulty_test_helper name a r expected = 
+  name &gt;::(fun _ -&gt; assert_equal expected (difficulty a r<span data-count="35">)</span>) 
+
+let map_test = [
+  start_room_test_helper "start room of adventure test" test_adventure 1<span data-count="83">;</span>
+  room_ids_test_helper "room ids in adventure test" test_adventure 
+    [1;2;3;4;5;6;7;8];
+  message_test_helper "message in roo<span data-count="16">m</span> 1 of adventure test" test_adventure 1 
+    "You are at Ho<span data-count="16">m</span>e Base";
+  message_test_helper "message in room 3 of adventure test" test_adventure 3 
+    "You are at Somerset Town";
+  exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
+    ["So<span data-count="16">m</span>erset Town"];
+  next_room_test_helper "next from room 3 to room 4" test_adventure 3 
+    "Black Forest" 4;
+  next_rooms_test_helper "next rooms from room 2" test_adventure 2 [3];
+  enemies_test_helper "enemy in room 1" test_adventure 1 [];
+  enemies_test_helper "enemy in room 2" test_adventure 2 [1];
+  shop_test_helper "shop in room 2" test_adventure 2 
+    [
+      {
+        item = FlatHp ("PH", 5);
+        price = 3
+      };
+      {
+    <span data-count="28"> </span>   item = DebuffRemover "PH";
+        price = 2
+      }
+    ];
+  shop_test_helper "shop in <span data-count="54">r</span>oom 3" test_adventure 3 
+    [
+      {
+        item = PercentHp ("PH", 0.1);
+        price = 10
+      };
+      {
+        item = AtkBooster ("PH", 0.05);
+        price = 7
+      };
+      {
+        item = RevivalItem "PH";
+        price<span data-count="131"> </span>= 8
+      };
+      {
+    <span data-count="455"> </span>   item = DamageBooster ("PH", 0.03);
+        price = 4
+      };
+      {
+      <span data-count="127"> </span> item = DamageRedu<span data-count="43">c</span>er ("PH", 0.1);
+        price = 12
+      };
+  <span data-count="103"> </span> ];
+  rewards_test_helper "rewards<span data-count="43"> </span>in room 2" <span data-count="265">t</span>est_adventure 2 
+    [DamageReducer ("R", 0.1)];
+  rewards_test_helper "rewards <span data-count="45">i</span>n room 3" test_adv<span data-count="75">e</span>nture 3 
+    [FlatHp ("R", 5); DebuffRemover "R"];
+  difficulty_test_h<span data-count="16">e</span>lper "di<span data-count="16">f</span>fculty of room 2" test_adv<span data-count="16">e</span>nture 2 1;
+]
+
+(* START: State tests *)
+open State
+(* Helper functions *)
+let get_char_list l =
+  List.fil<span data-count="296">t</span>er_map (fun x -&gt; C<span data-count="90">h</span>aracter.get_char t1 x) l
+
+let state_chars_test name input expected_output =
+  name &gt;:: (f<span data-count="129">u</span>n _ -&gt; assert_equa<span data-count="51">l</span> expected_output (input |&gt; get_chars) 
+               ~printer:(pp_list (fun x -&gt; get_char_name x)))
+
+let state_get_char_test name state <span data-count="36">i</span>ndex expected_outp<span data-count="18">u</span>t =
+  name &gt;:: (fun _ -&gt; assert_equal 
+  <span data-count="30"> </span>            (Character.get_char t1 expe<span data-count="14">c</span>ted_output |&gt; Option.get) 
+               (get_char index state) 
+    <span data-count="44"> </span>          ~printer<span data-count="37">:</span>get_char_name)
+
+let state_exn_test name input ex<span data-count="24">p</span>ected_output =
+  name &gt;:: (fun _ -<span data-count="37">&gt;</span> assert_raises expected_output input)
+
+let state_int_test name input f expected_output =
+  name &gt;::<span data-count="54"> </span>(fun _ -&gt; assert_equal expected_output (i<span data-count="36">n</span>put |&gt; f)
+        <span data-count="18"> </span>      ~printer:string_of_int)
+
+<span data-count="26">l</span>et state_inventory_test name input expected_output =
+ <span data-count="27"> </span>name &gt;:: (fun _ -<span data-count="35">&gt;</span> assert_equal expected_output (get_inventory input)
+             <span data-count="27"> </span> ~printer:(pp_list item_string))
+
+let <span data-count="54">s</span>tate_visited_test name input expe<span data-count="45">c</span>ted_output <span data-count="147">=</span>
+  name &gt;:: (fun _ -&gt; asse<span data-count="123">r</span>t_equal expected_output<span data-count="45"> </span>(input |&gt; get_visited) 
+               ~printe<span data-count="48">r</span>:(pp_list<span data-count="48"> </span>string_of_int) ~cmp:cmp_set_like_li<span data-count="45">s</span>ts)
+
+let state_add_xp_test n<span data-count="48">a</span>me state index amt new_xp up =
+  let (<span data-count="45">t</span>', r) = a<span data-count="45">d</span>d_xp index amt state in
+  name &gt;:: (f<span data-count="82">u</span>n _ -&gt; assert_equal (new_xp,<span data-count="82"> </span>up) (get_xp index t', r) 
+               ~printer:(fun (x, b) -&gt; "(<span data-count="32">"</span> ^ string_of_int x ^ ", " 
+         <span data-count="23"> </span>                             <span data-count="21">^</span> string_of_bool b ^ ")"))
+
+let s<span data-count="27">t</span>ate_printer c s =
+  "{\n" ^ "Characters: " 
+  ^ pp_list (fun x -&gt; Character.get_char_id x |&gt; stri<span data-count="72">n</span>g_of_int) (get_cha<span data-count="72">r</span>s s)
+  ^ "\n" ^ "C<span data-count="36">u</span>rrent room: " ^ <span data-count="32">s</span>tring_of_int (get_room s) ^ "\n"
+  ^ "Visited: " ^ pp_lis<span data-count="36">t</span> (string_of_int) (get_visited s) ^ "\n"
+  ^ "Gold: " ^ string<span data-count="27">_</span>of_int (get_gold s) ^ "\n"
+  ^ "I<span data-count="12">n</span>ventory: " ^ pp_list (item_string) <span data-count="16">(</span>get_inventory s)
+  ^ "\n}"
+
+let state_move_test name in<span data-count="12">p</span>ut room new_visited =
+  match State.mo<span data-count="13">v</span>e input room with
+  | Illegal -&gt; name &gt;:: (fun _ -&gt; assert_equal [] new_visited)
+  | Legal t' -&gt; state_visited_t<span data-count="43">e</span>st name t' new_visited
+
+l<span data-count="48">e</span>t state_save_test na<span data-count="3">m</span>e state adv c path =
+  save state path;
+  name &gt;:: (fun _<span data-count="21"> </span>-&gt; assert<span data-count="21">_</span>equal (lo<span data-count="21">a</span><span data-count="21">d</span> adv c path) state 
+               ~printer:(sta<span data-count="16">t</span>e_printer c))
+
+(* States and <span data-count="12">c</span>haracter<span data-count="12"> </span>lists *)
+let cl1 = get_char_list <span data-count="16">[</span>1; 2; 3]
+let cl2 = get_char_list [4; 1; 2; <span data-count="16">2</span>; 3]
+let s0 = init_state test_adventure [] (* Empty chars *)
+let s1 = init_state test_adventure cl1
+let s2 = init_state test_a<span data-count="16">d</span>venture cl2<span data-count="16"> </span>(* Duplicate chars *)
+let s3 = (* Moving around *)
+  let open State i<span data-count="19">n</span> 
+  let mv r s = 
+    match move s r with
+ <span data-count="15"> </span>  | Legal t' -&gt; t'
+    | Illegal -&gt; failwith "<span data-count="19">I</span>llegal move" in
+  s1
+  |&gt; mv 2
+  |&gt; mv 3
+  |&gt;<span data-count="16"> </span>mv 4
+  |&gt; mv 3
+(* Add char with XP *)
+let s4 = s2 |&gt; add_<span data-count="16">c</span>har (Character.get_char t1 2 |&gt; Option.get) ~xp:50 3
+let s5 = s1 |&gt; add_gold 50 (* Added<span data-count="10"> </span>gold *)
+let s6 = s5 |&gt; sub_gold 20 (* Succesful gol<span data-count="16">d</span> removal *)
+let s7 = s1 (** Add<span data-count="10"> </span>inventory<span data-count="10"> </span>*)
+         |&gt; add_inventory (DebuffRemover "T1") 
+      <span data-count="16"> </span>  |&gt; add_inventory (Damage<span data-count="16">R</span>educer ("T2", 0.02))
+
+
+let state_tests = [
+  st<span data-count="16">a</span>te_chars_test "get_char<span data-count="16">s</span> test" s1 cl1;
+  state_chars_test<span data-count="10"> </span>"get_chars empty" s0 [];
+  state_get_char_test "g<span data-count="16">e</span>t_char test" s1 1 2;
+  state_<span data-count="10">g</span>et_char<span data-count="10">_</span>test "get_char test with dups 1" s2 2 2;
+  state_get_char<span data-count="16">_</span>test "get_char test with dups 2"<span data-count="16"> </span>s2 3 2;
+  state_exn_te<span data-count="16">s</span>t "get_char beyond index" (fun<span data-count="16"> </span>_ -&gt; get_char 3 s1) 
+ <span data-count="16"> </span>  (Failure "nth");
+  state_exn_test <span data-count="10">"</span>get_char negative" (fun _ -&gt; get_char ~-1 s1) 
+    (<span data-count="16">I</span>nvalid_argument "List.nth");
+  s<span data-count="10">t</span>ate_int_te<span data-count="10">s</span>t "get_xp 0 test" s1 (get_xp 0) 0;
+  state_int_test "get_<span data-count="16">x</span>p test" s4 (get_xp 3) 50;
+  state_exn_test "get_xp beyond<span data-count="16"> </span>index" (fun _ -&gt; get_xp 3 s1) 
+    (Failure "nt<span data-count="16">h</span>");
+  state_exn_test "get_xp negative" (fun _ -&gt; get_xp <span data-count="16">~</span>-1 s1) 
+    (Invalid_argument "List.nth");
+  stat<span data-count="16">e</span>_int_test "get_level 0 test" s1 (get_level 0) 0;
+  state_int_tes<span data-count="16">t</span> "get_level test" s4 (get_level 3) 6;
+  state_ex<span data-count="12">n</span>_test "get_level beyond index<span data-count="12">"</span> (fun _ -&gt; get_level 3 s1) 
+    (Failure "nth");
+  state_exn_test "get_level negative" (fun _ -&gt; get_level ~-1 s1) 
+ <span data-count="16"> </span>  (Inval<span data-count="16">i</span>d_argument "List.nth");
+ <span data-count="12"> </span>state_int_test "get_room test" s1 State.<span data-count="16">g</span>et_room 1;
+  state_visited_test "get_<span data-count="12">v</span>isited test" s1 [1];
+  state_visited_test "visited no dups test" s3 [1; 2; 3; 4];
+  state_int_test "get_gold 0 test" s1 get_gold 0;
+ <span data-count="12"> </span>state_in<span data-count="16">t</span>_te<span data-count="12">s</span>t "get_gold, add_gold t<span data-count="12">e</span>st" s5 get_gold 50;
+  state_inventory_te<span data-count="16">s</span>t "get_inventory 0 test" s1 <span data-count="16">[</span>];
+  state_chars_test "add_chars prepend" (add_char 
+                                          (Character.get_char <span data-count="16">t</span>1 11 
+  <span data-count="16"> </span>                          <span data-count="16"> </span>             |&gt; Option.get) 0 s2)
+    (g<span data-count="12">e</span>t_char_list [11; 4; 1; 2; 2<span data-count="16">;</span> 3]);
+  state_chars_test "add_chars append using -1" (add_char 
+                                                <span data-count="16"> </span> (Charac<span data-count="16">t</span>er.get_char t1 10 
+       <span data-count="16"> </span>                                       <span data-count="12"> </span>   |&gt; Option.get) ~-1 s2)
+<span data-count="12"> </span>   (get_char_list [4; 1; 2; 2; 3; 10]);
+  state_chars_test "add_chars append" (add_char 
+                     <span data-count="12"> </span>        <span data-count="16"> </span>          (Character.get_c<span data-count="16">h</span>ar t1 10 
+              <span data-count="16"> </span>                           |&gt; Optio<span data-count="16">n</span>.get) 5 s2) 
+    (get_char_list [4; 1; 2; 2; 3; 10]);
+  state_chars_test "add_char middle" (add_char 
+                          <span data-count="16"> </span>        <span data-count="16"> </span>   <span data-count="16"> </span>(Character.get_char t1 9<span data-count="16"> </span>
+                     <span data-count="16"> </span>                   |&gt; Option.get) 3 s2) 
+    (get_char_list <span data-count="16">[</span>4; 1; 2; 9; 2; 3]);
+  state<span data-count="12">_</span>chars_test "add_char empty" (ad<span data-count="10">d</span>_char 
+                                       (Character.get_char t1 8 
+      <span data-count="10"> </span>        <span data-count="10"> </span>                        |&gt; Option.get) 0 s0) 
+    (get_char_list [8]);
+  state_chars_test "add<span data-count="12">_</span>char empty using -1" (add_char 
+   <span data-count="10"> </span>                                            (Character.get_char t1 8 
+                                                 |&gt; Option.<span data-count="10">g</span>et) ~-1 <span data-count="6">s</span>0) 
+    (get_char_list [8]);
+  state_int_test "add_char with nonzero xp in char list with dups" s4<span data-count="12"> </span>(get_xp 3)
+    50;
+  state_exn_test <span data-count="12">"</span>add_char negative" (fun <span data-count="16">_</span> -&gt; add_char 
+                   <span data-count="12"> </span>                     (Character.get<span data-count="12">_</span>char t1 1 |&gt; Option.get)<span data-count="16"> </span>
+                              <span data-count="16"> </span>          ~-2 s1) (Failure "Invalid index");
+  state<span data-count="12">_</span>exn_test "add<span data-count="12">_</span>char beyond index" (fun<span data-count="16"> </span>_ -&gt; add_char 
+                   <span data-count="10"> </span>            <span data-count="10"> </span>            (Character.get_char t1 1 
+               <span data-count="16"> </span>                              |&gt; Optio<span data-count="6">n</span>.get) 
+                                             4 s1) (Failu<span data-count="12">r</span>e "Invalid index");
+  state_cha<span data-count="6">r</span>s_test "remove_chars on first" (remove_char 0 s2)
+    (get_char_li<span data-count="12">s</span>t [1; 2; 2; 3]);
+  state<span data-count="16">_</span>chars_test "remove_chars o<span data-count="16">n</span> last" (remove_char 4 s2)
+    <span data-count="16">(</span>get_char_list [4; 1; 2; 2]);
+  sta<span data-count="16">t</span>e_int_test "remove_chars i<span data-count="16">n</span> middle with dups" 
+    (rem<span data-count="16">o</span>ve_char 4 s4) (get_xp 3) 50;
+<span data-count="16"> </span> state_exn_test<span data-count="12"> </span>"remove_char negative" <span data-count="12">(</span>fun _ -&gt; remove_char ~-1 s1) 
+    (Failu<span data-count="6">r</span>e "Invalid index");
+  state_exn_test "remove_char beyon<span data-count="16">d</span> index" (fun _ -&gt; remove_char 3 s1) 
+   <span data-count="10"> </span>(Failure "Invalid index");
+  state_exn_test "remove_cha<span data-count="16">r</span> empty" (fun _ -&gt; remove_char 0 s0) 
+    (Failure "I<span data-count="10">n</span>valid index");
+  state_chars_test "swap_chars" (sw<span data-count="16">a</span>p_chars 1 2 s1)
+    (get_char_list [<span data-count="10">1</span>; 3; 2]);
+ <span data-count="10"> </span>state_chars_test "swap_chars same char" (swap_chars 1 1<span data-count="16"> </span>s1)
+    (get_char_list [1; 2; 3]);
+ <span data-count="10"> </span>state_int_tes<span data-count="10">t</span> "swap_chars dups" (swap_chars 3 2 s4) (get_xp 2) 50;
+  state_exn_test "swap_chars n1 beyond index" (f<span data-count="10">u</span>n _ -&gt; swap<span data-count="10">_</span>cha<span data-count="10">r</span>s 0 3 s1) 
+    (Failure "nth");
+  state_exn_test "s<span data-count="16">w</span>ap_chars n2 beyond index" (fun _ -&gt; swap_chars 3 0 s1<span data-count="16">)</span> 
+    (Failure "nth");
+  state_exn_test "swap_chars n1 an<span data-count="16">d</span> n2 beyond index" 
+    (fun _ -&gt; swap_chars 3 4 s1) (Failure<span data-count="16"> </span>"nth");
+  state_exn_test "swap_ch<span data-count="10">a</span>rs n1 negative" (fun _ -&gt; swap_chars ~-3 1 s1) 
+    (Failure "I<span data-count="16">n</span>valid index");
+  state_exn_test "sw<span data-count="10">a</span>p_chars<span data-count="10"> </span>n2 negative" (fun _ -&gt; swap_chars 1 ~-3 s1) 
+    (Failure<span data-count="16"> </span>"Invalid index");
+  state_exn_test "swap_chars n1 and n2 ne<span data-count="61">g</span>ative" 
+    (fun _ -&gt; swap_chars ~-1 ~-3<span data-count="21"> </span>s1) (Failure "Invalid index");
+  state_add_xp_test "add_xp to 0 xp" s1 0<span data-count="40"> </span>25 25 true;
+  state_add_xp_test "add_xp no level up" s4 3 1 51 false;
+  state_add_xp_test "add_xp wit<span data-count="16">h</span> level up" s4 3 1000 1050 true;
+  state_exn_test "add_xp beyond<span data-count="40"> </span>index" (fun _ -&gt; add_xp 3 100 s1) 
+    (Failure "<span data-count="13">I</span>nvalid index");
+  state_exn_test "add_xp negativ<span data-count="10">e</span> index" (fun _ -&gt; add_xp ~-1 100 s1) 
+    (Failure "Invalid inde<span data-count="16">x</span>");
+  state_int_test "sub_gold successful test" s6<span data-count="10"> </span>get_gold 30;
+  st<span data-count="7">a</span>te_exn_test "sub_gold insufficient test" (fun _ -<span data-count="16">&gt;</span> sub_gold 60 s5) 
+    (Failure "Insufficien<span data-count="16">t</span> gold");
+  state_inventory_test "add_inve<span data-count="16">n</span>tory test" s7 
+    [DamageReducer ("T2", 0.02); DebuffRemover "T1"];
+  s<span data-count="16">t</span>ate_inventory_test "remove_inventory successful test" 
+    (s7 |&gt; remov<span data-count="16">e</span>_inventory 1) [DamageReducer ("T2", 0.02)];
+  state_exn_test "remove_inven<span data-count="16">t</span>ory beyond index" 
+    (fun _ -&gt; remove_inventory 2 s7) (Failure "Invali<span data-count="16">d</span> index");
+  state_exn_test "remove_inventory negative index" 
+    (fun _ -<span data-count="16">&gt;</span> remove_inventory ~-1 s7) (Failure "Invalid index");
+  state_move_test "legal move" s1 2 [2; 1];
+  state_move_test "illegal move" s1<span data-count="16"> </span>4 [];
+  s<span data-count="16">t</span>ate_save_test "save test, minimal" s0 test_adv<span data-count="14">e</span>nture t1 <span data-count="16">"</span>./s0.json";
+  state_save_test "save test, norm<span data-count="10">a</span>l" s1 tes<span data-count="11">t</span>_adventure t1 "./s1.json";
+  state_save_test "save test, with dups" s2 te<span data-count="10">s</span>t_adventure t1 "./s<span data-count="10">2</span>.json";
+  state_save_test "sa<span data-count="10">v</span>e test, with xp" s4<span data-count="10"> </span>test_adventure t1 "./s4.json"<span data-count="10">;</span>
+  state_save_test <span data-count="10">"</span>save test, with gold" s5 test<span data-count="10">_</span>adventure t1 "./s5.<span data-count="10">j</span>son";
+  state_save_test "save<span data-count="10"> </span>test, with inv" s7 <span data-count="10">t</span>est_adventure t1 "./s7.json";
+]
+
+(* STARTING comb<span data-count="10">a</span>t tests *)
+
+(* "Aqua Torrent" <span data-count="10">*</span>)
+let move_6 = Opti<span data-count="10">o</span>n.get (get_move t1 6) 
+(* "Cycl<span data-count="10">o</span>ne" *)
+let move_7 =<span data-count="10"> </span>Option.get (get_move t1 7) 
+(* <span data-count="10">"</span>Icebolt" *)
+let mov<span data-count="10">e</span>_8 = Option.get (get_move t1 8) 
+
+let move_set1 = [mo<span data-count="10">v</span>e_6; move_8; move_7]
+
+let char_1 = Option.get (Character.get_char t1 1)
+let char_2 = Option.get (Character.get_char t1 2)
+let char_3 = Option.get (Character.get_char t1 3)
+let char_4 = Option.get (Character.get_char t1 4)
+let char_5 = Option.get (Character.get_char t1 5)
+let char_6 = Option.get (Character.get_char t1 6)
+let char_10 = Option.get (Character.get_char t1 10)
+let char_11 = Option.get (Character.get_char t1 11)
+let char_12 = Option.get (Character.get_char t1 12)
+let char_1001 = Option.get (Character.get_char t1 1001)
+
+let char_lst1 = [char_1, 10;char_2, 10; char_3, 10]
+let char_lst2 = [char_3, 10;char_1001, 10]
+
+let char_lst3 = []
+let char_lst4 = [char_10, 10; char_11, 20; char_12, 20]
+
+let empty_item_lst = []
+
+let char_lst1_lst2_t =
+  {
+    team1 = 
+      [
+        { 
+          char_c = char_1;
+          char_name = "Brave Warrior Clarkson";
+          char_moves = [move_1; move_2];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_2;
+          char_name = "Wise Sage Gries";
+          char_moves = [move_16; move_17];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        }
+      ];
+    team2 =
+      [
+        { 
+          char_c = char_3;
+          char_name = "Nether Imp";
+          char_moves = [move_3; move_5];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_1001;
+          char_name = "test char";
+          char_moves = [move_1001; move_1002];
+          cur_hp = 5500;
+          atk = 1050;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        }
+      ];
+    winner = 0;
+    items = empty_item_lst
+  }
+
+let char_lst3_lst4_t =
+  {
+    team1 = 
+      [];
+    team2 =
+      [
+        {
+          char_c = char_10;
+          char_name = "Alpha Wolf";
+          char_moves = [move_1; move_2];
+          cur_hp = 1750;
+          atk = 60;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 10
+        };
+        {
+          char_c = char_11;
+          char_name = "Wolf";
+          char_moves = [move_1; move_2];
+          cur_hp = 2250;
+          atk = 110;
+          buffs = []; 
+          active = true;
+          cooldown = [];
+          level = 20
+        };
+        {
+          char_c = char_12;
+       <span data-count="10"> </span>  char_name = "Mermaid";
+          char_moves = [move_6; move_15];
+          cur_hp = 2250;
+          atk = 110;
+          buffs = []; 
+       <span data-count="10"> </span>  active = true;
+          cooldown = [];
+          level = 20
+        }
+      ];
+<span data-count="19"> </span>   winner = 0;
+    items = empty_item_lst
+  }
+
+let ch<span data-count="19">a</span>r_lst3_lst3_t =
+  {
+    <span data-count="19">t</span>eam1 = [];
+    team2 = [];
+    winner = 0;
+    items = empty_item_lst
+  }
+
+
+let combat_t1 = 
+  let first_team <span data-count="10">=</span> [(char_1, 10);char_2 , 10;char_3 , 10] in 
+  let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
+  init first_team <span data-count="10">s</span>ec_team empty_item_lst
+
+let combat_t2 = 
+  let first_team = [char_1001, 10] in 
+  let sec_team = [char_4, 10;char_5, 10] in 
+  init first_team sec_team empty_item_lst
+
+let combat_end_game first_team sec_team = 
+  let t = init first_team sec_team  empty_item_lst in
+  Combat.start_t_sing t;
+  <span data-count="37">t</span>
+
+let combat_end_t1 = 
+  let first_team = [char_1, 10<span data-count="10">;</span>char_2, 10] in 
+  let sec_team = [] in 
+  combat_end_game first_team sec_team
+
+let combat_end_t2 = 
+  let first_team = [] in 
+  let sec_team = [char_5, 10] in 
+  combat_end_game first_team sec_team
+
+(* Get a team object by using [init] like above, then extract the field *)
+let team1 = combat_t1.team1 
+let team2 = combat_t1.team2
+let team3 = c<span data-count="10">o</span>mbat_t2.team1
+let team4 = combat_t2.team2
+let empty_team = combat_end_t2.team1
+
+(* Access each targ<span data-count="10">e</span>t in a team using List.nth *)
+let team_target team nth = 
+  List.nth team nth
+
+let team1_first_target = team_target team1 0
+let team1_first_target_hp = team1_first_target.cur_hp
+
+let team2_first_target = team_target team2 0
+let team2_first_target_hp = team2_first_target.cur_hp
+let team2_first_target_half_hp = team2_first_target_hp / 2
+let team2_first_target_rem_hp = 
+  team2_first_target_hp - team2_first_target_half_hp
+
+let team3_first_target = team_target team3 0
+let team3_first_target_hp = team3_first_target.cur_hp
+
+let team4<span data-count="353">_</span>first_target = te<span data-count="119">a</span>m_target team4 0
+let team4_first_target_hp = team4_first_target.cur_hp
+
+let c1 = 
+  {
+    char_<span data-count="46">c</span> =  char_5;
+    char_name = "Forest Fairy";
+    ch<span data-count="47">a</span>r_moves = [move_6; move_10];
+    atk = 100;
+    cur_hp = 40;
+    buffs = []; 
+    active = true;
+   <span data-count="40"> </span>cooldown = [];
+    level = 10
+  }
+
+let c2 = 
+  {
+    char_c =  char_5;
+    char_name = "Forest Fairy";
+    char_moves = [move_6;<span data-count="37"> </span>move_10];
+    at<span data-count="37">k</span> = 100;
+    cur_hp = 0<span data-count="13">;</span>
+    buffs = []; 
+    active = false;
+    cooldown = [];
+    level = 10
+  }
+
+let c5_level_0 = 
+  {
+<span data-count="53"> </span>   char_c = char_5<span data-count="53">;</span>
+    char_name = "Fore<span data-count="1">s</span>t Fairy";
+    char_moves = [move_6; move_10];
+    atk = 10;
+    cur_hp = 1250;
+    buffs = []; 
+    active =<span data-count="31"> </span>true;
+    cooldown = [];
+    level = 0;
+  }
+
+let c5_le<span data-count="32">v</span>el10 = 
+  {
+    c<span data-count="14">h</span>ar_c = char_5; 
+    char_name = "Forest Fairy";
+    char_moves = [mov<span data-count="45">e</span>_6; move_10];
+    atk = 60;
+    cur_hp <span data-count="49">=</span> 1750; 
+    buffs = []; 
+    <span data-count="49">a</span>ctive = true;
+    cooldown = [];
+    level<span data-count="10"> </span>= 10;
+  }
+
+let c12_level5 = 
+  {
+    char_c = c_12;
+    <span data-count="43">c</span>har_name = "Mermaid";
+    char_moves = [move_6; move_15];
+    atk = 35; 
+    cur_hp = 1500; 
+    <span data-count="18">b</span>uffs = []; 
+    active = true;
+    <span data-count="18">c</span>ooldown = [];
+    level = 5;
+  }
+
+let assert_eq_help name result <span data-count="30">e</span>xp_output = 
+  name &gt;:: fun _ -&gt; ass<span data-count="30">e</span>rt_equal exp_output result 
+
+let combat_move_input_test name mo<span data-count="18">v</span>e_lst input exp_output = 
+  let result = Comba<span data-count="23">t</span>.move_input move_lst input in
+  assert<span data-count="21">_</span>eq_help name result exp_output 
+
+let combat_target_input_test name team input exp_output = 
+ <span data-count="32"> </span>let result = Combat.target_input team input in
+  assert_eq_help name result exp_output
+
+let do_dm<span data-count="131">g</span>_test name c dmg expected = 
+  do_dmg c dmg; 
+  name &gt;:: fun _ -&gt; 
+    assert_e<span data-count="29">q</span>ual expected c.cur_hp ~printer:(string_of_int<span data-count="32">)</span>
+
+let do_heal_test name c heal expected = 
+  do_heal c heal; 
+  name &gt;:: fun _ -&gt; 
+    as<span data-count="57">s</span>ert_equal expected c.cur_hp ~printer:(string_<span data-count="56">o</span>f_int)
+
+let combat_init_test name clst1 clst2 expected = 
+  let init = Combat.init cl<span data-count="38">s</span>t1 clst2 empty_item_lst in
+  <span data-count="39">n</span>ame &gt;:: fun _ -&gt; assert_equal init expected 
+
+let combat_vary_<span data-count="11">t</span>est name k percent = 
+  let value = Combat.v<span data-count="11">a</span>ry k percent in 
+  let margin = k *. (fl<span data-count="13">o</span>at_of_int percent) /. 100.0 in
+  if val<span data-count="13">u</span>e &lt; k then assert_eq_help name ((k -. valu<span data-count="13">e</span>) &lt;= marg<span data-count="13">i</span>n) true
+  else assert_eq_help n<span data-count="9">a</span>me ((valu<span data-count="9">e</span> -. k) &lt;= margin) true
+
+let combat_<span data-count="12">i</span>s_active_<span data-count="12">t</span>est name c expected = 
+  assert_<span data-count="11">e</span>q_help name (Combat.is_active c) expected
+
+let combat_get_active_test name team exp<span data-count="10">e</span>cted = 
+  assert_eq_help name (Combat.get_a<span data-count="10">c</span>tive team) expected
+
+let is_team_dead_test name <span data-count="12">t</span>eam expected = 
+  let active_team = Combat.ge<span data-count="23">t</span>_active team in 
+  assert_eq_help name (Combat.is_team_dead ac<span data-count="12">t</span>ive_team) expected
+
+let get_team_test<span data-count="12"> </span>name n t expected = 
+  let result = Combat.get_team n t in 
+  assert_eq_help name result expected 
+
+let is_move_test name move_name m expected = 
+  let result = Combat.is_move move_name m in 
+  assert_eq_help name result expected 
+
+let load_char_test name character level expected = 
+  let char_new = Combat.load_char (character, level) in
+  assert_eq_help name char_new expected
+
+let load_char_test name char_level expected = 
+  assert_eq_help name (Combat.load_char char_level) expected 
+
+let smartness_of_c_test name char expected = 
+  assert_eq_help name (Combat.smartness_of_c char) expected 
+
+let check_winner_test name team team_num expected = 
+  assert_eq_help name (Combat.check_winner team team_num) expected
+
+(* One of the teams ar*)
+let combat_winner_test name t expected = 
+  assert_eq_help name (t.winner) expected
+
+(* Makes move_cd entry *)
+let make_cd_entry move cd = 
+  {move = move;
+   turns_left = cd;}
+
+let update_cd_test name input expected = 
+  let new_move_cd = Combat.update_cd input in
+  assert_eq_help name new_move_cd expected
+
+let update_cd_lst_test name input expected = 
+  let new_lst = Combat.update_cd_lst input in
+  assert_eq_help name new_lst expected
+
+let update_cd_team_test name team expected = 
+  Combat.update_cd_team team;
+  assert_eq_help name team expected
+
+let move_cd_1 = make_cd_entry move_1 10 
+let move_cd_1_new = make_cd_entry move_1 9
+let move_cd_1_8 = make_cd_entry move_1 8
+
+let move_cd_2 = make_cd_entry move_2 0
+let move_cd_2_new = make_cd_entry move_2 ~-1
+
+let move_cd_3 = make_cd_entry move_3 ~-30
+let move_cd_3_new = make_cd_entry move_3 ~-31
+
+let move_cd_5 = make_cd_entry move_5 1
+let move_cd_5_new = make_cd_entry move_5 0
+
+let move_cd_15 = make_cd_entry move_15 0
+
+let move_cd_1001 = make_cd_entry move_1001 1
+let move_cd_1001_new = make_cd_entry move_1001 0
+
+let move_cd_1002 = make_cd_entry move_1002 0
+
+(* move6, 3 turns*)
+let move_6_cd = make_cd_entry move_6 3
+let update_move6 = update_cd move_6_cd
+
+let cd_team_1 =
+  [
+    {
+      char_c = char_10;
+      char_name = "Alpha Wolf";
+      char_moves = [move_1; move_2];
+      cur_hp = 1750;
+      atk = 60;
+      buffs = []; 
+      active = true;
+      cooldown = [];
+      level = 10
+    };
+    {
+      char_c = char_12;
+      char_name = "Mermaid";
+      char_moves = [move_6; move_15];
+      cur_hp = 2250;
+      atk = 110;
+      buffs = []; 
+      active = true;
+      cooldown = [];
+      level = 10
+    }
+  ]
+
+let cd_team_2 =
+  [
+    {
+      char_c = char_10;
+      char_name = "Alpha Wolf";
+      char_moves = [move_1; move_2];
+      cur_hp = 1750;
+      atk = 60;
+      buffs = []; 
+      active = true;
+      cooldown = [move_cd_1; move_cd_1_new];
+      level = 10
+    };
+    {
+      char_c = char_12;
+      char_name = "Mermaid";
+      char_moves = [move_6; move_15];
+      cur_hp = 2250;
+      atk = 110;
+      buffs = []; 
+      active = true;
+      cooldown = [move_cd_15];
+      level = 10
+    }
+  ]
+
+let cd_team_2_new =
+  [
+    {
+      char_c = char_10;
+      char_name = "Alpha<span data-count="15"> </span>Wolf";
+      char_moves = [move_1; move_2];
+      cur_hp = 1750;
+      atk = 60;
+      <span data-count="15">b</span>uffs = []; 
+      active = true;
+      cooldown = [move_cd_1_new; move_cd_1_8<span data-count="13">]</span>;
+      level = 10
+    };
+    {
+      char_c = char_12;
+      char_name = "Me<span data-count="13">r</span>maid";
+      char_moves = [move_6; move_15];
+      cur_hp = 2250;
+      atk = 110;
+      buffs = <span data-count="10">[</span>]; 
+      active = true;
+      cooldown = [];
+      level = 10
+    }
+  ]
+
+let cd_team_3 =
+  [
+    <span data-count="10">{</span>
+      char_c = char_1001;
+      char_name = "test char";
+      char_moves = [move_1001; move_1002<span data-count="10">]</span>;
+      cur_hp = 5500;
+      atk = 1050;
+      buffs = []; 
+      active = true;
+      cooldown = [m<span data-count="10">o</span>ve_cd_1001; move_cd_1002];
+      level = 10
+    };
+    {
+      char_c = char_<span data-count="10">3</span>;
+      char_name = "Nether Imp";
+      char_moves = [move_3; move<span data-count="10">_</span>5];
+      cur_hp = 1750;
+      atk = 60;
+      buffs = []; 
+      a<span data-count="10">c</span>tive = true;
+      cooldown = [move_cd_3];
+      level = 10
+  <span data-count="10"> </span> };
+  ]
+
+let cd_team_3_new =
+  [
+    {
+      char_c =<span data-count="10"> </span>char_1001;
+      char_name = "test char";
+      cha<span data-count="10">r</span>_moves = [move_1001; move_1002];
+      cur_hp = 5500;
+ <span data-count="10"> </span>    atk = 1050;
+      buffs = []; 
+      active = true;
+      cooldown = [];
+      level = 10
+    };
+    {
+    <span data-count="10"> </span> char_c = char_3;
+      char_name = "Nether Imp";
+      char_moves<span data-count="10"> </span>= [move_3; move_5];
+      cur_hp = 1750;
+      atk = 60;
+      buffs <span data-count="10">=</span> []; 
+      active = true;
+      cooldown = [];
+      level = <span data-count="10">1</span>0
+    };
+  ]
+
+let team_no_health =
+  [
+    {
+      char_c = char_1001;
+      char_name = "test ch<span data-count="10">a</span>r";
+      char_moves = [move_1001; move_1002];
+      cur_hp = 0;
+      atk = 1050;
+      buffs = []; 
+<span data-count="10"> </span>     active = false;
+      cooldown = [];
+      level = 10
+    };
+    {
+      char_c = char_3;
+      char_name = "Nether Imp";
+      cha<span data-count="10">r</span>_moves = [move_3; move_5];
+      cur_hp = 0;
+      atk = 60;
+      buffs = []; 
+      active <span data-count="10">=</span> false;
+      cooldown = [];
+      level = 10
+    };
+  ]
+
+let combat_tests = [
+  (* testing move_input *)
+  c<span data-count="10">o</span>mbat_move_input_test "valid move 6" 
+    move_set1 "Aqua torrent" (Valid_m move_6);
+  combat_move_input_test <span data-count="10">"</span>valid move 7" move_set1 "cyclone" (Valid_m move_7);
+  combat_move_input_test "valid move 8" move_set1 "Icebolt" (V<span data-count="10">a</span>lid_m move_8);
+  combat_move_input_test "invalid move, move not part of list" 
+    move<span data-count="10">_</span>set1 "Kick" (Invalid_m);
+  combat_move_input_test "invalid move" move_se<span data-count="10">t</span>1 "asdfg" (Invalid_m);
+  (* testing tar_input *)
+  combat_target_input_test "valid target fo<span data-count="10">r</span> team1" team1 "1" 
+    (Valid_tar team1_first_target);
+  combat_target_input_test "valid target for team2" team2 "1" 
+<span data-count="10"> </span>   (Valid_tar team2_first_target);  
+  combat_target_in<span data-count="10">p</span>ut_test "invalid target for team1" team1 "5" Invalid_tar; 
+  comb<span data-count="10">a</span>t_target_input_test "invalid target for team2" team2 "4" Invalid_<span data-count="10">t</span>ar;
+  assert_eq_help "update cd, turns left" update_move6.turns_left 2;
+  assert_eq_help "up<span data-count="10">d</span>ate cd, move" update_move6.move move_6;
+  combat_vary_test "vary by 0 percent from 10" 10. 0;
+  combat_vary_test "vary by 0 <span data-count="10">p</span>ercent from 0" 0. 0;
+  combat_vary_test "<span data-count="10">v</span>ary by 100 percent from 0" 0. 100;
+  combat_vary_test "vary by 20 per<span data-count="10">c</span>ent from 10" 10. 20;
+  combat_vary_test "vary by 20 percent from 0" 0. 20;
+  combat_winner_test "wi<span data-count="10">n</span>ner of an ongoing game is 0" combat_t1 0;
+  combat_winner_test "winner of an ending game is 1" <span data-count="10">c</span>ombat_end_t1 1;
+  combat_winner_test "winner of an ending game is<span data-count="10"> </span>2" combat_end_t2 2;
+  do_dmg_test "subtracts all health of t<span data-count="10">e</span>am1[0]" 
+    team1_first_target team1_first_target_hp 0;
+  do_dmg_test "subtra<span data-count="10">c</span>ts 0 from health from team4[1]" 
+    team4_first_target 0 team4_first_targe<span data-count="10">t</span>_hp;
+  do_dmg_test "subtracts half of the health from team2[1]" 
+    t<span data-count="10">e</span>am2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
+ <span data-count="10"> </span>do_dmg_test "subtracts big value 100000 from health" 
+    team3_first_target 10000<span data-count="10">0</span> 0;
+  combat<span data-count="10">_</span>init_test "initialize a game state t for char list 1 &amp; 2" 
+    char_lst1 char_lst2 char_lst1_lst2_t;
+  combat_in<span data-count="4">i</span>t_test "initialize a game state t for char list 3 &amp; 4" 
+    char_lst3 char_lst4 char_lst3_lst4_t;
+  combat_init_test "initialize a game state t for empty char lists 3 &amp; 3" 
+    char_lst3 char_lst3 char_lst3_lst3_t;
+  update_cd_test "update move_cd_1 with positive cd = 10" 
+    move_cd_1 move_cd_1_new;
+  update_cd_test "update move_cd_2 with cd = 0" move_cd_2 move_cd_2_new;
+  update_cd_test "update move_cd_3 with negative cd = -30" 
+    move_cd_3 move_cd_3_new;
+  update_cd_lst_test "update move_cd with positive cd's" 
+    [move_cd_1; move_cd_1_new] [move_cd_1_new; move_cd_1_8];
+  update_cd_lst_test "update empty move_cd list" [] [];
+  update_cd_lst_test "update move_cd with cd = 0" [move_cd_2] [];
+  update_cd_lst_test "update move_cd with cd = 1" [move_cd_5] [];
+  update_cd_lst_test "update move_cd with negative cd's" 
+    [move_cd_2_new; move_cd_3] [];
+  update_cd_lst_test "update move_cd with combinations of cd's" 
+    [move_cd_2; move_cd_1; move_cd_2_new] [move_cd_1_new];
+  update_cd_team_test "emtpy team" [] [];
+  update_cd_team_test "emtpy cooldown move list" cd_team_1 cd_team_1;
+  update_cd_team_test "one char with positive cd and one with cd = 0" 
+    cd_team_2 cd_team_2_new;
+  update_cd_team_test "chars with negative cd, cd=1 and cd = 0" 
+    cd_team_3 cd_team_3_new;
+  combat_is_active_test "character with positive health" c1 true;
+  combat_is_active_test "character with 0 health" c2 false;
+  combat_get_active_test "team with all characters alive" cd_team_1 cd_team_1;
+  combat_get_active_test "team with all characters dead" team_no_health [];
+  combat_get_active_test "team with all characters dead" team_no_health [];
+  is_team_dead_test "team with all characters dead" team_no_health true;
+  is_team_dead_test "team with characters alive" cd_team_3 false;
+  get_team_test "team 1 followed by team 2 in combat 1" 
+    1 combat_t1 (team1, team2);
+  get_team_test "team 2 followed by team 1 in combat 2" 
+    2 combat_t1 (team2, team1);
+  get_team_test "team 1 followed by team 2 in combat 2" 
+    1 combat_t2 (team3, team4);
+  get_team_test "team 2 followed by team 1 in combat 2" 
+    2 combat_t2 (team4, team3);
+  is_move_test "testing move with wrong name" "aqua" move_6 false; 
+  is_move_test "testing empty string input" "" move_7 false; 
+  is_move_test "testing move with all underscore letters" 
+    "aqua torrent" move_6 true; 
+  is_move_test "testing move 8 with exact name" "Icebolt" move_8 true;
+  load_char_test "load character 5 at level 0" (char_5, 0) c5_level_0;  
+  load_char_test "load character 5 at level 10" (char_5, 10) c5_level10;
+  load_char_test "load character 12 at level 5" (char_12,5) c12_level5;
+  smartness_of_c_test "smartness of character 5 at level 0" c5_level_0 4;
+  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 14;
+  check_winner_test "non empty team" team1 1 ();
+]
+
+
+let suite =
+  "test suite"  &gt;::: List.flatten [
+    char_tests;
+    move_tests;
+    map_test;
+    state_tests;
+    combat_tests;
+  ]
+
+let _ = run_test_tt_main suite
+
+</code></pre>
+      </div>
+    </div>
+    <script src="coverage.js"></script>
+  </body>
+</html>

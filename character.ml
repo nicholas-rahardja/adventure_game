@@ -27,14 +27,13 @@ type c = {
 }
 
 (**AF: {all_chars = [(1,c1); (2,c2); (3,c3); ...; (n,cn)]}; 
-   all_moves = [(1,m1);(2,m2);....;(n,mn)]} are the characters 
+   {all_moves = [(1,m1);(2,m2);....;(n,mn)]} are the characters 
    c1, c2, c3,..., cn, with all the possible moves in the game. 
    RI: None*)
 type t = {
   all_chars : (int * c) list;
   all_moves : (int * move) list
 }
-
 
 (* Constants *)
 let atk_per_lvl = 3
