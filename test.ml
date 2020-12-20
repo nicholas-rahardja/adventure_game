@@ -362,23 +362,6 @@ let state_tests = [
     (Failure "Invalid index");
   state_exn_test "remove_char empty" (fun _ -> remove_char 0 s0) 
     (Failure "Invalid index");
-  state_chars_test "swap_chars" (swap_chars 1 2 s1)
-    (get_char_list [1; 3; 2]);
-  state_chars_test "swap_chars same char" (swap_chars 1 1 s1)
-    (get_char_list [1; 2; 3]);
-  state_int_test "swap_chars dups" (swap_chars 3 2 s4) (get_xp 2) 50;
-  state_exn_test "swap_chars n1 beyond index" (fun _ -> swap_chars 0 3 s1) 
-    (Failure "nth");
-  state_exn_test "swap_chars n2 beyond index" (fun _ -> swap_chars 3 0 s1) 
-    (Failure "nth");
-  state_exn_test "swap_chars n1 and n2 beyond index" 
-    (fun _ -> swap_chars 3 4 s1) (Failure "nth");
-  state_exn_test "swap_chars n1 negative" (fun _ -> swap_chars ~-3 1 s1) 
-    (Failure "Invalid index");
-  state_exn_test "swap_chars n2 negative" (fun _ -> swap_chars 1 ~-3 s1) 
-    (Failure "Invalid index");
-  state_exn_test "swap_chars n1 and n2 negative" 
-    (fun _ -> swap_chars ~-1 ~-3 s1) (Failure "Invalid index");
   state_add_xp_test "add_xp to 0 xp" s1 0 25 25 true;
   state_add_xp_test "add_xp no level up" s4 3 1 51 false;
   state_add_xp_test "add_xp with level up" s4 3 1000 1050 true;
@@ -686,8 +669,8 @@ let combat_target_input_test name team input exp_output =
   assert_eq_help name result exp_output
 
 (* let do_dmg_test name c dmg expected = 
-  do_dmg c dmg; 
-  name >:: fun _ -> 
+   do_dmg c dmg; 
+   name >:: fun _ -> 
     assert_equal expected c.cur_hp ~printer:(string_of_int) *)
 
 let do_heal_test name c heal expected = 
@@ -964,13 +947,13 @@ let combat_tests = [
   (* combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
      combat_winner_test "winner of an ending game is 2" combat_end_t2 2; *)
   (* do_dmg_test "subtracts all health of team1[0]" 
-    team1_first_target team1_first_target_hp 0;
-  do_dmg_test "subtracts 0 from health from team4[1]" 
-    team4_first_target 0 team4_first_target_hp;
-  do_dmg_test "subtracts half of the health from team2[1]" 
-    team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
-  do_dmg_test "subtracts big value 100000 from health" 
-    team3_first_target 100000 0; *)
+     team1_first_target team1_first_target_hp 0;
+     do_dmg_test "subtracts 0 from health from team4[1]" 
+     team4_first_target 0 team4_first_target_hp;
+     do_dmg_test "subtracts half of the health from team2[1]" 
+     team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
+     do_dmg_test "subtracts big value 100000 from health" 
+     team3_first_target 100000 0; *)
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 

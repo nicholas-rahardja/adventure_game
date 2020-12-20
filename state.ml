@@ -63,14 +63,8 @@ let get_level n t =
   | (c, xp) -> (-1. +. sqrt (1. +. 4. *. (float_of_int xp))) /. 2. 
                |> int_of_float
 
-
-
 let xp_of_lvl lvl = 
   (lvl * lvl) + lvl
-
-let next_xp_of_lvl lvl = 
-  let next_lvl = lvl + 1 in 
-  xp_of_lvl next_lvl - (xp_of_lvl lvl)
 
 let get_room t =
   t.current_room
@@ -118,19 +112,6 @@ let remove_char n t =
       t with
       chars = remove_helper n clist
     }
-
-let swap_chars n1 n2 t =
-  if n1 < 0 || n2 < 0 then failwith "Invalid index"
-  else
-    let c1 = get_char n1 t in
-    let exp1 = get_xp n1 t in
-    let c2 = get_char n2 t in
-    let exp2 = get_xp n2 t in
-    t
-    |> remove_char n1
-    |> add_char c2 ~xp:exp2 n1
-    |> remove_char n2
-    |> add_char c1 ~xp:exp1 n2
 
 (** Precondition: [n] must be between 0 and [List.length clist - 1], 
     inclusive. *)
