@@ -26,14 +26,6 @@ type t = {
   all_moves : (int * move) list
 }
 
-(** Representation type for a buff *)
-type buff = 
-  | Dot of int * int 
-  | Hot of int * int
-  | DmgDoneMod of int * int
-  | DmgReceivedMod of int * int
-  | ElementalDmgDoneMod of int * int
-  | ElementalVulnerability of int * int
 
 (** [from_json j] is the list of characters and moves that [j] represents.
     Requires: [j] is a valid characters JSON file representation. *)
@@ -64,7 +56,7 @@ val get_hp : c -> int
 (** [get_move t id] is the move with ID [id] in [t]. *)
 val get_move : t -> int -> move option
 
-(** [get_move_name id] is the [move]'s name. *)
+(** [get_move_name move] is the [move]'s name. *)
 val get_move_name : move -> string
 
 (** [get_move_atk move] is [move]'s base attack value. *)
@@ -85,7 +77,7 @@ val get_damage : c -> c -> move -> float
 (** [get_char_atk_lvl c lvl] is [c]'s attack stat at level [lvl]. *)
 val get_char_atk_lvl : c -> int -> int 
 
-(** [get_hp_lvl c lvl] is [c] HP at level [lvl]. *)
+(** [get_char_hp_lvl c lvl] is [c] HP at level [lvl]. *)
 val get_char_hp_lvl : c -> int -> int 
 
 (** [get_move_cd move] gets the [cooldown] of [move] *)
