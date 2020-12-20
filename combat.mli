@@ -1,5 +1,4 @@
-(** A module that initiates and handles combat, given a list of characters.
-*)
+(** A module that initiates and handles combat, given a list of characters.*)
 
 (** [move_cd] is an entry in the cooldown list. It has the [move] on cooldown,
     and the number of turns left to get off cooldown. *)
