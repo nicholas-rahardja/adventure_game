@@ -155,7 +155,6 @@ let get_effectiveness (move : move) (character :c) : float =
   | (Grass, Water) -> 1.5 
   | _ -> 0.5 
 
-(**discuss with AL how we want to implement damage*)
 let get_damage (player:c) (enemy:c) (move:move) : float = 
   let effectiveness = get_effectiveness move enemy in 
   float_of_int(move.atk) *. effectiveness 

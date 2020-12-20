@@ -143,8 +143,8 @@ let move_tests = [
   move_getter_test_helper "get description move 2" get_move_desc move_2 "PH";
   move_getter_test_helper "get attack move 2" get_move_atk move_2 10;
   move_getter_test_helper "get scale of move 1" get_scale move_1 2.0;
-  move_getter_test_helper "get move element of move 16" get_move_element move_16
-    Normal;
+  move_getter_test_helper "get move element of move 16" get_move_element 
+    move_16 Normal;
   get_effectiveness_tests_helper 
     "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
   get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
