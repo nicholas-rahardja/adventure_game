@@ -28,13 +28,13 @@ type char_t = Character.t
 
 type team = c list
 
-(**{team1 = [c1; c2]}; team2 = [c3; c4]; winner = 1; 
-   items= [item1; item2; item_n]} represents the combat where there are 2 teams
+(**{team1 = {[c1; c2]}; team2 = {[c3; c4]}; winner = 1; 
+   items= {[item1; item2; item_n]} represents the combat where there are 2 teams
    team 1 and team 2. Where team 1 has characters c1 and c2, and team 2 has 
    characters c3 and c4. Items are all the items held by team 1 (only valid in 
    single player mode). The winner of the game is team1. Note if winner is 0, 
    then no team has won yet.
-   RI:  [winner] can only be 0,1,2*)
+   RI:  [winner] can only be 0,1,2 *)
 type t = {
   team1: team;
   team2: team;
@@ -90,10 +90,10 @@ let do_dmg c (dmg : int) =
   (blue_char_name c; 
    Printf.printf " has taken %d damage\n" dmg);
   let remaining_health = c.cur_hp - dmg in
-  if remaining_health > 0 then 
-    (blue_char_name c;
-     Printf.printf " has %d health left\n" remaining_health;
-     c.cur_hp <- remaining_health) 
+  if remaining_health > 0 then begin
+    blue_char_name c;
+    Printf.printf " has %d health left\n" remaining_health;
+    c.cur_hp <- remaining_health end 
   else
     (blue_char_name c;
      Printf.printf " has fallen!\n";
@@ -238,11 +238,10 @@ let print_item n item =
   let item_name = Adventure.item_string item in 
   Printf.printf "Type %d to use item %s \n" (n + 1) item_name
 
-(* Helper to remove [n]th element from list [lst] *)
-let rec remove n lst = 
+let rec remove_n n lst = 
   match lst with 
   | [] -> []
-  | h :: t -> if n = 0 then t else h :: remove (n - 1) t
+  | h :: t -> if n = 0 then t else h :: remove_n (n - 1) t
 
 let print_item_choices items = 
   print_endline "You may use an item";
@@ -275,7 +274,11 @@ let rec revival_item_select_helper team =
 let no_item_exp input = 
   if input = 0 then raise NoItemSelected
 
-(** PH function. Will be used to allow usage of items *)
+let user_input_item_msg = "Please enter the integer to select which
+        character to use this item on"
+
+let invalid_item_msg = "that is not a valid item, please type again"
+
 let rec use_item team items t = 
   try
     if List.length items > 0 then begin 
@@ -285,21 +288,17 @@ let rec use_item team items t =
       let item_selected = List.nth items (input - 1) in 
       let char_selected = begin
         match item_selected with 
-        | Adventure.RevivalItem _ -> 
-          revival_item_select_helper team
-        | _ -> print_endline "Please enter the integer to select which
-        character to use this item on";
-          select_enemy team
+        | Adventure.RevivalItem _ -> revival_item_select_helper team
+        | _ -> print_endline user_input_item_msg; select_enemy team
       end in 
       match_item item_selected char_selected;
-      let new_item_lst = remove (input - 1) items in 
+      let new_item_lst = remove_n (input - 1) items in 
       t.items <- new_item_lst
     end
   with e -> match e with 
     | NoItemSelected -> print_endline "you decided not to use an item"
     | RevivalItemException -> use_item team items t
-    | _ -> print_endline "that is not a valid item, please type again"; 
-      use_item team items t
+    | _ -> print_endline invalid_item_msg; use_item team items t
 
 let is_move input move = 
   let move1 = Character.get_move_name move |>  String.lowercase_ascii in 
@@ -406,8 +405,6 @@ let start_t t =
   with Winner inte -> 
     Printf.printf "Congratulation, team %d is the Winner!\n\n" inte;
     t.winner <- inte
-
-let winner t = t.winner
 
 let print_char_select t id = 
   let char_name = 

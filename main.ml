@@ -59,11 +59,9 @@ let getextract_char id =
   let opt = (get_char t1 id) in 
   Option.get opt
 
-
 let michael = getextract_char 1
 let gries = getextract_char 2 
 let imp = getextract_char 3
-
 
 let player_team = [michael; gries; imp]
 
@@ -79,7 +77,8 @@ let print_int_line adv_t x =
   let room_name = (Adventure.room_name adv_t x) in 
   ANSITerminal.(print_string [blue] ( room_name ^ "\n"))
 
-let print_rooms room_lst adv_t = List.iter (print_int_line adv_t) room_lst
+let print_rooms room_lst adv_t = 
+  List.iter (print_int_line adv_t) room_lst
 
 (* allows player to recruit an enemy *)
 let player_input input = 
@@ -99,7 +98,6 @@ let rec add_to_team_helper char state lvl =
     print_endline "You have decided to keep your current team"; state
   | Yes -> add_to_team_yes char state lvl
 
-
 and add_to_team_yes char state lvl = 
   try begin
     let cur_party = State.get_chars state in 
@@ -116,10 +114,8 @@ and add_to_team_yes char state lvl =
   with _ -> print_endline "that is not a valid choice, please type a valid int";
     add_to_team_yes char state lvl
 
-
-
 let add_to_team enemy_team state difficulty = 
-  if Combat.proc enemy_join_chance then begin 
+  if Combat.proc enemy_join_chance then (
     let rand_choice = Combat.rand_in_lst enemy_team in 
     print_newline ();
     let char_name = Character.get_char_name rand_choice in 
@@ -128,16 +124,14 @@ let add_to_team enemy_team state difficulty =
     Printf.printf 
       "Type 'y' to let him join your adventures! or type 'n' to decline \n" ;
     add_to_team_helper rand_choice state difficulty
-  end
+  )
   else state
-
 
 let rec match_move t = 
   try begin
     match State.move t (read_int ()) with 
     | Illegal -> print_endline "enter a valid room exit"; match_move t
     | Legal x -> x
-
   end
   with 
   | _ -> print_endline "enter a valid room exit"; match_move t
@@ -217,20 +211,23 @@ let print_item_lst item_lst =
 let check_buy_none input = 
   if input = "none" then raise NoItemSelected else ()
 
+let ask_shop_helper shop = 
+  print_item_lst shop ();
+  let input = read_line () in 
+  check_buy_none input;
+  let choice = int_of_string input - 1 in 
+  List.nth shop choice 
+
 let rec ask_shop_item shop state = 
   try
-    print_item_lst shop ();
-    let input = read_line () in 
-    check_buy_none input;
-    let choice = int_of_string input - 1 in 
-    let item_choice = List.nth shop choice in 
-    if State.get_gold state < item_choice.price then begin
+    let item_choice = ask_shop_helper shop in 
+    if State.get_gold state < item_choice.price then (
       print_endline "You don't have enough gold!";
       print_endline "The shopkeeper says: No money, No buy!";
-      ask_shop_item shop state end 
+      ask_shop_item shop state )
     else begin 
       let item_name = Adventure.item_string item_choice.item in 
-      Printf.printf "You brought " ;
+      Printf.printf "You brought ";
       ANSITerminal.(print_string [blue] item_name);
       print_newline ();
       let sub_gold_state = State.sub_gold item_choice.price state in 
@@ -240,7 +237,6 @@ let rec ask_shop_item shop state =
   match e with 
   | NoItemSelected -> print_endline "You decided not to buy anything.\n"; state
   | _ -> print_endline "enter a valid int"; ask_shop_item shop state
-
 
 let state_shop_helper shop state = 
   if List.length shop = 0 then state else begin
@@ -260,8 +256,8 @@ let state_shop_helper shop state =
   end
 
 let rec ask_save_yes state = 
-  print_endline "Type the name of the file you would like to save it as: \n
-For example, type 'save1' or 'Clarksons_adventure'";
+  print_endline "Type the name of the file you would like to save it as:";
+  print_endline"For example, type 'save1' or 'Clarksons_adventure'";
   try 
     let input = read_line () in 
     let file_name =  input ^ ".json" in
@@ -274,9 +270,8 @@ For example, type 'save1' or 'Clarksons_adventure'";
 (** asks the user to save progress *)
 let rec ask_save state = 
   try
-    print_endline "Would you like to save your progress? 
-Type 'yes' to save. 
-Type 'no' to not save" ;
+    print_string "Would you like to save your progress?";
+    print_endline "Type 'yes' to save.\nType 'no' to not save" ;
     let input = read_line () in 
     match input with 
     | "yes" | "y" -> ask_save_yes state
@@ -333,26 +328,30 @@ let sing_player () =
   | SingPlayerCompleted -> print_yellow_win_msg ()
   | _ -> ()
 
-let rec load_game () = 
+let print_load_msg () = 
   print_endline "Type the name of your save file. 
 For example: 'save1' or 'Clarksons_Adventures'\n";
   print_string "Or type ";
   print_red "'quit'"; 
-  print_endline " to return to the main menu";
+  print_endline " to return to the main menu"
+
+let rec load_game () = 
+  print_load_msg ();
   try
     let input = read_line () in 
-    if input = "quit" then raise QuitGameLoading else begin
+    if input = "quit" then raise QuitGameLoading 
+    else (
       let path = "./" ^ input ^ ".json" in 
       let state = State.load adventure_t t1 path in 
       Printf.printf "Successfully loaded file %s\n" input;
       one_round state adventure_t
-    end
-  with e ->
-  match e with 
-  | QuitGameLoading -> raise QuitGameLoading
-  | SinglePlayerLost -> print_lost_msg ()
-  | SingPlayerCompleted -> print_yellow_win_msg ()
-  | _ -> print_endline "That file is not found. Please try again."; load_game ()
+    )
+  with e -> match e with 
+    | QuitGameLoading -> raise QuitGameLoading
+    | SinglePlayerLost -> print_lost_msg ()
+    | SingPlayerCompleted -> print_yellow_win_msg ()
+    | _ -> 
+      print_endline "That file is not found. Please try again."; load_game ()
 
 
 let mult_player () = Combat.mult_start t1
