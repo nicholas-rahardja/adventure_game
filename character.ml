@@ -59,9 +59,6 @@ let get_char_id c =
 let get_char_name c =
   c.name
 
-let get_char_desc c =
-  c.description
-
 let get_moves c =
   c.moves
 
@@ -70,9 +67,6 @@ let get_char_atk c =
 
 let get_hp c =
   c.hp 
-
-let get_char_element c =
-  c.element
 
 (* Move-related functions *)
 
@@ -132,18 +126,12 @@ let from_json j =
 let get_move_name (move:move) : string = 
   move.name 
 
-let get_move_desc (move:move) : string = 
-  move.description
-
 let get_move_atk (move:move) : int = 
   move.atk
 
 let get_scale (move:move) : float = 
   move.scale
-
-let get_move_element (move:move) : element = 
-  move.element 
-
+  
 let get_move_cd move = 
   move.cooldown
 

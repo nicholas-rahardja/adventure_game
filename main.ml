@@ -1,11 +1,10 @@
 open Character
 
-
 let j1 = Yojson.Basic.from_file "json/charmove.json"
 
 let t1 = from_json j1
 let adventure_t = 
-  Adventure.from_json (Yojson.Basic.from_file "adventure_test.json")
+  Adventure.from_json (Yojson.Basic.from_file "adventure_game.json")
 
 type player_choice = 
   | Yes
@@ -18,6 +17,8 @@ let rooms_visited_count = ref 0
 
 let starting_room_id = ref ~-9999
 
+let ending_room_id = 8
+
 (** Exception when player doesnt want to buy an item *)
 exception NoItemSelected
 
@@ -26,6 +27,9 @@ exception SinglePlayerLost
 
 (** Exception when player decides to not load a game file *)
 exception QuitGameLoading
+
+(** Exception when player has defeated the opponents in the last room *)
+exception SingPlayerCompleted
 
 let counter = ref 1
 (** [print_char_name c] prints:
@@ -217,32 +221,35 @@ let rec ask_shop_item shop state =
     let choice = int_of_string input - 1 in 
     let item_choice = List.nth shop choice in 
     if State.get_gold state < item_choice.price then begin
+      print_endline "You don't have enough gold!";
       print_endline "The shopkeeper says: No money, No buy!";
       ask_shop_item shop state end 
     else begin 
       let item_name = Adventure.item_string item_choice.item in 
-      Printf.printf "You brought %s \n" item_name;
+      Printf.printf "You brought " ;
+      ANSITerminal.(print_string [blue] item_name);
+      print_newline ();
       let sub_gold_state = State.sub_gold item_choice.price state in 
       State.add_inventory item_choice.item sub_gold_state
     end
   with e -> 
   match e with 
-  |NoItemSelected -> print_endline "You decided not to buy anything"; state
+  | NoItemSelected -> print_endline "You decided not to buy anything"; state
   | _ -> print_endline "enter a valid int"; ask_shop_item shop state
 
 
 let state_shop_helper shop state = 
   if List.length shop = 0 then state else begin
     print_endline "A shopkeeper greets you: ";
-    ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look 
-      around...\n");
+    ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look \
+                                       around...\n");
     print_endline "Type the int of the item you want. You can only buy one.";
     print_string "Or type ";
     print_red "'none'";
     print_endline " to buy nothing";
     print_endline "You currently have: ";
     let cur_gold = State.get_gold state |> string_of_int in
-    ANSITerminal.(print_string [yellow] (cur_gold ^ "gold\n") );
+    ANSITerminal.(print_string [yellow] (cur_gold ^ " gold\n") );
     let new_state = ask_shop_item shop state in 
     print_endline "The shopkeeper says: Come again anytime!";
     new_state
@@ -296,6 +303,7 @@ let rec one_round (state : State.t) adv_t =
     if List.length enemies = 0 then state else 
       init_combat cur_room enemies state adv_t
   in
+  if cur_room = ending_room_id then raise SingPlayerCompleted;
   let rewards = Adventure.rewards adv_t cur_room in 
   let state_after_rewards = add_rewards rewards new_state in
   let shop_items = Adventure.shop adv_t cur_room in 
@@ -315,8 +323,13 @@ let sing_player () =
     let game_state = State.init_state adventure_t player_team in 
     starting_room_id := State.get_room game_state;
     one_round game_state adventure_t
-  with SinglePlayerLost -> 
-    print_endline "Please restart the game to play again!"
+  with e -> 
+  match e with 
+  | SinglePlayerLost -> print_endline "Please restart the game to play again!"
+  | SingPlayerCompleted -> 
+    print_endline "Congratulations!!! You have completed the game! \ 
+  Thank you for playing!"
+  | _ -> ()
 
 let rec load_game () = 
   print_endline "Type the name of your save file. 

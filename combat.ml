@@ -51,7 +51,6 @@ type target_select =
   | Valid_tar of c
   | Invalid_tar
 
-(* TODO *)
 type item_select = 
   | ValidItem of item
   | InvalidItem
@@ -64,13 +63,12 @@ let max_selections = 7
 let dmg_variation = 5
 let health_mod = 5
 let delay_time = 1
-let permanent = 9999999
-let multiplayer_base_lvl = 10
+let multiplayer_base_lvl = 3
 
-let revive_base_hp = 50.
+let revive_base_hp = 0.5
 
 (* Single player constants *)
-let dmg_mod = 10
+let dmg_mod = 1
 
 exception WinnerSingPlayer of int * (item list)
 
@@ -237,7 +235,10 @@ let percent_hp name percent c =
   do_heal c hp_restored
 
 let revival_item name c = 
-  percent_hp name revive_base_hp c; c.active <- true
+  percent_hp name revive_base_hp c; c.active <- true;
+  let char_name = c.char_name in 
+  Printf.printf 
+    "%s has been revived, but they are too weak to attack this turn!" char_name
 
 let match_item item c = 
   match item with
@@ -260,8 +261,9 @@ let rec remove n lst =
 
 let print_item_choices items = 
   print_endline "You may use an item";
-  print_endline 
-    "Type the int to select your item. Or type 0 to not use any item \n";
+  print_string "Type the int to select your item. Or type ";
+  ANSITerminal.(print_string [red] "0");
+  print_endline " to not use any item \n";
   List.iteri (print_item) items
 
 (* let item_input items input = 
@@ -579,8 +581,9 @@ let execute_turn n t : unit =
   update_cd_team fri_team;
   let act_friendly = get_active fri_team in 
   check_winner (get_active enemy_team) n;
+  check_winner act_friendly (switch_n n);
   if n = 1 then begin
-    ANSITerminal.(print_string [red] "It is your turn to attack: \n\n");
+    ANSITerminal.(print_string [green] "\nIt is your turn to attack: \n\n");
     use_item fri_team t.items t; 
     List.iter (use_move n enemy_team) act_friendly
   end

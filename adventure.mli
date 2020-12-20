@@ -32,11 +32,7 @@ val start_room : t -> room_id
     adventure [a]. *)
 val room_ids : t -> room_id list
 
-(** [message a r] is the initial message of room [r] in adventure [a]. 
-    Raises [Not_found] if [r] is not a room identifier in [a]. *)
-val message : t -> room_id -> string
-
-(** [message a r] is the initial message of room [r] in adventure [a]. 
+(** [room_name a r] is the initial message of room [r] in adventure [a]. 
     Raises [Not_found] if [r] is not a room identifier in [a]. *)
 val room_name : t -> room_id -> string
 
