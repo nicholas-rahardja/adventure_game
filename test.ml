@@ -35,38 +35,17 @@ open Combat
 let j1 = from_file "json/charmove.json"
 let t1 = from_json j1
 
-(* Copied from A2 test suite *)
-(** [pp_string s] pretty-prints string [s]. *)
-let pp_string s = "\"" ^ s ^ "\""
+(* Comparison and printer functions. These are REIMPLEMENTED FROM SCRATCH. 
+   Despite some functions having the same names, they are NOT the same as the 
+   code provided in CS 3110 assignments. *)
 
-(** [pp_list pp_elt lst] pretty-prints list [lst], using [pp_elt]
-    to pretty-print each element of [lst]. *)
 let pp_list pp_elt lst =
-  let pp_elts lst =
-    let rec loop n acc = function
-      | [] -> acc
-      | [h] -> acc ^ pp_elt h
-      | h1 :: (h2 :: t as t') ->
-        if n = 100 then acc ^ "..."  (* stop printing long list *)
-        else loop (n + 1) (acc ^ (pp_elt h1) ^ "; ") t'
-    in loop 0 "" lst
-  in "[" ^ pp_elts lst ^ "]"
+  let rec print_elt = function
+    | [] -> ""
+    | h :: t -> pp_elt h ^ ", " ^ print_elt t
+  in
+  "[" ^ print_elt lst ^ "]"
 
-(** [cmp_set_like_lists lst1 lst2] compares two lists to see whether
-    they are equivalent set-like lists.  That means checking two things.
-    First, they must both be {i set-like}, meaning that they do not
-    contain any duplicates.  Second, they must contain the same elements,
-    though not necessarily in the same order. *)
-let cmp_set_like_lists lst1 lst2 =
-  let uniq1 = List.sort_uniq compare lst1 in
-  let uniq2 = List.sort_uniq compare lst2 in
-  List.length lst1 = List.length uniq1
-  &&
-  List.length lst2 = List.length uniq2
-  &&
-  uniq1 = uniq2
-
-(* Other comparison and printer functions *)
 let cmp_unordered_lists lst1 lst2 =
   List.sort compare lst1 = List.sort compare lst2
 
@@ -79,6 +58,7 @@ let string_of_element = function
   | Fire -> "Fire"
   | Grass -> "Grass"
 
+(* START: Character tests *)
 let chars_test name json f p expected =
   name >:: (fun _ -> assert_equal expected 
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
@@ -87,7 +67,7 @@ let chars_test name json f p expected =
 let chars_str_test name json f expected =
   name >:: (fun _ -> assert_equal expected 
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
-               ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
+               ~cmp:cmp_unordered_lists ~printer:(pp_list str))
 
 let get_char_hp_lvl_test name char level expected = 
   name >:: (fun _ -> assert_equal expected (get_char_hp_lvl char level))
@@ -128,7 +108,6 @@ let char_tests = [
 ]
 
 (** Testing the move functions *)
-
 let move_getter_test_helper name f input expected = 
   name >:: (fun _ -> assert_equal expected (f input))
 
@@ -161,17 +140,16 @@ let move_tests = [
   get_effectiveness_tests_helper 
     "effectivennes of normal move vs fire character" 1.0 move_2 c_3;
   get_effectiveness_tests_helper "grass move vs fire character" 0.5 move_11 c_3;
-
   get_damange_helper "grass move vs fire character with base attack 10"
     5. c_12 c_3 move_11;
 ]
 
 open Adventure
-let test_adventure = from_json (from_file "adventure_test.json")
+let test_adventure = from_json (from_file "./json/adventure_test.json")
 
 let room_ids_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (room_ids a) 
-              ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists) 
+              ~printer:(pp_list string_of_int) ~cmp:cmp_unordered_lists) 
 
 let start_room_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (start_room a)) 
@@ -190,11 +168,11 @@ let enemies_test_helper name a r expected =
 
 let shop_test_helper name a r expected =
   name >::(fun _ -> assert_equal expected (shop a r)
-              ~cmp:cmp_set_like_lists ~printer:(pp_list item_wrapper_string)) 
+              ~cmp:cmp_unordered_lists ~printer:(pp_list item_wrapper_string)) 
 
 let rewards_test_helper name a r expected =
   name >::(fun _ -> assert_equal expected (rewards a r)
-              ~cmp:cmp_set_like_lists ~printer:(pp_list item_string)) 
+              ~cmp:cmp_unordered_lists ~printer:(pp_list item_string)) 
 
 let difficulty_test_helper name a r expected = 
   name >::(fun _ -> assert_equal expected (difficulty a r)) 
@@ -202,7 +180,7 @@ let difficulty_test_helper name a r expected =
 let map_test = [
   start_room_test_helper "start room of adventure test" test_adventure 1;
   room_ids_test_helper "room ids in adventure test" test_adventure 
-    [1;2;3;4;5;6;7;8];
+    [1; 2; 3; 4; 5; 6; 7; 8];
   exits_test_helper "exits from room 2 in adventure test" test_adventure 2 
     ["Somerset Town"];
   next_room_test_helper "next from room 3 to room 4" test_adventure 3 
@@ -260,7 +238,7 @@ let state_inventory_test name input expected_output =
 
 let state_visited_test name input expected_output =
   name >:: (fun _ -> assert_equal expected_output (input |> get_visited) 
-               ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)
+               ~printer:(pp_list string_of_int) ~cmp:cmp_unordered_lists)
 
 let state_add_xp_test name state index amt new_xp up =
   let (t', r) = add_xp index amt state in
@@ -338,39 +316,31 @@ let state_tests = [
   state_int_test "get_gold 0 test" s1 get_gold 0;
   state_int_test "get_gold, add_gold test" s5 get_gold 50;
   state_inventory_test "get_inventory 0 test" s1 [];
-  state_chars_test "add_chars prepend" (add_char 
-                                          (Character.get_char t1 11 
-                                           |> Option.get) 0 s2)
+  state_chars_test "add_chars prepend" 
+    (add_char (Character.get_char t1 11 |> Option.get) 0 s2)
     (get_char_list [11; 4; 1; 2; 2; 3]);
-  state_chars_test "add_chars append using -1" (add_char 
-                                                  (Character.get_char t1 10 
-                                                   |> Option.get) ~-1 s2)
+  state_chars_test "add_chars append using -1" 
+    (add_char (Character.get_char t1 10 |> Option.get) ~-1 s2)
     (get_char_list [4; 1; 2; 2; 3; 10]);
-  state_chars_test "add_chars append" (add_char 
-                                         (Character.get_char t1 10 
-                                          |> Option.get) 5 s2) 
+  state_chars_test "add_chars append" 
+    (add_char (Character.get_char t1 10 |> Option.get) 5 s2) 
     (get_char_list [4; 1; 2; 2; 3; 10]);
-  state_chars_test "add_char middle" (add_char 
-                                        (Character.get_char t1 9 
-                                         |> Option.get) 3 s2) 
+  state_chars_test "add_char middle" 
+    (add_char (Character.get_char t1 9 |> Option.get) 3 s2) 
     (get_char_list [4; 1; 2; 9; 2; 3]);
-  state_chars_test "add_char empty" (add_char 
-                                       (Character.get_char t1 8 
-                                        |> Option.get) 0 s0) 
-    (get_char_list [8]);
-  state_chars_test "add_char empty using -1" (add_char 
-                                                (Character.get_char t1 8 
-                                                 |> Option.get) ~-1 s0) 
+  state_chars_test "add_char empty" 
+    (add_char (Character.get_char t1 8 |> Option.get) 0 s0) (get_char_list [8]);
+  state_chars_test "add_char empty using -1" 
+    (add_char (Character.get_char t1 8 |> Option.get) ~-1 s0) 
     (get_char_list [8]);
   state_int_test "add_char with nonzero xp in char list with dups" s4 (get_xp 3)
     50;
-  state_exn_test "add_char negative" (fun _ -> add_char 
-                                         (Character.get_char t1 1 |> Option.get) 
-                                         ~-2 s1) (Failure "Invalid index");
-  state_exn_test "add_char beyond index" (fun _ -> add_char 
-                                             (Character.get_char t1 1 
-                                              |> Option.get) 
-                                             4 s1) (Failure "Invalid index");
+  state_exn_test "add_char negative" 
+    (fun _ -> add_char (Character.get_char t1 1 |> Option.get) ~-2 s1) 
+    (Failure "Invalid index");
+  state_exn_test "add_char beyond index" 
+    (fun _ -> add_char (Character.get_char t1 1 |> Option.get) 4 s1) 
+    (Failure "Invalid index");
   state_chars_test "remove_chars on first" (remove_char 0 s2)
     (get_char_list [1; 2; 2; 3]);
   state_chars_test "remove_chars on last" (remove_char 4 s2)
@@ -426,7 +396,6 @@ let char_1001 = Option.get (Character.get_char t1 1001)
 
 let char_lst1 = [char_1, 10;char_2, 10; char_3, 10]
 let char_lst2 = [char_3, 10;char_1001, 10]
-
 let char_lst3 = []
 let char_lst4 = [char_10, 10; char_11, 20; char_12, 20]
 
@@ -552,13 +521,13 @@ let char_lst3_lst3_t =
   }
 
 let combat_t1 = 
-  let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
-  let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
+  let first_team = [char_1, 10; char_2 , 10; char_3 , 10] in 
+  let sec_team = [char_4 , 10; char_5, 10; char_6, 10] in 
   init first_team sec_team empty_item_lst
 
 let combat_t2 = 
   let first_team = [char_1001, 10] in 
-  let sec_team = [char_4, 10;char_5, 10] in 
+  let sec_team = [char_4, 10; char_5, 10] in 
   init first_team sec_team empty_item_lst
 
 (* Get a team object by using [init] like above, then extract the field *)
@@ -713,9 +682,9 @@ let combat_winner_test name t expected =
   assert_eq_help name (t.winner) expected
 
 (* Makes move_cd entry *)
-let make_cd_entry move cd = 
-  {move = move;
-   turns_left = cd;}
+let make_cd_entry move cd = {
+  move = move;
+  turns_left = cd;}
 
 let update_cd_test name input expected = 
   let new_move_cd = Combat.update_cd input in
