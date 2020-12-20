@@ -38,7 +38,6 @@ let t1 = from_json j1
 (* Comparison and printer functions. These are REIMPLEMENTED FROM SCRATCH. 
    Despite some functions having the same names, they are NOT the same as the 
    code provided in CS 3110 assignments. *)
-let pp_string s = s
 
 let pp_list pp_elt lst =
   let rec print_elt = function
@@ -68,7 +67,7 @@ let chars_test name json f p expected =
 let chars_str_test name json f expected =
   name >:: (fun _ -> assert_equal expected 
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
-               ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
+               ~cmp:cmp_unordered_lists ~printer:(pp_list str))
 
 let get_char_hp_lvl_test name char level expected = 
   name >:: (fun _ -> assert_equal expected (get_char_hp_lvl char level))
