@@ -35,38 +35,17 @@ open Combat
 let j1 = from_file "json/charmove.json"
 let t1 = from_json j1
 
-(* Copied from A2 test suite *)
-(** [pp_string s] pretty-prints string [s]. *)
-let pp_string s = "\"" ^ s ^ "\""
+(* Comparison and printer functions. These are REIMPLEMENTED FROM SCRATCH. 
+   Despite some functions having the same names, they are NOT the same as the 
+   code provided in CS 3110 assignments. *)
 
-(** [pp_list pp_elt lst] pretty-prints list [lst], using [pp_elt]
-    to pretty-print each element of [lst]. *)
 let pp_list pp_elt lst =
-  let pp_elts lst =
-    let rec loop n acc = function
-      | [] -> acc
-      | [h] -> acc ^ pp_elt h
-      | h1 :: (h2 :: t as t') ->
-        if n = 100 then acc ^ "..."  (* stop printing long list *)
-        else loop (n + 1) (acc ^ (pp_elt h1) ^ "; ") t'
-    in loop 0 "" lst
-  in "[" ^ pp_elts lst ^ "]"
+  let rec print_elt = function
+    | [] -> ""
+    | h :: t -> pp_elt h ^ ", " ^ print_elt t
+  in
+  "[" ^ print_elt lst ^ "]"
 
-(** [cmp_set_like_lists lst1 lst2] compares two lists to see whether
-    they are equivalent set-like lists.  That means checking two things.
-    First, they must both be {i set-like}, meaning that they do not
-    contain any duplicates.  Second, they must contain the same elements,
-    though not necessarily in the same order. *)
-let cmp_set_like_lists lst1 lst2 =
-  let uniq1 = List.sort_uniq compare lst1 in
-  let uniq2 = List.sort_uniq compare lst2 in
-  List.length lst1 = List.length uniq1
-  &&
-  List.length lst2 = List.length uniq2
-  &&
-  uniq1 = uniq2
-
-(* Other comparison and printer functions *)
 let cmp_unordered_lists lst1 lst2 =
   List.sort compare lst1 = List.sort compare lst2
 
@@ -79,6 +58,7 @@ let string_of_element = function
   | Fire -> "Fire"
   | Grass -> "Grass"
 
+(* START: Character tests *)
 let chars_test name json f p expected =
   name >:: (fun _ -> assert_equal expected 
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
@@ -87,7 +67,7 @@ let chars_test name json f p expected =
 let chars_str_test name json f expected =
   name >:: (fun _ -> assert_equal expected 
                ((from_json json).all_chars |> List.map (fun (_, y) -> f y))
-               ~cmp:cmp_unordered_lists ~printer:(pp_list pp_string))
+               ~cmp:cmp_unordered_lists ~printer:(pp_list str))
 
 let get_char_hp_lvl_test name char level expected = 
   name >:: (fun _ -> assert_equal expected (get_char_hp_lvl char level))
@@ -171,7 +151,7 @@ let test_adventure = from_json (from_file "./json/adventure_test.json")
 
 let room_ids_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (room_ids a) 
-              ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists) 
+              ~printer:(pp_list string_of_int) ~cmp:cmp_unordered_lists) 
 
 let start_room_test_helper name a expected = 
   name >::(fun _ -> assert_equal expected (start_room a)) 
@@ -190,11 +170,11 @@ let enemies_test_helper name a r expected =
 
 let shop_test_helper name a r expected =
   name >::(fun _ -> assert_equal expected (shop a r)
-              ~cmp:cmp_set_like_lists ~printer:(pp_list item_wrapper_string)) 
+              ~cmp:cmp_unordered_lists ~printer:(pp_list item_wrapper_string)) 
 
 let rewards_test_helper name a r expected =
   name >::(fun _ -> assert_equal expected (rewards a r)
-              ~cmp:cmp_set_like_lists ~printer:(pp_list item_string)) 
+              ~cmp:cmp_unordered_lists ~printer:(pp_list item_string)) 
 
 let difficulty_test_helper name a r expected = 
   name >::(fun _ -> assert_equal expected (difficulty a r)) 
@@ -260,7 +240,7 @@ let state_inventory_test name input expected_output =
 
 let state_visited_test name input expected_output =
   name >:: (fun _ -> assert_equal expected_output (input |> get_visited) 
-               ~printer:(pp_list string_of_int) ~cmp:cmp_set_like_lists)
+               ~printer:(pp_list string_of_int) ~cmp:cmp_unordered_lists)
 
 let state_add_xp_test name state index amt new_xp up =
   let (t', r) = add_xp index amt state in
