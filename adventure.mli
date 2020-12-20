@@ -65,11 +65,7 @@ val difficulty: t -> room_id -> int
 type item =
   | FlatHp of string * int (** Recovers flat hp *)
   | PercentHp of string * float (** Recovers % hp *)
-  | AtkBooster of string * float (** Attack booster by % *)
-  | DebuffRemover of string
-  | DamageBooster of string * float (** Elemental damage booster by % *)
   | RevivalItem of string
-  | DamageReducer of string * float (** Reduces damage received by a % *)
 
 (** The type of values representing complete item data for the shop. *)
 type item_wrapper =

@@ -1,0 +1,1 @@
+{"chars":[{"id":1,"xp":4},{"id":2,"xp":4},{"id":3,"xp":4}],"current_room":5,"visited":[1,2,3,5],"gold":0,"inventory":[{"name":"Blessing of Lyra","item":"RevivalItem"},{"name":"Medicine","item":"FlatHp","eff":100},{"name":"Healing Balm","item":"FlatHp","eff":100}]}

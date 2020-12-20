@@ -1,0 +1,1 @@
+{"chars":[{"id":2,"xp":22},{"id":3,"xp":22},{"id":9,"xp":12}],"current_room":8,"visited":[1,2,3,5,7,8],"gold":10,"inventory":[{"name":"Blessing of Lyra","item":"RevivalItem"},{"name":"Life Flower","item":"PercentHp","eff":0.7},{"name":"Blessing of Lyra","item":"RevivalItem"},{"name":"Medicine","item":"FlatHp","eff":100},{"name":"Healing Balm","item":"FlatHp","eff":100}]}

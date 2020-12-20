@@ -204,39 +204,12 @@ let item_json i =
         ("item", `String "PercentHp");
         ("eff", `Float f)
       ]
-  | AtkBooster (n, f) -> 
-    `Assoc 
-      [
-        ("name", `String n);
-        ("item", `String "AtkBooster");
-        ("eff", `Float f)
-      ] 
-  | DebuffRemover n -> 
-    `Assoc 
-      [
-        ("name", `String n);
-        ("item", `String "DebuffRemover");
-      ] 
-  | DamageBooster (n, f) -> 
-    `Assoc 
-      [
-        ("name", `String n);
-        ("item", `String "DamageBooster");
-        ("eff", `Float f)
-      ] 
   | RevivalItem n -> 
     `Assoc 
       [
         ("name", `String n);
         ("item", `String "RevivalItem");
       ] 
-  | DamageReducer (n, f) -> 
-    `Assoc 
-      [
-        ("name", `String n);
-        ("item", `String "DamageReducer");
-        ("eff", `Float f)
-      ]
 
 let to_json t =
   `Assoc
