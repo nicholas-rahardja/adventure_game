@@ -175,23 +175,17 @@ val random_pick_char : Character.t -> int -> int -> int -> int list
     Requires : [max_id] must be less than the number of possible character *)
 val random_clst : int -> Character.t -> int -> int -> int -> Character.c list
 
-
-
-
-
-
 (** [init clst1 clst2 items] initializes a game state t with the given 
     character and level pair lists, with [items] loaded *)
 val init: (Character.c * int) list -> (Character.c * int) list -> 
   Adventure.item list -> t
-
 
 (** [start clst1 clst2 items] initializes a game state t with the given 
     character and level pair lists, with the given [items]
     raises an exception for who wins combat. 
     [Winner 1] for team 1 win, [Winner 2] for team 2 win.
     Once combat ends, it must allow the function [winner] to return the
-    correct winner*)
+    correct winner. *)
 val start: (Character.c * int) list -> (Character.c * int) list -> 
   Adventure.item list -> unit
 
