@@ -39,6 +39,9 @@ type room ={
   exits : exit list 
 }
 
+(**AF: {rooms = [room_1; room_2;...; room_n]; start_room = room_s} is the
+   adventure with the starting room at room_ s and that has n number of rooms.
+   RI: The same room can only appear once in the list.*)
 type t ={
   rooms : room list;
   start_room: room_id;

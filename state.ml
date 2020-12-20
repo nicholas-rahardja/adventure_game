@@ -4,7 +4,13 @@ type xp = int
 
 type gold = int
 
-(** Invariant: [visited] must contain no duplicates. *)
+(** AF: {chars = [(c1,1);(c2,2)]; current_room = r1; visited = [r2;r3]; map = m;
+    gold = g; inventory = [item1;item2]} is the state of the game containing 
+    characters c1 and c2, that have xp 1 and 2 respectively. The current room 
+    the player is in is room r1, and the player has visited rooms r2 and r3. 
+    The map m is currently in use, the player has g amounts of gold, and they
+    have items item1 and item2. 
+    RI: [visited] must contain no duplicates.*)
 type t = 
   {
     chars : (Character.c * xp) list;
