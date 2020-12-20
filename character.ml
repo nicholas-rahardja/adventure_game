@@ -127,7 +127,6 @@ let get_scale (move:move) : float =
 let get_move_cd move = 
   move.cooldown
 
-
 (* Attack-related functions *)
 
 let get_effectiveness (move : move) (character :c) : float = 
