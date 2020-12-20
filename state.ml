@@ -9,8 +9,8 @@ type gold = int
     characters c1 and c2, that have xp 1 and 2 respectively. The current room 
     the player is in is room r1, and the player has visited rooms r2 and r3. 
     The map m is currently in use, the player has g amounts of gold, and they
-    have items item1 and item2. 
-    RI: [visited] must contain no duplicates.*)
+    have items item1 and item2.
+    RI: [visited] must contain no duplicates. *)
 type t = 
   {
     chars : (Character.c * xp) list;
