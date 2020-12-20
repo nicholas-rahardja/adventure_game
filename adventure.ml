@@ -160,6 +160,3 @@ let item_string i =
 
 let item_wrapper_string i =
   item_string i.item ^ " [Price: " ^ string_of_int i.price ^ "]"
-
-
-

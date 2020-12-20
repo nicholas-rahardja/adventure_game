@@ -131,10 +131,9 @@ let get_move_atk (move:move) : int =
 
 let get_scale (move:move) : float = 
   move.scale
-  
+
 let get_move_cd move = 
   move.cooldown
-
 
 (* Attack-related functions *)
 
