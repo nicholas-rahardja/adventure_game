@@ -13,6 +13,9 @@ type move_cd =
     from the cd list *)
 type cd_lst = move_cd list
 
+(** [type item] represents an item from the [Adventure] module *)
+type item = Adventure.item
+
 (**[type c] represents one character on a team.
    Must include Character.c in its representation.*)
 type c =
@@ -39,7 +42,7 @@ type t ={
   team1: team;
   team2: team;
   mutable winner: int;
-  mutable items: Adventure.item list
+  mutable items: item list
 }
 
 exception Winner of int
@@ -60,8 +63,8 @@ type target_select =
 (** [item_select] distinguishes between a valid item that the user can use,
     and an input that does not lead to a valid item*)
 type item_select = 
-  | Valid_item of unit
-  | Invalid_item
+  | ValidItem of item
+  | InvalidItem
 
 (** [dmg_variation] is the variation % that all damage/healing is subjected to.
     Example: if dmg_variation = 5, then a damage of 100 can be randomly 
@@ -118,7 +121,7 @@ val is_team_dead: team -> bool
 val check_winner: team -> int -> unit
 
 (** PH function. Will be used to allow usage of items *)
-val use_item: team -> unit
+val use_item: team -> item list -> t ->  unit
 
 (*print [is_move input move] checks if [input] matches the name of [move], 
     it disregards capitalization  *)

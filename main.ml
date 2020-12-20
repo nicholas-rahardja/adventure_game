@@ -1,5 +1,3 @@
-open OUnit2
-
 open Character
 
 
