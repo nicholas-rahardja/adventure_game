@@ -26,14 +26,6 @@ type t = {
   all_moves : (int * move) list
 }
 
-(** Representation type for a buff *)
-type buff = 
-  | Dot of int * int 
-  | Hot of int * int
-  | DmgDoneMod of int * int
-  | DmgReceivedMod of int * int
-  | ElementalDmgDoneMod of int * int
-  | ElementalVulnerability of int * int
 
 (** [from_json j] is the list of characters and moves that [j] represents.
     Requires: [j] is a valid characters JSON file representation. *)

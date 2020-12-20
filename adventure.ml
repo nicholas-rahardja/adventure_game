@@ -16,11 +16,7 @@ type exit ={
 type item =
   | FlatHp of string * int 
   | PercentHp of string * float 
-  | AtkBooster of string * float 
-  | DebuffRemover of string
-  | DamageBooster of string * float 
   | RevivalItem of string
-  | DamageReducer of string * float
 
 type item_wrapper =
   {
@@ -59,17 +55,7 @@ let item_matcher o =
   | "PercentHp" -> 
     PercentHp (o |> member "name" |> to_string, 
                o |> member "eff" |> to_float)
-  | "AtkBooster" -> 
-    AtkBooster (o |> member "name" |> to_string, 
-                o |> member "eff" |> to_float)
-  | "DebuffRemover" -> DebuffRemover (o |> member "name" |> to_string) 
-  | "DamageBooster" -> 
-    DamageBooster (o |> member "name" |> to_string, 
-                   o |> member "eff" |> to_float)
   | "RevivalItem" -> RevivalItem (o |> member "name" |> to_string)
-  | "DamageReducer" -> 
-    DamageReducer (o |> member "name" |> to_string, 
-                   o |> member "eff" |> to_float)
   | _ -> failwith "Invalid item"
 
 let shop_of_json json =
@@ -148,14 +134,8 @@ let item_string i =
       n ^ ": " ^ string_of_int x ^ " " ^ n ^ " HP Medicine" 
     | PercentHp (n, f) -> 
       n ^ ": " ^ string_of_float (f *. 100.) ^ "% HP Medicine"
-    | AtkBooster (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Attack Booster"  
-    | DebuffRemover n -> n ^ ": " ^ "Debuff Remover"
-    | DamageBooster (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Damage Booster" 
     | RevivalItem n -> n ^ ": " ^ "Revival Item"
-    | DamageReducer (n, f) -> 
-      n ^ ": " ^ string_of_float (f *. 100.) ^ "% Damage Reducer"
+
   end
 
 let item_wrapper_string i =

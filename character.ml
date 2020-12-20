@@ -35,14 +35,6 @@ type t = {
   all_moves : (int * move) list
 }
 
-(* First int is the id, 2nd int is the effectiveness *)
-type buff = 
-  | Dot of int * int 
-  | Hot of int * int
-  | DmgDoneMod of int * int
-  | DmgReceivedMod of int * int
-  | ElementalDmgDoneMod of int * int
-  | ElementalVulnerability of int * int
 
 (* Constants *)
 let atk_per_lvl = 3
@@ -131,7 +123,7 @@ let get_move_atk (move:move) : int =
 
 let get_scale (move:move) : float = 
   move.scale
-  
+
 let get_move_cd move = 
   move.cooldown
 

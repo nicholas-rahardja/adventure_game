@@ -230,8 +230,6 @@ let map_test = [
         price = 8
       };
     ];
-  rewards_test_helper "rewards in room 3" test_adventure 3 
-    [FlatHp ("R", 5); DebuffRemover "R"];
   difficulty_test_helper "diffculty of room 2" test_adventure 2 1;
 ]
 
@@ -312,9 +310,6 @@ let s3 = (* Moving around *)
 let s4 = s2 |> add_char (Character.get_char t1 2 |> Option.get) ~xp:50 3
 let s5 = s1 |> add_gold 50 (* Added gold *)
 let s6 = s5 |> sub_gold 20 (* Succesful gold removal *)
-let s7 = s1 (** Add inventory *)
-         |> add_inventory (DebuffRemover "T1") 
-         |> add_inventory (DamageReducer ("T2", 0.02))
 
 
 let state_tests = [
@@ -400,14 +395,6 @@ let state_tests = [
   state_int_test "sub_gold successful test" s6 get_gold 30;
   state_exn_test "sub_gold insufficient test" (fun _ -> sub_gold 60 s5) 
     (Failure "Insufficient gold");
-  state_inventory_test "add_inventory test" s7 
-    [DamageReducer ("T2", 0.02); DebuffRemover "T1"];
-  state_inventory_test "remove_inventory successful test" 
-    (s7 |> remove_inventory 1) [DamageReducer ("T2", 0.02)];
-  state_exn_test "remove_inventory beyond index" 
-    (fun _ -> remove_inventory 2 s7) (Failure "Invalid index");
-  state_exn_test "remove_inventory negative index" 
-    (fun _ -> remove_inventory ~-1 s7) (Failure "Invalid index");
   state_move_test "legal move" s1 2 [2; 1];
   state_move_test "illegal move" s1 4 [];
   state_save_test "save test, minimal" s0 test_adventure t1 "./s0.json";
@@ -415,7 +402,6 @@ let state_tests = [
   state_save_test "save test, with dups" s2 test_adventure t1 "./s2.json";
   state_save_test "save test, with xp" s4 test_adventure t1 "./s4.json";
   state_save_test "save test, with gold" s5 test_adventure t1 "./s5.json";
-  state_save_test "save test, with inv" s7 test_adventure t1 "./s7.json";
 ]
 
 (* STARTING combat tests *)

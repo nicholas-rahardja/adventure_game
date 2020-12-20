@@ -240,12 +240,12 @@ let revival_item name c =
   Printf.printf 
     "%s has been revived, but they are too weak to attack this turn!" char_name
 
+
 let match_item item c = 
   match item with
   | Adventure.RevivalItem name -> revival_item name c
   | Adventure.FlatHp (name, value) -> flat_hp name value c
   | Adventure.PercentHp (name, percent) -> percent_hp name percent c
-  | _ -> failwith "item unimplemented"
 
 
 

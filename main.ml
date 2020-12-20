@@ -19,6 +19,13 @@ let starting_room_id = ref ~-9999
 
 let ending_room_id = 8
 
+let print_yellow_win_msg () = 
+  ANSITerminal.(print_string 
+                  [yellow] "Congratulations!!! You have completed the game! 
+  Thank you for playing!\n")
+
+let print_lost_msg () = print_endline "Please restart the game to play again!\n"
+
 (** Exception when player doesnt want to buy an item *)
 exception NoItemSelected
 
@@ -322,11 +329,8 @@ let sing_player () =
     one_round game_state adventure_t
   with e -> 
   match e with 
-  | SinglePlayerLost -> print_endline "Please restart the game to play again!"
-  | SingPlayerCompleted -> 
-    ANSITerminal.(print_string 
-                    [yellow] "Congratulations!!! You have completed the game! 
-  Thank you for playing!")
+  | SinglePlayerLost -> print_lost_msg ()
+  | SingPlayerCompleted -> print_yellow_win_msg ()
   | _ -> ()
 
 let rec load_game () = 
@@ -346,6 +350,8 @@ For example: 'save1' or 'Clarksons_Adventures'\n";
   with e ->
   match e with 
   | QuitGameLoading -> raise QuitGameLoading
+  | SinglePlayerLost -> print_lost_msg ()
+  | SingPlayerCompleted -> print_yellow_win_msg ()
   | _ -> print_endline "That file is not found. Please try again."; load_game ()
 
 
