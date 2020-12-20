@@ -83,6 +83,10 @@ val get_gold : t -> gold
     with state [t] has. The order is used in [remove_inventory]. *)
 val get_inventory : t -> Adventure.item list
 
+(** [load_inventory items t] is the state of the game with the items replaced
+    with [items] *)
+val load_inventory: Adventure.item list -> t -> t
+
 (** [add_chars c ~xp:e n t] adds character [c] with experience points [e] in 
     index [n] of the character list of the player with state [t]. If [n] is -1, 
     the character is appended to the end of the list. [e] is optional and will 

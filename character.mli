@@ -94,13 +94,11 @@ val get_effectiveness : move -> c -> float
 (** [get_damage c e move] is the damage [c] inflicts on [e] with [move]. *)
 val get_damage : c -> c -> move -> float 
 
-(** [get_move_buff t move] is the [move]'s buff. None if it does not 
-    apply a buff. [Some buff] if there is a buff applied, where [buff] is the
-    buff *)
-val get_move_buff : t -> move -> buff option
-
 (** [get_char_atk_lvl c lvl] is [c]'s attack stat at level [lvl]. *)
 val get_char_atk_lvl : c -> int -> int 
 
 (** [get_hp_lvl c lvl] is [c] HP at level [lvl]. *)
 val get_char_hp_lvl : c -> int -> int 
+
+(** [get_move_cd move] gets the [cooldown] of [move] *)
+val get_move_cd : move -> int

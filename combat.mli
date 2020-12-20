@@ -250,7 +250,7 @@ val set_teamlvl: Character.c list -> int -> (Character.c * int) list
     but clst2 will be controlled
     by the computer, and [items] are loaded in.*)
 val start_sing: (Character.c * int) list -> (Character.c * int) list -> 
-  Adventure.item list -> unit
+  Adventure.item list -> int * item list
 
 (** [rand_in_lst lst] returns a random element in lst *)
 val rand_in_lst : 'a list -> 'a

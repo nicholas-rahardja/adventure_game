@@ -1,7 +1,7 @@
 open Character
 
 
-let j1 = Yojson.Basic.from_file "json/charmovetest.json"
+let j1 = Yojson.Basic.from_file "json/charmove.json"
 
 let t1 = from_json j1
 let adventure_t = 
@@ -14,8 +14,19 @@ type player_choice =
 
 let enemy_join_chance = 100
 
+let rooms_visited_count = ref 0
+
+let starting_room_id = ref ~-9999
+
 (** Exception when player doesnt want to buy an item *)
 exception NoItemSelected
+
+(** Exception when player has lost single player *)
+exception SinglePlayerLost
+
+(** Exception when player decides to not load a game file *)
+exception QuitGameLoading
+
 let counter = ref 1
 (** [print_char_name c] prints:
     "Type n to remove [c]'s name" Where n is the number in the party.*)
@@ -53,6 +64,8 @@ let test_team2 = [fairy; fairy; fairy]
 
 let char_list intlst = List.map (getextract_char) intlst
 
+let print_red str = 
+  ANSITerminal.(print_string [red] str)
 
 let print_int_line adv_t x = 
   Printf.printf "Room %d : Go to " x ;
@@ -102,7 +115,7 @@ let add_to_team enemy_team state difficulty =
   if Combat.proc enemy_join_chance then begin 
     let rand_choice = Combat.rand_in_lst enemy_team in 
     let char_name = Character.get_char_name rand_choice in 
-    ANSITerminal.(print_string [red] char_name);
+    print_red char_name;
     Printf.printf " with level %d wants to join your team! \n" difficulty;
     Printf.printf 
       "Type 'y' to let him join your adventures! or type 'n' to decline \n" ;
@@ -144,17 +157,26 @@ let add_gold_helper lvl state =
   Printf.printf "You have received %d gold! \n" amt;
   State.add_gold amt state
 
+let handle_winner integer = 
+  if integer = 2 then begin 
+    print_endline "Oh no! Your team has fallen! Better luck next time!";
+    raise SinglePlayerLost
+  end
+  else ()
+
 let init_combat cur_room enemies state adv_t = 
   let player_team = State.get_char_with_xp_lst state in 
   let difficulty = Adventure.difficulty adv_t cur_room in 
   let pairs = Combat.set_teamlvl enemies difficulty in 
   let items = State.get_inventory state in 
-  ANSITerminal.(print_string [red] "An enemy has attacked! \n\n");
-  Combat.start_sing player_team pairs items;
-  ANSITerminal.(print_string [red] "You won! \n");
+  print_red "An enemy has attacked! \n\n";
+  let (winner, items) = Combat.start_sing player_team pairs items in 
+  handle_winner winner;
+  let state_update_items = State.load_inventory items state in 
+  print_red "You won! \n";
   let exp_gained = State.xp_of_lvl difficulty in 
   Printf.printf "Your characters gained %d experience \n" exp_gained;
-  let state_ref = ref state in
+  let state_ref = ref state_update_items in
   for i = 0 to List.length (player_team) - 1 do 
     state_ref := (add_xp_func i exp_gained !state_ref)
   done; 
@@ -166,7 +188,7 @@ let add_rewards item_lst state =
   let state_ref = ref state in 
   List.iter (fun item -> 
       let item_name = Adventure.item_string item in 
-      Printf.printf "You found %s! You put it in your inventory\n5" item_name;
+      Printf.printf "You found %s! You put it in your inventory\n" item_name;
       let new_state = State.add_inventory item !state_ref in 
       state_ref := new_state) item_lst ; !state_ref
 
@@ -200,7 +222,8 @@ let rec ask_shop_item shop state =
     else begin 
       let item_name = Adventure.item_string item_choice.item in 
       Printf.printf "You brought %s \n" item_name;
-      State.sub_gold item_choice.price state
+      let sub_gold_state = State.sub_gold item_choice.price state in 
+      State.add_inventory item_choice.item sub_gold_state
     end
   with e -> 
   match e with 
@@ -213,25 +236,64 @@ let state_shop_helper shop state =
     print_endline "A shopkeeper greets you: ";
     ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look around...\n");
     print_endline "Type the int of the item you want. You can only buy one.";
-    print_endline "Or type 'none' to buy nothing";
+    print_string "Or type ";
+    print_red "'none'";
+    print_endline " to buy nothing";
+    print_endline "You currently have: ";
+    let cur_gold = State.get_gold state |> string_of_int in
+    ANSITerminal.(print_string [yellow] (cur_gold ^ "gold\n") );
     let new_state = ask_shop_item shop state in 
     print_endline "The shopkeeper says: Come again anytime!";
     new_state
-
-
   end
 
+let rec ask_save_yes state = 
+  print_endline "Type the name of the file you would like to save it as: \n
+For example, type 'save1' or 'Clarksons_adventure'";
+  try 
+    let input = read_line () in 
+    let file_name =  input ^ ".json" in
+    let path = "./" ^ file_name in 
+    Printf.printf "Saved as %s \n" file_name;
+    State.save state path
+  with _ -> print_endline "That is not a valid file name, please try again";
+    ask_save_yes state
+
+(** asks the user to save progress *)
+let rec ask_save state = 
+  try
+    print_endline "Would you like to save your progress? 
+Type 'yes' to save. 
+Type 'no' to not save" ;
+    let input = read_line () in 
+    match input with 
+    | "yes" | "y" -> ask_save_yes state
+    | "no" | "n" -> ()
+    | _ -> failwith "not valid option"
+
+  with _ -> 
+    print_endline "\nplease type yes or no"; ask_save state 
+
+let print_room room adv_t = 
+  let name = Adventure.room_name adv_t room in 
+  print_string "\nYou are currently at ";
+  ANSITerminal.(print_string [green] name)
+
+let first_room cur_room exp = 
+  if !rooms_visited_count > 1 then exp ();
+  if cur_room <> !starting_room_id  then incr rooms_visited_count 
 
 (** [one_round state adv_t] carries out the combat in a single room, and then
     allows the player to choose the next exits. *)
 let rec one_round (state : State.t) adv_t = 
-  print_newline ();
   let cur_room = State.get_room state in 
+  print_room cur_room adv_t;
+  print_newline ();
+  first_room cur_room (fun _ -> ask_save state);
   let enemies = Adventure.enemies adv_t cur_room |> char_list in 
   let new_state = 
-    if List.length enemies = 0 then (print_endline "No enemies found\n"; state) else 
+    if List.length enemies = 0 then state else 
       init_combat cur_room enemies state adv_t
-      (* init_combat cur_room enemies state adv_t  end *)
   in
   let rewards = Adventure.rewards adv_t cur_room in 
   let state_after_rewards = add_rewards rewards new_state in
@@ -246,27 +308,51 @@ let rec one_round (state : State.t) adv_t =
 
 
 let sing_player () = 
-  ANSITerminal.( print_string [red] "Welcome Adventurer! \n ");
-  print_endline "You must defeat the enemies and reclaim
-this land!!";
-  let game_state = State.init_state adventure_t player_team in 
-  one_round game_state adventure_t
+  try
+    print_red "Welcome Adventurer! \n ";
+    print_endline "You must defeat the enemies and reclaim this land!! \n";
+    let game_state = State.init_state adventure_t player_team in 
+    starting_room_id := State.get_room game_state;
+    one_round game_state adventure_t
+  with SinglePlayerLost -> 
+    print_endline "Please restart the game to play again!"
 
+let rec load_game () = 
+  print_endline "Type the name of your save file. 
+For example: 'save1' or 'Clarksons_Adventures'\n";
+  print_string "Or type ";
+  print_red "'quit'"; 
+  print_endline " to return to the main menu";
+  try
+    let input = read_line () in 
+    if input = "quit" then raise QuitGameLoading else begin
+      let path = "./" ^ input ^ ".json" in 
+      let state = State.load adventure_t t1 path in 
+      Printf.printf "Successfully loaded file %s\n" input;
+      one_round state adventure_t
+    end
+  with e ->
+  match e with 
+  | QuitGameLoading -> raise QuitGameLoading
+  | _ -> print_endline "That file is not found. Please try again."; load_game ()
 
 
 let mult_player () = Combat.mult_start t1
 
 let rec go () = 
-  print_endline "Type 1 for multiplayer,\n or Type 2 for single player ";
-  let choice = read_int () in 
-  print_newline ();
-  if choice = 1 then mult_player ()
-  else if choice = 2 then sing_player ()
-  else go ()
-
-
+  try
+    print_endline 
+      "Type 1 for multiplayer,\nor Type 2 for single player story mode,
+or Type 3 to load a saved game file ";
+    let choice = read_int () in 
+    print_newline ();
+    match choice with 
+    | 1 -> mult_player ()
+    | 2 -> sing_player ()
+    | 3 -> load_game ()
+    | _ -> print_endline "Please enter 1,2, or 3"; go ()
+  with QuitGameLoading -> go ()
 
 let go_t = 
-  ANSITerminal.(print_string [red]
-                  "\n\nWelcome to the 3110 Combat-based Game System!\n\n");
+  print_red "\n\nWelcome to the 3110 Combat-based Game System!\n\n";
   go ()
