@@ -61,7 +61,8 @@ val next_rooms : t -> room_id -> room_id list
 val enemies : t -> room_id -> int list 
 
 (** [diffculty a r] is the dificulty level of the enemy in room [r] in 
-    adventure [a]. Raises [UnknownRoom r] if [r] is not a room identifier in [a]*)
+    adventure [a]. Raises [UnknownRoom r] if [r] is not a room identifier 
+    in [a]*)
 val difficulty: t -> room_id -> int 
 
 (** The type representing item types. The string is the item name. *)

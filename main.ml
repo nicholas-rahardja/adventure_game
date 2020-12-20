@@ -234,7 +234,8 @@ let rec ask_shop_item shop state =
 let state_shop_helper shop state = 
   if List.length shop = 0 then state else begin
     print_endline "A shopkeeper greets you: ";
-    ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look around...\n");
+    ANSITerminal.(print_string [blue] "Welcome to my shop! Have a look 
+      around...\n");
     print_endline "Type the int of the item you want. You can only buy one.";
     print_string "Or type ";
     print_red "'none'";
@@ -292,8 +293,13 @@ let rec one_round (state : State.t) adv_t =
   first_room cur_room (fun _ -> ask_save state);
   let enemies = Adventure.enemies adv_t cur_room |> char_list in 
   let new_state = 
+<<<<<<< HEAD
     if List.length enemies = 0 then state else 
       init_combat cur_room enemies state adv_t
+=======
+    if List.length enemies = 0 then (print_endline "No enemies found\n"; state) 
+    else init_combat cur_room enemies state adv_t
+>>>>>>> 1f83af94a3944c047a333c7785d2dea25ff80cb7
   in
   let rewards = Adventure.rewards adv_t cur_room in 
   let state_after_rewards = add_rewards rewards new_state in

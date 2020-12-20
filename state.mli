@@ -65,7 +65,8 @@ val get_level : int -> t -> level
 (** [xp_of_lvl lvl] is the total amount of xp to level from 0 to [lvl] *)
 val xp_of_lvl: level -> xp
 
-(** [next_xp_of_lvl lvl] is the amount of xp to level up from [lvl] to [lvl + 1]*)
+(** [next_xp_of_lvl lvl] is the amount of xp to level up from [lvl] to 
+    [lvl + 1]*)
 val next_xp_of_lvl : level -> xp
 
 (** [get_room t] is the ID of the room the player with state [t] is currently 
@@ -102,7 +103,7 @@ val add_char : Character.c -> ?xp:xp -> int -> t -> t
     list. *)
 val remove_char : int -> t -> t
 
-(** [swap_chars n1 n2] swaps the characters at indices [n1] and [n2] of [t]'s 
+(** [swap_chars n1 n2 t] swaps the characters at indices [n1] and [n2] of [t]'s 
     character list. 
     Raises: [Failure] if [n1] and [n2] are not valid indices of the
     character list. *)
