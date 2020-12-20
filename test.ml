@@ -25,7 +25,6 @@
    functions returned the values that they were expected to.
 *)
 
-
 open OUnit2
 open Yojson.Basic
 open Character
@@ -122,10 +121,10 @@ let char_tests = [
     [10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; 1000];
   chars_test "char hp test" j1 get_hp (pp_list string_of_int) 
     [250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 250; 1000];
-  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 300; 
-  get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 270; 
-  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 15; 
-  get_char_atk_lvl_test "atk of character 12 at level 8" c_3 8 50;
+  get_char_hp_lvl_test "hp of character 3 at level 5" c_3 5 350; 
+  get_char_hp_lvl_test "hp of character 12 at level 2" c_12 2 290; 
+  get_char_atk_lvl_test "atk of character 3 at level 1" c_3 1 13; 
+  get_char_atk_lvl_test "atk of character 12 at level 8" c_3 8 34;
 ]
 
 (** Testing the move functions *)
@@ -455,8 +454,8 @@ let char_lst1_lst2_t =
           char_c = char_1;
           char_name = "Brave Warrior Clarkson";
           char_moves = [move_1; move_2];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -466,8 +465,8 @@ let char_lst1_lst2_t =
           char_c = char_2;
           char_name = "Wise Sage Gries";
           char_moves = [move_16; move_17];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -477,8 +476,8 @@ let char_lst1_lst2_t =
           char_c = char_3;
           char_name = "Nether Imp";
           char_moves = [move_3; move_5];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -491,8 +490,8 @@ let char_lst1_lst2_t =
           char_c = char_3;
           char_name = "Nether Imp";
           char_moves = [move_3; move_5];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -502,8 +501,8 @@ let char_lst1_lst2_t =
           char_c = char_1001;
           char_name = "test char";
           char_moves = [move_1001; move_1002];
-          cur_hp = 5500;
-          atk = 1050;
+          cur_hp = 1200;
+          atk = 1030;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -524,8 +523,8 @@ let char_lst3_lst4_t =
           char_c = char_10;
           char_name = "Alpha Wolf";
           char_moves = [move_1; move_2];
-          cur_hp = 1750;
-          atk = 60;
+          cur_hp = 450;
+          atk = 40;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -535,8 +534,8 @@ let char_lst3_lst4_t =
           char_c = char_11;
           char_name = "Wolf";
           char_moves = [move_1; move_2];
-          cur_hp = 2250;
-          atk = 110;
+          cur_hp = 650;
+          atk = 70;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -546,8 +545,8 @@ let char_lst3_lst4_t =
           char_c = char_12;
           char_name = "Mermaid";
           char_moves = [move_6; move_15];
-          cur_hp = 2250;
-          atk = 110;
+          cur_hp = 650;
+          atk = 70;
           buffs = []; 
           active = true;
           cooldown = [];
@@ -566,7 +565,6 @@ let char_lst3_lst3_t =
     items = empty_item_lst
   }
 
-
 let combat_t1 = 
   let first_team = [(char_1, 10);char_2 , 10;char_3 , 10] in 
   let sec_team = [char_4 , 10;char_5, 10;char_6, 10] in 
@@ -577,29 +575,12 @@ let combat_t2 =
   let sec_team = [char_4, 10;char_5, 10] in 
   init first_team sec_team empty_item_lst
 
-(* let combat_end_game first_team sec_team = 
-   let t = init first_team sec_team  empty_item_lst in
-   Combat.start_t_sing t;
-   t 
-
-   let combat_end_t1 = 
-   let first_team = [char_1, 10;char_2, 10] in 
-   let sec_team = [] in 
-   combat_end_game first_team sec_team
-
-   let combat_end_t2 = 
-   let first_team = [] in 
-   let sec_team = [char_5, 10] in 
-   combat_end_game first_team sec_team
-*)
 (* Get a team object by using [init] like above, then extract the field *)
 let team1 = combat_t1.team1 
 let team2 = combat_t1.team2
 let team3 = combat_t2.team1
 let team4 = combat_t2.team2
-(*
-let empty_team = combat_end_t2.team1
-*)
+
 (* Access each target in a team using List.nth *)
 let team_target team nth = 
   List.nth team nth
@@ -651,7 +632,7 @@ let c5_level_0 =
     char_name = "Forest Fairy";
     char_moves = [move_6; move_10];
     atk = 10;
-    cur_hp = 1250;
+    cur_hp = 250;
     buffs = []; 
     active = true;
     cooldown = [];
@@ -663,8 +644,8 @@ let c5_level10 =
     char_c = char_5; 
     char_name = "Forest Fairy";
     char_moves = [move_6; move_10];
-    atk = 60;
-    cur_hp = 1750; 
+    atk = 40;
+    cur_hp = 450; 
     buffs = []; 
     active = true;
     cooldown = [];
@@ -676,8 +657,8 @@ let c12_level5 =
     char_c = c_12;
     char_name = "Mermaid";
     char_moves = [move_6; move_15];
-    atk = 35; 
-    cur_hp = 1500; 
+    atk = 25; 
+    cur_hp = 350; 
     buffs = []; 
     active = true;
     cooldown = [];
@@ -694,11 +675,6 @@ let combat_move_input_test name move_lst input exp_output =
 let combat_target_input_test name team input exp_output = 
   let result = Combat.target_input team input in
   assert_eq_help name result exp_output
-
-(* let do_dmg_test name c dmg expected = 
-   do_dmg c dmg; 
-   name >:: fun _ -> 
-    assert_equal expected c.cur_hp ~printer:(string_of_int) *)
 
 let do_heal_test name c heal expected = 
   do_heal c heal; 
@@ -971,16 +947,6 @@ let combat_tests = [
   combat_vary_test "vary by 20 percent from 10" 10. 20;
   combat_vary_test "vary by 20 percent from 0" 0. 20;
   combat_winner_test "winner of an ongoing game is 0" combat_t1 0;
-  (* combat_winner_test "winner of an ending game is 1" combat_end_t1 1;
-     combat_winner_test "winner of an ending game is 2" combat_end_t2 2; *)
-  (* do_dmg_test "subtracts all health of team1[0]" 
-     team1_first_target team1_first_target_hp 0;
-     do_dmg_test "subtracts 0 from health from team4[1]" 
-     team4_first_target 0 team4_first_target_hp;
-     do_dmg_test "subtracts half of the health from team2[1]" 
-     team2_first_target team2_first_target_half_hp team2_first_target_rem_hp;
-     do_dmg_test "subtracts big value 100000 from health" 
-     team3_first_target 100000 0; *)
   combat_init_test "initialize a game state t for char list 1 & 2" 
     char_lst1 char_lst2 char_lst1_lst2_t;
   combat_init_test "initialize a game state t for char list 3 & 4" 
@@ -1031,10 +997,9 @@ let combat_tests = [
   load_char_test "load character 5 at level 10" (char_5, 10) c5_level10;
   load_char_test "load character 12 at level 5" (char_12,5) c12_level5;
   smartness_of_c_test "smartness of character 5 at level 0" c5_level_0 4;
-  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 14;
+  smartness_of_c_test "smartness of character 12 at level 5" c12_level5 10;
   check_winner_test "non empty team" team1 1 ();
 ]
-
 
 let suite =
   "test suite"  >::: List.flatten [
