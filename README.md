@@ -6,7 +6,7 @@ Text based adventure game created using Ocaml (a functional programming language
 
 After cloning the repository, navigate to the directory and type 'make build' followed by 'make play'. 
 
-'''
+,,,
 make build 
 make play
-'''
+,,,
