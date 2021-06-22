@@ -4,9 +4,8 @@ Text based adventure game created using Ocaml (a functional programming language
 
 ## How to run the game 
 
-After cloning the repository, navigate to the directory and type 'make build' followed by 'make play'. 
+After cloning the repository, navigate to the directory and type:
 
-,,,
-make build 
-make play
-,,,
+make build <br>
+make play <br>
+
